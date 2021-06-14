@@ -2,7 +2,7 @@
 
 ## Content
 
-1. [Tutorial: Intro to React](https://reactjs.org/tutorial/tutorial.html)
+1. [Tutorial](https://reactjs.org/tutorial/tutorial.html)
 
 2. [Main concepts](https://reactjs.org/docs/hello-world.html)
 
