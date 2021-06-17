@@ -1,5 +1,4 @@
 import { useState, createContext, useContext } from "react";
-import clsx from "clsx";
 import style from "./style.module.css";
 
 /*
@@ -75,7 +74,7 @@ const Square = ({ index }) => {
   return (
     <button
       onClick={handleClick}
-      className={clsx(style["square"], style[modifier])}
+      className={style["square"] + " " + style[modifier]}
     >
       {mark}
     </button>
@@ -91,7 +90,7 @@ const Board = () => {
   return (
     <div>
       {indices.map((row) => (
-        <div className={clsx(style["board-row"])} key={row}>
+        <div key={row} className={style["board-row"]}>
           {row.map((index) => (
             <Square index={index} key={index} />
           ))}
@@ -155,7 +154,7 @@ const Info = () => {
       <li key={m}>
         <button
           onClick={() => setMove(m)}
-          className={clsx(style["button"], style[modifier])}
+          className={style["button"] + " " + style[modifier]}
         >
           {moveInfo}
         </button>
@@ -163,9 +162,9 @@ const Info = () => {
     );
   });
   return (
-    <div className={clsx(style["game-info"])}>
+    <div className={style["game-info"]}>
       <div>{status}</div>
-      <ol reversed={order === "ascending"} className={clsx(style["list"])}>
+      <ol reversed={order === "ascending"} className={style["list"]}>
         {moves}
       </ol>
       <button onClick={handleClickOrder}>{"Order: " + order}</button>
@@ -186,7 +185,7 @@ const TicTacToeGame = () => {
   };
   return (
     <Context.Provider value={value}>
-      <div className={clsx(style["game"])}>
+      <div className={style["game"]}>
         <Board />
         <Info />
       </div>

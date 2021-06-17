@@ -1,0 +1,7 @@
+.toolbar {
+  justify-content: space-between;
+}
+
+.toolbar .title.lighter {
+  font-weight: lighter;
+}
