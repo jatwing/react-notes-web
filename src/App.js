@@ -1,27 +1,25 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Layout from "layout";
-import HomePage from "pages/home";
-import TicTacToeGame from "pages/01-tic-tac-toe-game";
-import HelloWorld from "pages/02-main-concepts/01-hello-world";
-import IntroducingJSX from "pages/02-main-concepts/02-introducing-jsx";
+import { getSubtrees } from "utils/path-helper";
+import routes from "config/routes";
+import ParentNode from "pages/parent-node";
 
-import Context from "pages/03-advanced-guides/03-context";
+const subtrees = getSubtrees(routes.map((r) => r.path));
 
-// here i try to define a list that can be exported
+const parentNodeRoutes = subtrees.map((t) => ({
+  exact: true,
+  path: t.path || "/",
+  render: () => <ParentNode subtree={t} subtrees={subtrees} />,
+  key: t.path || "/",
+}));
 
-const routes = [
-  { path: "/", component: HomePage },
-  { path: "/01-tic-tac-toe-game", component: TicTacToeGame },
-  { path: "/02-main-concepts/01-hello-world", component: HelloWorld },
-  { path: "/02-main-concepts/02-introducing-jsx", component: IntroducingJSX },
-
-  { path: "/03-advanced-guides/03-context", component: Context },
-];
-
-
-
-
+const leafRoutes = routes.map((r) => ({
+  exact: true,
+  path: r.path,
+  component: r.component,
+  key: r.path,
+}));
 
 class App extends React.Component {
   render() {
@@ -29,15 +27,12 @@ class App extends React.Component {
       <Router>
         <Layout>
           <Switch>
-            {routes.map((r) => (
-              <Route
-                exact
-                path={r.path}
-                component={r.component}
-                key={r.path}
-              />
+            {parentNodeRoutes.map((r) => (
+              <Route {...r} />
             ))}
-
+            {leafRoutes.map((r) => (
+              <Route {...r} />
+            ))}
           </Switch>
         </Layout>
       </Router>
@@ -46,4 +41,3 @@ class App extends React.Component {
 }
 
 export default App;
-export { routes };

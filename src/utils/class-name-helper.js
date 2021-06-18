@@ -1,10 +1,10 @@
 /*
  * Usage:
- *    import style from "./style.module.css"
- *    const cls = classNameHelper(style);
- *    const className = cls("class1", "class2")
+ *   import style from "./style.module.css"
+ *   const cls = classNameHelper(style);
+ *   const className = cls("class1", "class2")
  * Result:
- *    const className = clsx(style["class1"], style["class2"])
+ *   const className = clsx(style["class1"], style["class2"])
  */
 
 import clsx from "clsx";

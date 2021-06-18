@@ -1,6 +1,8 @@
 import { createContext, useContext } from "react";
-
+import Link from "components/link"
 const ThemeContext = createContext("light");
+
+
 
 const ThemeButton = () => {
   const context = useContext(ThemeContext);
@@ -21,6 +23,9 @@ const Context = () => {
   return (
     <ThemeContext.Provider value="dark">
       <Toolbar />
+
+
+      <Link to="/"   >myLink</Link>
     </ThemeContext.Provider>
   );
 };

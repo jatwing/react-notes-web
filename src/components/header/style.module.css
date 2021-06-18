@@ -5,3 +5,7 @@
 .toolbar .title.lighter {
   font-weight: lighter;
 }
+
+.toolbar .title.bolder {
+  font-weight: bolder;
+}
