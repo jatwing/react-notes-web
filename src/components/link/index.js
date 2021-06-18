@@ -1,12 +1,38 @@
+/*
+ * https://reactrouter.com/web/api/Link
+ * https://material-ui.com/api/link/
+ */
 import { Link as MaterialLink } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 
-//https://codesandbox.io/s/89h9q?file=/demo.js
+const preventDefault = (e) => e.preventDefault;
 
-// https://material-ui.com/guides/composition/#link
-const Link = ({ props }) => (
-  <MaterialLink component={RouterLink}   {...props} />
-)
+const test = ({
+  to,
+  replace,
+  innerRef,
+  component,
+  // prop collision: "component"
+  materialComponent,
+  onClick,
+  ...materialProps
+}) => (
+  <RouterLink
+    to={to}
+    replace={replace}
+    innerRef={innerRef}
+    component={component}
+  >
+    <MaterialLink href={to} onClick={onClick || preventDefault} component={materialComponent} {...materialProps}/>
+  </RouterLink>
+);
 
+const Link = () => (
+  <MaterialLink component={RouterLink} color="primary" to="/">
+    that is a link{" "}
+  </MaterialLink>
+);
 
 export default Link;
+
+export {test}
