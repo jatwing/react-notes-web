@@ -70,4 +70,15 @@ const getSubtrees = (paths) => {
   }));
 };
 
-export { rootAlias, getNodes, getPath, getSubtrees };
+const getSubsubtrees = (subtree, subtrees) => {
+  const subsubtrees = [];
+  subtree.children.forEach((c) => {
+    const subsubtree = subtrees.find((t) => c === t.parent);
+    if (subsubtree) {
+      subsubtrees.push(subsubtree);
+    }
+  });
+  return subsubtrees;
+};
+
+export { rootAlias, getNodes, getPath, getSubtrees, getSubsubtrees };
