@@ -1,4 +1,5 @@
-import { Box, Card, CardContent, Link, Typography } from "@material-ui/core";
+import Link from "components/link"
+import { Box, Card, CardContent,  Typography } from "@material-ui/core";
 
 const TreeCard = ({ tree }) => (
   <Card>

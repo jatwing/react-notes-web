@@ -1,6 +1,6 @@
-import { Link as LinkRo,   useLocation } from "react-router-dom";
-
-import { AppBar, Link,  Toolbar, Typography } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
+import Link from "components/link";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import classNameHelper from "utils/class-name-helper";
 import style from "./style.module.css";
 import { rootAlias, getNodes, getPath } from "utils/path-helper";
@@ -11,20 +11,18 @@ const Header = () => {
   const { pathname } = useLocation();
   const [internalNodes, leaf] = getNodes(pathname);
 
-
-  console.log(
-
-    "testing the header"
-  )
-
   return (
     <AppBar position="static" color="primary" className={cls("app-bar")}>
-      <div>test</div>
       <Toolbar className={cls("toolbar")}>
         <Typography variant="h6" className={cls("title", "lighter")}>
-          <LinkRo to="/">
-            { rootAlias }
-          </LinkRo>
+          <Link
+            href="/"
+            color="inherit"
+            key={"/"}
+            className={cls("title", "lighter")}
+          >
+            {rootAlias}
+          </Link>
         </Typography>
         {internalNodes.map((i) => (
           <Typography variant="h6">
