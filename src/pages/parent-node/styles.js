@@ -39,7 +39,10 @@ const useStyles = makeStyles((theme) => ({
     },
     "& $row$minor": {
       color: theme.palette.text.primary,
-      backgroundColor: "#ffffff",
+      transition: "padding 1s linear",
+      "&:hover": {
+        padding: "20px 16px 20px 16px",
+      },
     },
 
     "& $text": {
@@ -67,9 +70,17 @@ const useStyles = makeStyles((theme) => ({
     "& $row$minor": {
       color: theme.palette.text.secondary,
       borderTop: `1px dashed ${theme.palette.secondary.main}`,
+      transition: "padding 1s linear",
+      "&:hover": {
+        padding: "20px 16px 20px 16px",
+        "& $text": {
+          fontSize: theme.typography.h6.fontSize,
+        },
+      },
     },
     "& $text": {
       fontSize: theme.typography.body1.fontSize,
+      transition: "font-size 1s linear"
     },
   },
   /** root */
