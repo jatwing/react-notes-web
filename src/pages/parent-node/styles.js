@@ -2,58 +2,62 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   /** modifier */
-  primary: {},
-  secondary: {},
+  major: {},
+  minor: {},
   /** element */
-
   corner: {
     display: "block",
     width: "32px",
     height: "32px",
-    clipPath: "polygon(0 0, 32px 0, 32px 32px)",
-    background: `linear-gradient(45deg, ${theme.palette.secondary.light} 50%, ${theme.palette.secondary.dark})`,
     position: "absolute",
-    right: 0,
+    right: "0",
+    background: `linear-gradient(45deg, transparent 50%, ${theme.palette.secondary.light} 50%, ${theme.palette.secondary.dark})`,
   },
-
-  corner2: {
-    display: "block",
-    width: `${32 * Math.sqrt(2)}px`,
-    height: `${32 * Math.sqrt(2)}px`,
-    transformOrigin: "top right",
-    transform: "rotate(45deg)",
-    position: "absolute",
-    right: "-16px",
-    backgroundColor: "yellow",
+  link: {
+    "&:hover": {
+      textDecoration: "underline green"}
   },
-
   row: {
     padding: "16px",
   },
+  text: {},
   /** block */
   header: {
     position: "relative",
-    "& > $row$primary": {
+    "& $row$major": {
       color: theme.palette.primary.contrastText,
       backgroundColor: theme.palette.primary.main,
     },
-    "& > $row$secondary": {
+    "& $row$major:hover": {
+      color: theme.palette.primary.highlightText,
+      textDecoration: "underline red",
+    },
+
+    "& $row$minor": {
       color: theme.palette.text.primary,
+      backgroundColor: "#ffffff",
+    },
+    "& $text": {
+      fontSize: theme.typography.h6.fontSize,
     },
   },
+
   content: {
-    "& > $row$primary": {
+    "& $row$major": {
       color: theme.palette.secondary.contrastText,
     },
-    "& > $row$primary:nth-child(odd)": {
+    "& > *:nth-child(odd) $row$major": {
       backgroundColor: theme.palette.secondary.main,
     },
-    "& > $row$primary:nth-child(even)": {
+    "& > *:nth-child(even) $row$major": {
       backgroundColor: theme.palette.secondary.dark,
     },
-    "& > $row$secondary": {
+    "& $row$minor": {
       color: theme.palette.text.secondary,
       borderTop: `1px dashed ${theme.palette.secondary.main}`,
+    },
+    "& $text": {
+      fontSize: theme.typography.body1.fontSize,
     },
   },
   /** root */
