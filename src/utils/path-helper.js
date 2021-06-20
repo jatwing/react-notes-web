@@ -30,7 +30,7 @@ const getSubtrees = (paths) => {
   paths.forEach((p) => {
     const [internalNodes, leaf] = getNodes(p);
     if (internalNodes.length > 0 || (internalNodes.length === 0 && leaf)) {
-      const path = "";
+      const path = "/";
       if (!(path in subtrees)) {
         subtrees[path] = {
           parent: rootAlias,

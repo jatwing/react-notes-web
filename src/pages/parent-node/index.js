@@ -5,18 +5,26 @@ import clsx from "clsx";
 
 const TreeCard = ({ tree, modifier }) => {
   const classes = useStyles();
+  const directory = tree.path === "/" ? "/" : tree.path + "/"
+
   return (
     <Card className={clsx(classes.root)}>
       <Box className={clsx(classes.header)}>
+      <Box className={clsx(classes.corner)} />
         <Box className={clsx(classes.row, classes[modifier])}>
-          <Typography variant="h6" >{tree.parent}</Typography>
+          <Link href={tree.path} color="inherit">
+            <Typography variant="h6">{tree.parent}</Typography>
+          </Link>
         </Box>
       </Box>
       <Box className={clsx(classes.content)}>
         {tree.children.map((c) => (
           <Box className={clsx(classes.row, classes[modifier])}>
             <Typography variant="body1">
-              <Link href={tree.path + "/" + c} color="inherit">
+              <Link
+                href={directory + c}
+                color="inherit"
+              >
                 {c}
               </Link>
             </Typography>
@@ -30,9 +38,9 @@ const TreeCard = ({ tree, modifier }) => {
 const ParentNode = ({ subtree, subsubtrees }) => {
   return (
     <>
-      <TreeCard tree={subtree} modifier="primary"/>
+      <TreeCard tree={subtree} modifier="primary" />
       {subsubtrees.map((t) => (
-        <TreeCard tree={t} modifier="secondary"/>
+        <TreeCard tree={t} modifier="secondary" />
       ))}
     </>
   );
