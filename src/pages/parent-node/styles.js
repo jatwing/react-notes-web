@@ -5,38 +5,43 @@ const useStyles = makeStyles((theme) => ({
   major: {},
   minor: {},
   /** element */
-  corner: {
-    display: "block",
-    width: "32px",
-    height: "32px",
-    position: "absolute",
-    right: "0",
-    background: `linear-gradient(45deg, transparent 50%, ${theme.palette.secondary.light} 50%, ${theme.palette.secondary.dark})`,
-  },
+  corner: {},
   link: {
     "&:hover": {
-      textDecoration: "underline green"}
+      textDecoration: "none",
+    },
   },
   row: {
     padding: "16px",
+    "&:hover": {
+      textDecoration: "underline currentcolor",
+    },
   },
   text: {},
   /** block */
   header: {
     position: "relative",
+    "& $corner$minor": {
+      width: "32px",
+      height: "32px",
+      clipPath: "polygon(0 0, 32px 0, 32px 32px)",
+      position: "absolute",
+      right: "0",
+      background: `linear-gradient(45deg, ${theme.palette.secondary.light} 50%, ${theme.palette.secondary.dark})`,
+    },
     "& $row$major": {
       color: theme.palette.primary.contrastText,
+      transition: "color 1s linear",
       backgroundColor: theme.palette.primary.main,
+      "&:hover": {
+        color: theme.palette.primary.highlightText,
+      },
     },
-    "& $row$major:hover": {
-      color: theme.palette.primary.highlightText,
-      textDecoration: "underline red",
-    },
-
     "& $row$minor": {
       color: theme.palette.text.primary,
       backgroundColor: "#ffffff",
     },
+
     "& $text": {
       fontSize: theme.typography.h6.fontSize,
     },
@@ -45,11 +50,18 @@ const useStyles = makeStyles((theme) => ({
   content: {
     "& $row$major": {
       color: theme.palette.secondary.contrastText,
+      transition: "background 1s linear",
+      "&:hover": {
+        backgroundColor: theme.palette.primary.main,
+      },
     },
-    "& > *:nth-child(odd) $row$major": {
+    "& > *:nth-child(3n+1) $row$major": {
+      backgroundColor: theme.palette.secondary.light,
+    },
+    "& > *:nth-child(3n+2) $row$major": {
       backgroundColor: theme.palette.secondary.main,
     },
-    "& > *:nth-child(even) $row$major": {
+    "& > *:nth-child(3n) $row$major": {
       backgroundColor: theme.palette.secondary.dark,
     },
     "& $row$minor": {
