@@ -5,6 +5,15 @@ import { ThemeProvider } from "@material-ui/styles";
 import Header from "components/header";
 
 const theme = createMuiTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 576,
+      md: 768,
+      lg: 992,
+      xl: 1200
+    }
+  },
   palette: {
     primary: {
       main: "#20232a",
@@ -13,13 +22,8 @@ const theme = createMuiTheme({
     secondary: {
       main: "#3f51b5"
     }
-
-
-   // secondary: {
-   //   main: "#20232a",
-  //    contrastText: "#61dafb",
-  //  }
   },
+
 });
 
 const cls = classNameHelper(style);
