@@ -86,7 +86,6 @@ const useStyles = makeStyles((theme) => ({
   },
   /** root */
   root: {
-    marginBottom: '16px',
   },
 }));
 
