@@ -1,11 +1,22 @@
+import React from "react"
 import Link from 'components/link';
-import { Box, Card, Grid, Typography } from '@material-ui/core';
-import useStyles from './styles';
+import {
+  Box,
+  Card,
+  Typography,
+  ImageList,
+  ImageListItem,
+  Slider,
+} from '@material-ui/core';
+
+// import useStyles from './styles';
 import clsx from 'clsx';
 import useMedia from 'utils/media';
+import root from './style';
+import { jsx, css } from '@emotion/react';
 
 const TreeCard = ({ tree, modifier }) => {
-  const classes = useStyles();
+  const classes = {};
   const directory = tree.path === '/' ? '/' : tree.path + '/';
   const { isSmall, isMedium, isLarge } = useMedia();
   return (
@@ -32,26 +43,44 @@ const TreeCard = ({ tree, modifier }) => {
   );
 };
 
-
-/*
- * see https://material-ui.com/components/grid-list/
- */
-
 const ParentNode = ({ subtree, subsubtrees }) => {
-  const classes = useStyles();
+  const classes = {};
+
+  const style = css`
+    color: hotpink;
+  `;
+
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={0} sm={0} md={3} lg={4} />
-      <Grid item xs={12} sm={12} md={6} lg={4}>
-        <TreeCard tree={subtree} modifier="major" />
-      </Grid>
-      <Grid item xs={0} sm={0} md={3} lg={4} />
+    <>
+      <div css={style}>
+        test root
+        <Box
+          className="test1"
+          css={css`
+            color: #fff;
+          `}
+        >
+          test 1
+        </Box>
+        <Box className="test2">test 2</Box>
+      </div>
+
+      <Box sx={{ width: 300 }}>
+        <Slider defaultValue={30} />
+        <Slider
+          defaultValue={30}
+          css={css`
+            color: #ff00ff;
+          `}
+        />
+      </Box>
+
+      <TreeCard tree={subtree} modifier="major" />
+
       {subsubtrees.map((t) => (
-        <Grid item xs={12} sm={12} md={6} lg={4}>
-          <TreeCard tree={t} modifier="minor" />
-        </Grid>
+        <TreeCard tree={t} modifier="minor" />
       ))}
-    </Grid>
+    </>
   );
 };
 

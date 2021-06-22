@@ -1,38 +1,24 @@
-import { Box, createMuiTheme } from "@material-ui/core";
-import classNameHelper from "utils/class-name-helper";
-import style from "./style.module.css";
-import { ThemeProvider } from "@material-ui/styles";
-import Header from "components/header";
+import { Box } from '@material-ui/core';
+import { ThemeProvider  } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 576,
-      md: 768,
-      lg: 992,
-      xl: 1200
-    }
-  },
-  palette: {
-    primary: {
-      main: "#20232a",
-      highlightText: "#61dafb"
-    },
-    secondary: {
-      main: "#3f51b5"
-    }
-  },
+import { StylesProvider } from '@material-ui/styles'
 
-});
+import theme from 'config/theme';
+import classNameHelper from 'utils/class-name-helper';
+import style from './style.module.css';
+import Header from 'sections/header';
+
+
 
 const cls = classNameHelper(style);
 
 const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
+      <StylesProvider injectFirst>
       <Header />
-      <Box className={cls("content")}>{children}</Box>
+      <Box className={cls('content')}>{children}</Box>
+      </StylesProvider>
     </ThemeProvider>
   );
 };
