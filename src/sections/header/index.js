@@ -1,58 +1,52 @@
+import React from 'react';
+
 import { useLocation } from 'react-router-dom';
 import Link from 'components/link';
 import { AppBar, Box, Toolbar, Typography } from '@material-ui/core';
-import classNameHelper from 'utils/class-name-helper';
-import style from './style.module.css';
-import { rootAlias, getNodes, getPath } from 'utils/path-helper';
+import { getNodes ,getPath} from 'utils/directory-tree'
 
+import useStyles from './styles';
 import useMedia from 'utils/media';
+import { useTheme } from '@material-ui/core/styles';
+import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 
-const cls = classNameHelper(style);
 
-import classes from './styles';
+const rootAlias = "TODO"
+
 
 const Header = () => {
   const { pathname } = useLocation();
-  const [internalNodes, leaf] = getNodes(pathname);
+  const nodes = getNodes(pathname);
+
+  /*
+   * can that be more abstract?
+   */
+
+  let internalNodes = ["/"]
+  let leaf = null;
+
+  if (nodes.length > 1) {
+   leaf = nodes.pop();
+    internalNodes = nodes;
+  }
+
 
   const { isSmall, isMedium, isLarge } = useMedia();
 
   const rootElement = (
-    <Typography variant="h6" className={cls('title', 'lighter')}>
-      <Link
-        href="/"
-        color="inherit"
-        key={'/'}
-        className={cls('title', 'lighter')}
-      >
-        {rootAlias}
-      </Link>
-    </Typography>
+    <Link href="/" key={'/'} className="link">
+      {rootAlias}
+    </Link>
   );
+
   const internalNodeElements = internalNodes.map((i) => (
-    <Typography variant="h6">
-      <Link
-        href={getPath(pathname, i)}
-        color="inherit"
-        key={i}
-        className={cls('title', 'lighter')}
-      >
-        {i}
-      </Link>
-    </Typography>
+    <Link href={getPath(pathname, i)} key={i} className="link">
+      {i}
+    </Link>
   ));
 
-  const leafElement = leaf && (
-    <Typography variant="h6" color="inherit" className={cls('title', 'bolder')}>
-      {leaf}
-    </Typography>
-  );
-  const ellipsisElement = (
-    <Typography variant="h6" color="inherit" className={cls('title', 'bolder')}>
-      ...
-    </Typography>
-  );
-
+  const leafElement = leaf && <Typography className="title">{leaf}</Typography>;
+  const ellipsisElement = <ArrowBackIosRoundedIcon className="icon"  />
   const elements = [rootElement, ...internalNodeElements, leafElement];
 
   let maximum = 1;
@@ -63,14 +57,16 @@ const Header = () => {
   }
   const hasEllipsis = maximum + 1 < elements.length;
 
+  const theme = useTheme()
   return (
-    <AppBar color="primary" position="sticky" className={cls('app-bar')}>
-      <Toolbar css={classes}>
+    <AppBar  position="sticky" >
+      <Toolbar className={useStyles(theme, "toolbar")} >
         {hasEllipsis && ellipsisElement}
         {hasEllipsis ? elements.slice(-maximum) : elements}
       </Toolbar>
     </AppBar>
   );
 };
+
 
 export default Header;

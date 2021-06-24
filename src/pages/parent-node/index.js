@@ -4,16 +4,16 @@ import {
   Box,
   Card,
   Typography,
-  ImageList,
-  ImageListItem,
-  Slider,
 } from '@material-ui/core';
 
 // import useStyles from './styles';
 import clsx from 'clsx';
 import useMedia from 'utils/media';
+import { getSubsubtrees} from 'utils/directory-tree'
+
 import root from './style';
-import { jsx, css } from '@emotion/react';
+
+
 
 const TreeCard = ({ tree, modifier }) => {
   const classes = {};
@@ -43,37 +43,13 @@ const TreeCard = ({ tree, modifier }) => {
   );
 };
 
-const ParentNode = ({ subtree, subsubtrees }) => {
+const ParentNode = ({ subtree, subtrees }) => {
+  const subsubtrees = getSubsubtrees(subtree, subtrees)
   const classes = {};
 
-  const style = css`
-    color: hotpink;
-  `;
 
   return (
     <>
-      <div css={style}>
-        test root
-        <Box
-          className="test1"
-          css={css`
-            color: #fff;
-          `}
-        >
-          test 1
-        </Box>
-        <Box className="test2">test 2</Box>
-      </div>
-
-      <Box sx={{ width: 300 }}>
-        <Slider defaultValue={30} />
-        <Slider
-          defaultValue={30}
-          css={css`
-            color: #ff00ff;
-          `}
-        />
-      </Box>
 
       <TreeCard tree={subtree} modifier="major" />
 
