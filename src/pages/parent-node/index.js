@@ -1,19 +1,13 @@
-import React from "react"
+import React from 'react';
 import Link from 'components/link';
-import {
-  Box,
-  Card,
-  Typography,
-} from '@material-ui/core';
+import { Box, Card, Typography } from '@material-ui/core';
 
 // import useStyles from './styles';
 import clsx from 'clsx';
 import useMedia from 'utils/media';
-import { getSubsubtrees} from 'utils/directory-tree'
+import { getSubsubtrees } from 'utils/directory-tree';
 
 import root from './style';
-
-
 
 const TreeCard = ({ tree, modifier }) => {
   const classes = {};
@@ -44,13 +38,11 @@ const TreeCard = ({ tree, modifier }) => {
 };
 
 const ParentNode = ({ subtree, subtrees }) => {
-  const subsubtrees = getSubsubtrees(subtree, subtrees)
+  const subsubtrees = getSubsubtrees(subtree, subtrees);
   const classes = {};
-
 
   return (
     <>
-
       <TreeCard tree={subtree} modifier="major" />
 
       {subsubtrees.map((t) => (

@@ -7,7 +7,7 @@
  *   const className = clsx(style["class1"], style["class2"])
  */
 
-import clsx from "clsx";
+import clsx from 'clsx';
 const classNameHelper = (style) => (...classes) => {
   const styles = classes.map((c) => style[c]);
   return clsx(...styles);

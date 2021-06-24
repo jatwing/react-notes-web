@@ -1,6 +1,6 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext } from 'react';
 
-const ThemeContext = createContext("light");
+const ThemeContext = createContext('light');
 
 const ThemeButton = () => {
   const context = useContext(ThemeContext);

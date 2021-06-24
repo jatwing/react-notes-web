@@ -7,7 +7,9 @@ const useStyles = (theme, block) => {
       justify-content: space-between;
       align-items: center;
 
-      .icon, .link, .title {
+      .icon,
+      .link,
+      .title {
         font-family: ${theme.typography.fontStacks.sansSerif};
         font-size: ${theme.typography.h6.fontSize};
         font-weight: ${theme.typography.h6.fontWeight};
@@ -16,20 +18,24 @@ const useStyles = (theme, block) => {
         padding-right: ${theme.spacing(2)};
       }
 
-      .icon, .link {
+      .icon,
+      .link {
         color: ${theme.palette.primary.contrastText};
         transition: color 1s linear;
       }
-      .icon:hover, .link:hover {
+      .icon:hover,
+      .link:hover {
         color: ${theme.palette.primary.highlightText};
         text-decoration: none;
       }
-      .icon:focus, .link:focus {
+      .icon:focus,
+      .link:focus {
         color: ${theme.palette.primary.contrastText};
         background-color: ${theme.palette.primary.light};
       }
 
-      .link, .title {
+      .link,
+      .title {
         align-self: stretch;
         display: flex;
         align-items: center;

@@ -1,15 +1,15 @@
-import { Component, createElement } from "react";
+import { Component, createElement } from 'react';
 
 /*
  * embedding expressions in JSX
  */
 function formatName(user) {
-  return user.firstName + " " + user.lastName;
+  return user.firstName + ' ' + user.lastName;
 }
 
 const user = {
-  firstName: "Harper",
-  lastName: "Perez",
+  firstName: 'Harper',
+  lastName: 'Perez',
 };
 const element1 = <h1>Hello, {formatName(user)}</h1>;
 
@@ -44,7 +44,7 @@ const element4 = (
  * JSX prevents injection attacks
  */
 const response = {
-  potentiallyMaliciousInput: "potentiallyMaliciousInput",
+  potentiallyMaliciousInput: 'potentiallyMaliciousInput',
 };
 const title = response.potentiallyMaliciousInput;
 const element5 = <h1>{title}</h1>;
@@ -54,7 +54,7 @@ const element5 = <h1>{title}</h1>;
  */
 
 const element6 = <h1 className="greeting">Hello, world!</h1>;
-const element7 = createElement("h1", { className: "greeting" }, "Hello, world");
+const element7 = createElement('h1', { className: 'greeting' }, 'Hello, world');
 
 class IntroducingJSX extends Component {
   render() {

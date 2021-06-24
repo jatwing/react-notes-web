@@ -1,11 +1,11 @@
-const rootAlias = "home";
+const rootAlias = 'home';
 
 const getNodes = (fullPath) => {
   const path = fullPath.substring(1);
   let internalNodes = [];
-  let leaf = "";
+  let leaf = '';
   if (path) {
-    const nodes = path.split("/");
+    const nodes = path.split('/');
     internalNodes = nodes.slice(0, -1);
     leaf = nodes.slice(-1)[0];
   }
@@ -30,14 +30,14 @@ const getSubtrees = (paths) => {
   paths.forEach((p) => {
     const [internalNodes, leaf] = getNodes(p);
     if (internalNodes.length > 0 || (internalNodes.length === 0 && leaf)) {
-      const path = "/";
+      const path = '/';
       if (!(path in subtrees)) {
         subtrees[path] = {
           parent: rootAlias,
           children: new Set(),
         };
       }
-      subtrees[path]["children"].add(internalNodes[0] || leaf);
+      subtrees[path]['children'].add(internalNodes[0] || leaf);
     }
     internalNodes.forEach((n, i, a) => {
       const path = getPath(p, n);
@@ -48,9 +48,9 @@ const getSubtrees = (paths) => {
         };
       }
       if (i < a.length - 1) {
-        subtrees[path]["children"].add(a[i + 1]);
+        subtrees[path]['children'].add(a[i + 1]);
       } else {
-        subtrees[path]["children"].add(leaf);
+        subtrees[path]['children'].add(leaf);
       }
     });
   });
@@ -65,8 +65,8 @@ const getSubtrees = (paths) => {
    */
   return Object.keys(subtrees).map((k) => ({
     path: k,
-    parent: subtrees[k]["parent"],
-    children: Array.from(subtrees[k]["children"]),
+    parent: subtrees[k]['parent'],
+    children: Array.from(subtrees[k]['children']),
   }));
 };
 

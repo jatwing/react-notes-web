@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Box className='content'>{children}</Box>
+      <Box className="content">{children}</Box>
     </ThemeProvider>
   );
 };

@@ -1,5 +1,5 @@
-import { useState, createContext, useContext } from "react";
-import style from "./style.module.css";
+import { useState, createContext, useContext } from 'react';
+import style from './style.module.css';
 
 /*
  * context
@@ -34,9 +34,9 @@ const getWinner = (squares) => {
 
 const getNextMark = (move) => {
   if (move % 2 === 0) {
-    return "X";
+    return 'X';
   } else {
-    return "O";
+    return 'O';
   }
 };
 
@@ -51,7 +51,7 @@ const getLocation = (index) => {
  */
 const Square = ({ index }) => {
   const { history, setHistory, move, setMove } = useContext(Context);
-  const squares = history[move]["squares"];
+  const squares = history[move]['squares'];
   const mark = squares[index];
   const winner = getWinner(squares);
   const handleClick = () => {
@@ -67,14 +67,14 @@ const Square = ({ index }) => {
     );
     setMove(move + 1);
   };
-  let modifier = "normal";
-  if (winner && winner["indices"].includes(index)) {
-    modifier = "highlight";
+  let modifier = 'normal';
+  if (winner && winner['indices'].includes(index)) {
+    modifier = 'highlight';
   }
   return (
     <button
       onClick={handleClick}
-      className={style["square"] + " " + style[modifier]}
+      className={style['square'] + ' ' + style[modifier]}
     >
       {mark}
     </button>
@@ -90,7 +90,7 @@ const Board = () => {
   return (
     <div>
       {indices.map((row) => (
-        <div key={row} className={style["board-row"]}>
+        <div key={row} className={style['board-row']}>
           {row.map((index) => (
             <Square index={index} key={index} />
           ))}
@@ -102,12 +102,12 @@ const Board = () => {
 
 const Info = () => {
   const { history, move, setMove } = useContext(Context);
-  const squares = history[move]["squares"];
+  const squares = history[move]['squares'];
   const winner = getWinner(squares);
   // status
   let status;
   if (winner) {
-    status = "Winner: " + winner["mark"];
+    status = 'Winner: ' + winner['mark'];
   } else {
     let isFull = true;
     squares.forEach((s) => {
@@ -116,45 +116,45 @@ const Info = () => {
       }
     });
     if (isFull) {
-      status = "The game ended in a draw.";
+      status = 'The game ended in a draw.';
     } else {
-      status = "Next player: " + getNextMark(move);
+      status = 'Next player: ' + getNextMark(move);
     }
   }
   // order
-  const [order, setOrder] = useState("ascending");
+  const [order, setOrder] = useState('ascending');
   const handleClickOrder = () => {
-    if (order === "ascending") {
-      setOrder("descending");
+    if (order === 'ascending') {
+      setOrder('descending');
     } else {
-      setOrder("ascending");
+      setOrder('ascending');
     }
   };
   // moves
   let historySorted = history.slice();
-  if (order === "ascending") {
+  if (order === 'ascending') {
     historySorted = historySorted.reverse();
   }
   const moves = historySorted.map((h, i) => {
     let m;
-    if (order === "ascending") {
+    if (order === 'ascending') {
       m = history.length - 1 - i;
     } else {
       m = i;
     }
     const moveInfo =
-      h["index"] === null
-        ? "Go to game start"
-        : `Go to move # ${m}, position ${getLocation(h["index"])}`;
-    let modifier = "normal";
+      h['index'] === null
+        ? 'Go to game start'
+        : `Go to move # ${m}, position ${getLocation(h['index'])}`;
+    let modifier = 'normal';
     if (m === move) {
-      modifier = "bolder";
+      modifier = 'bolder';
     }
     return (
       <li key={m}>
         <button
           onClick={() => setMove(m)}
-          className={style["button"] + " " + style[modifier]}
+          className={style['button'] + ' ' + style[modifier]}
         >
           {moveInfo}
         </button>
@@ -162,12 +162,12 @@ const Info = () => {
     );
   });
   return (
-    <div className={style["game-info"]}>
+    <div className={style['game-info']}>
       <div>{status}</div>
-      <ol reversed={order === "ascending"} className={style["list"]}>
+      <ol reversed={order === 'ascending'} className={style['list']}>
         {moves}
       </ol>
-      <button onClick={handleClickOrder}>{"Order: " + order}</button>
+      <button onClick={handleClickOrder}>{'Order: ' + order}</button>
     </div>
   );
 };
@@ -185,7 +185,7 @@ const TicTacToeGame = () => {
   };
   return (
     <Context.Provider value={value}>
-      <div className={style["game"]}>
+      <div className={style['game']}>
         <Board />
         <Info />
       </div>

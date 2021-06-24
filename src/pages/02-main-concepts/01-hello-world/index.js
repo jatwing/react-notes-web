@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component } from 'react';
 
 /*
  * note that ReactDOM.render() differs from Component.render()

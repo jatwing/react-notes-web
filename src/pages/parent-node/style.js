@@ -1,4 +1,4 @@
-import { jsx, css} from '@emotion/react'
+import { jsx, css } from '@emotion/react';
 
 const root = css`
   color: #00ff0f;
@@ -6,10 +6,8 @@ const root = css`
     color: black;
   }
   .test2 {
-    color: green
+    color: green;
   }
-`
-
-
+`;
 
 export default root;
