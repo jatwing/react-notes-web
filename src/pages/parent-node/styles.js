@@ -1,6 +1,8 @@
 import { css } from '@emotion/css';
+import useMedia  from 'utils/media'
 
 const useStyles = (theme, block) => {
+  const { largeQuery } = useMedia();
   if (block === 'root') {
     return css`
       .link:hover {
@@ -100,6 +102,20 @@ const useStyles = (theme, block) => {
         transition: font-size 1s linear;
       }
     `;
+  }
+
+  else if (block === 'list') {
+    return css`
+      .item {
+        width: 100%;
+      }
+      ${largeQuery} {
+        .item.test {
+          position: fixed;
+          width: 30%;
+        }
+      }
+    `
   }
 };
 

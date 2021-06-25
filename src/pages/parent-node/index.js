@@ -1,6 +1,13 @@
 import React from 'react';
 import Link from 'components/link';
-import { ImageList, ImageListItem,   Box, Card, Typography } from '@material-ui/core';
+import {
+  ImageList,
+  ImageListItem,
+  Box,
+  Card,
+  Typography,
+  Grid
+} from '@material-ui/core';
 import useMedia from 'utils/media';
 import { getSubsubtrees } from 'utils/directory-tree';
 import useStyles from './styles';
@@ -12,8 +19,8 @@ const TreeCard = ({ tree, modifier }) => {
   return (
     <Card className={useStyles(theme, 'root')}>
       <Box className={useStyles(theme, 'header')}>
-        <Link href={tree.path} className={cx('link ', modifier)}>
-          <Box className={cx('row ', modifier)}>
+        <Link href={tree.path} className={cx('link', modifier)}>
+          <Box className={cx('row', modifier)}>
             <Typography className="text">
               {tree.parent === '/' ? 'home' : tree.parent}
             </Typography>
@@ -23,7 +30,7 @@ const TreeCard = ({ tree, modifier }) => {
       <Box className={useStyles(theme, 'content')}>
         {tree.children.map((child) => (
           <Link href={tree.directory + child} key={child} className="link">
-            <Box className={cx('row ', modifier)}>
+            <Box className={cx('row', modifier)}>
               <Typography className="text">{child}</Typography>
             </Box>
           </Link>
@@ -36,22 +43,62 @@ const TreeCard = ({ tree, modifier }) => {
 const ParentNode = ({ subtree, subtrees }) => {
   const nonLeaves = subtrees.filter((tree) => tree.children.length > 0);
   const subsubtrees = getSubsubtrees(subtree, nonLeaves);
-  const majorCard = <TreeCard tree={subtree} modifier="major" />;
+  const majorCard = (
+    <ImageListItem className={cx('item', 'test')}>
+      <TreeCard tree={subtree} modifier="major" />
+    </ImageListItem>
+  );
   const minorCards = subsubtrees.map((subsubtree) => (
-    <TreeCard tree={subsubtree} modifier="minor" />
+    <ImageListItem className="item">
+      <TreeCard tree={subsubtree} modifier="minor" />
+    </ImageListItem>
   ));
 
+  const theme = useTheme();
+
+  // the real name is root of this component : parent node,
+  // TODO rename
+
+  const listStyles = useStyles(theme, 'list');
   const { isSmall, isMedium, isLarge } = useMedia();
-  return (
-    <ImageList variant="masonry"  cols={3} gap={16}>
-      {majorCard}
-      {minorCards}
-      {minorCards}
-      {minorCards}
-      {minorCards}
-      {minorCards}
-    </ImageList>
-  );
+  const cols = isSmall ? 1 : 2;
+  const gap = theme.spacing(2);
+
+  if (isLarge) {
+    return (
+      <Grid container spacing={gap} className={listStyles}>
+        <Grid item xs={4}>{majorCard}</Grid>
+        <Grid item xs={8}>
+          <ImageList
+            variant="masonry"
+            cols={2}
+            gap={'16px'}
+            className={listStyles}
+          >
+            {minorCards}
+            {minorCards}
+            {minorCards}
+            {minorCards}
+            {minorCards}
+          </ImageList>
+        </Grid>
+      </Grid>
+    );
+  } else if (isSmall || isMedium) {
+    return (
+      <Box className={listStyles}>
+        <ImageList variant="masonry" cols={cols} gap={theme.spacing(2)}>
+          {majorCard}
+          {minorCards}
+          {minorCards}
+          {minorCards}
+          {minorCards}
+          {minorCards}
+        </ImageList>
+      </Box>
+    );
+  }
+  return <></>
 };
 
 export default ParentNode;
