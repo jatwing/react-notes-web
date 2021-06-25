@@ -1,34 +1,30 @@
 import React from 'react';
 import Link from 'components/link';
-import { Box, Card, Typography } from '@material-ui/core';
-
-// import useStyles from './styles';
-import clsx from 'clsx';
+import { ImageList, ImageListItem,   Box, Card, Typography } from '@material-ui/core';
 import useMedia from 'utils/media';
 import { getSubsubtrees } from 'utils/directory-tree';
-
-import root from './style';
+import useStyles from './styles';
+import { useTheme } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
 
 const TreeCard = ({ tree, modifier }) => {
-  const classes = {};
-  const directory = tree.path === '/' ? '/' : tree.path + '/';
-  const { isSmall, isMedium, isLarge } = useMedia();
+  const theme = useTheme();
   return (
-    <Card className={clsx(classes.root)}>
-      <Box className={clsx(classes.header)}>
-        <Link href={tree.path} className={clsx(classes.link)}>
-          <Box className={clsx(classes.row, classes[modifier])}>
-            <Typography className={clsx(classes.text)}>
-              {tree.parent}
+    <Card className={useStyles(theme, 'root')}>
+      <Box className={useStyles(theme, 'header')}>
+        <Link href={tree.path} className={cx('link ', modifier)}>
+          <Box className={cx('row ', modifier)}>
+            <Typography className="text">
+              {tree.parent === '/' ? 'home' : tree.parent}
             </Typography>
           </Box>
         </Link>
       </Box>
-      <Box className={clsx(classes.content)}>
-        {tree.children.map((c) => (
-          <Link href={directory + c} className={clsx(classes.link)}>
-            <Box className={clsx(classes.row, classes[modifier])}>
-              <Typography className={clsx(classes.text)}>{c}</Typography>
+      <Box className={useStyles(theme, 'content')}>
+        {tree.children.map((child) => (
+          <Link href={tree.directory + child} key={child} className="link">
+            <Box className={cx('row ', modifier)}>
+              <Typography className="text">{child}</Typography>
             </Box>
           </Link>
         ))}
@@ -38,17 +34,23 @@ const TreeCard = ({ tree, modifier }) => {
 };
 
 const ParentNode = ({ subtree, subtrees }) => {
-  const subsubtrees = getSubsubtrees(subtree, subtrees);
-  const classes = {};
+  const nonLeaves = subtrees.filter((tree) => tree.children.length > 0);
+  const subsubtrees = getSubsubtrees(subtree, nonLeaves);
+  const majorCard = <TreeCard tree={subtree} modifier="major" />;
+  const minorCards = subsubtrees.map((subsubtree) => (
+    <TreeCard tree={subsubtree} modifier="minor" />
+  ));
 
+  const { isSmall, isMedium, isLarge } = useMedia();
   return (
-    <>
-      <TreeCard tree={subtree} modifier="major" />
-
-      {subsubtrees.map((t) => (
-        <TreeCard tree={t} modifier="minor" />
-      ))}
-    </>
+    <ImageList variant="masonry"  cols={3} gap={16}>
+      {majorCard}
+      {minorCards}
+      {minorCards}
+      {minorCards}
+      {minorCards}
+      {minorCards}
+    </ImageList>
   );
 };
 
