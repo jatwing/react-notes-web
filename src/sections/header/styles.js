@@ -5,10 +5,10 @@ const useStyles = (theme, block) => {
     return css`
       display: flex;
       justify-content: space-between;
-      align-items: stretch;
 
       .link,
       .title {
+        align-self: stretch;
         display: flex;
         align-items: center;
       }
