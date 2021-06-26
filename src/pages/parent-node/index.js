@@ -6,13 +6,14 @@ import {
   Box,
   Card,
   Typography,
-  Grid
+  Grid,
 } from '@material-ui/core';
 import useMedia from 'utils/media';
 import { getSubsubtrees } from 'utils/directory-tree';
 import useStyles from './styles';
 import { useTheme } from '@material-ui/core/styles';
 import { cx } from '@emotion/css';
+import MultiRowTextCard from 'components/multi-row-text-card';
 
 const TreeCard = ({ tree, modifier }) => {
   const theme = useTheme();
@@ -43,7 +44,26 @@ const TreeCard = ({ tree, modifier }) => {
 const ParentNode = ({ subtree, subtrees }) => {
   const nonLeaves = subtrees.filter((tree) => tree.children.length > 0);
   const subsubtrees = getSubsubtrees(subtree, nonLeaves);
+  const getData = (tree) => ({
+    header: {
+      text: tree.parent,
+      href: tree.path
+    },
+    content: tree.children.map(child => ({
+      text: child,
+      href: tree.directory + child
+    }))
+  })
+
+
+
   const majorCard = (
+    <ImageListItem className={cx('item', 'test')}>
+      <MultiRowTextCard data={getData(subtree)} modifier="major"/>
+    </ImageListItem>
+  );
+
+  const majorCard3 = (
     <ImageListItem className={cx('item', 'test')}>
       <TreeCard tree={subtree} modifier="major" />
     </ImageListItem>
@@ -60,7 +80,7 @@ const ParentNode = ({ subtree, subtrees }) => {
   // TODO rename
 
   const listStyles = useStyles(theme, 'list');
-  const { isSmall, isMedium, isLarge } = useMedia();
+  const { isSmall, isMedium, isLarge } = useMedia(theme);
   const cols = isSmall ? 1 : 2;
   const gap = theme.spacing(2);
 
@@ -70,12 +90,7 @@ const ParentNode = ({ subtree, subtrees }) => {
         {majorCard}
         <Box className="left">test</Box>
         <Box className="right">
-          <ImageList
-            variant="masonry"
-            cols={2}
-            gap={'16px'}
-            className={"list"}
-          >
+          <ImageList variant="masonry" cols={2} gap={'16px'} className={'list'}>
             {minorCards}
             {minorCards}
             {minorCards}
@@ -88,7 +103,12 @@ const ParentNode = ({ subtree, subtrees }) => {
   } else if (isSmall || isMedium) {
     return (
       <Box className={listStyles}>
-        <ImageList variant="masonry" cols={cols} gap={theme.spacing(2)} className="list">
+        <ImageList
+          variant="masonry"
+          cols={cols}
+          gap={theme.spacing(2)}
+          className="list"
+        >
           {majorCard}
           {minorCards}
           {minorCards}
@@ -99,7 +119,7 @@ const ParentNode = ({ subtree, subtrees }) => {
       </Box>
     );
   }
-  return <></>
+  return <></>;
 };
 
 export default ParentNode;

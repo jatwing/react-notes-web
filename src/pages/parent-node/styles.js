@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import useMedia from 'utils/media';
 
 const useStyles = (theme, block) => {
-  const { largeQuery } = useMedia();
+  const { largeQuery } = useMedia(theme);
 
   if (block === 'list') {
     return css`
@@ -21,7 +21,6 @@ const useStyles = (theme, block) => {
         overflow: visible;
       }
 
-
       .right .list {
         margin-top: 0;
       }
@@ -32,7 +31,7 @@ const useStyles = (theme, block) => {
       ${largeQuery} {
         .item.test {
           position: fixed;
-          width: calc(${(100 / 3)}% - ${32 / 3}px - 16px);
+          width: calc(${100 / 3}% - ${32 / 3}px - 16px);
         }
       }
     `;

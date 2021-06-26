@@ -14,7 +14,8 @@ const Header = () => {
   const parentNodes = nodes.slice(0, -1);
   const leafNode = nodes[nodes.length - 1];
 
-  const { isMedium, isLarge } = useMedia();
+  const theme = useTheme();
+  const { isMedium, isLarge } = useMedia(theme);
   /** maximum number of parent nodes */
   let maximum = 1;
   if (isMedium) {
@@ -34,14 +35,15 @@ const Header = () => {
   );
   const parentElements = parentNodes.map((node) => (
     <Link href={getPath(pathname, node)} key={node} className="link">
-      {node === "/" ? "home" : node}
+      {node === '/' ? 'home' : node}
     </Link>
   ));
   const leafElement = leafNode && (
-    <Typography className="title">{leafNode === "/" ? "home" : leafNode}</Typography>
+    <Typography className="title">
+      {leafNode === '/' ? 'home' : leafNode}
+    </Typography>
   );
 
-  const theme = useTheme();
   return (
     <AppBar position="sticky">
       <Toolbar className={useStyles(theme, 'toolbar')}>

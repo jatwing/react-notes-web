@@ -1,8 +1,6 @@
-import { useTheme } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
 
-const useMedia = () => {
-  const theme = useTheme();
+const useMedia = (theme) => {
   const smallQuery = theme.breakpoints.down('md');
   const mediumQuery = theme.breakpoints.between('md', 'lg');
   const largeQuery = theme.breakpoints.up('lg');
