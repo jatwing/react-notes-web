@@ -66,14 +66,15 @@ const ParentNode = ({ subtree, subtrees }) => {
 
   if (isLarge) {
     return (
-      <Grid container spacing={gap} className={listStyles}>
-        <Grid item xs={4}>{majorCard}</Grid>
-        <Grid item xs={8}>
+      <Box className={listStyles}>
+        {majorCard}
+        <Box className="left">test</Box>
+        <Box className="right">
           <ImageList
             variant="masonry"
             cols={2}
             gap={'16px'}
-            className={listStyles}
+            className={"list"}
           >
             {minorCards}
             {minorCards}
@@ -81,13 +82,13 @@ const ParentNode = ({ subtree, subtrees }) => {
             {minorCards}
             {minorCards}
           </ImageList>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     );
   } else if (isSmall || isMedium) {
     return (
       <Box className={listStyles}>
-        <ImageList variant="masonry" cols={cols} gap={theme.spacing(2)}>
+        <ImageList variant="masonry" cols={cols} gap={theme.spacing(2)} className="list">
           {majorCard}
           {minorCards}
           {minorCards}

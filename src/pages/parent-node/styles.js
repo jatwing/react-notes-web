@@ -1,9 +1,42 @@
 import { css } from '@emotion/css';
-import useMedia  from 'utils/media'
+import useMedia from 'utils/media';
 
 const useStyles = (theme, block) => {
   const { largeQuery } = useMedia();
-  if (block === 'root') {
+
+  if (block === 'list') {
+    return css`
+      .left {
+        display: inline-block;
+        width: ${100 / 3}%;
+        background-color: red;
+      }
+
+      .right {
+        display: inline-block;
+        width: ${(100 / 3) * 2}%;
+      }
+
+      .list {
+        overflow: visible;
+      }
+
+
+      .right .list {
+        margin-top: 0;
+      }
+
+      .item {
+        width: 100%;
+      }
+      ${largeQuery} {
+        .item.test {
+          position: fixed;
+          width: calc(${(100 / 3)}% - ${32 / 3}px - 16px);
+        }
+      }
+    `;
+  } else if (block === 'root') {
     return css`
       .link:hover {
         text-decoration: none;
@@ -102,20 +135,6 @@ const useStyles = (theme, block) => {
         transition: font-size 1s linear;
       }
     `;
-  }
-
-  else if (block === 'list') {
-    return css`
-      .item {
-        width: 100%;
-      }
-      ${largeQuery} {
-        .item.test {
-          position: fixed;
-          width: 30%;
-        }
-      }
-    `
   }
 };
 
