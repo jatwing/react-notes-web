@@ -31,14 +31,17 @@ const ParentNode = ({ subtree, subtrees }) => {
         <ImageList
           variant="masonry"
           cols={isSmall ? 1 : 2}
-          gap={theme.spacing(2)}
+          gap={parseFloat(theme.spacing(2))}
           className={classes.list}
         >
-          <ImageListItem className={clsx(classes.card, classes.major)}>
+          <ImageListItem
+            key={subtree.path}
+            className={clsx(classes.card, classes.major)}
+          >
             <MultiRowTextCard data={getData(subtree)} modifier="major" />
           </ImageListItem>
           {subsubtrees.map((subsubtree) => (
-            <ImageListItem className={classes.card}>
+            <ImageListItem key={subsubtree.path} className={classes.card}>
               <MultiRowTextCard data={getData(subsubtree)} modifier="minor" />
             </ImageListItem>
           ))}

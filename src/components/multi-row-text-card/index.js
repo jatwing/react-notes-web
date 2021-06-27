@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'components/link';
 import { Box, Card, Typography } from '@material-ui/core';
 import useStyles from './styles';
-import { useTheme } from '@material-ui/styles';
 import clsx from 'clsx';
 
 const MultiRowTextCard = ({ data, modifier }) => {
