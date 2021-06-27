@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageList, ImageListItem, Box } from '@material-ui/core';
-import useMedia from 'utils/media';
+import { useMedia } from 'utils/media';
 import { getSubsubtrees } from 'utils/directory-tree';
 import useStyles from './styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -23,23 +23,10 @@ const ParentNode = ({ subtree, subtrees }) => {
 
   const theme = useTheme();
   const classes = useStyles();
-  const majorCard = (
-    <ImageListItem className={clsx(classes.card, classes.major)}>
-      <MultiRowTextCard data={getData(subtree)} modifier="major" />
-    </ImageListItem>
-  );
-
-  const minorCards = subsubtrees.map((subsubtree) => (
-    <ImageListItem className={classes.card}>
-      <MultiRowTextCard data={getData(subsubtree)} modifier="minor" />
-    </ImageListItem>
-  ));
-
   const { isSmall } = useMedia(theme);
-
   return (
     <Box className={classes.root}>
-      <Box className={classes.left}/>
+      <Box className={classes.left} />
       <Box className={classes.right}>
         <ImageList
           variant="masonry"
@@ -47,12 +34,14 @@ const ParentNode = ({ subtree, subtrees }) => {
           gap={theme.spacing(2)}
           className={classes.list}
         >
-          {majorCard}
-          {minorCards}
-          {minorCards}
-          {minorCards}
-          {minorCards}
-          {minorCards}
+          <ImageListItem className={clsx(classes.card, classes.major)}>
+            <MultiRowTextCard data={getData(subtree)} modifier="major" />
+          </ImageListItem>
+          {subsubtrees.map((subsubtree) => (
+            <ImageListItem className={classes.card}>
+              <MultiRowTextCard data={getData(subsubtree)} modifier="minor" />
+            </ImageListItem>
+          ))}
         </ImageList>
       </Box>
     </Box>

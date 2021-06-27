@@ -1,13 +1,18 @@
 import { useMediaQuery } from '@material-ui/core';
 
-const useMedia = (theme) => {
+const getMediaQueries = (theme) => {
   const smallQuery = theme.breakpoints.down('md');
   const mediumQuery = theme.breakpoints.between('md', 'lg');
   const largeQuery = theme.breakpoints.up('lg');
-  const isSmall =  useMediaQuery(smallQuery);
-  const isMedium = useMediaQuery(mediumQuery);
-  const isLarge =  useMediaQuery(largeQuery);
-  return { smallQuery, mediumQuery, largeQuery, isSmall, isMedium, isLarge };
+  return { smallQuery, mediumQuery, largeQuery };
 };
 
-export default useMedia;
+const useMedia = (theme) => {
+  const { smallQuery, mediumQuery, largeQuery } = getMediaQueries(theme);
+  const isSmall = useMediaQuery(smallQuery);
+  const isMedium = useMediaQuery(mediumQuery);
+  const isLarge = useMediaQuery(largeQuery);
+  return { isSmall, isMedium, isLarge };
+};
+
+export { getMediaQueries, useMedia }

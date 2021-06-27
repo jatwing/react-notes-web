@@ -1,11 +1,8 @@
 import { makeStyles } from '@material-ui/styles';
-import useMedia from 'utils/media';
-import { css } from '@emotion/css';
-import { useMediaQuery } from '@material-ui/core';
+import { getMediaQueries } from 'utils/media';
 
 const useStyles = makeStyles((theme) => {
-  // const largeQuery = useMedia(theme);
-  const largeQuery = theme.breakpoints.up('lg');
+  const { largeQuery } = getMediaQueries(theme);
   return {
     /** modifier */
     major: {},

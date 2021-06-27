@@ -6,8 +6,6 @@ import { useTheme } from '@material-ui/styles';
 import clsx from 'clsx';
 
 const MultiRowTextCard = ({ data, modifier }) => {
-  console.log(useTheme());
-
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -16,7 +14,7 @@ const MultiRowTextCard = ({ data, modifier }) => {
           href={data.header.href}
           className={clsx(classes.link, classes[modifier])}
         >
-          <Box className={clsx(classes.row, classes[modifier])}> 
+          <Box className={clsx(classes.row, classes[modifier])}>
             <Typography className={classes.text}>{data.header.text}</Typography>
           </Box>
         </Link>

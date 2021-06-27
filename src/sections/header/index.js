@@ -4,7 +4,7 @@ import Link from 'components/link';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { getNodes, getPath } from 'utils/directory-tree';
 import useStyles from './styles';
-import useMedia from 'utils/media';
+import { useMedia } from 'utils/media';
 import { useTheme } from '@material-ui/core/styles';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 
