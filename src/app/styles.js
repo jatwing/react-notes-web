@@ -2,8 +2,8 @@ import { css } from '@emotion/css';
 
 const useStyles = (theme) => {
   return css`
-    .content {
-      margin: 16px;
+    & .content {
+      margin: ${theme.spacing(2)};
     }
   `;
 };

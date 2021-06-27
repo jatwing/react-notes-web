@@ -6,15 +6,15 @@ const useStyles = (theme, block) => {
       display: flex;
       justify-content: space-between;
 
-      .link,
-      .title {
+      & .link,
+      & .title {
         align-self: stretch;
         display: flex;
         align-items: center;
       }
 
-      .link,
-      .title {
+      & .link,
+      & .title {
         font-family: ${theme.typography.fontStacks.sansSerif};
         font-size: ${theme.typography.h6.fontSize};
         font-weight: ${theme.typography.h6.fontWeight};
@@ -23,24 +23,24 @@ const useStyles = (theme, block) => {
         padding-right: ${theme.spacing(2)};
       }
 
-      .link {
+      & .link {
         color: ${theme.palette.primary.contrastText};
         transition: color 1s linear;
       }
-      .link:hover {
+      & .link:hover {
         color: ${theme.palette.primary.highlightText};
         text-decoration: none;
       }
-      .link:focus {
+      & .link:focus {
         color: ${theme.palette.primary.contrastText};
         background-color: ${theme.palette.primary.light};
       }
 
-      .title {
+      & .title {
         color: ${theme.palette.primary.highlightText};
         position: relative;
       }
-      .title::after {
+      & .title::after {
         content: '';
         width: 100%;
         height: 4px;
