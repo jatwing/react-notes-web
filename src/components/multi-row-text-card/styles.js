@@ -1,93 +1,95 @@
-import { css } from '@emotion/css';
+import { makeStyles } from '@material-ui/styles';
 
-const useStyles = (theme) => {
-  return css`
-    & .link:hover {
-      text-decoration: none;
-    }
-
-    & .row {
-      padding: ${theme.spacing(2)};
-    }
-    & .row:hover {
-      text-decoration: underline currentcolor;
-    }
-
-    & .header .row.major {
-      color: ${theme.palette.primary.contrastText};
-      transition: color 1s linear;
-      background-color: ${theme.palette.primary.main};
-    }
-    & .header .row.major:hover {
-      color: ${theme.palette.primary.highlightText};
-      text-decoration: none;
-    }
-
-    & .header .row.minor {
-      color: ${theme.palette.text.primary};
-      position: relative;
-    }
-    & .header .row.minor::after {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 32px;
-      clip-path: polygon(0 0, 32px 0, 32px 32px);
-      position: absolute;
-      right: 0;
-      top: 0;
-      background: linear-gradient(
-        ${theme.palette.secondary.dark},
-        ${theme.palette.secondary.light}
-      );
-    }
-    & .header .row.minor:hover::after {
-      background: linear-gradient(
-        ${theme.palette.primary.dark},
-        ${theme.palette.primary.light}
-      );
-    }
-
-    & .header.text {
-      font-family: ${theme.typography.fontStacks.sansSerif};
-      font-size: ${theme.typography.h6.fontSize};
-      font-weight: ${theme.typography.h6.fontWeight};
-      lineheight: ${theme.typography.h6.lineHeight};
-    }
-
-    & .content .row.major {
-      color: ${theme.palette.secondary.contrastText};
-      transition: background 1s linear;
-    }
-    & .content *:nth-child(3n + 1) .row.major {
-      background-color: ${theme.palette.secondary.light};
-    }
-    & .content *:nth-child(3n + 2) .row.major {
-      background-color: ${theme.palette.secondary.main};
-    }
-    & .content *:nth-child(3n) .row.major {
-      background-color: ${theme.palette.secondary.dark};
-    }
-    & .content .row.major:hover {
-      background-color: ${theme.palette.primary.main};
-    }
-
-    & .content .row.minor {
-      color: ${theme.palette.text.secondary};
-      border-top: 1px dashed ${theme.palette.secondary.main};
-    }
-    & .content .row.minor:hover .text {
-      font-size: ${theme.typography.h6.fontSize};
-    }
-
-    & .content .text {
-      font-family: ${theme.typography.fontStacks.serif};
-      font-size: ${theme.typography.body1.fontSize};
-      font-weight: ${theme.typography.body1.fontWeight};
-      lineheight: ${theme.typography.body1.lineHeight};
-      transition: font-size 1s linear;
-    }
-  `;
-};
+const useStyles = makeStyles((theme) => ({
+  /** modifier */
+  major: {},
+  minor: {},
+  /** element */
+  link: {
+    textDecoration: 'none',
+  },
+  row: {
+    padding: theme.spacing(2),
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline currentcolor',
+    },
+  },
+  text: {},
+  /** block */
+  header: {
+    '& $row$major': {
+      color: theme.palette.primary.contrastText,
+      transition: 'color 1s linear',
+      backgroundColor: theme.palette.primary.main,
+      '&:hover': {
+        color: theme.palette.primary.highlightText,
+        textDecoration: 'none',
+      },
+    },
+    '& $row$minor': {
+      color: theme.palette.text.primary,
+      position: 'relative',
+      '&::after': {
+        content: '""',
+        display: 'block',
+        width: '32px',
+        height: '32px',
+        clipPath: 'polygon(0 0, 32px 0, 32px 32px)',
+        position: 'absolute',
+        right: '0',
+        top: '0',
+        background: `linear-gradient(${theme.palette.secondary.dark}, ${theme.palette.secondary.light})`,
+      },
+      '&:hover': {
+        '&::after': {
+          background: `linear-gradient(${theme.palette.primary.dark}, ${theme.palette.primary.light})`,
+        },
+      },
+      '& $text': {
+        fontFamily: theme.typography.fontStacks.sansSerif,
+        fontSize: theme.typography.h6.fontSize,
+        fontWeight: theme.typography.h6.fontWeight,
+        lineHeight: theme.typography.h6.lineHeight,
+      },
+    },
+  },
+  content: {
+    '& $row$major': {
+      color: theme.palette.secondary.contrastText,
+      transition: 'background 1s linear',
+      '&:hover': {
+        backgroundColor: theme.palette.primary.main,
+      },
+    },
+    '& > *:nth-child(3n+1) $row$major': {
+      backgroundColor: theme.palette.secondary.light,
+    },
+    '& > *:nth-child(3n+2) $row$major': {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    '& > *:nth-child(3n) $row$major': {
+      backgroundColor: theme.palette.secondary.dark,
+    },
+    '& $row$minor': {
+      color: theme.palette.text.secondary,
+      borderTop: `1px dashed ${theme.palette.secondary.main}`,
+      '&:hover': {
+        '& $text': {
+          fontSize: theme.typography.h6.fontSize,
+        },
+      },
+    },
+    '& $text': {
+      fontFamily: theme.typography.fontStacks.serif,
+      fontSize: theme.typography.body1.fontSize,
+      fontWeight: theme.typography.body1.fontWeight,
+      lineHeight: theme.typography.body1.lineHeight,
+      transition: 'font-size 1s linear',
+    },
+  },
+  /** root */
+  root: {},
+}));
 
 export default useStyles;

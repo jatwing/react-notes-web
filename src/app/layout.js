@@ -1,15 +1,15 @@
 import { Box } from '@material-ui/core';
-import Header from 'sections/header';
+import * as React from 'react';
 import useStyles from './styles';
-import { useTheme } from '@material-ui/core/styles'
+import Header from 'sections/header';
 
 const Layout = ({ children }) => {
-  const theme =useTheme()
+  const classes = useStyles();
   return (
-    <Box className={useStyles(theme)}>
+    <>
       <Header />
-      <Box className="content">{children}</Box>
-    </Box>
+      <Box className={classes.content}>{children}</Box>
+    </>
   );
 };
 

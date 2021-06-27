@@ -28,25 +28,27 @@ const Header = () => {
   const backNode =
     nodes.length - 1 - maximum >= 0 ? nodes[nodes.length - 1 - maximum] : '/';
 
+  const classes = useStyles();
+
   const backIcon = (
-    <Link href={getPath(pathname, backNode)} key={backNode} className="link">
+    <Link href={getPath(pathname, backNode)} key={backNode} className={classes.link}>
       <ArrowBackIosRoundedIcon />
     </Link>
   );
   const parentElements = parentNodes.map((node) => (
-    <Link href={getPath(pathname, node)} key={node} className="link">
+    <Link href={getPath(pathname, node)} key={node} className={classes.link}>
       {node === '/' ? 'home' : node}
     </Link>
   ));
   const leafElement = leafNode && (
-    <Typography className="title">
+    <Typography className={classes.title}>
       {leafNode === '/' ? 'home' : leafNode}
     </Typography>
   );
 
   return (
-    <AppBar position="sticky">
-      <Toolbar className={useStyles(theme, 'toolbar')}>
+    <AppBar position="sticky" className={classes.root}>
+      <Toolbar className={classes.toolbar}>
         {isVisible && backIcon}
         {startIndex < 0 && parentElements.slice(startIndex)}
         {leafElement}

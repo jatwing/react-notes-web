@@ -6,10 +6,10 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Layout from './layout';
-import Theme from './theme';
 import { getSubtrees } from 'utils/directory-tree';
 import routes from 'config/routes';
 import ParentNode from 'pages/parent-node';
+import Theme from './theme';
 
 const subtrees = getSubtrees(routes.map((route) => route.path));
 
@@ -33,8 +33,8 @@ const leafRoutes = routes.map((route) => ({
 
 const App = () => {
   return (
-    <Router>
-      <Theme>
+    <Theme>
+      <Router>
         <Layout>
           <Switch>
             {leafRoutes.map((route) => (
@@ -46,8 +46,8 @@ const App = () => {
             <Redirect to="/" />
           </Switch>
         </Layout>
-      </Theme>
-    </Router>
+      </Router>
+    </Theme>
   );
 };
 

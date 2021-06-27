@@ -2,27 +2,30 @@ import React from 'react';
 import Link from 'components/link';
 import { Box, Card, Typography } from '@material-ui/core';
 import useStyles from './styles';
-import { useTheme } from '@material-ui/core/styles';
-import { cx } from '@emotion/css';
+import { useTheme } from '@material-ui/styles';
+import clsx from 'clsx';
 
 const MultiRowTextCard = ({ data, modifier }) => {
-  const theme = useTheme();
-  const a = useStyles(theme);
-  console.log(a)
+  console.log(useTheme());
+
+  const classes = useStyles();
   return (
-    <Card className={a}>
-      <Box className="header">
-        <Link href={data.header.href} className={cx('link', modifier)}>
-          <Box className={cx('row', modifier)}>
-            <Typography className="text">{data.header.text}</Typography>
+    <Card className={classes.root}>
+      <Box className={classes.header}>
+        <Link
+          href={data.header.href}
+          className={clsx(classes.link, classes[modifier])}
+        >
+          <Box className={clsx(classes.row, classes[modifier])}> 
+            <Typography className={classes.text}>{data.header.text}</Typography>
           </Box>
         </Link>
       </Box>
-      <Box className="content">
+      <Box className={classes.content}>
         {data.content.map((row) => (
-          <Link href={row.href} key={row.href} className="link">
-            <Box className={cx('row', modifier)}>
-              <Typography className="text">{row.text}</Typography>
+          <Link href={row.href} key={row.href} className={classes.link}>
+            <Box className={clsx(classes.row, classes[modifier])}>
+              <Typography className={classes.text}>{row.text}</Typography>
             </Box>
           </Link>
         ))}
