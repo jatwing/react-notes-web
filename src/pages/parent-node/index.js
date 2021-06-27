@@ -39,7 +39,7 @@ const ParentNode = ({ subtree, subtrees }) => {
 
   return (
     <Box className={classes.root}>
-      <Box className={classes.left}>test</Box>
+      <Box className={classes.left}/>
       <Box className={classes.right}>
         <ImageList
           variant="masonry"

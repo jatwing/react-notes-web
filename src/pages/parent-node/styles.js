@@ -17,23 +17,12 @@ const useStyles = makeStyles((theme) => {
       width: '100%',
     },
     /** block */
-    fixed: {
-      display: 'none',
-      [largeQuery]: {
-        display: 'initial',
-        position: 'fixed',
-        /** [100% of initial containing block - margin * 2 - gap * 2 ] / 3 */
-        width: `calc(${100 / 3}% - ${theme.spacing(8 / 3)})`,
-      },
-    },
     left: {
       display: 'inline-block',
       width: '0',
-      backgroundColor: 'red',
       [largeQuery]: {
-        /** [100% of root - gap * 2] / 3 */
-        width: `calc(${100 / 3}% - ${theme.spacing(4 / 3)})`,
-        marginRight: theme.spacing(2),
+        /** ('root' width - gap * 2) / 3 + gap * 2 */
+        width: `calc(${100 / 3}% + ${theme.spacing(2 / 3)})`,
       },
     },
     right: {
@@ -42,21 +31,15 @@ const useStyles = makeStyles((theme) => {
       '& $list': {
         marginTop: '0',
       },
-      '& $card$major': {
-        [largeQuery]: {
-          display: 'initial',
-          position: 'fixed',
-          left: '0',
-          top: '0',
-          /** [100% of initial containing block - margin * 2 - gap * 2 ] / 3 */
-          width: `calc(${100 / 3}% - ${theme.spacing(8 / 3)})`,
-        },
-      },
       [largeQuery]: {
-        /** [100% of root - gap * 2] / 3 * 2 + gap */
+        /** ('root' width - gap * 2) / 3 * 2 + gap * 2 */
         width: `calc(${(100 / 3) * 2}% - ${theme.spacing(2 / 3)})`,
-        '& $item$major': {
-          display: 'none',
+        '& $card$major': {
+          /** default position relative to 'right' */
+          position: 'fixed',
+          left: theme.spacing(2),
+          /** (<html> width - margin * 2 - gap * 2) / 3 */
+          width: `calc(${100 / 3}% - ${theme.spacing(8 / 3)})`,
         },
       },
     },
