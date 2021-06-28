@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  /** root */
-  root: {},
+  /** container */
+  container: {},
 }));
 
 export default useStyles;

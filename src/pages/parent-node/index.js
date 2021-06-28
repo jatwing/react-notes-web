@@ -25,7 +25,7 @@ const ParentNode = ({ subtree, subtrees }) => {
   const classes = useStyles();
   const { isSmall } = useMedia(theme);
   return (
-    <Box className={classes.root}>
+    <Box className={classes.container}>
       <Box className={classes.left} />
       <Box className={classes.right}>
         <ImageList

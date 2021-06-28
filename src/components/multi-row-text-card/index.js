@@ -7,7 +7,7 @@ import clsx from 'clsx';
 const MultiRowTextCard = ({ data, modifier }) => {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card className={classes.container}>
       <Box className={classes.header}>
         <Link
           href={data.header.href}

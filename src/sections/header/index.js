@@ -47,7 +47,7 @@ const Header = () => {
   );
 
   return (
-    <AppBar position="sticky" className={classes.root}>
+    <AppBar position="sticky" className={classes.container}>
       <Toolbar className={classes.toolbar}>
         {isVisible && backIcon}
         {startIndex < 0 && parentElements.slice(startIndex)}

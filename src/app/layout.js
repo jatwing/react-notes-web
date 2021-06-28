@@ -1,5 +1,4 @@
 import { Box } from '@material-ui/core';
-import * as React from 'react';
 import useStyles from './styles';
 import Header from 'sections/header';
 
