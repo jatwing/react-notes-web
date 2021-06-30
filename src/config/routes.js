@@ -11,9 +11,12 @@ import Forms from 'pages/02-main-concepts/09-forms';
 import LiftingStateUp from 'pages/02-main-concepts/10-lifting-state-up';
 import CompositionVsInheritance from 'pages/02-main-concepts/11-composition-vs-inheritance';
 import ThinkingInReact from 'pages/02-main-concepts/12-thinking-in-react';
+<<<<<<< HEAD
 
 import Accessibility from 'pages/03-advanced-guides/01-accessibility'
 
+=======
+>>>>>>> 7b8150c9b703c2f31b99c65c63ea409bcfd39697
 
 import Context from 'pages/03-advanced-guides/03-context';
 
@@ -63,10 +66,13 @@ const routes = [
     path: '/02-main-concepts/12-thinking-in-react',
     component: ThinkingInReact,
   },
+<<<<<<< HEAD
   {
     path: '/03-advanced-guides/01-accessibility',
     component: Accessibility
   },
+=======
+>>>>>>> 7b8150c9b703c2f31b99c65c63ea409bcfd39697
 
   { path: '/03-advanced-guides/03-context', component: Context },
 ];

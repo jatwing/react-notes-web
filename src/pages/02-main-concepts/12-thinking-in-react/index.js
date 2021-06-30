@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, Fragment } from 'react';
 import styles from './styles.module.css';
 import clsx from 'clsx';
@@ -173,5 +174,16 @@ const ThinkingInReact = () => {
 
   return <FilterableProductTable products={products} />;
 };
+=======
+
+
+const ThinkingInReact = () => {
+
+
+  return (
+   <></>
+  )
+}
+>>>>>>> 7b8150c9b703c2f31b99c65c63ea409bcfd39697
 
 export default ThinkingInReact;
