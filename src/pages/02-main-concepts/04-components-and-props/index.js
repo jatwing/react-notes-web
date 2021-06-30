@@ -58,7 +58,7 @@ function ComponentsAndProps() {
     text: 'I hope you enjoy learning React!',
     author: {
       name: 'Hello Kitty',
-      avatarUrl: '/images/02-main-concepts/04-components-and-props/avatar.jpg',
+      avatarUrl: '/images/pages/02-main-concepts/04-components-and-props/avatar.jpg',
     },
   };
 
