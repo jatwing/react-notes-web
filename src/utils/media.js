@@ -4,7 +4,8 @@ const getMediaQueries = (theme) => {
   const smallQuery = theme.breakpoints.down('md');
   const mediumQuery = theme.breakpoints.between('md', 'lg');
   const largeQuery = theme.breakpoints.up('lg');
-  return { smallQuery, mediumQuery, largeQuery };
+  const mediumLargeQuery = theme.breakpoints.up('md');
+  return { smallQuery, mediumQuery, largeQuery, mediumLargeQuery };
 };
 
 const useMedia = (theme) => {
@@ -15,4 +16,4 @@ const useMedia = (theme) => {
   return { isSmall, isMedium, isLarge };
 };
 
-export { getMediaQueries, useMedia }
+export { getMediaQueries, useMedia };

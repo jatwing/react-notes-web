@@ -6,11 +6,11 @@ import Footer from 'sections/footer'
 const Layout = ({ children }) => {
   const classes = useStyles();
   return (
-    <>
+    <Box className={classes.container}>
       <Header />
       <Box className={classes.content}>{children}</Box>
       <Footer />
-    </>
+    </Box>
   );
 };
 

@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.primary.highlightText,
       position: 'relative',
       '&::after': {
-        content: '""',
         width: '100%',
         height: theme.spacing(0.5),
+        content: '""',
         backgroundColor: theme.palette.primary.highlightText,
         position: 'absolute',
         left: '0',
