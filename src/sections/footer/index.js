@@ -75,14 +75,14 @@ const Footer = () => {
 
   return (
     <Box className={classes.container}>
-      <Grid container spacing={2} className={classes.columns}>
-        <Grid item xs={6} sm={6} md={4} className={classes.column}>
+      <Grid container className={classes.subContainer}>
+        <Grid item xs={6} sm={6} md={3} className={classes.column}>
           <ProjectColumn className={classes.column}/>
         </Grid>
-        <Grid item xs={6} sm={6} md={4} className={classes.column}>
+        <Grid item xs={6} sm={6} md={3} className={classes.column}>
           <AuthorColumn />
         </Grid>
-        <Grid item xs={12} sm={12} md={4} className={classes.logo}>
+        <Grid item xs={12} sm={12} md={6} className={classes.logo}>
           <Logo />
         </Grid>
       </Grid>

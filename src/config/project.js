@@ -17,7 +17,7 @@ const project = {
   license: 'https://creativecommons.org/licenses/by/4.0/',
   email: 'mailto:jatwing@pm.me',
   stackOverflow: 'https://stackoverflow.com/users/8813862/jatwing',
-  copyright: `© 2020-${(new Date()).getFullYear()}, Jatwing. Some Rights Reserved.`,
+  copyright: `© 2020-${(new Date()).getFullYear()}, Jatwing. Some rights reserved.`,
 };
 
 export default project;

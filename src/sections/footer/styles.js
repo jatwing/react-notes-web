@@ -11,69 +11,54 @@ const useStyles = makeStyles((theme) => {
       height: '64px',
       clipPath: 'circle(50%)',
       backgroundColor: '#ffffff',
-    },
-    text: {
-      fontFamily: theme.typography.fontStacks.sansSerif,
-      fontWeight: theme.typography.body1.fontWeight,
-      lineHeight: theme.typography.body1.lineHeight,
-      color: theme.palette.grey['500'],
       marginBottom: theme.spacing(1),
     },
-    link: {
-
-    },
-
-
+    text: {},
+    link: {},
     /** block  */
     column: {
       '& $text': {
-        fontSize: theme.typography.h6.fontSize,
-        fontWeight: theme.typography.fontWeightBold,
-        margin: '0',
+        ...theme.typography.h6,
+        fontFamily: theme.typography.fontStacks.sansSerif,
+        color: theme.palette.grey['500'],
       },
-
       '& $link': {
         display: 'block',
+        ...theme.typography.body1,
         fontFamily: theme.typography.fontStacks.sansSerif,
-        fontSize: theme.typography.body1.fontSize,
-        fontWeight: theme.typography.body1.fontWeight,
-        lineHeight: theme.typography.body1.lineHeight,
         textDecoration: 'none',
         color: theme.palette.primary.contrastText,
-        marginBottom: theme.spacing(1),
+        cursor: 'pointer',
+        marginTop: theme.spacing(1),
       },
     },
     logo: {
       display: 'flex',
       flexFlow: 'column nowrap',
       alignItems: 'center',
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(2),
       [mediumLargeQuery]: {
         order: '-1',
         alignItems: 'flex-start',
+        marginTop: '0',
       },
       '& $text': {
-        fontSize: theme.typography.body1.fontSize,
-        margin: '0',
+        ...theme.typography.body1,
+        fontFamily: theme.typography.fontStacks.sansSerif,
+        color: theme.palette.grey['500'],
       },
     },
-
     /** container  */
     container: {
       backgroundColor: theme.palette.primary.main,
     },
     subContainer: {
       width: '90%',
-      padding: theme.spacing(2),
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      [mediumQuery]: {
-        width: '75%',
-      },
+      padding: theme.spacing(4),
+      margin: '0 auto 0 auto',
       [largeQuery]: {
         width: '60%',
       },
-      '& $text': {},
     },
   };
 });
