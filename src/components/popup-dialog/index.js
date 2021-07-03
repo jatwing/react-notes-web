@@ -8,9 +8,11 @@ import {
 import { useMedia } from 'utils/media';
 import useStyles from './styles';
 import clsx from 'clsx';
+import { useTheme } from '@material-ui/core';
 
 const PopupDialog = (props) => {
-  const { isMedium, isLarge } = useMedia();
+  const theme = useTheme();
+  const { isMedium, isLarge } = useMedia(theme);
   let defaultMaxWidth = 'sm';
   if (isMedium) {
     defaultMaxWidth = 'md';

@@ -7,8 +7,8 @@ const useStyles = makeStyles((theme) => {
     /** modifier */
     /** element */
     image: {
-      width: '48px',
-      height: '48px',
+      width: '64px',
+      height: '64px',
       clipPath: 'circle(50%)',
       backgroundColor: '#ffffff',
     },
@@ -20,34 +20,8 @@ const useStyles = makeStyles((theme) => {
       marginBottom: theme.spacing(1),
     },
     link: {
-      display: 'block',
-      fontFamily: theme.typography.fontStacks.sansSerif,
-      fontSize: theme.typography.body1.fontSize,
-      fontWeight: theme.typography.body1.fontWeight,
-      lineHeight: theme.typography.body1.lineHeight,
-      textDecoration: 'none',
-      color: theme.palette.primary.contrastText,
-      marginBottom: theme.spacing(1),
+
     },
-
-/* copy from demo */
- form: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: 'auto',
-    width: 'fit-content',
-  },
-  formControl: {
-    marginTop: theme.spacing(2),
-    minWidth: 120,
-  },
-  formControlLabel: {
-    marginTop: theme.spacing(1),
-  },
-
-
-
-/* copy from demo */
 
 
     /** block  */
@@ -55,6 +29,18 @@ const useStyles = makeStyles((theme) => {
       '& $text': {
         fontSize: theme.typography.h6.fontSize,
         fontWeight: theme.typography.fontWeightBold,
+        margin: '0',
+      },
+
+      '& $link': {
+        display: 'block',
+        fontFamily: theme.typography.fontStacks.sansSerif,
+        fontSize: theme.typography.body1.fontSize,
+        fontWeight: theme.typography.body1.fontWeight,
+        lineHeight: theme.typography.body1.lineHeight,
+        textDecoration: 'none',
+        color: theme.palette.primary.contrastText,
+        marginBottom: theme.spacing(1),
       },
     },
     logo: {
@@ -65,16 +51,18 @@ const useStyles = makeStyles((theme) => {
       [mediumLargeQuery]: {
         order: '-1',
         alignItems: 'flex-start',
-        marginTop: '0',
       },
       '& $text': {
         fontSize: theme.typography.body1.fontSize,
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(2),
+        margin: '0',
       },
     },
 
-    columns: {
+    /** container  */
+    container: {
+      backgroundColor: theme.palette.primary.main,
+    },
+    subContainer: {
       width: '90%',
       padding: theme.spacing(2),
       marginLeft: 'auto',
@@ -86,11 +74,6 @@ const useStyles = makeStyles((theme) => {
         width: '60%',
       },
       '& $text': {},
-    },
-
-    /** container  */
-    container: {
-      backgroundColor: theme.palette.primary.main,
     },
   };
 });

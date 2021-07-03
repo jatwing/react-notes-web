@@ -2,23 +2,22 @@ const project = {
   github: 'https://github.com/jatwing/react-tutorial',
   attribution: {
     title:{
-      name: 'react tutorial',
-      href: 'google.com'
+      name: 'Tutorial: Intro to React',
+      href: 'https://reactjs.org/tutorial/tutorial.html'
     },
     author: {
-      name: 'react community',
-      href: 'https://reactjs.org/acknowledgements.html/',
+      name: 'React Community',
+      href: 'https://github.com/reactjs',
     },
     license: {
-      name: 'CC ',
-      href: 'google.com'
+      name: 'Creative Commons Attribution 4.0 International License',
+      href: 'https://creativecommons.org/licenses/by/4.0/'
     },
   },
   license: 'https://creativecommons.org/licenses/by/4.0/',
   email: 'mailto:jatwing@pm.me',
   stackOverflow: 'https://stackoverflow.com/users/8813862/jatwing',
-  author: 'jatwing',
-  year: (new Date()).getFullYear(),
+  copyright: `© 2020-${(new Date()).getFullYear()}, Jatwing. Some Rights Reserved.`,
 };
 
 export default project;

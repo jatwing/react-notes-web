@@ -1,77 +1,44 @@
-import { useState } from 'react';
-import { Box, Grid, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import project from 'config/project';
 import useStyles from './styles';
-import PopupDialog from 'components/popup-dialog'; 
+import ClickableElementPopupDialog from 'components/clickable-element-popup-dialog';
 import clsx from 'clsx';
-
-const TextLink = (props) => {
-  const { text, ...otherProps } = props;
-  const classes = useStyles();
-  return (
-    <a target="_blank" className={classes.link} {...otherProps}>
-      {text}
-    </a>
-  );
-};
-
-
-
-// to create componentn Popup
-const MaxWidthDialog = () =>  {
-  const [open, setOpen] = useState(false);
-  // to use responsive;
-  const fullWidth = true;
-  const maxWidth = 'sm';
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  }
-  return (<>
-    <Typography onClick={handleClickOpen}>
-        text called labeled, click then open.
-    </Typography>
-    <Dialog
-      fullWidth={fullWidth}
-      maxWidth={maxWidth}
-      open={open}
-      onClose={handleClose}
-    >
-      <DialogTitle> the title</DialogTitle>
-      <DialogContent>
-        <Typography> the content descriton set the condition to use Dialog content text or allow user to pass JSX element children</Typography>
-      </DialogContent>
-
-<DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-
-    </Dialog>
-
-
-
-  </>)
-
-}
-
-
 
 const ProjectColumn = () => {
   const classes = useStyles();
+  const element = <Typography className={classes.link}>Attribution</Typography>;
+  const { title, author, license } = project.attribution;
+  const content = (
+    <p>
+      <a href={title.href} target="_blank" className={classes.link}>
+        {title.name}
+      </a>{' '}
+      by{' '}
+      <a href={author.href} target="_blank" className={classes.link}>
+        {author.name}
+      </a>{' '}
+      is licensed under a{' '}
+      <a href={license.href} target="_blank" className={classes.link}>
+        {license.name}
+      </a>
+    </p>
+  );
   return (
     <>
       <Typography className={classes.text}>Project</Typography>
-      <TextLink text="Github" href={project.github} />
-
-
-      <a href={project.attribution} className={classes.link}>
-  TODO TODO TODO       Attributioy
+      <a href={project.github} target="_blank" className={classes.link}>
+        Github
       </a>
-      <TextLink text='License' href={project.license} />
+
+      <ClickableElementPopupDialog
+        element={element}
+        title={'Attribution'}
+        content={content}
+      />
+
+      <a href={project.license} target="_blank" className={classes.link}>
+        License
+      </a>
     </>
   );
 };
@@ -81,8 +48,12 @@ const AuthorColumn = () => {
   return (
     <>
       <Typography className={classes.text}>Author</Typography>
-      <TextLink text='Email' href={project.email}/>
-      <TextLink text='Stack Overflow' href={project.stackOverflow} />
+      <a href={project.email} target="_blank" className={classes.link}>
+        Email
+      </a>
+      <a href={project.stackOverflow} target="_blank" className={classes.link}>
+        Stack Overflow
+      </a>
     </>
   );
 };
@@ -93,7 +64,7 @@ const Logo = () => {
     <>
       <img src="/images/common/jatwing.png" className={classes.image} />
       <Typography className={classes.text}>
-        Copyright &copy; {project.year} {project.author}
+        {project.copyright}
       </Typography>
     </>
   );
@@ -106,22 +77,11 @@ const Footer = () => {
     <Box className={classes.container}>
       <Grid container spacing={2} className={classes.columns}>
         <Grid item xs={6} sm={6} md={4} className={classes.column}>
-          <ProjectColumn />
+          <ProjectColumn className={classes.column}/>
         </Grid>
         <Grid item xs={6} sm={6} md={4} className={classes.column}>
           <AuthorColumn />
         </Grid>
-        {/*
-         * missing the original title, the original license, but how to display that
-         * with some sort of consistency ???
-         *
-         *
-         * a popup ???? but the link may be click ASAP
-         *
-         * a popup with the link to the article, author and license
-         *
-         * a sentence same as the README Attribution
-         */}
         <Grid item xs={12} sm={12} md={4} className={classes.logo}>
           <Logo />
         </Grid>
