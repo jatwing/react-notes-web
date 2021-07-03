@@ -16,14 +16,19 @@ const useStyles = makeStyles((theme) => {
     text: {},
     link: {},
     /** block  */
-    column: {
+    innerColumn: {
+      width: 'max-content',
+      margin: '0 auto',
       '& $text': {
+        display: 'block',
+        width: 'fit-content',
         ...theme.typography.h6,
         fontFamily: theme.typography.fontStacks.sansSerif,
         color: theme.palette.grey['500'],
       },
       '& $link': {
         display: 'block',
+        width: 'fit-content',
         ...theme.typography.body1,
         fontFamily: theme.typography.fontStacks.sansSerif,
         textDecoration: 'none',
@@ -48,14 +53,20 @@ const useStyles = makeStyles((theme) => {
         color: theme.palette.grey['500'],
       },
     },
+    dialogContent: {
+      color: "#ff0000",
+      '& $link': {
+        color: '#00ff00',
+      }
+    },
     /** container  */
     container: {
       backgroundColor: theme.palette.primary.main,
     },
-    subContainer: {
+    innerContainer: {
       width: '90%',
       padding: theme.spacing(4),
-      margin: '0 auto 0 auto',
+      margin: '0 auto',
       [largeQuery]: {
         width: '60%',
       },

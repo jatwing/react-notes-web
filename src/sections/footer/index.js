@@ -9,7 +9,7 @@ const ProjectColumn = () => {
   const element = <Typography className={classes.link}>Attribution</Typography>;
   const { title, author, license } = project.attribution;
   const content = (
-    <p>
+    <p className={classes.dialogContent}>
       <a href={title.href} target="_blank" className={classes.link}>
         {title.name}
       </a>{' '}
@@ -21,32 +21,31 @@ const ProjectColumn = () => {
       <a href={license.href} target="_blank" className={classes.link}>
         {license.name}
       </a>
+      .
     </p>
   );
   return (
-    <>
+    <Box className={classes.innerColumn}>
       <Typography className={classes.text}>Project</Typography>
       <a href={project.github} target="_blank" className={classes.link}>
         Github
       </a>
-
       <ClickableElementPopupDialog
         element={element}
         title={'Attribution'}
         content={content}
       />
-
       <a href={project.license} target="_blank" className={classes.link}>
         License
       </a>
-    </>
+    </Box>
   );
 };
 
 const AuthorColumn = () => {
   const classes = useStyles();
   return (
-    <>
+    <Box className={classes.innerColumn}>
       <Typography className={classes.text}>Author</Typography>
       <a href={project.email} target="_blank" className={classes.link}>
         Email
@@ -54,7 +53,7 @@ const AuthorColumn = () => {
       <a href={project.stackOverflow} target="_blank" className={classes.link}>
         Stack Overflow
       </a>
-    </>
+    </Box>
   );
 };
 
@@ -63,9 +62,7 @@ const Logo = () => {
   return (
     <>
       <img src="/images/common/jatwing.png" className={classes.image} />
-      <Typography className={classes.text}>
-        {project.copyright}
-      </Typography>
+      <Typography className={classes.text}>{project.copyright}</Typography>
     </>
   );
 };
@@ -75,9 +72,9 @@ const Footer = () => {
 
   return (
     <Box className={classes.container}>
-      <Grid container className={classes.subContainer}>
+      <Grid container className={classes.innerContainer}>
         <Grid item xs={6} sm={6} md={3} className={classes.column}>
-          <ProjectColumn className={classes.column}/>
+          <ProjectColumn className={classes.column} />
         </Grid>
         <Grid item xs={6} sm={6} md={3} className={classes.column}>
           <AuthorColumn />
