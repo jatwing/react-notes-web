@@ -4,7 +4,7 @@ import { useMedia } from 'utils/media';
 import { getSubsubtrees } from 'utils/directory-tree';
 import useStyles from './styles';
 import { useTheme } from '@material-ui/core/styles';
-import MultiRowTextCard from 'components/multi-row-text-card';
+import MultirowTextCard from 'components/multirow-text-card';
 import clsx from 'clsx';
 
 const ParentNode = ({ subtree, subtrees }) => {
@@ -38,11 +38,11 @@ const ParentNode = ({ subtree, subtrees }) => {
             key={subtree.path}
             className={clsx(classes.card, classes.major)}
           >
-            <MultiRowTextCard data={getData(subtree)} modifier="major" />
+            <MultirowTextCard data={getData(subtree)} modifier="major" />
           </ImageListItem>
           {subsubtrees.map((subsubtree) => (
             <ImageListItem key={subsubtree.path} className={classes.card}>
-              <MultiRowTextCard data={getData(subsubtree)} modifier="minor" />
+              <MultirowTextCard data={getData(subsubtree)} modifier="minor" />
             </ImageListItem>
           ))}
         </ImageList>

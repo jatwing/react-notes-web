@@ -4,7 +4,7 @@ import { Box, Card, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import clsx from 'clsx';
 
-const MultiRowTextCard = ({ data, modifier }) => {
+const MultirowTextCard = ({ data, modifier }) => {
   const classes = useStyles();
   return (
     <Card className={classes.container}>
@@ -31,4 +31,4 @@ const MultiRowTextCard = ({ data, modifier }) => {
   );
 };
 
-export default MultiRowTextCard;
+export default MultirowTextCard;

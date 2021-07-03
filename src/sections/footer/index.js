@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Box, Grid, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core';
 import project from 'config/project';
 import useStyles from './styles';
+import PopupDialog from 'components/popup-dialog'; 
 import clsx from 'clsx';
 
-const TextLink = ({ text, ...props }) => {
+const TextLink = (props) => {
+  const { text, ...otherProps } = props;
   const classes = useStyles();
   return (
-    <a target="_blank" className={classes.link} {...props}>
+    <a target="_blank" className={classes.link} {...otherProps}>
       {text}
     </a>
   );
@@ -64,7 +66,6 @@ const ProjectColumn = () => {
     <>
       <Typography className={classes.text}>Project</Typography>
       <TextLink text="Github" href={project.github} />
-      <MaxWidthDialog />
 
 
       <a href={project.attribution} className={classes.link}>

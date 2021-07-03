@@ -1,72 +1,69 @@
-import { useState } from 'react';
 import {
-  Fragment,
-  Typography,
   Dialog,
   DialogTitle,
+  DialogContent,
   DialogActions,
   Button,
 } from '@material-ui/core';
 import { useMedia } from 'utils/media';
-import { useStyles } from './styles';
+import useStyles from './styles';
 import clsx from 'clsx';
 
 const PopupDialog = (props) => {
-  // data input, other parameter, css
+  const { isMedium, isLarge } = useMedia();
+  let defaultMaxWidth = 'sm';
+  if (isMedium) {
+    defaultMaxWidth = 'md';
+  } else if (isLarge) {
+    defaultMaxWidth = 'lg';
+  }
+  const {
+    title = '',
+    children = null,
+    hasButton = true,
+    isOpen,
+    setIsOpen,
+    afterClose = () => {},
+    fullWidth = true,
+    maxWidth = defaultMaxWidth,
+    classes = {},
+  } = props;
 
-  const { label, title, children, fullWidth, maxWidth, classes } = props;
-
-  const [isOpen, setIsOpen] = useState(false);
-  const handleClickLabel = () => {
-    setIsOpen(true);
-  };
   const handleClickClose = () => {
     setIsOpen(false);
+    afterClose();
   };
-  const { isMedium, isLarge } = useMedia();
-  let innerMaxWidth = 'sm';
-  if (isMedium) {
-    innerMaxWidth = 'md';
-  } else if (isLarge) {
-    innerMaxWidth = 'lg';
-  }
 
   const innerClasses = useStyles();
-
   return (
-    <Fragment className={clsx(innerClasses?.container, classes?.container)}>
-      <Typography
-        onClick={handleClickLabel}
-        className={clsx(innerClasses?.label, classes?.label)}
-      >
-        {label}
-      </Typography>
-      <Dialog
-        fullWidth={fullWidth ?? true}
-        maxWidth={maxWidth || innerMaxWidth}
-        open={isOpen}
-        onClose={handleClickClose}
-        className={clsx(innerClasses?.dialog, classes?.dialog)}
-      >
-        <DialogTitle className={clsx(innerClasses?.title, classes?.title)}>
+    <Dialog
+      fullWidth={fullWidth}
+      maxWidth={maxWidth}
+      open={isOpen}
+      onClose={handleClickClose}
+      className={clsx(innerClasses.dialog, classes.dialog)}
+    >
+      {!!title && (
+        <DialogTitle className={clsx(innerClasses.title, classes.title)}>
           {title}
         </DialogTitle>
-        <DialogContent
-          className={clsx(innerClasses?.content, classes?.content)}
-        >
+      )}
+      {!!children && (
+        <DialogContent className={clsx(innerClasses.content, classes.content)}>
           {children}
         </DialogContent>
-
+      )}
+      {!!hasButton && (
         <DialogActions>
           <Button
             onClick={handleClickClose}
-            className={clsx(innerClasses?.button, classes?.button)}
+            className={clsx(innerClasses.button, classes.button)}
           >
             Close
           </Button>
         </DialogActions>
-      </Dialog>
-    </Fragment>
+      )}
+    </Dialog>
   );
 };
 
