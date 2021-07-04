@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/styles';
 import { getMediaQueries } from 'utils/media';
 
 const useStyles = makeStyles((theme) => {
-  const { mediumQuery, largeQuery, mediumLargeQuery } = getMediaQueries(theme);
+  const { largeQuery, mediumLargeQuery } = getMediaQueries(theme);
   return {
     /** modifier */
     /** element */
@@ -16,9 +16,7 @@ const useStyles = makeStyles((theme) => {
     text: {},
     link: {},
     /** block  */
-    innerColumn: {
-      width: 'max-content',
-      margin: '0 auto',
+    column: {
       '& $text': {
         display: 'block',
         width: 'fit-content',
@@ -52,12 +50,6 @@ const useStyles = makeStyles((theme) => {
         fontFamily: theme.typography.fontStacks.sansSerif,
         color: theme.palette.grey['500'],
       },
-    },
-    dialogContent: {
-      color: "#ff0000",
-      '& $link': {
-        color: '#00ff00',
-      }
     },
     /** container  */
     container: {

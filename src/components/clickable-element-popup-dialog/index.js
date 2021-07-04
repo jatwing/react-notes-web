@@ -5,9 +5,7 @@ import PopupDialog from 'components/popup-dialog';
 const ClickableElementPopupDialog = (props) => {
   const { element, content, ...otherProps } = props;
   const [isOpen, setIsOpen] = useState(false);
-    console.log('1hreer')
   const handleClick = () => {
-    console.log('hreer')
     setIsOpen(true);
   };
   return (

@@ -36,14 +36,14 @@ const PopupDialog = (props) => {
     afterClose();
   };
 
-  const innerClasses = useStyles();
+  const innerClasses = useStyles(classes)();
   return (
     <Dialog
       fullWidth={fullWidth}
       maxWidth={maxWidth}
       open={isOpen}
       onClose={handleClickClose}
-      className={clsx(innerClasses.dialog, classes.dialog)}
+      className={clsx(innerClasses.container, classes.container)}
     >
       {!!title && (
         <DialogTitle className={clsx(innerClasses.title, classes.title)}>
@@ -56,7 +56,7 @@ const PopupDialog = (props) => {
         </DialogContent>
       )}
       {!!hasButton && (
-        <DialogActions>
+        <DialogActions className={clsx(innerClasses.actions, classes.actions)}>
           <Button
             onClick={handleClickClose}
             className={clsx(innerClasses.button, classes.button)}
