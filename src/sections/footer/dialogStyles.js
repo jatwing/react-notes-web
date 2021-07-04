@@ -8,7 +8,7 @@ const useDialogStyles = makeStyles((theme) => {
     text: {},
 
     link: {},
-
+    button: {},
     /** block */
     title: {},
 

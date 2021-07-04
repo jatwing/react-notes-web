@@ -3,7 +3,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button,
 } from '@material-ui/core';
 import { useMedia } from 'utils/media';
 import useStyles from './styles';
@@ -22,7 +21,7 @@ const PopupDialog = (props) => {
   const {
     title = '',
     children = null,
-    hasButton = true,
+    actions = null,
     isOpen,
     setIsOpen,
     afterClose = () => {},
@@ -35,7 +34,6 @@ const PopupDialog = (props) => {
     setIsOpen(false);
     afterClose();
   };
-
   const innerClasses = useStyles(classes)();
   return (
     <Dialog
@@ -55,14 +53,9 @@ const PopupDialog = (props) => {
           {children}
         </DialogContent>
       )}
-      {!!hasButton && (
+      {!!actions && (
         <DialogActions className={clsx(innerClasses.actions, classes.actions)}>
-          <Button
-            onClick={handleClickClose}
-            className={clsx(innerClasses.button, classes.button)}
-          >
-            Close
-          </Button>
+          {actions}
         </DialogActions>
       )}
     </Dialog>
