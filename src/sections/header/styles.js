@@ -9,20 +9,18 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'space-between',
+    padding: '0 32px',
     '& $link, & $title': {
       alignSelf: 'stretch',
       display: 'flex',
       alignItems: 'center',
+      ...theme.typography.h6,
       fontFamily: theme.typography.fontStacks.sansSerif,
-      fontSize: theme.typography.h6.fontSize,
-      fontWeight: theme.typography.h6.fontWeight,
-      lineHeight: theme.typography.h6.lineHeight,
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2),
+      padding: `0 16px`
     },
     '& $link': {
       color: theme.palette.primary.contrastText,
-      transition: 'color 1s linear',
+      transition: theme.transitions.create('color'),
       '&:hover': {
         color: theme.palette.primary.highlightText,
         textDecoration: 'none',
@@ -37,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
       position: 'relative',
       '&::after': {
         width: '100%',
-        height: theme.spacing(0.5),
+        height: '4px',
         content: '""',
         backgroundColor: theme.palette.primary.highlightText,
         position: 'absolute',

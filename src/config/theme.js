@@ -3,18 +3,25 @@ import { createTheme } from '@material-ui/core/styles';
 const theme = createTheme({
   palette: {
     primary: {
-    //  main: '#2a9c7a',
-     // contrastText: '#000000',
-
-      main: '#20232a',
-      contrastText: '#ffffff',
-      highlightText: '#61dafb',
+      main: /** 露草色 */ '#3d87c3',
+      highlightText: '#ff77ff',
+    },
+    secondary: {
+      main: /** 木賊色 */ '#40684f',
+    },
+    error: {
+      main: /** 茜色 */ '#b13546',
+    },
+    warning: {
+      main: /** 躑躅色 */ '#dc4473',
+    },
+    info: {
+      main: /** 向日葵色 */ '#ffba20',
+    },
+    success: {
+      main: /** 菫色 */ '#654e99',
     },
   },
-    secondary: {
-    //  main: '#9cc8e2'
-      main: '#3f51b5',
-    },
   typography: {
     fontFamily: 'Roboto Slab, serif',
     fontStacks: {

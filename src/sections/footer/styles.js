@@ -20,8 +20,10 @@ const useStyles = makeStyles((theme) => {
       '& $text': {
         display: 'block',
         width: 'fit-content',
-        ...theme.typography.h6,
+        ...theme.typography.body1,
         fontFamily: theme.typography.fontStacks.sansSerif,
+        fontWeight: theme.typography.fontWeightBold,
+        textTransform: 'uppercase',
         color: theme.palette.grey['500'],
       },
       '& $link': {
@@ -33,6 +35,9 @@ const useStyles = makeStyles((theme) => {
         color: theme.palette.primary.contrastText,
         cursor: 'pointer',
         marginTop: theme.spacing(1),
+        '&:hover, &:focus': {
+          textDecoration: 'underline',
+        }
       },
     },
     logo: {

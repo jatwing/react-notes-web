@@ -4,8 +4,8 @@ const useStyles = makeStyles((theme) => {
   return {
     /** block */
     content: {
-      flex: '1 1 0',
-      margin: theme.spacing(2),
+      flex: '1',
+      padding: '32px',
     },
     /** container  */
     container: {

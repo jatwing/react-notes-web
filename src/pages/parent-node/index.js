@@ -23,30 +23,33 @@ const ParentNode = ({ subtree, subtrees }) => {
 
   const theme = useTheme();
   const classes = useStyles();
-  const { isSmall } = useMedia(theme);
+  const { isMedium, isLarge } = useMedia(theme);
+  let cols = 1;
+  if (isMedium) {
+    cols = 2;
+  } else if (isLarge) {
+    cols = 3;
+  }
   return (
     <Box className={classes.container}>
-      <Box className={classes.left} />
-      <Box className={classes.right}>
-        <ImageList
-          variant="masonry"
-          cols={isSmall ? 1 : 2}
-          gap={parseFloat(theme.spacing(2))}
-          className={classes.list}
+      <ImageList
+        variant="masonry"
+        cols={cols}
+        gap={parseFloat(theme.spacing(2))}
+        className={classes.list}
+      >
+        <ImageListItem
+          key={subtree.path}
+          className={clsx(classes.card, classes.major)}
         >
-          <ImageListItem
-            key={subtree.path}
-            className={clsx(classes.card, classes.major)}
-          >
-            <MultirowTextCard data={getData(subtree)} modifier="major" />
+          <MultirowTextCard data={getData(subtree)} modifier="gradient" />
+        </ImageListItem>
+        {subsubtrees.map((subsubtree) => (
+          <ImageListItem key={subsubtree.path} className={classes.card}>
+            <MultirowTextCard data={getData(subsubtree)} modifier="default" />
           </ImageListItem>
-          {subsubtrees.map((subsubtree) => (
-            <ImageListItem key={subsubtree.path} className={classes.card}>
-              <MultirowTextCard data={getData(subsubtree)} modifier="minor" />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </Box>
+        ))}
+      </ImageList>
     </Box>
   );
 };

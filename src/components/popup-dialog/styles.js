@@ -17,44 +17,39 @@ const useStyles = (classes) =>
     return {
       /** block */
       title: {
-        display: 'flex',
-        justifyContent: 'center',
-        color: theme.palette.secondary.contrastText,
-        backgroundColor: theme.palette.secondary.main,
         ...(classes.text && {
           ['& .' + classes.text]: {
+            width: 'fit-content',
             ...theme.typography.h6,
             fontFamily: theme.typography.fontStacks.sansSerif,
+            borderBottom: `4px solid ${theme.palette.secondary.light}`,
           },
         }),
       },
-
       content: {
-        backgroundColor: '#ffffff',
         '$container $title + &': {
-          padding: '16px 24px 16px 24px',
+          padding: '16px 24px',
         },
         ...(classes.link && {
           ['& .' + classes.link]: {
             textDecoration: 'none',
-            color: theme.palette.secondary.dark,
+            color: theme.palette.secondary.main,
             '&:hover, &:focus': {
               textDecoration: 'underline',
             },
             '&:active': {
               textDecoration: 'none',
               color: '#ffffff',
-              backgroundColor: theme.palette.secondary.dark,
+              backgroundColor: theme.palette.secondary.main,
             },
           },
         }),
       },
-
       actions: {
         display: 'flex',
         justifyContent: 'space-around',
         width: '75%',
-        padding: '16px 24px 16px 24px',
+        padding: '16px 24px',
         margin: '0 auto 0 auto',
         ...(classes.button && {
           ['& .' + classes.button]: {
@@ -77,7 +72,6 @@ const useStyles = (classes) =>
           width: '37.5%',
         },
       },
-
       /** container */
       container: {},
     };

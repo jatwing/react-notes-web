@@ -59,7 +59,7 @@ const AttributionPopupDialog = () => {
 const ProjectColumn = () => {
   const classes = useStyles();
   return (
-    <Box className={classes.column}>
+    <Box >
       <Typography className={classes.text}>Project</Typography>
       <a href={project.github} target="_blank" className={classes.link}>
         Github
@@ -75,7 +75,7 @@ const ProjectColumn = () => {
 const AuthorColumn = () => {
   const classes = useStyles();
   return (
-    <Box className={classes.column}>
+    <Box >
       <Typography className={classes.text}>Author</Typography>
       <a href={project.email} target="_blank" className={classes.link}>
         Email
@@ -90,7 +90,7 @@ const AuthorColumn = () => {
 const Logo = () => {
   const classes = useStyles();
   return (
-    <Box className={classes.logo}>
+    <Box >
       <img src="/images/common/jatwing.png" className={classes.image} />
       <Typography className={classes.text}>{project.copyright}</Typography>
     </Box>
@@ -102,13 +102,13 @@ const Footer = () => {
   return (
     <Box className={classes.container}>
       <Grid container className={classes.innerContainer}>
-        <Grid item xs={6} sm={6} md={3}>
+        <Grid item xs={6} sm={6} md={3} className={classes.column}>
           <ProjectColumn />
         </Grid>
-        <Grid item xs={6} sm={6} md={3}>
+        <Grid item xs={6} sm={6} md={3} className={classes.column}>
           <AuthorColumn />
         </Grid>
-        <Grid item xs={12} sm={12} md={6}>
+        <Grid item xs={12} sm={12} md={6} className={classes.logo}>
           <Logo />
         </Grid>
       </Grid>
