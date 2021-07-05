@@ -1,7 +1,9 @@
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
-  /** modifier */
+  
+
+
   /** element */
   link: {},
   title: {},
@@ -9,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'space-between',
+    backgroundColor: theme.palette.primary.main,
     padding: '0 32px',
     '& $link, & $title': {
       alignSelf: 'stretch',
@@ -16,28 +19,28 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
       ...theme.typography.h6,
       fontFamily: theme.typography.fontStacks.sansSerif,
-      padding: `0 16px`
+      padding: `0 16px`,
     },
     '& $link': {
+      textDecoration: 'none',
       color: theme.palette.primary.contrastText,
       transition: theme.transitions.create('color'),
-      '&:hover': {
-        color: theme.palette.primary.highlightText,
-        textDecoration: 'none',
+      '&:hover, &:focus': {
+        color: theme.palette.grey['300'],
       },
-      '&:focus': {
+      '&:active': {
         color: theme.palette.primary.contrastText,
         backgroundColor: theme.palette.primary.light,
       },
     },
     '& $title': {
-      color: theme.palette.primary.highlightText,
+      color: 'black',
       position: 'relative',
       '&::after': {
         width: '100%',
         height: '4px',
         content: '""',
-        backgroundColor: theme.palette.primary.highlightText,
+        backgroundColor: 'currentcolor',
         position: 'absolute',
         left: '0',
         bottom: '0',
