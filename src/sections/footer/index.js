@@ -84,12 +84,17 @@ const AuthorColumn = () => {
   return (
     <Box>
       <Typography className={classes.text}>Author</Typography>
-      <a href={project.email} target="_blank" className={classes.link}>
-        Email
-      </a>
-      <a href={project.stackOverflow} target="_blank" className={classes.link}>
-        Stack Overflow
-      </a>
+      <ExternalLink
+        text={'Email'}
+        href={project.email}
+        className={classes.link}
+      />
+
+      <ExternalLink
+        text={'Stack Overflow'}
+        href={project.stackOverflow}
+        className={classes.link}
+      />
     </Box>
   );
 };
