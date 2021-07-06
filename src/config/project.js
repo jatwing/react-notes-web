@@ -1,4 +1,5 @@
 const project = {
+  name: 'React Tutorial',
   github: 'https://github.com/jatwing/react-tutorial',
   attribution: {
     title:{

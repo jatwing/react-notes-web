@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
+import ExternalLink from 'components/external-link';
 import project from 'config/project';
 import useStyles from './styles';
 import useDialogStyles from './dialogStyles';
@@ -19,22 +20,24 @@ const AttributionPopupDialog = () => {
   );
   const content = (
     <Typography className={dialogClasses.text}>
-      <a
+      <ExternalLink
+        text={documentTitle.name}
         href={documentTitle.href}
-        target="_blank"
         className={dialogClasses.link}
-      >
-        {documentTitle.name}
-      </a>{' '}
-      by{' '}
-      <a href={author.href} target="_blank" className={dialogClasses.link}>
-        {author.name}
-      </a>{' '}
-      is licensed under a{' '}
-      <a href={license.href} target="_blank" className={dialogClasses.link}>
-        {license.name}
-      </a>
-      .
+      />
+      {' by '}
+      <ExternalLink
+        text={author.name}
+        href={author.href}
+        className={dialogClasses.link}
+      />
+      {' is licensed under a '}
+      <ExternalLink
+        text={license.name}
+        href={license.href}
+        className={dialogClasses.link}
+      />
+      {'.'}
     </Typography>
   );
   const actions = (
@@ -59,15 +62,19 @@ const AttributionPopupDialog = () => {
 const ProjectColumn = () => {
   const classes = useStyles();
   return (
-    <Box >
+    <Box>
       <Typography className={classes.text}>Project</Typography>
-      <a href={project.github} target="_blank" className={classes.link}>
-        Github
-      </a>
+      <ExternalLink
+        text={'Github'}
+        href={project.github}
+        className={classes.link}
+      />
       <AttributionPopupDialog />
-      <a href={project.license} target="_blank" className={classes.link}>
-        License
-      </a>
+      <ExternalLink
+        text={'License'}
+        href={project.license}
+        className={classes.link}
+      />
     </Box>
   );
 };
@@ -75,7 +82,7 @@ const ProjectColumn = () => {
 const AuthorColumn = () => {
   const classes = useStyles();
   return (
-    <Box >
+    <Box>
       <Typography className={classes.text}>Author</Typography>
       <a href={project.email} target="_blank" className={classes.link}>
         Email
@@ -90,8 +97,12 @@ const AuthorColumn = () => {
 const Logo = () => {
   const classes = useStyles();
   return (
-    <Box >
-      <img src="/images/common/jatwing.png" className={classes.image} />
+    <Box>
+      <img
+        src="/images/common/jatwing.png"
+        alt="jatwing"
+        className={classes.image}
+      />
       <Typography className={classes.text}>{project.copyright}</Typography>
     </Box>
   );
@@ -101,7 +112,7 @@ const Footer = () => {
   const classes = useStyles();
   return (
     <Box className={classes.container}>
-      <Grid container className={classes.innerContainer}>
+      <Grid container className={classes.internalContainer}>
         <Grid item xs={6} sm={6} md={3} className={classes.column}>
           <ProjectColumn />
         </Grid>

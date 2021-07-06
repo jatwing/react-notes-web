@@ -4,17 +4,10 @@ import { getMediaQueries } from 'utils/media';
 const useStyles = makeStyles((theme) => {
   const { largeQuery, mediumLargeQuery } = getMediaQueries(theme);
   return {
-    /** modifier */
     /** element */
-    image: {
-      width: '64px',
-      height: '64px',
-      clipPath: 'circle(50%)',
-      backgroundColor: '#ffffff',
-      marginBottom: theme.spacing(1),
-    },
     text: {},
     link: {},
+    image: {},
     /** block  */
     column: {
       '& $text': {
@@ -24,7 +17,7 @@ const useStyles = makeStyles((theme) => {
         fontFamily: theme.typography.fontStacks.sansSerif,
         fontWeight: theme.typography.fontWeightBold,
         textTransform: 'uppercase',
-        color: theme.palette.grey['500'],
+        color: theme.palette.contrast.text.secondary,
       },
       '& $link': {
         display: 'block',
@@ -33,36 +26,49 @@ const useStyles = makeStyles((theme) => {
         fontFamily: theme.typography.fontStacks.sansSerif,
         textDecoration: 'none',
         color: theme.palette.primary.contrastText,
+        transition: theme.transitions.create('color'),
         cursor: 'pointer',
-        marginTop: theme.spacing(1),
+        marginTop: '8px',
         '&:hover, &:focus': {
           textDecoration: 'underline',
-        }
+          color: theme.palette.contrast.text.secondary,
+        },
       },
     },
     logo: {
       display: 'flex',
       flexFlow: 'column nowrap',
       alignItems: 'center',
-      marginTop: theme.spacing(2),
+      marginTop: '16px',
       [mediumLargeQuery]: {
         order: '-1',
         alignItems: 'flex-start',
         marginTop: '0',
       },
+      '& $image': {
+        width: '64px',
+        height: '64px',
+        clipPath: 'circle(50%)',
+        backgroundColor: theme.palette.primary.contrastText,
+        transition: theme.transitions.create('background-color'),
+        marginBottom: '8px',
+        '&:hover, &:focus': {
+          backgroundColor: theme.palette.contrast.text.secondary,
+        },
+      },
       '& $text': {
         ...theme.typography.body1,
         fontFamily: theme.typography.fontStacks.sansSerif,
-        color: theme.palette.grey['500'],
+        color: theme.palette.contrast.text.secondary,
       },
     },
     /** container  */
     container: {
       backgroundColor: theme.palette.primary.main,
     },
-    innerContainer: {
+    internalContainer: {
       width: '90%',
-      padding: theme.spacing(4),
+      padding: '32px',
       margin: '0 auto',
       [largeQuery]: {
         width: '60%',

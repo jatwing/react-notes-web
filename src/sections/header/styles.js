@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
-  
-
-
   /** element */
   link: {},
   title: {},
@@ -13,37 +10,44 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     backgroundColor: theme.palette.primary.main,
     padding: '0 32px',
+
     '& $link, & $title': {
       alignSelf: 'stretch',
       display: 'flex',
       alignItems: 'center',
       ...theme.typography.h6,
       fontFamily: theme.typography.fontStacks.sansSerif,
-      padding: `0 16px`,
-    },
-    '& $link': {
-      textDecoration: 'none',
       color: theme.palette.primary.contrastText,
       transition: theme.transitions.create('color'),
+      padding: `0 16px`,
       '&:hover, &:focus': {
-        color: theme.palette.grey['300'],
+        color: theme.palette.contrast.text.secondary,
       },
+    },
+    '&:hover $link, &:hover $title, &:focus $link, &:focus $title': {
+      color: theme.palette.contrast.text.disabled,
+    },
+
+    '& $link': {
+      textDecoration: 'none',
       '&:active': {
-        color: theme.palette.primary.contrastText,
         backgroundColor: theme.palette.primary.light,
       },
     },
+
     '& $title': {
-      color: 'black',
       position: 'relative',
       '&::after': {
         width: '100%',
         height: '4px',
         content: '""',
-        backgroundColor: 'currentcolor',
+        backgroundColor: theme.palette.primary.contrastText,
         position: 'absolute',
         left: '0',
         bottom: '0',
+      },
+      '&:hover::after, &:focus::after': {
+        backgroundColor: theme.palette.contrast.text.secondary,
       },
     },
   },

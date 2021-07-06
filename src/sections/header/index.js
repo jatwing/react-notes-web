@@ -15,7 +15,6 @@ const Header = () => {
   const leafNode = nodes[nodes.length - 1];
 
   const theme = useTheme();
-  console.log(theme)
 
 
   const { isMedium, isLarge } = useMedia(theme);

@@ -49,7 +49,7 @@ function sum(a, b) {
 }
 
 function withdraw(account, amount) {
-  account.total -= amount;
+   account.total -= amount;
 }
 
 function ComponentsAndProps() {
@@ -61,6 +61,9 @@ function ComponentsAndProps() {
       avatarUrl: '/images/pages/02-main-concepts/04-components-and-props/avatar.jpg',
     },
   };
+  const c = sum(1, 1);
+  const account = ({ total: 2})
+  withdraw(account, 1)
 
   return (
     <>
@@ -70,6 +73,8 @@ function ComponentsAndProps() {
         text={comment.text}
         author={comment.author}
       />
+
+      {c + " " + JSON.stringify(account)}
     </>
   );
 }

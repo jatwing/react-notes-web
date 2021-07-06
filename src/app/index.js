@@ -6,9 +6,10 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Layout from './layout';
-import { getSubtrees } from 'utils/directory-tree';
+import { getSubtrees, getNodes } from 'utils/directory-tree';
 import routes from 'config/routes';
-import ParentNode from 'pages/parent-node';
+import ParentNodePage from 'pages/parent-node-page';
+import LeafNodePage from 'pages/leaf-page';
 import Theme from './theme';
 
 const subtrees = getSubtrees(routes.map((route) => route.path));
@@ -19,17 +20,31 @@ const parentRoutes = subtrees
     return {
       exact: true,
       path: subtree.path,
-      render: () => <ParentNode subtree={subtree} subtrees={subtrees} />,
+      render: () => (
+        <ParentNodePage
+          subtree={subtree}
+          subtrees={subtrees}
+          title={subtree.parent}
+        />
+      ),
       key: subtree.path,
     };
   });
 
-const leafRoutes = routes.map((route) => ({
-  exact: true,
-  path: route.path,
-  component: route.component,
-  key: route.path,
-}));
+const leafRoutes = routes.map((route) => {
+  const nodes = getNodes(route.path);
+  return {
+    exact: true,
+    path: route.path,
+    render: () => (
+      <LeafNodePage
+        component={route.component}
+        title={nodes[nodes.length - 1]}
+      />
+    ),
+    key: route.path,
+  };
+});
 
 const App = () => {
   return (
