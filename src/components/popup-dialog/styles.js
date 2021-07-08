@@ -1,20 +1,34 @@
 import { makeStyles } from '@material-ui/styles';
 import { getMediaQueries } from 'utils/media';
 
-/**
- * here we get some element names from the outer special classes
- * TODO dangerous!
- * the potential re-rendering may occur, can we rewrite it?
+/*
+ * it is very hard to define block for the absolute positioned element,
  *
+ * we may define an absolute block,
  *
- * another problem is that, it try to define some styles for some potential
- * outer classes, is that OK?
+ * or we may not define the block,
+ * for brevity, neglect the problem now.
+ *
  */
 
 const useStyles = (classes) =>
   makeStyles((theme) => {
     const { mediumQuery, largeQuery } = getMediaQueries(theme);
     return {
+      /** element */
+      icon: {
+        position: 'absolute',
+        right: '8px',
+        top: '8px',
+        color: theme.palette.text.disabled,
+        '&:hover, &:focus': {
+          color: theme.palette.text.secondary,
+        },
+        '&:active': {
+          color: theme.palette.text.primary,
+        },
+      },
+
       /** block */
       title: {
         ...(classes.text && {
@@ -22,25 +36,22 @@ const useStyles = (classes) =>
             width: 'fit-content',
             ...theme.typography.h6,
             fontFamily: theme.typography.fontStacks.sansSerif,
-            borderBottom: `4px solid ${theme.palette.secondary.light}`,
           },
         }),
       },
       content: {
-        '$container $title + &': {
-          padding: '16px 24px',
-        },
         ...(classes.link && {
           ['& .' + classes.link]: {
             textDecoration: 'none',
+            ...theme.typography.body1,
+            fontFamily: theme.typography.fontStacks.serif,
             color: theme.palette.secondary.main,
             '&:hover, &:focus': {
               textDecoration: 'underline',
+              color: theme.palette.secondary.dark,
             },
             '&:active': {
               textDecoration: 'none',
-              color: '#ffffff',
-              backgroundColor: theme.palette.secondary.main,
             },
           },
         }),
@@ -49,19 +60,20 @@ const useStyles = (classes) =>
         display: 'flex',
         justifyContent: 'space-around',
         width: '75%',
-        padding: '16px 24px',
+        padding: '8px 24px',
         margin: '0 auto 0 auto',
         ...(classes.button && {
           ['& .' + classes.button]: {
+            textDecoration: 'none',
+            ...theme.typography.button,
             fontFamily: theme.typography.fontStacks.sansSerif,
-            textTransform: 'none',
-            color: theme.palette.secondary.dark,
-            backgroundColor: '#ffffff',
-            border: `2px solid ${theme.palette.secondary.dark}`,
-            borderRadius: '8px',
+            color: theme.palette.secondary.main,
             '&:hover, &:focus': {
-              color: '#ffffff',
-              backgroundColor: theme.palette.secondary.dark,
+              textDecoration: 'underline',
+              color: theme.palette.secondary.dark,
+            },
+            '&:active': {
+              textDecoration: 'none',
             },
           },
         }),

@@ -15,10 +15,11 @@ const Header = () => {
   const leafNode = nodes[nodes.length - 1];
 
   const theme = useTheme();
-
-
   const { isMedium, isLarge } = useMedia(theme);
-  /** maximum number of parent nodes */
+  /** 
+   * maximum number of parent nodes. 
+   * @type {number}
+   */
   let maximum = 1;
   if (isMedium) {
     maximum = 2;
@@ -33,7 +34,11 @@ const Header = () => {
   const classes = useStyles();
 
   const backIcon = (
-    <Link href={getPath(pathname, backNode)} key={backNode} className={classes.link}>
+    <Link
+      href={getPath(pathname, backNode)}
+      key={backNode}
+      className={classes.link}
+    >
       <ArrowBackIosRoundedIcon />
     </Link>
   );

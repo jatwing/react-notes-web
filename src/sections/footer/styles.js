@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => {
           textDecoration: 'underline',
           color: theme.palette.contrast.text.secondary,
         },
+        '&:active': {
+          textDecoration: 'none',
+        },
       },
     },
     logo: {

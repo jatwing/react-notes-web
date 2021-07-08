@@ -4,7 +4,8 @@ import { Card, List, ListItem, Divider, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import clsx from 'clsx';
 
-const MultirowTextCard = ({ data, modifier }) => {
+const MultirowTextCard = (props) => {
+  const { data, modifier } = props;
   const classes = useStyles();
   return (
     <Card className={classes.container}>

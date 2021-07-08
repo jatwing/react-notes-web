@@ -1,16 +1,26 @@
-import { Fragment } from 'react';
+import { useState, Fragment } from 'react';
 import { Box } from '@material-ui/core';
 import PopupDialog from 'components/popup-dialog';
 
 const ClickableElementPopupDialog = (props) => {
-  const { element, content, setIsOpen, ...otherProps } = props;
+  const [internalIsOpen, internalSetIsOpen] = useState(false);
+  const {
+    element,
+    content,
+    isOpen = internalIsOpen,
+    setIsOpen = internalSetIsOpen,
+    ...otherProps
+  } = props;
+
   const handleClickElement = () => {
     setIsOpen(true);
   };
   return (
     <Fragment>
       <Box onClick={handleClickElement}>{element}</Box>
-      <PopupDialog setIsOpen={setIsOpen} {...otherProps}>{content}</PopupDialog>
+      <PopupDialog isOpen={isOpen} setIsOpen={setIsOpen} {...otherProps}>
+        {content}
+      </PopupDialog>
     </Fragment>
   );
 };

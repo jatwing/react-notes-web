@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Box, Button, Grid, Typography } from '@material-ui/core';
+import { Box,  Grid, Typography } from '@material-ui/core';
 import ExternalLink from 'components/external-link';
 import project from 'config/project';
 import useStyles from './styles';
@@ -7,11 +6,7 @@ import useDialogStyles from './dialogStyles';
 import ClickableElementPopupDialog from 'components/clickable-element-popup-dialog';
 
 const AttributionPopupDialog = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const { title: documentTitle, author, license } = project.attribution;
-  const handleClickClose = () => {
-    setIsOpen(false);
-  };
   const classes = useStyles();
   const dialogClasses = useDialogStyles();
   const element = <Typography className={classes.link}>Attribution</Typography>;
@@ -40,20 +35,11 @@ const AttributionPopupDialog = () => {
       {'.'}
     </Typography>
   );
-  const actions = (
-    <Button onClick={handleClickClose} className={dialogClasses.button}>
-      Close
-    </Button>
-  );
-
   return (
     <ClickableElementPopupDialog
       element={element}
       title={title}
       content={content}
-      actions={actions}
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
       classes={dialogClasses}
     />
   );
