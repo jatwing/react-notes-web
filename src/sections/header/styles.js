@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: theme.typography.fontStacks.sansSerif,
       color: theme.palette.primary.contrastText,
       transition: theme.transitions.create('color'),
-      padding: `0 16px`,
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      padding: '0 16px',
       '&:hover, &:focus': {
         color: theme.palette.contrast.text.secondary,
       },

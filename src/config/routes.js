@@ -14,8 +14,11 @@ import ThinkingInReact from 'pages/02-main-concepts/12-thinking-in-react';
 
 import Accessibility from 'pages/03-advanced-guides/01-accessibility'
 
-
 import Context from 'pages/03-advanced-guides/03-context';
+
+import CodeSplitting from 'pages/03-advanced-guides/02-code-splitting';
+
+
 
 const routes = [
   { path: '/01-tic-tac-toe-game', component: TicTacToeGame },
@@ -64,11 +67,13 @@ const routes = [
     component: ThinkingInReact,
   },
   {
-    path: '/03-advanced-guides/01-accessibility',
+    path: '/03-advanced-guides/01-accessibility  (TODO)',
     component: Accessibility
   },
 
-  { path: '/03-advanced-guides/03-context', component: Context },
+  { path: '/03-advanced-guides/02-code-splitting', component: CodeSplitting   }
+,
+  { path: '/03-advanced-guides/03-context  (TODO)', component: Context },
 ];
 
 export default routes;
