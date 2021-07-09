@@ -1,4 +1,4 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -7,12 +7,12 @@ import {
 } from 'react-router-dom';
 import Layout from './layout';
 import { getSubtrees, getNodes } from 'utils/directory-tree';
-import routes from 'config/routes';
+import pageRoutes from 'config/routes';
 import ParentNodePage from 'pages/parent-node-page';
 import LeafNodePage from 'pages/leaf-page';
 import Theme from './theme';
 
-const subtrees = getSubtrees(routes.map((route) => route.path));
+const subtrees = getSubtrees(pageRoutes.map((route) => '/' + route));
 
 const parentRoutes = subtrees
   .filter((subtree) => subtree.children.length > 0)
@@ -31,18 +31,28 @@ const parentRoutes = subtrees
     };
   });
 
-const leafRoutes = routes.map((route) => {
-  const nodes = getNodes(route.path);
+const leafRoutes = pageRoutes.map((pageRoute) => {
+  const path = '/' + pageRoute;
+  /**
+   * webpack needs to be able to
+   * at least guess roughly what an import() is meant to be referencing
+   *
+   * 
+   * from stack-overflow  TODO too wordy, summarise.
+   *
+   * that is why we use 'pages/'
+   */
+
+  const component = lazy(() => import('pages/' + pageRoute));
+  const nodes = getNodes(path);
+
   return {
     exact: true,
-    path: route.path,
+    path: path,
     render: () => (
-      <LeafNodePage
-        component={route.component}
-        title={nodes[nodes.length - 1]}
-      />
+      <LeafNodePage component={component} title={nodes[nodes.length - 1]} />
     ),
-    key: route.path,
+    key: path,
   };
 });
 
@@ -51,15 +61,17 @@ const App = () => {
     <Theme>
       <Router>
         <Layout>
-          <Switch>
-            {leafRoutes.map((route) => (
-              <Route {...route} />
-            ))}
-            {parentRoutes.map((route) => (
-              <Route {...route} />
-            ))}
-            <Redirect to="/" />
-          </Switch>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              {leafRoutes.map((route) => (
+                <Route {...route} />
+              ))}
+              {parentRoutes.map((route) => (
+                <Route {...route} />
+              ))}
+              <Redirect to="/" />
+            </Switch>
+          </Suspense>
         </Layout>
       </Router>
     </Theme>
