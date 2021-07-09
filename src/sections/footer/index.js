@@ -90,7 +90,7 @@ const Logo = () => {
   return (
     <Box>
       <img
-        src="/images/common/jatwing.png"
+        src="/images/common/jatwing-orthogonal-margins.png"
         alt="jatwing"
         className={classes.image}
       />

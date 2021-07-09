@@ -3,23 +3,6 @@ import { createTheme } from '@material-ui/core/styles';
 const originalDarkTheme = createTheme({ palette: { mode: 'dark' } });
 
 const lightTheme = createTheme({
-  /**
-   *
-   *  as for the text, material design states that we need to
-   *  'create better contrast by
-   *  displaying white or black text with reduced opacity.'
-   *
-   *  @see
-   *  https://material.io/design
-   *  css file,
-   *
-   *  the text has primary, secondary and disabled colors,
-   *  icon color and hint color are the same as the disabled color.
-   *
-   *  MUI follows it.
-   *
-   */
-
   palette: {
     mode: 'light',
     primary: {

@@ -32,20 +32,14 @@ const parentRoutes = subtrees
   });
 
 const leafRoutes = pageRoutes.map((pageRoute) => {
-  const path = '/' + pageRoute;
   /**
-   * webpack needs to be able to
-   * at least guess roughly what an import() is meant to be referencing
-   *
-   * 
-   * from stack-overflow  TODO too wordy, summarise.
-   *
-   * that is why we use 'pages/'
+   * [Module methods](https://webpack.js.org/api/module-methods/)
+   * the import() must contain at least some information
+   * about where the module is located.
    */
-
-  const component = lazy(() => import('pages/' + pageRoute));
+  const component = lazy(() => import(`pages/${pageRoute}/index.js`));
+  const path = '/' + pageRoute;
   const nodes = getNodes(path);
-
   return {
     exact: true,
     path: path,
