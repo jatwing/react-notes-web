@@ -1,4 +1,4 @@
-# [React Tutorial](https://react-tutorial.pages.dev)
+# [React Notes Frontend](https://react-notes.jatwing.com/)
 
 ## Content
 
