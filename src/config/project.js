@@ -1,6 +1,6 @@
 const project = {
-  name: 'React Tutorial',
-  github: 'https://github.com/jatwing/react-tutorial',
+  name: 'React Notes',
+  github: 'https://github.com/jatwing/react-notes-frontend',
   attribution: {
     title:{
       name: 'Tutorial: Intro to React',
