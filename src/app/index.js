@@ -8,9 +8,16 @@ import {
 import Layout from './layout';
 import { getSubtrees, getNodes } from 'utils/directory-tree';
 import pageRoutes from 'config/routes';
+import project from 'config/project';
 import ParentNodePage from 'pages/parent-node-page';
 import LeafNodePage from 'pages/leaf-page';
 import Theme from './theme';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: project.api,
+});
 
 const subtrees = getSubtrees(pageRoutes.map((route) => '/' + route));
 
@@ -54,19 +61,21 @@ const App = () => {
   return (
     <Theme>
       <Router>
-        <Layout>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              {leafRoutes.map((route) => (
-                <Route {...route} />
-              ))}
-              {parentRoutes.map((route) => (
-                <Route {...route} />
-              ))}
-              <Redirect to="/" />
-            </Switch>
-          </Suspense>
-        </Layout>
+        <ApolloProvider client={client}>
+          <Layout>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                {leafRoutes.map((route) => (
+                  <Route {...route} />
+                ))}
+                {parentRoutes.map((route) => (
+                  <Route {...route} />
+                ))}
+                <Redirect to="/" />
+              </Switch>
+            </Suspense>
+          </Layout>
+        </ApolloProvider>
       </Router>
     </Theme>
   );

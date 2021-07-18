@@ -19,6 +19,8 @@ const project = {
   email: 'mailto:jatwing@pm.me',
   stackOverflow: 'https://stackoverflow.com/users/8813862/jatwing',
   copyright: `© 2020-${(new Date()).getFullYear()}, Jatwing. Some rights reserved.`,
+  
+  api: 'https://react-notes-cms.jatwing.com/api/graphql' 
 };
 
 export default project;
