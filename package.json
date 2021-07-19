@@ -6,6 +6,7 @@
     "@apollo/client": "^3.3.21",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@keystone-next/document-renderer": "^4.0.0",
     "@material-ui/core": "next",
     "@material-ui/icons": "next",
     "@material-ui/styles": "next",

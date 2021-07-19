@@ -1521,6 +1521,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@keystone-next/document-renderer@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@keystone-next/document-renderer/-/document-renderer-4.0.0.tgz#f34b18643743c23256535f57949ec843ef9d5dc9"
+  integrity sha512-0KrkpGE2XwhrL8iugW4tXL6/WjEmtBtIgm7NN7VUvSdIZN/AMuy57AeOdBMeiux1Z7RalNeF+JyaW5KoHukADQ==
+
 "@material-ui/core@next":
   version "5.0.0-alpha.38"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-5.0.0-alpha.38.tgz#a74eb5ac3979417dc77ac1b300d31a9d7c6fe49a"
@@ -11486,10 +11491,8 @@ watchpack@^1.7.4:
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.7.5.tgz#1267e6c55e0b9b5be44c2023aed5437a2c26c453"
   integrity sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
   dependencies:
-    chokidar "^3.4.1"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
-    watchpack-chokidar2 "^2.0.1"
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
