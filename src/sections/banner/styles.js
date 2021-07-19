@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => {
     row: {
       display: 'flex',
       justifyContent: 'space-between',
+      alignItems: 'center',
       padding: '8px 16px',
       '& p': {
         ...theme.typography.body1,
@@ -16,6 +17,15 @@ const useStyles = makeStyles((theme) => {
         padding: '0',
         margin: '0',
       },
+      '& a': {
+        color: theme.palette.info.contrastText,
+        '&:hover, &:focus': {
+          color: theme.palette.text.secondary,
+        },
+        "&:active": {
+          textDecoration: 'none',
+        }
+      },
       '&$hidden': {
         display: 'none'
       }
@@ -23,8 +33,6 @@ const useStyles = makeStyles((theme) => {
     icon: {
       ...theme.typography.h6,
       color: theme.palette.text.primary,
-      padding: '0',
-      margin: 'auto 0',
       cursor: 'pointer',
       '&:hover, &:focus': {
         color: theme.palette.text.secondary,
