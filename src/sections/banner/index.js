@@ -6,7 +6,7 @@ import { DocumentRenderer } from '@keystone-next/document-renderer';
 import clsx from 'clsx';
 import useStyles from './styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import { sortBy } from 'lodash'
+import { filter, sortBy } from 'lodash'
 
 
 const GET_NOTIFICATIONS = gql`
@@ -54,10 +54,10 @@ const Banner = () => {
         <ClosableRow>{`Error! ${error.message}`}</ClosableRow>
       </Box>
     );
-  const notifications = sortBy(data.allNotifications, ['order'])
+  const notifications = sortBy(filter(data.allNotifications, 'isVisible'), 'order')
   return (
     <Box className={classes.content}>
-      {data.allNotifications.map((notification) => (
+      {notifications.map((notification) => (
         <ClosableRow key={JSON.stringify(notification)}>
           <DocumentRenderer document={notification.content.document} />
         </ClosableRow>
