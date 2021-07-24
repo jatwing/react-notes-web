@@ -1,26 +1,13 @@
 import { useState } from 'react';
-import { useNotifications } from 'hooks/notifications';
 import { Box } from '@material-ui/core';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, ApolloClient, InMemoryCache } from '@apollo/client';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
 import clsx from 'clsx';
 import useStyles from './styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import { filter, sortBy } from 'lodash'
-
-
-const GET_NOTIFICATIONS = gql`
-  query {
-    allNotifications {
-      isVisible
-      order
-      name
-      content {
-        document
-      }
-    }
-  }
-`;
+import { filter, sortBy } from 'lodash';
+// import { GET_NOTIFICATIONS } from 'queries'
+import {  useNotifications } from 'hooks/notifications'
 
 const ClosableRow = (props) => {
   const { children } = props;
@@ -38,7 +25,7 @@ const ClosableRow = (props) => {
 };
 
 const Banner = () => {
-  const { loading, error, data } = useQuery(GET_NOTIFICATIONS);
+  const { loading, error, data } = useNotifications(); 
 
   const classes = useStyles();
 
@@ -54,7 +41,10 @@ const Banner = () => {
         <ClosableRow>{`Error! ${error.message}`}</ClosableRow>
       </Box>
     );
-  const notifications = sortBy(filter(data.allNotifications, 'isVisible'), 'order')
+  const notifications = sortBy(
+    filter(data.allNotifications, 'isVisible'),
+    'order'
+  );
   return (
     <Box className={classes.content}>
       {notifications.map((notification) => (
