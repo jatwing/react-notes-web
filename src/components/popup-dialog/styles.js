@@ -1,16 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 import { getMediaQueries } from 'utils/media';
 
-/*
- * it is very hard to define block for the absolute positioned element,
- *
- * we may define an absolute block,
- *
- * or we may not define the block,
- * for brevity, neglect the problem now.
- *
- */
-
 const useStyles = (classes) =>
   makeStyles((theme) => {
     const { mediumQuery, largeQuery } = getMediaQueries(theme);

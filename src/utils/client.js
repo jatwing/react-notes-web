@@ -2,7 +2,12 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: 'https://common-cms.jatwing.com/api/graphql',
+  uri: process.env.REACT_APP_GRAPHQL_URI,
 });
 
-export { client }
+const getUrl = (src) => {
+  console.log(process.env.REACT_APP_CMS_URL)
+  return process.env.REACT_APP_CMS_URL + src
+}
+
+export { client, getUrl }

@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { Box } from '@material-ui/core';
-import { useQuery, gql, ApolloClient, InMemoryCache } from '@apollo/client';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
 import clsx from 'clsx';
 import useStyles from './styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { filter, sortBy } from 'lodash';
-// import { GET_NOTIFICATIONS } from 'queries'
-import {  useNotifications } from 'hooks/notifications'
+import { useNotifications } from 'hooks/notifications';
 
 const ClosableRow = (props) => {
   const { children } = props;
@@ -25,22 +23,22 @@ const ClosableRow = (props) => {
 };
 
 const Banner = () => {
-  const { loading, error, data } = useNotifications(); 
-
+  const { loading, error, data } = useNotifications();
   const classes = useStyles();
-
-  if (loading)
+  if (loading) {
     return (
       <Box className={classes.content}>
         <Box className={classes.row}>{'Loading...'}</Box>
       </Box>
     );
-  if (error)
+  }
+  if (error) {
     return (
       <Box className={classes.content}>
         <ClosableRow>{`Error! ${error.message}`}</ClosableRow>
       </Box>
     );
+  }
   const notifications = sortBy(
     filter(data.allNotifications, 'isVisible'),
     'order'

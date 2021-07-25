@@ -1,5 +1,9 @@
+import { useAuthor } from './authors' 
 import { useNotifications } from './notifications'
+import { useProject } from './projects'
 
 export { 
-  useNotifications
+  useAuthor,
+  useNotifications,
+  useProject
 }

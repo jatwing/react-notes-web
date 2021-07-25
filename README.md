@@ -14,6 +14,14 @@
 
 6. [Testing](https://reactjs.org/docs/testing.html)
 
+## Environment Variables
+
+**`.env`**
+```
+REACT_APP_CMS_URL=https://example.com
+REACT_APP_GRAPHQL_URI=https://example.com/api/graphql
+```
+
 ## Attribution
 
 [Tutorial: Intro to React](https://reactjs.org/tutorial/tutorial.html) by [React Community](https://github.com/reactjs) is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
