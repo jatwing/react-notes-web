@@ -1,9 +1,6 @@
-import { useAuthor } from './authors' 
-import { useNotifications } from './notifications'
-import { useProject } from './projects'
+import { useAuthentication } from './authentication';
+import { useAuthor } from './authors';
+import { useNotifications } from './notifications';
+import { useProject } from './projects';
 
-export { 
-  useAuthor,
-  useNotifications,
-  useProject
-}
+export { useAuthentication, useAuthor, useNotifications, useProject };

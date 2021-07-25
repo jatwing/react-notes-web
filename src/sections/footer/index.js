@@ -4,9 +4,12 @@ import ExternalLink from 'components/external-link';
 import useStyles from './styles';
 import useDialogStyles from './dialogStyles';
 import ClickableElementPopupDialog from 'components/clickable-element-popup-dialog';
-import { useAuthor, useProject } from 'hooks';
+import { useAuthentication,  useAuthor, useProject } from 'hooks';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
+
 import { getUrl } from 'utils/client';
+
+
 
 const Context = createContext({});
 
@@ -94,7 +97,10 @@ const Logo = () => {
   return (
     <Box>
       <img
-        src={getUrl(author.data.Author.avatar.src)}
+        src={
+        //  getUrl(author.data.Author.avatar.src)
+          "https://common-cms.jatwing.com/images/dd0a66fc-d171-42bb-b413-ff6abd729b43.png"
+        }
         alt="jatwing"
         className={classes.image}
       />
@@ -106,12 +112,22 @@ const Logo = () => {
 };
 
 const Footer = () => {
+
+  const [auth]  = useAuthentication("s", "2");
+// try to move it to "client " use promise 
+  //  @see https://www.apollographql.com/docs/react/api/core/ApolloClient/
+  //  auth();
+
   const author = useAuthor('jatwing');
   const project = useProject('react-notes');
   const value = {
     author: author,
     project: project,
   };
+
+
+
+
   const classes = useStyles();
 
   return (
