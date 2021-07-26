@@ -113,7 +113,7 @@ const Logo = () => {
 
 const Footer = () => {
 
-  const [auth]  = useAuthentication("s", "2");
+  // const [auth]  = useAuthentication("s", "2");
 // try to move it to "client " use promise 
   //  @see https://www.apollographql.com/docs/react/api/core/ApolloClient/
   // auth()
@@ -122,7 +122,7 @@ const Footer = () => {
 
   // TTL for cookie
 
-  document.cookie='keystonejs-session=Fe'
+ // document.cookie='keystonejs-session=Fe'
 
   const author = useAuthor('jatwing');
   const project = useProject('react-notes');
