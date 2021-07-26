@@ -8,7 +8,7 @@ import { useAuthentication,  useAuthor, useProject } from 'hooks';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
 
 import { getUrl } from 'utils/client';
-
+import { test  } from 'utils/client'
 
 
 const Context = createContext({});
@@ -116,7 +116,13 @@ const Footer = () => {
   const [auth]  = useAuthentication("s", "2");
 // try to move it to "client " use promise 
   //  @see https://www.apollographql.com/docs/react/api/core/ApolloClient/
-  //  auth();
+  // auth()
+  //
+
+
+  // TTL for cookie
+
+  document.cookie='keystonejs-session=Fe'
 
   const author = useAuthor('jatwing');
   const project = useProject('react-notes');
@@ -125,10 +131,13 @@ const Footer = () => {
     project: project,
   };
 
-
+  console.log(test)
 
 
   const classes = useStyles();
+
+
+
 
   return (
     <Context.Provider value={value}>
