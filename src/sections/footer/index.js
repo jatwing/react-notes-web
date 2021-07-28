@@ -115,12 +115,6 @@ const Logo = () => {
 };
 
 const Footer = () => {
-<<<<<<< HEAD
-=======
-
-  // const [auth]  = useAuthentication("s", "2");
-// try to move it to "client " use promise 
->>>>>>> fdf4ebf7e69a1bf27b1aec97398c7cd97ebd1615
   //  @see https://www.apollographql.com/docs/react/api/core/ApolloClient/
   // auth()
 
