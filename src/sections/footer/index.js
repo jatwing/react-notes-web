@@ -97,13 +97,24 @@ const Logo = () => {
     return <Typography className={classes.text}>Error!</Typography>;
   }
 
+
+  console.log("!!!!!")
+  console.log(document.cookie)
+
+  // document.cookie="keystonejs-session=Fe26.2**1de7769406876509e1ebae247f2df51a0052c97c4acbcc9c25c49fe34eb2cc9e*s5gKrknYTDaViCTSeWeI3A*uKFDpS3gfrRjVG96JiQ33BxBAzR3MjEyTrSm0TdIL2dvx7UmXdxGIfNOz0Sufg94yQcFSqv7Md6QpiPiyx1ZBQ*1630040670669*9cb1c6fda8e2a5d3c2fcff2dea17ab63ca636b9cc02c832f16c64a85df85b8aa*uIQiTPLemzHHbakA7w-EMzlNKB9m-kt2XEX7zNDOPBU"
+
+  console.log(document.cookie)
+
+
   return (
     <Box>
       <img
         src={
+        
           //  getUrl(author.data.Author.avatar.src)
           'https://common-cms.jatwing.com/images/dd0a66fc-d171-42bb-b413-ff6abd729b43.png'
         }
+        crossOrigin="use-credentials"
         alt="jatwing"
         className={classes.image}
       />

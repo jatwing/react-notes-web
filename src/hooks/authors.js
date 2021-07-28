@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { client } from 'utils/client';
-import { useCreatingAuthentication } from 'hooks'
+import { useCreatingAuthentication } from 'hooks';
+import { useEffect } from 'react';
 
 const useAuthor = (name) => {
   const GET_AUTHOR = gql`
@@ -20,9 +21,13 @@ const useAuthor = (name) => {
     process.env.REACT_APP_EMAIL,
     process.env.REACT_APP_PASSWORD
   );
-  createAuthentication();
+
+  useEffect(() => {
+    createAuthentication();
 
 
+    console.log(" + " + document.cookie)
+  }, []);
 
   return useQuery(GET_AUTHOR, {
     client: client,
