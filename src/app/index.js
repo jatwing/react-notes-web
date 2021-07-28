@@ -14,6 +14,10 @@ import LeafNodePage from 'pages/leaf-page';
 import Theme from './theme';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
+
+import { useEffect } from 'react'
+import  {useCreatingAuthentication} from 'hooks'
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   uri: project.api,
@@ -58,6 +62,11 @@ const leafRoutes = pageRoutes.map((pageRoute) => {
 });
 
 const App = () => {
+
+
+
+
+
   return (
     <Theme>
       <Router>

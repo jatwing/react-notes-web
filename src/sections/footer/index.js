@@ -1,15 +1,18 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core';
 import ExternalLink from 'components/external-link';
 import useStyles from './styles';
 import useDialogStyles from './dialogStyles';
 import ClickableElementPopupDialog from 'components/clickable-element-popup-dialog';
-import { useAuthentication,  useAuthor, useProject } from 'hooks';
+import {
+  useAuthentication,
+  useCreatingAuthentication,
+  useAuthor,
+  useProject,
+} from 'hooks';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
 
 import { getUrl } from 'utils/client';
-import { test  } from 'utils/client'
-
 
 const Context = createContext({});
 
@@ -98,8 +101,8 @@ const Logo = () => {
     <Box>
       <img
         src={
-        //  getUrl(author.data.Author.avatar.src)
-          "https://common-cms.jatwing.com/images/dd0a66fc-d171-42bb-b413-ff6abd729b43.png"
+          //  getUrl(author.data.Author.avatar.src)
+          'https://common-cms.jatwing.com/images/dd0a66fc-d171-42bb-b413-ff6abd729b43.png'
         }
         alt="jatwing"
         className={classes.image}
@@ -112,17 +115,43 @@ const Logo = () => {
 };
 
 const Footer = () => {
-
-  const [auth]  = useAuthentication("s", "2");
-// try to move it to "client " use promise 
   //  @see https://www.apollographql.com/docs/react/api/core/ApolloClient/
   // auth()
-  //
+
+  // test the code inside the Footer component
+  // @see https://www.apollographql.com/docs/react/data/mutations/
+
+  // return a tuple [mutate function, object that represents mutation status]
+  const [createAuthentication, { data }] = useCreatingAuthentication(
+    process.env.REACT_APP_EMAIL,
+    process.env.REACT_APP_PASSWORD
+  );
+  useEffect(() => {
+    console.log(" i createe")
+    createAuthentication();
+  }, []);
 
 
-  // TTL for cookie
+  useEffect(() => {
+    if (!data || !("authenticateUserWithPassword" in data)) {
+      return
+    }
+    const result = data["authenticateUserWithPassword"]
+    if (result?.code === "FAILURE") {
+      console.log(result?.message)
+      return
+    }
+    if ('sessionToken' in result) {
 
-  document.cookie='keystonejs-session=Fe'
+  //    document.cookie = `keystonejs-session=${result.sessionToken}; SameSite=None; Secure`
+      console.log("     *&:")
+    }
+
+
+  }, [data])
+
+
+
 
   const author = useAuthor('jatwing');
   const project = useProject('react-notes');
@@ -131,13 +160,7 @@ const Footer = () => {
     project: project,
   };
 
-  console.log(test)
-
-
   const classes = useStyles();
-
-
-
 
   return (
     <Context.Provider value={value}>

@@ -1,6 +1,6 @@
-import { useAuthentication } from './authentication';
+import { useAuthentication, useCreatingAuthentication } from './authentication';
 import { useAuthor } from './authors';
 import { useNotifications } from './notifications';
 import { useProject } from './projects';
 
-export { useAuthentication, useAuthor, useNotifications, useProject };
+export { useAuthentication, useCreatingAuthentication, useAuthor, useNotifications, useProject };
