@@ -112,7 +112,6 @@ const Logo = () => {
           'https://common-cms.jatwing.com/images/dd0a66fc-d171-42bb-b413-ff6abd729b43.png'
           // crossOrigin="use-credentials" below
         }
-        crossOrigin="use-credentials"
         alt="jatwing"
         className={classes.image}
       />
