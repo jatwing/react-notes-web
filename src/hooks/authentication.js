@@ -1,24 +1,6 @@
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { client } from 'utils/client';
 
-const useAuthentication = () => {
-  const GET_AUTHENTICATION = gql`
-    query {
-      authenticatedItem {
-        ... on User {
-          id
-          name
-          email
-          password {
-            isSet
-          }
-        }
-      }
-    }
-  `;
-  return useQuery(GET_AUTHENTICATION, { client: client });
-};
-
 const useCreatingAuthentication = (email, password) => {
   const CREATE_AUTHENTICATION = gql`
     mutation {
@@ -47,4 +29,22 @@ const useCreatingAuthentication = (email, password) => {
   return useMutation(CREATE_AUTHENTICATION, { client: client });
 };
 
-export { useAuthentication, useCreatingAuthentication };
+const useReadingAuthentication = () => {
+  const READ_AUTHENTICATION = gql`
+    query {
+      authenticatedItem {
+        ... on User {
+          id
+          name
+          email
+          password {
+            isSet
+          }
+        }
+      }
+    }
+  `;
+  return useQuery(READ_AUTHENTICATION, { client: client });
+};
+
+export { useCreatingAuthentication, useReadingAuthentication }
