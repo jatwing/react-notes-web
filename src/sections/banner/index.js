@@ -7,6 +7,8 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { filter, sortBy } from 'lodash';
 import { useReadingNotifications } from 'hooks';
 
+import preval from 'preval.macro';
+
 const ClosableRow = (props) => {
   const { children } = props;
   const [isOpen, setIsOpen] = useState(true);
@@ -39,18 +41,40 @@ const Banner = () => {
       </Box>
     );
   }
-  /*
-   * can we only show it on development?
-   *
-   */
-  const now = new Date().toGMTString();
+  const now = preval`
+    const date = new Date();
+    module.exports = {
+      dateString: date.toDateString(),
+      timeString: date.toTimeString(),
+      date: date
+    }
+  `;
+
+  console.log(now);
+  console.log(typeof now);
+
+
+  console.log(now.date)
+  console.log(typeof now.date)
+
+
+  const test = preval`
+    module.exports = new Date();
+  `
+
+console.log(test)
+
   const notifications = sortBy(
     filter(data.allNotifications, 'isVisible'),
     'order'
   );
+
   return (
     <Box className={classes.content}>
-      { now }
+      {'test'}
+      <p>
+        Build date : {preval`module.exports = new Date().toLocaleString();`}
+      </p>
       {notifications.map((notification) => (
         <ClosableRow key={JSON.stringify(notification)}>
           <DocumentRenderer document={notification.content.document} />
