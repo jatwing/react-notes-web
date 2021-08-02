@@ -4,35 +4,37 @@ import ExternalLink from 'components/external-link';
 import useStyles from './styles';
 import useDialogStyles from './dialogStyles';
 import ClickableElementPopupDialog from 'components/clickable-element-popup-dialog';
-import { useReadingAuthor, useProject } from 'hooks';
+import { useReadingAuthor, useReadingProject } from 'hooks';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
-import { getAssetUrl   } from 'utils/client';
+import { getAssetUrl } from 'utils/client';
 
 const Context = createContext({});
 
 const ProjectColumn = () => {
-  const { project } = useContext(Context);
+  const { readProject } = useContext(Context);
+  const { loading, error, data } = readProject;
   const classes = useStyles();
   const dialogClasses = useDialogStyles();
-  if (project.loading) {
+  if (loading) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
-  if (project.error) {
+  if (error) {
     return <Typography className={classes.text}>Error!</Typography>;
   }
+  const project = data.Project;
   const element = <Typography className={classes.link}>Attribution</Typography>;
   const title = (
     <Typography className={dialogClasses.text}>Attribution</Typography>
   );
   const content = (
-    <DocumentRenderer document={project.data.Project.attribution.document} />
+    <DocumentRenderer document={project.attribution.document} />
   );
   return (
     <Box>
       <Typography className={classes.text}>Project</Typography>
       <ExternalLink
         text={'Github'}
-        href={project.data.Project.github}
+        href={project.github}
         className={classes.link}
       />
       <ClickableElementPopupDialog
@@ -43,7 +45,7 @@ const ProjectColumn = () => {
       />
       <ExternalLink
         text={'License'}
-        href={project.data.Project.license}
+        href={project.license}
         className={classes.link}
       />
     </Box>
@@ -51,25 +53,27 @@ const ProjectColumn = () => {
 };
 
 const AuthorColumn = () => {
-  const { author } = useContext(Context);
+  const { readAuthor } = useContext(Context);
+  const { loading, error, data } = readAuthor;
   const classes = useStyles();
-  if (author.loading) {
+  if (loading) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
-  if (author.error) {
+  if (error) {
     return <Typography className={classes.text}>Error!</Typography>;
   }
+  const author = data.Author;
   return (
     <Box>
       <Typography className={classes.text}>Author</Typography>
       <ExternalLink
         text={'Email'}
-        href={author.data.Author.email}
+        href={author.email}
         className={classes.link}
       />
       <ExternalLink
         text={'Stack Overflow'}
-        href={author.data.Author.stackOverflow}
+        href={author.stackOverflow}
         className={classes.link}
       />
     </Box>
@@ -77,36 +81,36 @@ const AuthorColumn = () => {
 };
 
 const Logo = () => {
-  const { author, project } = useContext(Context);
+  const { readAuthor, readProject } = useContext(Context);
   const classes = useStyles();
-  if (author.loading || project.loading) {
+  if (readAuthor.loading || readProject.loading) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
-  if (author.error || project.error) {
+  if (readAuthor.error || readProject.error) {
     return <Typography className={classes.text}>Error!</Typography>;
   }
+  const author = readAuthor.data.Author;
+  const project = readProject.data.Project;
   return (
     <Box>
       <img
-        src={
-          getAssetUrl(author.data.Author.avatar.src)
-        }
+        src={getAssetUrl(author.avatar.src)}
         alt="jatwing"
         className={classes.image}
       />
       <Typography className={classes.text}>
-        {project.data.Project.copyright}
+        {project.copyright}
       </Typography>
     </Box>
   );
 };
 
 const Footer = () => {
-  const author = useReadingAuthor('jatwing')
-  const project = useProject('react-notes');
+  const readAuthor = useReadingAuthor('jatwing');
+  const readProject = useReadingProject('react-notes');
   const value = {
-    author: author,
-    project: project,
+    readAuthor,
+    readProject,
   };
   const classes = useStyles();
   return (

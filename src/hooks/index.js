@@ -3,13 +3,13 @@ import {
   useReadingAuthentication
 } from './authentication';
 import { useReadingAuthor } from './authors';
-import { useNotifications } from './notifications';
-import { useProject } from './projects';
+import { useReadingNotifications } from './notifications';
+import { useReadingProject } from './projects';
 
 export {
   useCreatingAuthentication,
   useReadingAuthentication,
   useReadingAuthor,
-  useNotifications,
-  useProject,
+  useReadingNotifications,
+  useReadingProject,
 };

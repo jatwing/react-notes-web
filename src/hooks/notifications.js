@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { client } from 'utils/client';
 
-const useNotifications = () => {
+const useReadingNotifications = () => {
   const GET_NOTIFICATIONS = gql`
     query {
       allNotifications {
@@ -17,4 +17,4 @@ const useNotifications = () => {
   return useQuery(GET_NOTIFICATIONS, { client: client });
 };
 
-export { useNotifications };
+export { useReadingNotifications };

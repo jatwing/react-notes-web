@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import useStyles from './styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { filter, sortBy } from 'lodash';
-import { useNotifications } from 'hooks/notifications';
+import { useReadingNotifications } from 'hooks';
 
 const ClosableRow = (props) => {
   const { children } = props;
@@ -23,7 +23,7 @@ const ClosableRow = (props) => {
 };
 
 const Banner = () => {
-  const { loading, error, data } = useNotifications();
+  const { loading, error, data } = useReadingNotifications();
   const classes = useStyles();
   if (loading) {
     return (

@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { client } from 'utils/client';
 
-const useProject = (name) => {
+const useReadingProject = (name) => {
   const GET_PROJECT = gql`
     query {
       Project(where: {name: "${name}"}) {
@@ -18,4 +18,4 @@ const useProject = (name) => {
   return useQuery(GET_PROJECT, { client: client });
 };
 
-export { useProject };
+export { useReadingProject };
