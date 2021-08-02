@@ -18,33 +18,32 @@ const useStyles = (classes) =>
           color: theme.palette.text.primary,
         },
       },
-
       /** block */
       title: {
-        ...(classes.text && {
-          ['& .' + classes.text]: {
-            width: 'fit-content',
-            ...theme.typography.h6,
-            fontFamily: theme.typography.fontStacks.sansSerif,
-          },
-        }),
+        ['& p' + (classes.text ? `, & .${classes.text}` : '')]: {
+          width: 'fit-content',
+          ...theme.typography.h6,
+          fontFamily: theme.typography.fontStacks.sansSerif,
+        },
       },
       content: {
-        ...(classes.link && {
-          ['& .' + classes.link]: {
-            textDecoration: 'none',
-            ...theme.typography.body1,
-            fontFamily: theme.typography.fontStacks.serif,
-            color: theme.palette.secondary.main,
-            '&:hover, &:focus': {
-              textDecoration: 'underline',
-              color: theme.palette.secondary.dark,
-            },
-            '&:active': {
-              textDecoration: 'none',
-            },
+        ['& p' + (classes.text ? `, & .${classes.text}` : '')]: {
+          ...theme.typography.body1,
+          fontFamily: theme.typography.fontStacks.serif,
+          color: theme.palette.text.primary,
+        },
+        ['& a' + (classes.link ? `, & .${classes.link}` : '')]: {
+          textDecoration: 'none',
+          color: theme.palette.secondary.main,
+
+          '&:hover, &:focus': {
+            textDecoration: 'underline',
+            color: theme.palette.secondary.dark,
           },
-        }),
+          '&:active': {
+            textDecoration: 'none',
+          },
+        },
       },
       actions: {
         display: 'flex',
