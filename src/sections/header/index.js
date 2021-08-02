@@ -16,8 +16,8 @@ const Header = () => {
 
   const theme = useTheme();
   const { isMedium, isLarge } = useMedia(theme);
-  /** 
-   * maximum number of parent nodes. 
+  /**
+   * maximum number of parent nodes.
    * @type {number}
    */
   let maximum = 1;

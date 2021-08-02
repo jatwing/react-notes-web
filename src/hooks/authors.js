@@ -1,9 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { client } from 'utils/client';
-import { useReadingAuthentication, useCreatingAuthentication } from 'hooks';
-import { useEffect } from 'react';
 
-const useAuthor = (name) => {
+const useReadingAuthor = (name) => {
   const GET_AUTHOR = gql`
     query {
       Author(where: {name: "${name}"}) {
@@ -17,23 +15,12 @@ const useAuthor = (name) => {
     }
   `;
 
-  const [createAuthentication, { data }] = useCreatingAuthentication(
-    process.env.REACT_APP_EMAIL,
-    process.env.REACT_APP_PASSWORD
-  );
-
- //   createAuthentication();
-  useEffect(() => {
-    createAuthentication();
-  }, []);
-
   return useQuery(GET_AUTHOR, {
     client: client,
     context: {
-      headers: {
-      },
+      headers: {},
     },
   });
 };
 
-export { useAuthor };
+export { useReadingAuthor };

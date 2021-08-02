@@ -2,7 +2,7 @@ import { Link as MaterialLink } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 const Link = (props) => {
-    const { href, onClick, ...otherProps } = props;
+  const { href, onClick, ...otherProps } = props;
   const history = useHistory();
   const handleClick = (event) => {
     event.preventDefault();

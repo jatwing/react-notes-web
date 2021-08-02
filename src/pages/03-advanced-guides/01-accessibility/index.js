@@ -5,7 +5,6 @@
  * see pointer
  */
 
-
 import { useState, Fragment, useRef } from 'react';
 
 /** web accessibility initiative - accessible rich internet applications */

@@ -1,9 +1,9 @@
 const UsedComponent = () => {
-  return <div>Used Component</div>
-}
+  return <div>Used Component</div>;
+};
 
 const UnusedComponent = () => {
-  return <div>Unused Component</div>
-}
+  return <div>Unused Component</div>;
+};
 
-export { UsedComponent, UnusedComponent }
+export { UsedComponent, UnusedComponent };

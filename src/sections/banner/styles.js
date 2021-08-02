@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => {
         '&:hover, &:focus': {
           color: theme.palette.text.secondary,
         },
-        "&:active": {
+        '&:active': {
           textDecoration: 'none',
-        }
+        },
       },
       '&$hidden': {
-        display: 'none'
-      }
+        display: 'none',
+      },
     },
     icon: {
       ...theme.typography.h6,
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => {
       },
     },
     /** container */
-    container: {}
+    container: {},
   };
 });
 

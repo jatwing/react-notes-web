@@ -8,20 +8,9 @@ import {
 import Layout from './layout';
 import { getSubtrees, getNodes } from 'utils/directory-tree';
 import pageRoutes from 'config/routes';
-import project from 'config/project';
 import ParentNodePage from 'pages/parent-node-page';
 import LeafNodePage from 'pages/leaf-page';
 import Theme from './theme';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-
-
-import { useEffect } from 'react'
-import  {useCreatingAuthentication} from 'hooks'
-
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: project.api,
-});
 
 const subtrees = getSubtrees(pageRoutes.map((route) => '/' + route));
 
@@ -45,8 +34,8 @@ const parentRoutes = subtrees
 const leafRoutes = pageRoutes.map((pageRoute) => {
   /**
    * [Module methods](https://webpack.js.org/api/module-methods/)
-   * the import() must contain at least some information
-   * about where the module is located.
+   * the import() must contain at least some information about where the module
+   * is located.
    */
   const component = lazy(() => import(`pages/${pageRoute}/index.js`));
   const path = '/' + pageRoute;
@@ -62,29 +51,19 @@ const leafRoutes = pageRoutes.map((pageRoute) => {
 });
 
 const App = () => {
-
-
-
-
-
   return (
     <Theme>
       <Router>
-        <ApolloProvider client={client}>
-          <Layout>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Switch>
-                {leafRoutes.map((route) => (
-                  <Route {...route} />
-                ))}
-                {parentRoutes.map((route) => (
-                  <Route {...route} />
-                ))}
-                <Redirect to="/" />
-              </Switch>
-            </Suspense>
-          </Layout>
-        </ApolloProvider>
+        <Layout>
+          <Suspense fallback={<>Loading...</>}>
+            <Switch>
+              {parentRoutes.concat(leafRoutes).map((route) => (
+                <Route {...route} />
+              ))}
+              <Redirect to="/" />
+            </Switch>
+          </Suspense>
+        </Layout>
       </Router>
     </Theme>
   );

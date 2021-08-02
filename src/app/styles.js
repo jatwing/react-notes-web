@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => {
       display: 'flex',
       flexFlow: 'column nowrap',
       minHeight: '100vh',
-    }
+    },
   };
 });
 

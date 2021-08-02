@@ -1,13 +1,12 @@
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core';
 import ExternalLink from 'components/external-link';
 import useStyles from './styles';
 import useDialogStyles from './dialogStyles';
 import ClickableElementPopupDialog from 'components/clickable-element-popup-dialog';
-import { useCreatingAuthentication, useAuthor, useProject } from 'hooks';
+import { useReadingAuthor, useProject } from 'hooks';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
-
-import { getUrl } from 'utils/client';
+import { getAssetUrl   } from 'utils/client';
 
 const Context = createContext({});
 
@@ -15,14 +14,12 @@ const ProjectColumn = () => {
   const { project } = useContext(Context);
   const classes = useStyles();
   const dialogClasses = useDialogStyles();
-
   if (project.loading) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
   if (project.error) {
     return <Typography className={classes.text}>Error!</Typography>;
   }
-
   const element = <Typography className={classes.link}>Attribution</Typography>;
   const title = (
     <Typography className={dialogClasses.text}>Attribution</Typography>
@@ -56,14 +53,12 @@ const ProjectColumn = () => {
 const AuthorColumn = () => {
   const { author } = useContext(Context);
   const classes = useStyles();
-
   if (author.loading) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
   if (author.error) {
     return <Typography className={classes.text}>Error!</Typography>;
   }
-
   return (
     <Box>
       <Typography className={classes.text}>Author</Typography>
@@ -84,20 +79,17 @@ const AuthorColumn = () => {
 const Logo = () => {
   const { author, project } = useContext(Context);
   const classes = useStyles();
-
   if (author.loading || project.loading) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
   if (author.error || project.error) {
     return <Typography className={classes.text}>Error!</Typography>;
   }
-
   return (
     <Box>
       <img
         src={
-          //  getUrl(author.data.Author.avatar.src)
-          'https://common-cms.jatwing.com/images/dd0a66fc-d171-42bb-b413-ff6abd729b43.png'
+          getAssetUrl(author.data.Author.avatar.src)
         }
         alt="jatwing"
         className={classes.image}
@@ -109,70 +101,16 @@ const Logo = () => {
   );
 };
 
-const RemoteImage = () => {
-  return (
-    <img
-      src={
-        //  getUrl(author.data.Author.avatar.src)
-        'https://common-cms.jatwing.com/images/dd0a66fc-d171-42bb-b413-ff6abd729b43.png'
-      }
-      crossOrigin="use-credentials"
-      alt="jatwing"
-    />
-  );
-};
-
 const Footer = () => {
-  //  @see https://www.apollographql.com/docs/react/api/core/ApolloClient/
-  // auth()
-
-  // test the code inside the Footer component
-  // @see https://www.apollographql.com/docs/react/data/mutations/
-  // return a tuple [mutate function, object that represents mutation status]
-
-  const [createAuthentication, { data }] = useCreatingAuthentication(
-    process.env.REACT_APP_EMAIL,
-    process.env.REACT_APP_PASSWORD
-  );
-  useEffect(() => {
-    console.log(' i createe');
-    createAuthentication();
-  }, []);
-
-  useEffect(() => {
-    console.log('##### data effect');
-
-    if (!data || !('authenticateUserWithPassword' in data)) {
-      return;
-    }
-    const result = data['authenticateUserWithPassword'];
-    if (result?.code === 'FAILURE') {
-      console.log(result?.message);
-      return;
-    }
-    if ('sessionToken' in result) {
-      // document.cookie = `keystonejs-session=${result.sessionToken}`
-      console.log('insiddddde useEffect show data and cookie');
-      document.cookie = `keystonejs-session=${result['sessionToken']}; SameSite=None; Secure`;
-      console.log(data);
-      console.log(document.cookie);
-    }
-  }, [data]);
-
-  const author = useAuthor('jatwing');
+  const author = useReadingAuthor('jatwing')
   const project = useProject('react-notes');
   const value = {
     author: author,
     project: project,
   };
-
   const classes = useStyles();
-
   return (
     <Context.Provider value={value}>
-    {data?.authenticateUserWithPassword && <RemoteImage />}
-
-
       <Box className={classes.container}>
         <Grid container className={classes.internalContainer}>
           <Grid item xs={6} sm={6} md={3} className={classes.column}>

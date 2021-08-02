@@ -28,7 +28,7 @@ function getGreeting(user) {
  * specifying attributes with JSX
  */
 const element2 = <div tabIndex="0"></div>;
-const element3 = <img src={user.avatarUrl} alt="user avatar"/>;
+const element3 = <img src={user.avatarUrl} alt="user avatar" />;
 
 /*
  * specifying children with JSX
@@ -61,7 +61,7 @@ class IntroducingJSX extends Component {
     return (
       <>
         {element1}
-        { getGreeting(user) }
+        {getGreeting(user)}
         {element2}
         {element3}
         {element4}

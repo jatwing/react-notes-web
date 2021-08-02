@@ -19,5 +19,4 @@ const RulesOfHooks = () => {
   );
 };
 
-
 export default RulesOfHooks;

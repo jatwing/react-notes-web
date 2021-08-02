@@ -1,9 +1,8 @@
 import { Box } from '@material-ui/core';
 import useStyles from './styles';
-import Banner from 'sections/banner'
+import Banner from 'sections/banner';
 import Header from 'sections/header';
-import Footer from 'sections/footer'
-
+import Footer from 'sections/footer';
 
 const Layout = ({ children }) => {
   const classes = useStyles();

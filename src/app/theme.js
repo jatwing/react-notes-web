@@ -1,7 +1,7 @@
 import { StyledEngineProvider } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
 import 'config/styles.css';
-import { lightTheme  } from 'config/theme';
+import { lightTheme } from 'config/theme';
 
 const Theme = ({ children }) => {
   return (

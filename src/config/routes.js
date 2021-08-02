@@ -16,8 +16,6 @@ const pageRoutes = [
   '03-advanced-guides/02-code-splitting',
   '03-advanced-guides/03-context',
 
-
-
   '05-hooks/05-rules-of-hooks',
 ];
 

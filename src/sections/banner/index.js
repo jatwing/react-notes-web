@@ -39,12 +39,18 @@ const Banner = () => {
       </Box>
     );
   }
+  /*
+   * can we only show it on development?
+   *
+   */
+  const now = new Date().toGMTString();
   const notifications = sortBy(
     filter(data.allNotifications, 'isVisible'),
     'order'
   );
   return (
     <Box className={classes.content}>
+      { now }
       {notifications.map((notification) => (
         <ClosableRow key={JSON.stringify(notification)}>
           <DocumentRenderer document={notification.content.document} />

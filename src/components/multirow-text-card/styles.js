@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => {
         },
         '&$gradient': {
           color: theme.palette.primary.contrastText,
-        }
+        },
       },
       '& > *:nth-child(n + 3) $text': {
         ...theme.typography.body1,
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => {
           color: theme.palette.secondary.contrastText,
         },
       },
-      
+
       '& $divider': {
         '&$gradient': {
           display: 'none',
