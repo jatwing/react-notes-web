@@ -6,8 +6,7 @@ import useStyles from './styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { filter, sortBy } from 'lodash';
 import { useReadingNotifications } from 'hooks';
-
-import preval from 'preval.macro';
+import { buildDate } from 'utils/preval';
 
 const ClosableRow = (props) => {
   const { children } = props;
@@ -41,40 +40,19 @@ const Banner = () => {
       </Box>
     );
   }
-  const now = preval`
-    const date = new Date();
-    module.exports = {
-      dateString: date.toDateString(),
-      timeString: date.toTimeString(),
-      date: date
-    }
-  `;
-
-  console.log(now);
-  console.log(typeof now);
-
-
-  console.log(now.date)
-  console.log(typeof now.date)
-
-
-  const test = preval`
-    module.exports = new Date();
-  `
-
-console.log(test)
-
+  const { date, time } = buildDate;
+  const isDevelopmentMode = process.env.NODE_ENV === 'development';
   const notifications = sortBy(
     filter(data.allNotifications, 'isVisible'),
     'order'
   );
-
   return (
     <Box className={classes.content}>
-      {'test'}
-      <p>
-        Build date : {preval`module.exports = new Date().toLocaleString();`}
-      </p>
+      {isDevelopmentMode && (
+        <ClosableRow key={'development build date'}>
+          <p>{`Development build at ${time} on ${date}`}</p>
+        </ClosableRow>
+      )}
       {notifications.map((notification) => (
         <ClosableRow key={JSON.stringify(notification)}>
           <DocumentRenderer document={notification.content.document} />
