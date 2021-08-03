@@ -1,10 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Link from 'components/link';
+import { Link } from 'components';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import { getNodes, getPath } from 'utils/directory-tree';
-import useStyles from './styles';
-import { useMedia } from 'utils/media';
+import { getNodes, getPath, useMedia } from 'utils';
+import { useStyles } from './styles';
 import { useTheme } from '@material-ui/core/styles';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 
@@ -64,4 +63,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export { Header };

@@ -78,4 +78,4 @@ const useStyles = (classes) =>
     };
   });
 
-export default useStyles;
+export { useStyles };

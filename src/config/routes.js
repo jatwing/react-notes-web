@@ -1,4 +1,4 @@
-const pageRoutes = [
+const routes = [
   '01-tic-tac-toe-game',
   '02-main-concepts/01-hello-world',
   '02-main-concepts/02-introducing-jsx',
@@ -19,4 +19,4 @@ const pageRoutes = [
   '05-hooks/05-rules-of-hooks',
 ];
 
-export default pageRoutes;
+export { routes };

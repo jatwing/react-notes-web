@@ -1,18 +1,16 @@
 import React, { useEffect } from 'react';
 import { ImageList, ImageListItem, Box } from '@material-ui/core';
-import { useMedia } from 'utils/media';
-import { getSubsubtrees } from 'utils/directory-tree';
-import useStyles from './styles';
+import { useMedia, getSubsubtrees  } from 'utils';
+import { useStyles } from './styles';
 import { useTheme } from '@material-ui/core/styles';
-import MultirowTextCard from 'components/multirow-text-card';
-import project from 'config/project';
+import { MultirowTextCard } from 'components';
 import clsx from 'clsx';
 
 const ParentNodePage = (props) => {
   const { subtree, subtrees, title } = props;
 
   useEffect(() => {
-    document.title = !!title && title !== '/' ? title : project.name;
+    document.title = (!!title && title !== '/') ? title : 'React Notes';
   }, [title]);
 
   const nonLeaves = subtrees.filter((tree) => tree.children.length > 0);
@@ -61,4 +59,5 @@ const ParentNodePage = (props) => {
   );
 };
 
-export default ParentNodePage;
+export { ParentNodePage }
+

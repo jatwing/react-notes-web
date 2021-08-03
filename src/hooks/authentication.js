@@ -1,5 +1,5 @@
 import { gql, useQuery, useMutation } from '@apollo/client';
-import { client } from 'utils/client';
+import { client } from 'utils';
 
 const useCreatingAuthentication = (email, password) => {
   const CREATE_AUTHENTICATION = gql`

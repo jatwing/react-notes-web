@@ -2,9 +2,9 @@ import {
   useCreatingAuthentication,
   useReadingAuthentication
 } from './authentication';
-import { useReadingAuthor } from './authors';
-import { useReadingNotifications } from './notifications';
-import { useReadingProject } from './projects';
+import { useReadingAuthor } from './author';
+import { useReadingNotifications } from './notification';
+import { useReadingProject } from './project';
 
 export {
   useCreatingAuthentication,

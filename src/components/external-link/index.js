@@ -15,4 +15,4 @@ const ExternalLink = (props) => {
   );
 };
 
-export default ExternalLink;
+export { ExternalLink };

@@ -19,4 +19,4 @@ const useDialogStyles = makeStyles((theme) => {
   };
 });
 
-export default useDialogStyles;
+export { useDialogStyles };

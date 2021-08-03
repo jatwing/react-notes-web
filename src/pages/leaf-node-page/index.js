@@ -1,14 +1,15 @@
 import { createElement, useEffect } from 'react';
-import project from 'config/project';
 
-const LeafPage = (props) => {
+const LeafNodePage = (props) => {
   const { component, title, ...otherProps } = props;
 
   useEffect(() => {
-    document.title = !!title && title !== '/' ? title : project.name;
+    document.title = !!title && title !== '/' ? title : 'React Notes';
   }, [title]);
 
   return createElement(component, otherProps, null);
 };
 
-export default LeafPage;
+export { LeafNodePage }
+
+

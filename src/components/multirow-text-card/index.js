@@ -1,7 +1,7 @@
 import React from 'react';
-import Link from 'components/link';
+import { Link }  from 'components';
 import { Card, List, ListItem, Divider, Typography } from '@material-ui/core';
-import useStyles from './styles';
+import { useStyles} from './styles';
 import clsx from 'clsx';
 
 const MultirowTextCard = (props) => {
@@ -42,4 +42,4 @@ const MultirowTextCard = (props) => {
   );
 };
 
-export default MultirowTextCard;
+export { MultirowTextCard }; 

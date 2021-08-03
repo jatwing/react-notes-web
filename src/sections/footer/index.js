@@ -1,12 +1,11 @@
 import { createContext, useContext } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core';
-import ExternalLink from 'components/external-link';
-import useStyles from './styles';
-import useDialogStyles from './dialogStyles';
-import ClickableElementPopupDialog from 'components/clickable-element-popup-dialog';
+import { ExternalLink, ClickableElementPopupDialog } from 'components';
+import { useStyles } from './styles';
+import { useDialogStyles } from './dialogStyles';
 import { useReadingAuthor, useReadingProject } from 'hooks';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
-import { getAssetUrl } from 'utils/client';
+import { getAssetUrl } from 'utils';
 
 const Context = createContext({});
 
@@ -132,4 +131,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export { Footer };

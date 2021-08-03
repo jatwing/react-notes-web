@@ -1,7 +1,5 @@
-import { StyledEngineProvider } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/core/styles';
-import 'config/styles.css';
-import { lightTheme } from 'config/theme';
+import { StyledEngineProvider, ThemeProvider } from '@material-ui/core/styles';
+import { lightTheme } from 'config';
 
 const Theme = ({ children }) => {
   return (
@@ -11,4 +9,4 @@ const Theme = ({ children }) => {
   );
 };
 
-export default Theme;
+export { Theme };

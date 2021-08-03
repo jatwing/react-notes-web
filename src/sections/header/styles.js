@@ -57,4 +57,4 @@ const useStyles = makeStyles((theme) => ({
   container: {},
 }));
 
-export default useStyles;
+export { useStyles };

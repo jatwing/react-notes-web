@@ -5,14 +5,13 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import Layout from './layout';
-import { getSubtrees, getNodes } from 'utils/directory-tree';
-import pageRoutes from 'config/routes';
-import ParentNodePage from 'pages/parent-node-page';
-import LeafNodePage from 'pages/leaf-page';
-import Theme from './theme';
+import { Layout } from './layout';
+import { getSubtrees, getNodes } from 'utils';
+import { routes } from 'config';
+import { ParentNodePage, LeafNodePage } from 'pages';
+import { Theme } from './theme';
 
-const subtrees = getSubtrees(pageRoutes.map((route) => '/' + route));
+const subtrees = getSubtrees(routes.map((route) => '/' + route));
 
 const parentRoutes = subtrees
   .filter((subtree) => subtree.children.length > 0)
@@ -31,7 +30,7 @@ const parentRoutes = subtrees
     };
   });
 
-const leafRoutes = pageRoutes.map((pageRoute) => {
+const leafRoutes = routes.map((pageRoute) => {
   /**
    * [Module methods](https://webpack.js.org/api/module-methods/)
    * the import() must contain at least some information about where the module
@@ -57,9 +56,11 @@ const App = () => {
         <Layout>
           <Suspense fallback={<>Loading...</>}>
             <Switch>
-              {parentRoutes.concat(leafRoutes).map((route) => (
-                <Route {...route} />
-              ))}
+              {[...parentRoutes, ...leafRoutes]
+                .concat(leafRoutes)
+                .map((route) => (
+                  <Route {...route} />
+                ))}
               <Redirect to="/" />
             </Switch>
           </Suspense>
@@ -69,4 +70,4 @@ const App = () => {
   );
 };
 
-export default App;
+export { App };

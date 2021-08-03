@@ -5,12 +5,15 @@ import {
   Divider,
   DialogActions,
   IconButton,
+  useTheme
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import { useMedia } from 'utils/media';
-import useStyles from './styles';
+
+import CloseIcon from '@material-ui/icons/Close'
+
+// import { CloseIcon } from '@material-ui/icons';
+import { useMedia } from 'utils';
+import { useStyles } from './styles';
 import clsx from 'clsx';
-import { useTheme } from '@material-ui/core';
 
 const PopupDialog = (props) => {
   const {
@@ -81,4 +84,4 @@ const PopupDialog = (props) => {
   );
 };
 
-export default PopupDialog;
+export {  PopupDialog };

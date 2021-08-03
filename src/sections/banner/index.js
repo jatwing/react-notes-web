@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Box } from '@material-ui/core';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
 import clsx from 'clsx';
-import useStyles from './styles';
+import { useStyles } from './styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { filter, sortBy } from 'lodash';
 import { useReadingNotifications } from 'hooks';
-import { buildDate } from 'utils/preval';
+import { buildDate } from 'utils';
 
 const ClosableRow = (props) => {
   const { children } = props;
@@ -50,7 +50,7 @@ const Banner = () => {
     <Box className={classes.content}>
       {isDevelopmentMode && (
         <ClosableRow key={'development build date'}>
-          <p>{`Development build at ${time} on ${date}`}</p>
+          <p>{`Development build at ${time} on ${date}.`}</p>
         </ClosableRow>
       )}
       {notifications.map((notification) => (
@@ -62,4 +62,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export { Banner };

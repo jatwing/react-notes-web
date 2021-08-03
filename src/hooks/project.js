@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { client } from 'utils/client';
+import { client } from 'utils';
 
 const useReadingProject = (name) => {
   const GET_PROJECT = gql`

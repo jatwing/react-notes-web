@@ -14,4 +14,4 @@ const Link = (props) => {
   return <MaterialLink href={href} onClick={handleClick} {...otherProps} />;
 };
 
-export default Link;
+export { Link };
