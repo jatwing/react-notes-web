@@ -6,7 +6,7 @@ import {
   getSubsubtrees,
 } from './directory-tree';
 import { getMediaQueries, useMedia } from './media';
-import { buildDate } from './preval';
+import { buildDate, pageFiles } from './preval';
 
 export {
   client,
@@ -18,4 +18,5 @@ export {
   getMediaQueries,
   useMedia,
   buildDate,
+  pageFiles
 };

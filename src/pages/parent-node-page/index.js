@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ImageList, ImageListItem, Box } from '@material-ui/core';
+import { ImageList, ImageListItem } from '@material-ui/core';
 import { useMedia, getSubsubtrees } from 'utils';
 import { useStyles } from './styles';
 import { useTheme } from '@material-ui/core/styles';

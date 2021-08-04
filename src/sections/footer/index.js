@@ -93,7 +93,7 @@ const Logo = () => {
     return <Typography className={classes.text}>Error!</Typography>;
   }
 
-  const project = readProject.data.Project;
+  const project = data.Project;
   return (
     <>
       <img

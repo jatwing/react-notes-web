@@ -10,6 +10,8 @@ import { getSubtrees, getNodes } from 'utils';
 import { routes } from 'config';
 import { ParentNodePage, LeafNodePage } from 'pages';
 import { Theme } from './theme';
+import { pageFiles } from 'utils'
+
 
 const subtrees = getSubtrees(routes.map((route) => '/' + route));
 
@@ -29,6 +31,25 @@ const parentRoutes = subtrees
       key: subtree.path,
     };
   });
+
+
+console.log(pageFiles)
+
+const test = pageFiles.map(
+  file => {
+    const result =  file.match(/^(src\/pages\/)((?!(leaf-node-page|parent-node-page)).)+(\/index.js)$/)
+    if (result) {
+      return result
+    }
+    return result
+  }
+)
+
+console.log(test)
+
+
+
+
 
 const leafRoutes = routes.map((pageRoute) => {
   /**
