@@ -1,4 +1,21 @@
 /**
+ * @param {Array<string>} files
+ * @return {!Array<string>}
+ */
+const getRoutes = (files) => {
+  const reducer = (routes, file) => {
+    const matched = file.match(
+      /^src\/pages\/((?!(leaf-node-page|parent-node-page)).*)\/index.js$/
+    );
+    if (matched) {
+      routes.push(matched[1]);
+    }
+    return routes;
+  };
+  return files.reduce(reducer, []);
+};
+
+/**
  * @param {string} fullPath
  * @return {!Array<string>}
  */
@@ -73,4 +90,4 @@ const getSubsubtrees = (subtree, subtrees) => {
   return subsubtrees;
 };
 
-export { getNodes, getPath, getSubtrees, getSubsubtrees };
+export { getRoutes, getNodes, getPath, getSubtrees, getSubsubtrees };

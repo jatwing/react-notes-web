@@ -15,7 +15,7 @@ const ClosableRow = (props) => {
   const handleClick = () => {
     setIsOpen(false);
   };
-  
+
   const classes = useStyles();
   return (
     <Box className={clsx(classes.row, !isOpen && classes.hidden)}>

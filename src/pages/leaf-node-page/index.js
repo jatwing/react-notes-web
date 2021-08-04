@@ -8,14 +8,14 @@ const LeafNodePage = (props) => {
   useEffect(() => {
     if (title && title !== '/') {
       document.title = title;
-      return
+      return;
     }
     if (loading || error) {
-      return
+      return;
     }
-    document.title = data.Project.title
+    document.title = data.Project.title;
   }, [title, loading, error, data]);
-  
+
   return createElement(component, otherProps, null);
 };
 

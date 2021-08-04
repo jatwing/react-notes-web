@@ -1,5 +1,6 @@
 import { client, getAssetUrl } from './cms';
 import {
+  getRoutes,
   getNodes,
   getPath,
   getSubtrees,
@@ -11,6 +12,7 @@ import { buildDate, pageFiles } from './preval';
 export {
   client,
   getAssetUrl,
+  getRoutes,
   getNodes,
   getPath,
   getSubtrees,
@@ -18,5 +20,5 @@ export {
   getMediaQueries,
   useMedia,
   buildDate,
-  pageFiles
+  pageFiles,
 };

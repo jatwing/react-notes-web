@@ -9,7 +9,7 @@ const buildDate = preval`
 `;
 
 const pageFiles = preval`
-  const { statSync, readdirSync } = require("fs");
+  const { statSync, readdirSync } = require('fs');
   const { join } = require("path");
 
   const getDirectories = (path) => {

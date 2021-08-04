@@ -75,7 +75,7 @@ const useStyles = (classes) =>
         },
       },
       /** container */
-      container: {}
+      container: {},
     };
   });
 

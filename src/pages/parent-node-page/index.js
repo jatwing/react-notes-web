@@ -14,12 +14,12 @@ const ParentNodePage = (props) => {
   useEffect(() => {
     if (title && title !== '/') {
       document.title = title;
-      return
+      return;
     }
     if (loading || error) {
-      return
+      return;
     }
-    document.title = data.Project.title
+    document.title = data.Project.title;
   }, [title, loading, error, data]);
 
   const nonLeaves = subtrees.filter((tree) => tree.children.length > 0);
@@ -45,24 +45,24 @@ const ParentNodePage = (props) => {
     cols = 3;
   }
   return (
-      <ImageList
-        variant="masonry"
-        cols={cols}
-        gap={parseFloat(theme.spacing(2))}
-        className={classes.list}
+    <ImageList
+      variant="masonry"
+      cols={cols}
+      gap={parseFloat(theme.spacing(2))}
+      className={classes.list}
+    >
+      <ImageListItem
+        key={subtree.path}
+        className={clsx(classes.card, classes.major)}
       >
-        <ImageListItem
-          key={subtree.path}
-          className={clsx(classes.card, classes.major)}
-        >
-          <MultirowTextCard data={getData(subtree)} modifier="gradient" />
+        <MultirowTextCard data={getData(subtree)} modifier="gradient" />
+      </ImageListItem>
+      {subsubtrees.map((subsubtree) => (
+        <ImageListItem key={subsubtree.path} className={classes.card}>
+          <MultirowTextCard data={getData(subsubtree)} modifier="default" />
         </ImageListItem>
-        {subsubtrees.map((subsubtree) => (
-          <ImageListItem key={subsubtree.path} className={classes.card}>
-            <MultirowTextCard data={getData(subsubtree)} modifier="default" />
-          </ImageListItem>
-        ))}
-      </ImageList>
+      ))}
+    </ImageList>
   );
 };
 
