@@ -6,12 +6,11 @@ const useDialogStyles = makeStyles((theme) => {
 
     /** element */
     text: {},
-
     link: {},
     button: {},
+
     /** block */
     title: {},
-
     content: {},
 
     /** container */

@@ -9,9 +9,13 @@ const useReadingProject = (name) => {
         attribution {
           document
         }
+        avatar {
+          src
+        }
         copyright
         github
         license
+        title
       }
     }
   `;

@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => {
         clipPath: 'circle(50%)',
         backgroundColor: theme.palette.primary.contrastText,
         transition: theme.transitions.create('background-color'),
-        marginBottom: '8px',
+        marginBottom: '16px',
         '&:hover, &:focus': {
           backgroundColor: theme.palette.contrast.text.secondary,
         },

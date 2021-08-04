@@ -11,9 +11,7 @@ const useStyles = makeStyles((theme) => {
       margin: '0 0 -16px  0',
       overflow: 'visible',
     },
-    /** container */
-    container: {},
   };
 });
 
-export {useStyles };
+export { useStyles };

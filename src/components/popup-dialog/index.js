@@ -5,12 +5,9 @@ import {
   Divider,
   DialogActions,
   IconButton,
-  useTheme
+  useTheme,
 } from '@material-ui/core';
-
-import CloseIcon from '@material-ui/icons/Close'
-
-// import { CloseIcon } from '@material-ui/icons';
+import CloseIcon from '@material-ui/icons/Close';
 import { useMedia } from 'utils';
 import { useStyles } from './styles';
 import clsx from 'clsx';
@@ -27,7 +24,6 @@ const PopupDialog = (props) => {
     classes = {},
   } = props;
   let { maxWidth } = props;
-
   const theme = useTheme();
   const { isMedium, isLarge } = useMedia(theme);
   if (!maxWidth) {
@@ -84,4 +80,4 @@ const PopupDialog = (props) => {
   );
 };
 
-export {  PopupDialog };
+export { PopupDialog };

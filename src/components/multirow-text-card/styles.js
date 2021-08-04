@@ -1,20 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
 
-/**
- * at this moment, my best practice is,
- *
- * under the 'block', listing all the 'element' defined in the index.js
- * everything ends up an 'element'
- *
- * all the pseudo-class, pseduo-element, or customized 'modifier'
- * location inside the 'element' curlybracket.
- * they will not generate more curlybrackets to prevent breacket-hell.
- *
- * so a string key would be
- * '&(block) ----- element',
- * '&(element) ----- pseduo / modifierd'
- */
-
 const useStyles = makeStyles((theme) => {
   return {
     /** modifier */
@@ -117,8 +102,6 @@ const useStyles = makeStyles((theme) => {
         },
       },
     },
-    /** container */
-    container: {},
   };
 });
 

@@ -24,6 +24,7 @@ const useStyles = (classes) =>
           width: 'fit-content',
           ...theme.typography.h6,
           fontFamily: theme.typography.fontStacks.sansSerif,
+          margin: '0',
         },
       },
       content: {
@@ -31,11 +32,11 @@ const useStyles = (classes) =>
           ...theme.typography.body1,
           fontFamily: theme.typography.fontStacks.serif,
           color: theme.palette.text.primary,
+          margin: '0',
         },
         ['& a' + (classes.link ? `, & .${classes.link}` : '')]: {
           textDecoration: 'none',
           color: theme.palette.secondary.main,
-
           '&:hover, &:focus': {
             textDecoration: 'underline',
             color: theme.palette.secondary.dark,
@@ -74,7 +75,7 @@ const useStyles = (classes) =>
         },
       },
       /** container */
-      container: {},
+      container: {}
     };
   });
 

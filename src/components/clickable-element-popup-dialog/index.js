@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 import { Box } from '@material-ui/core';
 import { PopupDialog } from 'components';
 
@@ -15,13 +15,14 @@ const ClickableElementPopupDialog = (props) => {
   const handleClickElement = () => {
     setIsOpen(true);
   };
+
   return (
-    <Fragment>
+    <>
       <Box onClick={handleClickElement}>{element}</Box>
       <PopupDialog isOpen={isOpen} setIsOpen={setIsOpen} {...otherProps}>
         {content}
       </PopupDialog>
-    </Fragment>
+    </>
   );
 };
 

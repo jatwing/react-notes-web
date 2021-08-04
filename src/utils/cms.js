@@ -7,6 +7,6 @@ const client = new ApolloClient({
 
 const getAssetUrl = (src) => {
   return process.env.REACT_APP_CMS_URL + src;
-}
+};
 
 export { client, getAssetUrl };

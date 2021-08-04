@@ -11,9 +11,11 @@ import { buildDate } from 'utils';
 const ClosableRow = (props) => {
   const { children } = props;
   const [isOpen, setIsOpen] = useState(true);
+
   const handleClick = () => {
     setIsOpen(false);
   };
+  
   const classes = useStyles();
   return (
     <Box className={clsx(classes.row, !isOpen && classes.hidden)}>
@@ -25,6 +27,7 @@ const ClosableRow = (props) => {
 
 const Banner = () => {
   const { loading, error, data } = useReadingNotifications();
+
   const classes = useStyles();
   if (loading) {
     return (
@@ -40,12 +43,14 @@ const Banner = () => {
       </Box>
     );
   }
+
   const { date, time } = buildDate;
   const isDevelopmentMode = process.env.NODE_ENV === 'development';
   const notifications = sortBy(
     filter(data.allNotifications, 'isVisible'),
     'order'
   );
+
   return (
     <Box className={classes.content}>
       {isDevelopmentMode && (

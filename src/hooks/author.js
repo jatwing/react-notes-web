@@ -14,7 +14,6 @@ const useReadingAuthor = (name) => {
       }
     }
   `;
-
   return useQuery(GET_AUTHOR, {
     client: client,
     context: {

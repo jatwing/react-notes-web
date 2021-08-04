@@ -1,6 +1,6 @@
 import {
   useCreatingAuthentication,
-  useReadingAuthentication
+  useReadingAuthentication,
 } from './authentication';
 import { useReadingAuthor } from './author';
 import { useReadingNotifications } from './notification';

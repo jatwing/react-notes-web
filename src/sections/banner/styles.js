@@ -47,8 +47,6 @@ const useStyles = makeStyles((theme) => {
         backgroundColor: theme.palette.info.main,
       },
     },
-    /** container */
-    container: {},
   };
 });
 

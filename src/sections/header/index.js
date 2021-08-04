@@ -31,8 +31,7 @@ const Header = () => {
     nodes.length - 1 - maximum >= 0 ? nodes[nodes.length - 1 - maximum] : '/';
 
   const classes = useStyles();
-
-  const backIcon = (
+  const arrowBackIcon = (
     <Link
       href={getPath(pathname, backNode)}
       key={backNode}
@@ -53,9 +52,9 @@ const Header = () => {
   );
 
   return (
-    <AppBar position="sticky" className={classes.container}>
+    <AppBar position="sticky">
       <Toolbar className={classes.toolbar}>
-        {isVisible && backIcon}
+        {isVisible && arrowBackIcon}
         {startIndex < 0 && parentElements.slice(startIndex)}
         {leafElement}
       </Toolbar>

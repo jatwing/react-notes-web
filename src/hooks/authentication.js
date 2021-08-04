@@ -47,4 +47,4 @@ const useReadingAuthentication = () => {
   return useQuery(READ_AUTHENTICATION, { client: client });
 };
 
-export { useCreatingAuthentication, useReadingAuthentication   };
+export { useCreatingAuthentication, useReadingAuthentication };

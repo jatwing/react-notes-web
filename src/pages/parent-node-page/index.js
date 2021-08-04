@@ -1,17 +1,26 @@
 import React, { useEffect } from 'react';
 import { ImageList, ImageListItem, Box } from '@material-ui/core';
-import { useMedia, getSubsubtrees  } from 'utils';
+import { useMedia, getSubsubtrees } from 'utils';
 import { useStyles } from './styles';
 import { useTheme } from '@material-ui/core/styles';
 import { MultirowTextCard } from 'components';
 import clsx from 'clsx';
+import { useReadingProject } from 'hooks';
 
 const ParentNodePage = (props) => {
   const { subtree, subtrees, title } = props;
+  const { loading, error, data } = useReadingProject('react-notes');
 
   useEffect(() => {
-    document.title = (!!title && title !== '/') ? title : 'React Notes';
-  }, [title]);
+    if (title && title !== '/') {
+      document.title = title;
+      return
+    }
+    if (loading || error) {
+      return
+    }
+    document.title = data.Project.title
+  }, [title, loading, error, data]);
 
   const nonLeaves = subtrees.filter((tree) => tree.children.length > 0);
   const subsubtrees = getSubsubtrees(subtree, nonLeaves);
@@ -36,7 +45,6 @@ const ParentNodePage = (props) => {
     cols = 3;
   }
   return (
-    <Box className={classes.container}>
       <ImageList
         variant="masonry"
         cols={cols}
@@ -55,9 +63,7 @@ const ParentNodePage = (props) => {
           </ImageListItem>
         ))}
       </ImageList>
-    </Box>
   );
 };
 
-export { ParentNodePage }
-
+export { ParentNodePage };
