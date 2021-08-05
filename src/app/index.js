@@ -9,6 +9,7 @@ import { Layout } from './layout';
 import { getRoutes, getSubtrees, getNodes, pageFiles } from 'utils';
 import { ParentNodePage, LeafNodePage } from 'pages';
 import { Theme } from './theme';
+import 'utils/i18n.js';
 
 const routes = getRoutes(pageFiles);
 const subtrees = getSubtrees(routes.map((route) => '/' + route));
@@ -54,16 +55,16 @@ const App = () => {
     <Theme>
       <Router>
         <Layout>
-          <Suspense fallback={<>Loading...</>}>
-            <Switch>
+          <Switch>
+            <Suspense fallback="">
               {[...parentRoutes, ...leafRoutes]
                 .concat(leafRoutes)
                 .map((route) => (
                   <Route {...route} />
                 ))}
-              <Redirect to="/" />
-            </Switch>
-          </Suspense>
+            </Suspense>
+            <Redirect to="/" />
+          </Switch>
         </Layout>
       </Router>
     </Theme>

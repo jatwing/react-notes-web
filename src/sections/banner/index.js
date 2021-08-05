@@ -7,6 +7,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { filter, sortBy } from 'lodash';
 import { useReadingNotifications } from 'hooks';
 import { buildDate } from 'utils';
+import { useTranslation } from 'react-i18next';
 
 const ClosableRow = (props) => {
   const { children } = props;
@@ -28,18 +29,19 @@ const ClosableRow = (props) => {
 const Banner = () => {
   const { loading, error, data } = useReadingNotifications();
 
+  const { t } = useTranslation();
   const classes = useStyles();
   if (loading) {
     return (
       <Box className={classes.content}>
-        <Box className={classes.row}>{'Loading...'}</Box>
+        <Box className={classes.row}>{t('loading')}</Box>
       </Box>
     );
   }
   if (error) {
     return (
       <Box className={classes.content}>
-        <ClosableRow>{`Error! ${error.message}`}</ClosableRow>
+        <ClosableRow>{`${t('error')} ${error.message}`}</ClosableRow>
       </Box>
     );
   }
@@ -55,7 +57,7 @@ const Banner = () => {
     <Box className={classes.content}>
       {isDevelopmentMode && (
         <ClosableRow key={'development build date'}>
-          <p>{`Development build at ${time} on ${date}.`}</p>
+          <p>{t('developmentBuildAtTimeOnDate', { time, date })}</p>
         </ClosableRow>
       )}
       {notifications.map((notification) => (

@@ -6,6 +6,7 @@ import { getNodes, getPath, useMedia } from 'utils';
 import { useStyles } from './styles';
 import { useTheme } from '@material-ui/core/styles';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -30,6 +31,7 @@ const Header = () => {
   const backNode =
     nodes.length - 1 - maximum >= 0 ? nodes[nodes.length - 1 - maximum] : '/';
 
+  const { t } = useTranslation();
   const classes = useStyles();
   const arrowBackIcon = (
     <Link
@@ -42,12 +44,12 @@ const Header = () => {
   );
   const parentElements = parentNodes.map((node) => (
     <Link href={getPath(pathname, node)} key={node} className={classes.link}>
-      {node === '/' ? 'home' : node}
+      {node === '/' ? t('home') : node}
     </Link>
   ));
   const leafElement = leafNode && (
     <Typography className={classes.title}>
-      {leafNode === '/' ? 'home' : leafNode}
+      {leafNode === '/' ? t('home') : leafNode}
     </Typography>
   );
 

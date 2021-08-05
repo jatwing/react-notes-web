@@ -6,6 +6,7 @@ import { useDialogStyles } from './dialogStyles';
 import { useReadingAuthor, useReadingProject } from 'hooks';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
 import { getAssetUrl } from 'utils';
+import { useTranslation } from 'react-i18next';
 
 const Context = createContext({});
 
@@ -13,6 +14,7 @@ const ProjectColumn = () => {
   const { readProject } = useContext(Context);
   const { loading, error, data } = readProject;
 
+  const { t } = useTranslation();
   const classes = useStyles();
   const dialogClasses = useDialogStyles();
   if (loading) {
@@ -32,7 +34,7 @@ const ProjectColumn = () => {
     <>
       <Typography className={classes.text}>Project</Typography>
       <ExternalLink
-        text={'Github'}
+        text={t('github')}
         href={project.github}
         className={classes.link}
       />
@@ -43,7 +45,7 @@ const ProjectColumn = () => {
         classes={dialogClasses}
       />
       <ExternalLink
-        text={'License'}
+        text={t('license')}
         href={project.license}
         className={classes.link}
       />
@@ -55,6 +57,7 @@ const AuthorColumn = () => {
   const { readAuthor } = useContext(Context);
   const { loading, error, data } = readAuthor;
 
+  const { t } = useTranslation();
   const classes = useStyles();
   if (loading) {
     return <Typography className={classes.text}>Loading...</Typography>;
@@ -68,12 +71,12 @@ const AuthorColumn = () => {
     <>
       <Typography className={classes.text}>Author</Typography>
       <ExternalLink
-        text={'Email'}
+        text={t('email')}
         href={author.email}
         className={classes.link}
       />
       <ExternalLink
-        text={'Stack Overflow'}
+        text={t('stackOverflow')}
         href={author.stackOverflow}
         className={classes.link}
       />
@@ -85,6 +88,7 @@ const Logo = () => {
   const { readProject } = useContext(Context);
   const { loading, error, data } = readProject;
 
+  const { t } = useTranslation();
   const classes = useStyles();
   if (loading) {
     return <Typography className={classes.text}>Loading...</Typography>;
@@ -98,7 +102,7 @@ const Logo = () => {
     <>
       <img
         src={getAssetUrl(project.avatar.src)}
-        alt="jatwing"
+        alt={t('jatwing')}
         className={classes.image}
       />
       <Typography className={classes.text}>{project.copyright}</Typography>
