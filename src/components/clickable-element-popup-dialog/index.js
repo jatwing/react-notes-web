@@ -1,6 +1,6 @@
 import { Box } from '@material-ui/core';
-import { PopupDialog } from 'src/components';
 import { useState } from 'react';
+import { PopupDialog } from 'src/components';
 
 const ClickableElementPopupDialog = (props) => {
   const [internalIsOpen, internalSetIsOpen] = useState(false);

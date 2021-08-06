@@ -1,10 +1,9 @@
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
-import { Link } from 'src/components';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
+import { Link } from 'src/components';
 import { getNodes, getPath, useMedia } from 'src/utils';
 
 import { useStyles } from './styles';

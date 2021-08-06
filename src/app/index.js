@@ -1,6 +1,5 @@
 import 'src/utils/i18n.js';
 
-import { LeafNodePage, ParentNodePage } from 'src/pages';
 import { lazy, Suspense } from 'react';
 import {
   BrowserRouter as Router,
@@ -8,6 +7,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import { LeafNodePage, ParentNodePage } from 'src/pages';
 import { getNodes, getRoutes, getSubtrees, pageFiles } from 'src/utils';
 
 import { Layout } from './layout';
@@ -59,10 +59,9 @@ const App = () => {
         <Layout>
           <Switch>
             <Suspense fallback="">
-              {[...parentRoutes, ...leafRoutes]
-                .map((route) => (
-                  <Route {...route} />
-                ))}
+              {[...parentRoutes, ...leafRoutes].map((route) => (
+                <Route {...route} key={route} />
+              ))}
             </Suspense>
             <Redirect to="/" />
           </Switch>
