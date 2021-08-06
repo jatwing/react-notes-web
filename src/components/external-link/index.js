@@ -10,7 +10,7 @@ const ExternalLink = (props) => {
 
   return (
     <a href={href} target={target} rel={rel} {...otherProps}>
-      {!!text ? text : children}
+      {text ? text : children}
     </a>
   );
 };

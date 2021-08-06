@@ -19,6 +19,7 @@
 **`.env`**
 
 ```
+DISABLE_ESLINT_PLUGIN=true
 REACT_APP_CMS_URL=https://example.com
 REACT_APP_CMS_GRAPHQL_URI=https://example.com/api/graphql
 ```

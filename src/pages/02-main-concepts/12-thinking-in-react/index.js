@@ -1,6 +1,7 @@
-import { useState, Fragment } from 'react';
-import styles from './styles.module.css';
 import clsx from 'clsx';
+import { Fragment, useState } from 'react';
+
+import styles from './styles.module.css';
 
 const ProductCategoryRow = (props) => {
   const { category } = props;

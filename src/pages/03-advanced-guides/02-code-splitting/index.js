@@ -1,7 +1,9 @@
 /** bundling */
-import { add } from './math';
 import { lazy, Suspense } from 'react';
+
 import ErrorBoundary from './error-boundary';
+import { add } from './math';
+
 const bundling = () => {
   console.log(add(16, 26));
 };

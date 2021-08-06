@@ -1,7 +1,9 @@
-import { Box } from '@material-ui/core';
-import { useStyles } from './styles';
-import { Banner, Header, Footer } from 'sections';
 import 'config/styles.css';
+
+import { Box } from '@material-ui/core';
+import { Banner, Footer, Header } from 'sections';
+
+import { useStyles } from './styles';
 
 const Layout = ({ children }) => {
   const classes = useStyles();

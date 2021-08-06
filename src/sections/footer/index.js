@@ -1,12 +1,13 @@
-import { createContext, useContext } from 'react';
-import { Box, Grid, Typography } from '@material-ui/core';
-import { ExternalLink, ClickableElementPopupDialog } from 'components';
-import { useStyles } from './styles';
-import { useDialogStyles } from './dialogStyles';
-import { useReadingAuthor, useReadingProject } from 'hooks';
 import { DocumentRenderer } from '@keystone-next/document-renderer';
-import { getAssetUrl } from 'utils';
+import { Box, Grid, Typography } from '@material-ui/core';
+import { ClickableElementPopupDialog, ExternalLink } from 'components';
+import { useReadingAuthor, useReadingProject } from 'hooks';
+import { createContext, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getAssetUrl } from 'utils';
+
+import { useDialogStyles } from './dialogStyles';
+import { useStyles } from './styles';
 
 const Context = createContext({});
 

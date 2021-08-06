@@ -1,12 +1,13 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'components';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import { getNodes, getPath, useMedia } from 'utils';
-import { useStyles } from './styles';
 import { useTheme } from '@material-ui/core/styles';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
+import { Link } from 'components';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
+import { getNodes, getPath, useMedia } from 'utils';
+
+import { useStyles } from './styles';
 
 const Header = () => {
   const { pathname } = useLocation();

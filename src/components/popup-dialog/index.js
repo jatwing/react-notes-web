@@ -1,16 +1,17 @@
 import {
   Dialog,
-  DialogTitle,
-  DialogContent,
-  Divider,
   DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
   IconButton,
   useTheme,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useMedia } from 'utils';
-import { useStyles } from './styles';
 import clsx from 'clsx';
+import { useMedia } from 'utils';
+
+import { useStyles } from './styles';
 
 const PopupDialog = (props) => {
   const {

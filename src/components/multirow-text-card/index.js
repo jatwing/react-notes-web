@@ -1,8 +1,9 @@
-import React from 'react';
-import { Link } from 'components';
-import { Card, List, ListItem, Divider, Typography } from '@material-ui/core';
-import { useStyles } from './styles';
+import { Card, Divider, List, ListItem, Typography } from '@material-ui/core';
 import clsx from 'clsx';
+import { Link } from 'components';
+import React from 'react';
+
+import { useStyles } from './styles';
 
 const MultirowTextCard = (props) => {
   const { data, modifier } = props;

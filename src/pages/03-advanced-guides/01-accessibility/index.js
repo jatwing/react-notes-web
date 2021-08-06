@@ -5,7 +5,7 @@
  * see pointer
  */
 
-import { useState, Fragment, useRef } from 'react';
+import { Fragment, useRef, useState } from 'react';
 
 /** web accessibility initiative - accessible rich internet applications */
 const AccessibleRichInternetApplications = () => {

@@ -90,4 +90,4 @@ const getSubsubtrees = (subtree, subtrees) => {
   return subsubtrees;
 };
 
-export { getRoutes, getNodes, getPath, getSubtrees, getSubsubtrees };
+export { getNodes, getPath, getRoutes, getSubsubtrees, getSubtrees };

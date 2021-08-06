@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
 import { ImageList, ImageListItem } from '@material-ui/core';
-import { useMedia, getSubsubtrees } from 'utils';
-import { useStyles } from './styles';
 import { useTheme } from '@material-ui/core/styles';
-import { MultirowTextCard } from 'components';
 import clsx from 'clsx';
+import { MultirowTextCard } from 'components';
 import { useReadingProject } from 'hooks';
+import React, { useEffect } from 'react';
+import { getSubsubtrees, useMedia } from 'utils';
+
+import { useStyles } from './styles';
 
 const ParentNodePage = (props) => {
   const { subtree, subtrees, title } = props;

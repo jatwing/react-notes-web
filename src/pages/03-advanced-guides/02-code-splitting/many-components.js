@@ -6,4 +6,4 @@ const UnusedComponent = () => {
   return <div>Unused Component</div>;
 };
 
-export { UsedComponent, UnusedComponent };
+export { UnusedComponent, UsedComponent };

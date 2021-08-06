@@ -1,15 +1,17 @@
+import 'utils/i18n.js';
+
+import { LeafNodePage, ParentNodePage } from 'pages';
 import { lazy, Suspense } from 'react';
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom';
+import { getNodes, getRoutes, getSubtrees, pageFiles } from 'utils';
+
 import { Layout } from './layout';
-import { getRoutes, getSubtrees, getNodes, pageFiles } from 'utils';
-import { ParentNodePage, LeafNodePage } from 'pages';
 import { Theme } from './theme';
-import 'utils/i18n.js';
 
 const routes = getRoutes(pageFiles);
 const subtrees = getSubtrees(routes.map((route) => '/' + route));
