@@ -31,7 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "serve": "serve -s build"
+    "serve": "serve -s build",
+    "format": "yarn prettier --write .",
+    "lint": "yarn eslint . --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +54,10 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "2.3.2"
   }
 }
