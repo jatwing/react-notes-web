@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { client } from 'utils';
+import { client } from 'src/utils';
 
 const useReadingNotifications = () => {
   const GET_NOTIFICATIONS = gql`

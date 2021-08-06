@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import clsx from 'clsx';
-import { useMedia } from 'utils';
+import { useMedia } from 'src/utils';
 
 import { useStyles } from './styles';
 

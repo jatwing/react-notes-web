@@ -1,5 +1,5 @@
 import { Box } from '@material-ui/core';
-import { PopupDialog } from 'components';
+import { PopupDialog } from 'src/components';
 import { useState } from 'react';
 
 const ClickableElementPopupDialog = (props) => {

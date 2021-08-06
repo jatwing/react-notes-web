@@ -39,7 +39,7 @@ class Toggle extends Component {
 class LoggingButton extends Component {
   handleClick () {
     console.log('this is:', this);
-  };
+  }
 
   render() {
     return <button onClick={this.handleClick}>Click me</button>;

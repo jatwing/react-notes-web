@@ -2,11 +2,11 @@ import { DocumentRenderer } from '@keystone-next/document-renderer';
 import { Box } from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import clsx from 'clsx';
-import { useReadingNotifications } from 'hooks';
+import { useReadingNotifications } from 'src/hooks';
 import { filter, sortBy } from 'lodash';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { buildDate } from 'utils';
+import { buildDate } from 'src/utils';
 
 import { useStyles } from './styles';
 

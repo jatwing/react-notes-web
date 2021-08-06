@@ -1,6 +1,6 @@
-import 'utils/i18n.js';
+import 'src/utils/i18n.js';
 
-import { LeafNodePage, ParentNodePage } from 'pages';
+import { LeafNodePage, ParentNodePage } from 'src/pages';
 import { lazy, Suspense } from 'react';
 import {
   BrowserRouter as Router,
@@ -8,7 +8,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { getNodes, getRoutes, getSubtrees, pageFiles } from 'utils';
+import { getNodes, getRoutes, getSubtrees, pageFiles } from 'src/utils';
 
 import { Layout } from './layout';
 import { Theme } from './theme';
@@ -39,7 +39,7 @@ const leafRoutes = routes.map((pageRoute) => {
    * the import() must contain at least some information about where the module
    * is located.
    */
-  const component = lazy(() => import(`pages/${pageRoute}/index.js`));
+  const component = lazy(() => import(`src/pages/${pageRoute}/index.js`));
   const path = '/' + pageRoute;
   const nodes = getNodes(path);
   return {
@@ -60,7 +60,6 @@ const App = () => {
           <Switch>
             <Suspense fallback="">
               {[...parentRoutes, ...leafRoutes]
-                .concat(leafRoutes)
                 .map((route) => (
                   <Route {...route} />
                 ))}

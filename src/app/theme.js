@@ -1,5 +1,5 @@
 import { StyledEngineProvider, ThemeProvider } from '@material-ui/core/styles';
-import { lightTheme } from 'config';
+import { lightTheme } from 'src/config';
 
 const Theme = ({ children }) => {
   return (

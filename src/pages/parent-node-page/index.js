@@ -1,10 +1,10 @@
 import { ImageList, ImageListItem } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { MultirowTextCard } from 'components';
-import { useReadingProject } from 'hooks';
+import { MultirowTextCard } from 'src/components';
+import { useReadingProject } from 'src/hooks';
 import React, { useEffect } from 'react';
-import { getSubsubtrees, useMedia } from 'utils';
+import { getSubsubtrees, useMedia } from 'src/utils';
 
 import { useStyles } from './styles';
 

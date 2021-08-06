@@ -1,7 +1,7 @@
-import 'config/styles.css';
+import 'src/config/styles.css';
 
 import { Box } from '@material-ui/core';
-import { Banner, Footer, Header } from 'sections';
+import { Banner, Footer, Header } from 'src/sections';
 
 import { useStyles } from './styles';
 

@@ -1,4 +1,4 @@
-import { useReadingProject } from 'hooks';
+import { useReadingProject } from 'src/hooks';
 import { createElement, useEffect } from 'react';
 
 const LeafNodePage = (props) => {

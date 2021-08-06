@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
-import { getMediaQueries } from 'utils/media';
+import { getMediaQueries } from 'src/utils/media';
 
 const useStyles = makeStyles((theme) => {
   const { largeQuery, mediumLargeQuery } = getMediaQueries(theme);

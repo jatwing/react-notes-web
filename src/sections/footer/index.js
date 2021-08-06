@@ -1,10 +1,10 @@
 import { DocumentRenderer } from '@keystone-next/document-renderer';
 import { Box, Grid, Typography } from '@material-ui/core';
-import { ClickableElementPopupDialog, ExternalLink } from 'components';
-import { useReadingAuthor, useReadingProject } from 'hooks';
+import { ClickableElementPopupDialog, ExternalLink } from 'src/components';
+import { useReadingAuthor, useReadingProject } from 'src/hooks';
 import { createContext, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getAssetUrl } from 'utils';
+import { getAssetUrl } from 'src/utils';
 
 import { useDialogStyles } from './dialogStyles';
 import { useStyles } from './styles';
