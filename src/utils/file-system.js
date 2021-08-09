@@ -13,13 +13,13 @@ const traverse = (node, leafNodeCallback = null, parentNodeCallback = null) => {
   });
 };
 
-const getDirectoryNodes = () => {
+const getSemanticDirectoryNodes = () => {
   const nodes = [];
   const addNode = (node) => {
     nodes.push(node);
   };
   traverse(pageTree, null, addNode);
-  const isDirectory = (node) => {
+  const isSemanticDirectory = (node) => {
     if (node.type !== 'directory' || node.children.length === 0) {
       return false;
     }
@@ -31,24 +31,44 @@ const getDirectoryNodes = () => {
     });
     return hasDirectoryChild;
   };
-  return nodes.filter(isDirectory);
+  return nodes.filter(isSemanticDirectory);
 };
-const directoryNodes = getDirectoryNodes();
+const directoryNodes = getSemanticDirectoryNodes();
 
-const getFileNodes = () => {
+const getSemanticFileNodes = () => {
   const nodes = [];
   const addNode = (node) => {
     nodes.push(node);
   };
-  traverse(pageTree, addNode);
+  traverse(pageTree, null, addNode);
+  const isSemanticFile = (node) => {
+    if (node.type !== 'directory' || node.children.length === 0) {
+      return false;
+    }
+    let hasIndexChild = false;
+    node.children.forEach((child) => {
+      if (child.type === 'directory') {
+        return false
+      }
+      if (child.name === 'index.js') {
+        hasIndexChild = true
+      }
+    })
+    return hasIndexChild;
+  };
+
+
+  /*
   nodes.forEach((node) => {
     const results = node.path.match(/^src\/pages\/(.+)\/index.js$/);
     if (results) {
       node.route = results[1];
     }
   });
-  return nodes;
+  */
+
+  return nodes.filter(isSemanticFile);
 };
-const fileNodes = getFileNodes();
+const fileNodes = getSemanticFileNodes();
 
 export { directoryNodes, fileNodes };

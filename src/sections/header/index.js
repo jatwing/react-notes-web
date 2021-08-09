@@ -43,6 +43,11 @@ const getPath = (fullPath, node) => {
 const Header = () => {
   const { pathname } = useLocation();
   const nodes = getNodes(pathname);
+
+
+  console.log(nodes)
+
+
   const parentNodes = nodes.slice(0, -1);
   const leafNode = nodes[nodes.length - 1];
 

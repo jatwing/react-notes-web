@@ -1,22 +1,19 @@
-import { createElement, useEffect } from 'react';
-import { useReadingProject } from 'src/hooks';
+import { createElement, useEffect, lazy } from 'react';
 
-const LeafNodePage = (props) => {
-  const { component, title, ...otherProps } = props;
-  const { loading, error, data } = useReadingProject('react-notes');
-
+const FileNode = (props) => {
+  const { node } = props;
+  /**
+   * [Module methods](https://webpack.js.org/api/module-methods/)
+   * the import() must contain at least some information about where the module
+   * is located.
+   */
+  const component = lazy(() => import(`src/pages${node.url}/index.js`));
   useEffect(() => {
-    if (title && title !== '/') {
-      document.title = title;
-      return;
+    if (node.title) {
+      document.title = node.title;
     }
-    if (loading || error) {
-      return;
-    }
-    document.title = data.Project.title;
-  }, [title, loading, error, data]);
-
-  return createElement(component, otherProps, null);
+  }, [node]);
+  return createElement(component, null, null);
 };
 
-export { LeafNodePage };
+export { FileNode };

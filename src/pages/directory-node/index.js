@@ -4,21 +4,14 @@ import clsx from 'clsx';
 import { useEffect } from 'react';
 import { MultirowTextCard } from 'src/components';
 import { useReadingProject } from 'src/hooks';
-import { getSubsubtrees, useMedia } from 'src/utils';
-
+import { directoryNodes,  getSubsubtrees, useMedia } from 'src/utils';
 import { useStyles } from './styles';
-
-import { directoryNodes  } from 'src/utils/file-system';
-
-
 
 
 
 const DirectoryNode = (props) => {
   const { node } = props;
   const { loading, error, data } = useReadingProject('react-notes');
-  console.log('### inside directory node');
-  console.log(node);
   useEffect(() => {
     if (node.name && node.name !== 'src/pages') {
       document.title = node.name;
