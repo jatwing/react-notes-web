@@ -4,9 +4,41 @@ import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'src/components';
-import { getNodes, getPath, useMedia } from 'src/utils';
+import { useMedia } from 'src/utils';
 
 import { useStyles } from './styles';
+
+/*
+ * move to here
+ */
+
+/**
+ * @param {string} fullPath
+ * @return {!Array<string>}
+ */
+const getNodes = (fullPath) => {
+  if (fullPath === '/') {
+    return ['/'];
+  }
+  return ['/'].concat(fullPath.substring(1).split('/'));
+};
+
+/**
+ * @param {string} fullPath
+ * @param {string} node
+ * @return {string}
+ */
+const getPath = (fullPath, node) => {
+  const length = fullPath.indexOf(node) + node.length;
+  return fullPath.substring(0, length);
+};
+
+
+
+
+
+
+
 
 const Header = () => {
   const { pathname } = useLocation();

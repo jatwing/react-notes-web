@@ -8,33 +8,42 @@ import { getSubsubtrees, useMedia } from 'src/utils';
 
 import { useStyles } from './styles';
 
-const ParentNodePage = (props) => {
-  const { subtree, subtrees, title } = props;
-  const { loading, error, data } = useReadingProject('react-notes');
+import { directoryNodes  } from 'src/utils/file-system';
 
+
+
+
+
+const DirectoryNode = (props) => {
+  const { node } = props;
+  const { loading, error, data } = useReadingProject('react-notes');
+  console.log('### inside directory node');
+  console.log(node);
   useEffect(() => {
-    if (title && title !== '/') {
-      document.title = title;
+    if (node.name && node.name !== 'src/pages') {
+      document.title = node.name;
       return;
     }
     if (loading || error) {
       return;
     }
     document.title = data.Project.title;
-  }, [title, loading, error, data]);
+  }, [node, loading, error, data]);
 
-  const nonLeaves = subtrees.filter((tree) => tree.children.length > 0);
-  const subsubtrees = getSubsubtrees(subtree, nonLeaves);
-  const getData = (tree) => ({
+  const getSubtree = (node) => ({
     header: {
-      text: tree.parent,
-      href: tree.path,
+      text: node.name === 'src/pages' ? 'Home' : node.name,
+      href: node.url,
     },
-    content: tree.children.map((child) => ({
-      text: child,
-      href: tree.directory + child,
+    content: node.children.map((child) => ({
+      text: child.name,
+      href: child.url,
     })),
   });
+  const directoryChildren = node.children.filter(
+    child => directoryNodes.includes(child)
+  )
+
 
   const theme = useTheme();
   const classes = useStyles();
@@ -53,18 +62,19 @@ const ParentNodePage = (props) => {
       className={classes.list}
     >
       <ImageListItem
-        key={subtree.path}
+        key={node.path}
         className={clsx(classes.card, classes.major)}
       >
-        <MultirowTextCard data={getData(subtree)} modifier="gradient" />
+        <MultirowTextCard data={getSubtree(node)} modifier="gradient" />
       </ImageListItem>
-      {subsubtrees.map((subsubtree) => (
-        <ImageListItem key={subsubtree.path} className={classes.card}>
-          <MultirowTextCard data={getData(subsubtree)} modifier="default" />
+
+      {directoryChildren.map((child) => (
+        <ImageListItem key={child.path} className={classes.card}>
+          <MultirowTextCard data={getSubtree(child)} modifier="default" />
         </ImageListItem>
       ))}
     </ImageList>
   );
 };
 
-export { ParentNodePage };
+export { DirectoryNode};

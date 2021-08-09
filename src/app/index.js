@@ -1,66 +1,59 @@
 import 'src/utils/i18n.js';
 
 import { lazy, Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
-import { LeafNodePage, ParentNodePage } from 'src/pages';
-import { getNodes, getRoutes, getSubtrees, pageFiles } from 'src/utils';
+import { LeafNodePage } from 'src/pages/file-node';
+import { ParentNodePage, DirectoryNode } from 'src/pages/directory-node';
 
 import { Layout } from './layout';
 import { Theme } from './theme';
 
-const routes = getRoutes(pageFiles);
-const subtrees = getSubtrees(routes.map((route) => '/' + route));
+import {
+  traverse,
+  directoryNodes,
+  fileNodes,
+  fileRoutes,
+} from 'src/utils/file-system';
+import { pageTree } from 'src/utils';
 
-const parentRoutes = subtrees
-  .filter((subtree) => subtree.children.length > 0)
-  .map((subtree) => {
-    return {
-      exact: true,
-      path: subtree.path,
-      render: () => (
-        <ParentNodePage
-          subtree={subtree}
-          subtrees={subtrees}
-          title={subtree.parent}
-        />
-      ),
-      key: subtree.path,
-    };
-  });
+const directoryProps = directoryNodes.map((node) => ({
+  exact: true,
+  path: node.url,
+  render: () => <DirectoryNode node={node} />,
+  key: node.url,
+}));
 
-const leafRoutes = routes.map((pageRoute) => {
+const fileProps = fileNodes.map((node) => {
   /**
    * [Module methods](https://webpack.js.org/api/module-methods/)
    * the import() must contain at least some information about where the module
    * is located.
    */
-  const component = lazy(() => import(`src/pages/${pageRoute}/index.js`));
-  const path = '/' + pageRoute;
-  const nodes = getNodes(path);
+  const component = lazy(() => import(`src/pages/${node.route}/index.js`));
   return {
     exact: true,
-    path: path,
-    render: () => (
-      <LeafNodePage component={component} title={nodes[nodes.length - 1]} />
-    ),
-    key: path,
+    path: '/' + node.route,
+    render: () => <LeafNodePage component={component} title="dasdasd" />,
+    key: node.url,
   };
 });
 
 const App = () => {
+  const { t } = useTranslation();
   return (
     <Theme>
       <Router>
         <Layout>
           <Switch>
-            <Suspense fallback="">
-              {[...parentRoutes, ...leafRoutes].map((route) => (
-                <Route {...route} key={route} />
+            <Suspense fallback={t('loading')}>
+              {[...directoryProps, ...fileProps].map((props) => (
+                <Route {...props} />
               ))}
             </Suspense>
             <Redirect to="/" />

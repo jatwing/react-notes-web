@@ -8,33 +8,47 @@ const buildDate = preval`
   }
 `;
 
-const pageFiles = preval`
+const pageTree = preval`
   const { statSync, readdirSync } = require('fs');
-  const { join } = require("path");
+  const { join } = require('path');
 
-  const getDirectories = (path) => {
-    const isDirectory = (path) => statSync(path).isDirectory();
-    return readdirSync(path)
-      .map((name) => join(path, name))
-      .filter(isDirectory);
+  const getNode = (name, path) => {
+    /** file */
+    if (!statSync(path).isDirectory()) {
+      if (name !== 'index.js') {
+        return null;
+      }
+      return { name, type: 'file', path, url: path.substring(9) };
+    }
+    /** directory */
+    const childNames = readdirSync(path);
+    const node = {
+      name,
+      type: 'directory',
+      path,
+      url: path.substring(9) || '/',
+      children: [],
+    };
+    const excludedPaths = [
+      'src/pages/directory-node',
+      'src/pages/file-node',
+      'src/pages/index.js',
+    ];
+    childNames.forEach((childName) => {
+      const childPath = path + '/' + childName;
+      if (excludedPaths.includes(childPath)) {
+        return;
+      }
+      const child = getNode(childName, childPath, node);
+      child && node.children.push(child);
+    });
+    if (node.children.length === 0) {
+      return null;
+    }
+    return node;
   };
 
-  const getFiles = (path) => {
-    const isFile = (path) => statSync(path).isFile();
-    return readdirSync(path)
-      .map((name) => join(path, name))
-      .filter(isFile);
-  };
-
-  const getFilesRecursively = (path) => {
-    const directories = getDirectories(path);
-    const files = directories
-      .map((directory) => getFilesRecursively(directory))
-      .reduce((a, b) => a.concat(b), []);
-    return files.concat(getFiles(path));
-  };
-
-  module.exports = getFilesRecursively('src/pages');
+  module.exports = getNode('src/pages', 'src/pages');
 `;
 
-export { buildDate, pageFiles };
+export { buildDate, pageTree };

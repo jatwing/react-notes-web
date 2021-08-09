@@ -13,6 +13,15 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "fragment": "Fragment",
+      "version": "detect",
+      "flowVersion": "0.53"
+    }
+  },
   "rules": {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
