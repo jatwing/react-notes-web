@@ -1,6 +1,6 @@
 import 'src/utils/i18n.js';
 
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   BrowserRouter as Router,
@@ -8,12 +8,11 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { FileNode, DirectoryNode } from 'src/pages';
+import { DirectoryNode, FileNode } from 'src/pages';
+import { directoryNodes, fileNodes } from 'src/utils';
 
 import { Layout } from './layout';
 import { Theme } from './theme';
-
-import { directoryNodes, fileNodes } from 'src/utils';
 
 const directoryRoutes = directoryNodes.map((node) => (
   <Route

@@ -1,4 +1,4 @@
-import { createElement, useEffect, lazy } from 'react';
+import { createElement, lazy, useEffect } from 'react';
 
 const FileNode = (props) => {
   const { node } = props;

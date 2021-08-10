@@ -2,16 +2,17 @@ import { ImageList, ImageListItem } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MultirowTextCard } from 'src/components';
 import { useReadingProject } from 'src/hooks';
-import { directoryNodes,  getSubsubtrees, useMedia } from 'src/utils';
+import { directoryNodes, useMedia } from 'src/utils';
+
 import { useStyles } from './styles';
-
-
 
 const DirectoryNode = (props) => {
   const { node } = props;
   const { loading, error, data } = useReadingProject('react-notes');
+
   useEffect(() => {
     if (node.name && node.name !== 'src/pages') {
       document.title = node.name;
@@ -23,9 +24,10 @@ const DirectoryNode = (props) => {
     document.title = data.Project.title;
   }, [node, loading, error, data]);
 
+  const { t } = useTranslation();
   const getSubtree = (node) => ({
     header: {
-      text: node.name === 'src/pages' ? 'Home' : node.name,
+      text: node.name === 'src/pages' ? t('home') : node.name,
       href: node.url,
     },
     content: node.children.map((child) => ({
@@ -33,10 +35,9 @@ const DirectoryNode = (props) => {
       href: child.url,
     })),
   });
-  const directoryChildren = node.children.filter(
-    child => directoryNodes.includes(child)
-  )
-
+  const directoryChildren = node.children.filter((child) =>
+    directoryNodes.includes(child)
+  );
 
   const theme = useTheme();
   const classes = useStyles();
@@ -70,4 +71,4 @@ const DirectoryNode = (props) => {
   );
 };
 
-export { DirectoryNode};
+export { DirectoryNode };

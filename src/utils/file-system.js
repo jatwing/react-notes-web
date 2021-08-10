@@ -1,4 +1,4 @@
-import { pageTree } from 'src/utils';
+import { pageTree } from './preval';
 
 const traverse = (node, leafNodeCallback = null, parentNodeCallback = null) => {
   /** leaf node */
@@ -13,12 +13,24 @@ const traverse = (node, leafNodeCallback = null, parentNodeCallback = null) => {
   });
 };
 
-const getSemanticDirectoryNodes = () => {
+const fixTree = (tree) => {
+  const addChildrenParent = (node) => {
+    if (!node.children) {
+      return;
+    }
+    node.children.forEach((child) => {
+      child.parent = node;
+    });
+  };
+  traverse(tree, null, addChildrenParent);
+};
+
+const getSemanticDirectoryNodes = (tree) => {
   const nodes = [];
   const addNode = (node) => {
     nodes.push(node);
   };
-  traverse(pageTree, null, addNode);
+  traverse(tree, null, addNode);
   const isSemanticDirectory = (node) => {
     if (node.type !== 'directory' || node.children.length === 0) {
       return false;
@@ -33,14 +45,13 @@ const getSemanticDirectoryNodes = () => {
   };
   return nodes.filter(isSemanticDirectory);
 };
-const directoryNodes = getSemanticDirectoryNodes();
 
-const getSemanticFileNodes = () => {
+const getSemanticFileNodes = (tree) => {
   const nodes = [];
   const addNode = (node) => {
     nodes.push(node);
   };
-  traverse(pageTree, null, addNode);
+  traverse(tree, null, addNode);
   const isSemanticFile = (node) => {
     if (node.type !== 'directory' || node.children.length === 0) {
       return false;
@@ -48,27 +59,53 @@ const getSemanticFileNodes = () => {
     let hasIndexChild = false;
     node.children.forEach((child) => {
       if (child.type === 'directory') {
-        return false
+        return false;
       }
       if (child.name === 'index.js') {
-        hasIndexChild = true
+        hasIndexChild = true;
       }
-    })
+    });
     return hasIndexChild;
   };
-
-
-  /*
-  nodes.forEach((node) => {
-    const results = node.path.match(/^src\/pages\/(.+)\/index.js$/);
-    if (results) {
-      node.route = results[1];
-    }
-  });
-  */
-
   return nodes.filter(isSemanticFile);
 };
-const fileNodes = getSemanticFileNodes();
 
-export { directoryNodes, fileNodes };
+const findNode = (tree, callBack) => {
+  let result;
+  const find = (node) => {
+    if (callBack(node)) {
+      result = node;
+    }
+  };
+  traverse(tree, find, find);
+  return result;
+};
+
+const reverse = (node, anteriorCallback = null, posteriorCallback = null) => {
+  anteriorCallback && anteriorCallback(node);
+  /** before */
+  if (!node.parent) {
+    return;
+  }
+  reverse(node.parent, anteriorCallback, posteriorCallback);
+  /** after */
+  posteriorCallback && posteriorCallback(node);
+};
+
+const getAncestors = (node) => {
+  const nodes = [];
+  const addParentNode = (node) => {
+    nodes.push(node.parent);
+  };
+  reverse(node, null, addParentNode);
+  return nodes;
+};
+
+/**
+ * context
+ */
+fixTree(pageTree);
+const directoryNodes = getSemanticDirectoryNodes(pageTree);
+const fileNodes = getSemanticFileNodes(pageTree);
+
+export { directoryNodes, fileNodes, findNode, getAncestors };

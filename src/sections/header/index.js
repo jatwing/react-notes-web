@@ -4,57 +4,32 @@ import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'src/components';
-import { useMedia } from 'src/utils';
+import { findNode, getAncestors, pageTree, useMedia } from 'src/utils';
 
 import { useStyles } from './styles';
 
-/*
- * move to here
- */
-
-/**
- * @param {string} fullPath
- * @return {!Array<string>}
- */
-const getNodes = (fullPath) => {
-  if (fullPath === '/') {
-    return ['/'];
-  }
-  return ['/'].concat(fullPath.substring(1).split('/'));
-};
-
-/**
- * @param {string} fullPath
- * @param {string} node
- * @return {string}
- */
-const getPath = (fullPath, node) => {
-  const length = fullPath.indexOf(node) + node.length;
-  return fullPath.substring(0, length);
-};
-
-
-
-
-
-
-
-
 const Header = () => {
   const { pathname } = useLocation();
-  const nodes = getNodes(pathname);
+  const findByUrl = (node) => node.url === pathname;
+  const node = findNode(pageTree, findByUrl);
 
+  const { t } = useTranslation();
+  const classes = useStyles();
+  if (!node) {
+    return (
+      <AppBar position="sticky">
+        <Toolbar className={classes.toolbar}>
+          <Typography className={classes.title}>{t('error')}</Typography>;
+        </Toolbar>
+      </AppBar>
+    );
+  }
 
-  console.log(nodes)
-
-
-  const parentNodes = nodes.slice(0, -1);
-  const leafNode = nodes[nodes.length - 1];
-
+  const ancestors = getAncestors(node);
   const theme = useTheme();
   const { isMedium, isLarge } = useMedia(theme);
   /**
-   * maximum number of parent nodes.
+   * maximum number of ancestors.
    * @type {number}
    */
   let maximum = 1;
@@ -63,39 +38,37 @@ const Header = () => {
   } else if (isLarge) {
     maximum = 3;
   }
-  const isVisible = maximum < parentNodes.length;
-  const startIndex = -maximum + (isVisible && 1);
-  const backNode =
-    nodes.length - 1 - maximum >= 0 ? nodes[nodes.length - 1 - maximum] : '/';
+  const isArrowVisible = maximum < ancestors.length;
+  const firstAncestorIndex = isArrowVisible
+    ? ancestors.length - (maximum - 1)
+    : 0;
 
-  const { t } = useTranslation();
-  const classes = useStyles();
-  const arrowBackIcon = (
-    <Link
-      href={getPath(pathname, backNode)}
-      key={backNode}
-      className={classes.link}
-    >
+  const arrowBack = isArrowVisible ? (
+    <Link href={ancestors[firstAncestorIndex - 1].url} className={classes.link}>
       <ArrowBackIosRoundedIcon />
     </Link>
+  ) : (
+    <></>
   );
-  const parentElements = parentNodes.map((node) => (
-    <Link href={getPath(pathname, node)} key={node} className={classes.link}>
-      {node === '/' ? t('home') : node}
-    </Link>
-  ));
-  const leafElement = leafNode && (
+  const ancestorElements = ancestors
+    .map((ancestor) => (
+      <Link href={ancestor.url} key={ancestor.url} className={classes.link}>
+        {ancestor.name === 'src/pages' ? t('home') : ancestor.name}
+      </Link>
+    ))
+    .slice(firstAncestorIndex);
+  const nodeElement = (
     <Typography className={classes.title}>
-      {leafNode === '/' ? t('home') : leafNode}
+      {node.name === 'src/pages' ? t('home') : node.name}
     </Typography>
   );
 
   return (
     <AppBar position="sticky">
       <Toolbar className={classes.toolbar}>
-        {isVisible && arrowBackIcon}
-        {startIndex < 0 && parentElements.slice(startIndex)}
-        {leafElement}
+        {arrowBack}
+        {ancestorElements}
+        {nodeElement}
       </Toolbar>
     </AppBar>
   );
