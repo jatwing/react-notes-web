@@ -70,10 +70,10 @@ const getSemanticFileNodes = (tree) => {
   return nodes.filter(isSemanticFile);
 };
 
-const findNode = (tree, callBack) => {
+const findNode = (tree, evaluate) => {
   let result;
   const find = (node) => {
-    if (callBack(node)) {
+    if (evaluate(node)) {
       result = node;
     }
   };
