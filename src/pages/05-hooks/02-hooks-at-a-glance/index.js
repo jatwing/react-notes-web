@@ -1,71 +1,8 @@
 import { useState, useEffect } from 'react';
 
 
-/** effect hook */
-class ChatApi {
-  intervals = {};
-  status = {};
-  subscribeToFriendStatus(id, callback) {
-    const intervalId = setInterval(() => {
-      this.status = {
-        isOnline: Math.random() < 0.5,
-      };
-      callback(this.status);
-    }, 1000);
-    this.intervals[id] = intervalId;
-    console.log('subscribed');
-  }
-  unsubscribeFromFriendStatus(id, callback) {
-    const intervalId = this.intervals[id];
-    if (!intervalId) {
-      console.log('unsubscribed');
-      return;
-    }
-    clearInterval(intervalId);
-    callback(this.status);
-    console.log('unsubscribed');
-  }
-}
-const chatApi = new ChatApi();
 
-const FriendStatus = (props) => {
-  const [isOnline, setIsOnline] = useState(null);
-  const handleStatusChange = (status) => {
-    setIsOnline(status.isOnline);
-  };
-  useEffect(() => {
-    chatApi.subscribeToFriendStatus(props.friend.id, handleStatusChange);
-    return () => {
-      chatApi.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
-    };
-  }, []);
-  if (isOnline === null) {
-    return 'Loading...';
-  }
-  return isOnline ? 'Online' : 'Offline';
-};
 
-/** effect hook */
-const FriendStatusWithCounter = (props) => {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-  });
-  const [isOnline, setIsOnline] = useState(null);
-  const handleStatusChange = (status) => {
-    setIsOnline(status.isOnline);
-  };
-  useEffect(() => {
-    chatApi.subscribeToFriendStatus(props.friend.id, handleStatusChange);
-    return () => {
-      chatApi.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
-    };
-  }, []);
-  if (isOnline === null) {
-    return 'Loading...';
-  }
-  return isOnline ? 'Online' : 'Offline';
-};
 
 /** building your own hooks */
 const useFriendStatus = (friendId) => {
@@ -103,8 +40,6 @@ const FriendsList = (props) => {
 const HooksAtAGlance = () => {
   return (
     <>
-      <FriendStatus friend={{ id: 1 }} />
-      <FriendStatusWithCounter friend={{ id: 2 }} />
       <FriendStatusByHook friend={{ id: 3 }} />
       <FriendsList
         friends={[

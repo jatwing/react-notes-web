@@ -9,8 +9,8 @@ const FileNode = (props) => {
    */
   const component = lazy(() => import(`src/pages${node.url}/index.js`));
   useEffect(() => {
-    if (node.title) {
-      document.title = node.title;
+    if (node.name) {
+      document.title = node.name;
     }
   }, [node]);
   return createElement(component, null, null);
