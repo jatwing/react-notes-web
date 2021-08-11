@@ -1,5 +1,5 @@
 const EN_US_TRANSLATION = {
-  developmentBuildAtTimeOnDate: 'Development build at {{time}} on {{date}}',
+  developmentBuildAtTimeOnDate: 'Development build at {{time}} on {{date}}.',
   email: 'Email',
   error: 'Error!',
   github: 'Github',

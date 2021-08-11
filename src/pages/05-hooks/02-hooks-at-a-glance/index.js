@@ -1,12 +1,5 @@
 import { useState, useEffect } from 'react';
 
-/** state hook */
-const ExampleWithManyStates = () => {
-  const [age, setAge] = useState(42);
-  const [fruit, setFruit] = useState('banana');
-  const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
-  return <></>;
-};
 
 /** effect hook */
 class ChatApi {
@@ -104,13 +97,12 @@ const FriendListItem = (props) => {
 };
 
 const FriendsList = (props) => {
-  return props.friends.map((friend) => <FriendListItem friend={friend} />);
+  return props.friends.map((friend) => <FriendListItem friend={friend} key={friend.id} />);
 };
 
 const HooksAtAGlance = () => {
   return (
     <>
-      <ExampleWithManyStates />
       <FriendStatus friend={{ id: 1 }} />
       <FriendStatusWithCounter friend={{ id: 2 }} />
       <FriendStatusByHook friend={{ id: 3 }} />
