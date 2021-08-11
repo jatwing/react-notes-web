@@ -1,20 +1,5 @@
 import { useState, useEffect } from 'react';
 
-const Example = () => {
-  /** state hook */
-  const [count, setCount] = useState(0);
-  /** effect hook */
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-  });
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
-    </div>
-  );
-};
-
 /** state hook */
 const ExampleWithManyStates = () => {
   const [age, setAge] = useState(42);
@@ -125,7 +110,6 @@ const FriendsList = (props) => {
 const HooksAtAGlance = () => {
   return (
     <>
-      <Example />
       <ExampleWithManyStates />
       <FriendStatus friend={{ id: 1 }} />
       <FriendStatusWithCounter friend={{ id: 2 }} />

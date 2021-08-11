@@ -22,7 +22,7 @@ const Header = () => {
           <Typography className={classes.title}>{t('error')}</Typography>
         </Toolbar>
       </AppBar>
-    )
+    );
   }
 
   const ancestors = getAncestors(node);
