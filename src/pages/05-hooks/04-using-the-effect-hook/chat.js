@@ -3,22 +3,30 @@ class ChatApi {
   static intervals = {};
   static statuses = {};
   static subscribeToFriendStatus(id, callback) {
-    const intervalId = setInterval(() => {
-      const status = { isOnline: Math.random() < 0.5 };
-      this.statuses[id] = status;
-      callback(status);
-    }, 1000);
-    this.intervals[id] = intervalId;
+    if (!(id in this.intervals)) {
+      this.intervals[id] = setInterval(() => {
+        this.statuses[id] = { isOnline: Math.random() < 0.5 };
+      }, 1000);
+    }
+    /*
+     *  this api is wrong.
+     *
+     *  update ground truth (randomly)
+     *
+     *  nothing to do with the subscription
+     *
+     */
+
+
+    callback(this.statuses[id]);
+
     console.log(`friend ${id} status subscribed`);
   }
   static unsubscribeFromFriendStatus(id, callback) {
-    const intervalId = this.intervals[id];
-    if (!intervalId) {
-      console.log(`friend ${id} status unsubscribed`);
-      return;
+    if (this.intervals[id]) {
+      clearInterval(this.intervals[id])
     }
-    clearInterval(intervalId);
-    callback(this.statuses[id]);
+    callback(this.statuses[id])
     console.log(`friend ${id} status unsubscribed`);
   }
 }
