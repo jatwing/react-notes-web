@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+/** react relies on the order in which hooks are called */
 const Form = () => {
   const [name, setName] = useState('Mary');
   useEffect(() => {
@@ -7,8 +8,12 @@ const Form = () => {
   });
   const [surname, setSurname] = useState('Poppins');
   useEffect(() => {
-    document.title = name + ' ' + surname;
+    /** put that condition inside our hook  */
+    if (name !== '') {
+      document.title = name + ' ' + surname;
+    }
   });
+  return <></>;
 };
 
 const RulesOfHooks = () => {
