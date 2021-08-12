@@ -1,57 +1,24 @@
-/** effects with cleanup */
 class ChatApi {
-
-  static truthIntervals = {}
+  static intervals = {};
   static statuses = {};
-
-
-/*
- * when needed, generate the ground truth
- *
- * also needs an interval
- */
-
-
-  static subscriptionIntervals = {}
-
-/*
- * observe here, 
- *
- * using another intervals,
- *
- * an id can have serverl intervals.
- *
- *
- */
-
-
-
   static subscribeToFriendStatus(id, callback) {
-    if (!(id in this.intervals)) {
-      this.intervals[id] = setInterval(() => {
-        this.statuses[id] = { isOnline: Math.random() < 0.5 };
-      }, 1000);
+    if (id in this.intervals) {
+      console.log('Error!');
+      return;
     }
-    /*
-     *  this api is wrong.
-     *
-     *  update ground truth (randomly)
-     *
-     *  nothing to do with the subscription
-     *
-     */
-
-
-    callback(this.statuses[id]);
-
-    console.log(`friend ${id} status subscribed`);
+    this.intervals[id] = setInterval(() => {
+      this.statuses[id] = { isOnline: Math.random() < 0.5 };
+      callback(this.statuses[id]);
+    }, 1000);
+    console.log(`Friend ${id} status is subscribed.`);
   }
   static unsubscribeFromFriendStatus(id, callback) {
     if (this.intervals[id]) {
-      clearInterval(this.intervals[id])
+      clearInterval(this.intervals[id]);
+      delete this.intervals[id]
     }
-    callback(this.statuses[id])
-    console.log(`friend ${id} status unsubscribed`);
+    callback(this.statuses[id]);
+    console.log(`Friend ${id} status is unsubscribed.`);
   }
 }
 

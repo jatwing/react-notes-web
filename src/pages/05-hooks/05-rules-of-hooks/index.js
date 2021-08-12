@@ -13,7 +13,7 @@ const Form = () => {
       document.title = name + ' ' + surname;
     }
   });
-  return <></>;
+  return <>{localStorage.getItem('formData') || 'Loading...'}</>;
 };
 
 const RulesOfHooks = () => {

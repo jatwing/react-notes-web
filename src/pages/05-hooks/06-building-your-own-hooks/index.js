@@ -51,13 +51,13 @@ const Circle = (props) => {
 };
 
 const friendList = [
-  { id: 1, name: 'Phoebe' },
-  { id: 2, name: 'Rachel' },
-  { id: 3, name: 'Ross' },
+  { id: 4, name: 'Phoebe' },
+  { id: 5, name: 'Rachel' },
+  { id: 6, name: 'Ross' },
 ];
 
 const ChatRecipientPicker = () => {
-  const [recipientId, setRecipientId] = useState(1);
+  const [recipientId, setRecipientId] = useState(4);
   const isRecipientOnline = useFriendStatus(recipientId);
 
   return (
@@ -114,7 +114,7 @@ const Todos = () => {
       <p>To Do List</p>
       <ol>
         {todos.map((todo, index) => (
-          <li>{todo}</li>
+          <li key={index}>{todo}</li>
         ))}
       </ol>
     </div>
