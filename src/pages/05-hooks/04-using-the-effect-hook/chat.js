@@ -1,7 +1,31 @@
 /** effects with cleanup */
 class ChatApi {
-  static intervals = {};
+
+  static truthIntervals = {}
   static statuses = {};
+
+
+/*
+ * when needed, generate the ground truth
+ *
+ * also needs an interval
+ */
+
+
+  static subscriptionIntervals = {}
+
+/*
+ * observe here, 
+ *
+ * using another intervals,
+ *
+ * an id can have serverl intervals.
+ *
+ *
+ */
+
+
+
   static subscribeToFriendStatus(id, callback) {
     if (!(id in this.intervals)) {
       this.intervals[id] = setInterval(() => {
