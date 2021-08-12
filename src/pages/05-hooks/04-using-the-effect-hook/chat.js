@@ -15,7 +15,7 @@ class ChatApi {
   static unsubscribeFromFriendStatus(id, callback) {
     if (this.intervals[id]) {
       clearInterval(this.intervals[id]);
-      delete this.intervals[id]
+      delete this.intervals[id];
     }
     callback(this.statuses[id]);
     console.log(`Friend ${id} status is unsubscribed.`);

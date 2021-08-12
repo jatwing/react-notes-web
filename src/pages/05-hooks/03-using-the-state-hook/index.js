@@ -1,5 +1,5 @@
 /** what is a hook */
-import { Component,useState } from 'react';
+import { Component, useState } from 'react';
 
 const Example = () => {
   /** declaring a state variable */

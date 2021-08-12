@@ -15,6 +15,9 @@ const Header = () => {
 
   const { t } = useTranslation();
   const classes = useStyles();
+  const theme = useTheme();
+  const { isMedium, isLarge } = useMedia(theme);
+
   if (!node) {
     return (
       <AppBar position="sticky">
@@ -26,8 +29,6 @@ const Header = () => {
   }
 
   const ancestors = getAncestors(node);
-  const theme = useTheme();
-  const { isMedium, isLarge } = useMedia(theme);
   const ancestorsMaximumNumber = 1 + (isMedium && 1) + (isLarge && 1);
   const isArrowVisible = ancestorsMaximumNumber < ancestors.length;
   const firstAncestorIndex = isArrowVisible

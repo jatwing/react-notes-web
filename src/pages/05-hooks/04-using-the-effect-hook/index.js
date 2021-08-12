@@ -1,4 +1,4 @@
-import { Component,useEffect, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 
 import { ChatApi } from './chat';
 
