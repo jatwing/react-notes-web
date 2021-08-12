@@ -1,4 +1,5 @@
-import { useState, useEffect, Component } from 'react';
+import { Component,useEffect, useState } from 'react';
+
 import { ChatApi } from './chat';
 
 /** effects without cleanup */
