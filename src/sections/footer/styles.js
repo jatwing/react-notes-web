@@ -51,9 +51,9 @@ const useStyles = makeStyles((theme) => {
       '& $image': {
         width: '64px',
         height: '64px',
-        clipPath: 'circle(50%)',
         backgroundColor: theme.palette.primary.contrastText,
         transition: theme.transitions.create('background-color'),
+        borderRadius: '50%',
         marginBottom: '16px',
         '&:hover, &:focus': {
           backgroundColor: theme.palette.contrast.text.secondary,
