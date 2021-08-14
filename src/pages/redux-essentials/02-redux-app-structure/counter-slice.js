@@ -1,10 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fetchCount } from './counter-api';
+
+/** writing async logic with thunks */
+export const incrementAsync = createAsyncThunk(
+  'counter/fetchCount',
+  async (amount) => {
+    const response = await fetchCount(amount);
+    return response.data;
+  }
+);
 
 /** creating slice reducers and actions */
-const counterSlice = createSlice({
+export const counterSlice = createSlice({
   name: 'counter',
   initialState: {
     value: 0,
+    status: 'idle',
   },
   /** reducers and immutable updates */
   reducers: {
@@ -24,20 +35,25 @@ const counterSlice = createSlice({
       state.value += action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(incrementAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(incrementAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.value += action.payload;
+      });
+  },
 });
 
-const counterReducer = counterSlice.reducer;
+export const counterReducer = counterSlice.reducer;
 /**
  * { type: 'counter/increment' }
  * { type: 'counter/decrement' }
  * { type: 'counter/incrementByAmount' }
  */
-const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
-export {
-  counterSlice,
-  counterReducer,
-  increment,
-  decrement,
-  incrementByAmount,
-};
+/** reading data with useSelector */
+export const selectCount = (state) => state.counter.value;

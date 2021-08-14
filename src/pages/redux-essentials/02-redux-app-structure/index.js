@@ -1,25 +1,13 @@
-
-import { counterSlice  } from './counter-slice'
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { Counter } from './counter';
 
 const ReduxAppStructure = () => {
-
-  const newState = counterSlice.reducer(
-    { value: 10},
-    counterSlice.actions.increment()
-  )
-
-  console.log(newState)
-
   return (
-    <>
+    <Provider store={store}>
+      <Counter />
+    </Provider>
+  );
+};
 
-
-
-
-    </>
-
-  )
-
-}
-
-export default ReduxAppStructure
+export default ReduxAppStructure;
