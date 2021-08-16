@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
-import { store } from './store';
-import { Counter } from './counter';
+
+import { store } from './redux/store';
+import { Counter } from './view/counter';
 
 const ReduxAppStructure = () => {
   return (

@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCount } from './counter-api';
+
+import { fetchCount } from './api';
 
 /** writing async logic with thunks */
 export const incrementAsync = createAsyncThunk(
-  'counter/fetchCount',
+  'counter/incrementAsync',
   async (amount) => {
     const response = await fetchCount(amount);
     return response.data;
@@ -11,21 +12,15 @@ export const incrementAsync = createAsyncThunk(
 );
 
 /** creating slice reducers and actions */
-export const counterSlice = createSlice({
+const counterSlice = createSlice({
   name: 'counter',
   initialState: {
     value: 0,
-    status: 'idle',
+    status: '',
   },
   /** reducers and immutable updates */
   reducers: {
     increment: (state) => {
-      /**
-       * return {
-       *   ...state,
-       *   value: state.value + 1
-       * }
-       */
       state.value += 1;
     },
     decrement: (state) => {
@@ -35,25 +30,23 @@ export const counterSlice = createSlice({
       state.value += action.payload;
     },
   },
+  /** writing async logic with thunks */
   extraReducers: (builder) => {
     builder
       .addCase(incrementAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'pending';
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = 'fulfilled';
         state.value += action.payload;
+      })
+      .addCase(incrementAsync.rejected, (state, action) => {
+        state.status = 'rejected';
+        console.log(action);
       });
   },
 });
 
 export const counterReducer = counterSlice.reducer;
-/**
- * { type: 'counter/increment' }
- * { type: 'counter/decrement' }
- * { type: 'counter/incrementByAmount' }
- */
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
-/** reading data with useSelector */
-export const selectCount = (state) => state.counter.value;
+export const { increment, decrement, incrementByAmount } = counterSlice.actions;

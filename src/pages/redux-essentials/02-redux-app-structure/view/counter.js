@@ -1,21 +1,22 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  selectCounterStatus,
+  selectCounterValue,
+} from '../redux/counter/selectors';
 import {
   decrement,
   increment,
-  incrementByAmount,
   incrementAsync,
-  selectCount,
-} from './counter-slice';
+  incrementByAmount,
+} from '../redux/counter/slice';
 import styles from './styles.module.css';
 
 export const Counter = () => {
-  /**
-   * const count = selectCount(store.getState())
-   */
-  const count = useSelector(selectCount);
+  const count = useSelector(selectCounterValue);
+  const status = useSelector(selectCounterStatus);
   const dispatch = useDispatch();
-  /** component state and forms */
   const [incrementAmount, setIncrementAmount] = useState('2');
 
   return (
@@ -25,7 +26,7 @@ export const Counter = () => {
           className={styles.button}
           aria-label="Increment value"
           onClick={
-            /** () => store.dispatch({ type: 'counter/increment' }) */
+            /** dispatch */
             () => dispatch(increment())
           }
         >
@@ -58,10 +59,16 @@ export const Counter = () => {
         </button>
         <button
           className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
+          onClick={(e) => {
+            console.log('hey you click me');
+
+            dispatch(incrementAsync(Number(incrementAmount) || 0));
+          }}
+          disabled={status === 'pending'}
         >
           {'Add Async'}
         </button>
+        <p className={styles.text}>{status}</p>
       </div>
     </>
   );
