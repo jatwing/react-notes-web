@@ -59,9 +59,7 @@ export const Counter = () => {
         </button>
         <button
           className={styles.asyncButton}
-          onClick={(e) => {
-            console.log('hey you click me');
-
+          onClick={() => {
             dispatch(incrementAsync(Number(incrementAmount) || 0));
           }}
           disabled={status === 'pending'}
