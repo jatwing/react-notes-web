@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  createDecrement,
-  createIncrement,
-  createIncrementAsync,
-  createIncrementByAmount,
+  valueDecreased,
+  valueIncreased,
+  valueIncreasedAsync,
+  valueIncreasedByAmount,
 } from '../redux/counter/actions';
 import {
   selectCounterStatus,
@@ -27,7 +27,7 @@ export const Counter = () => {
           aria-label="Increment value"
           onClick={
             /** dispatch */
-            () => dispatch(createIncrement())
+            () => dispatch(valueIncreased())
           }
         >
           {'+'}
@@ -36,7 +36,7 @@ export const Counter = () => {
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(createDecrement())}
+          onClick={() => dispatch(valueDecreased())}
         >
           {'-'}
         </button>
@@ -52,7 +52,7 @@ export const Counter = () => {
         <button
           className={styles.button}
           onClick={() =>
-            dispatch(createIncrementByAmount(Number(incrementAmount) || 0))
+            dispatch(valueIncreasedByAmount(Number(incrementAmount) || 0))
           }
         >
           {'Add Amount'}
@@ -60,7 +60,7 @@ export const Counter = () => {
         <button
           className={styles.asyncButton}
           onClick={() => {
-            dispatch(createIncrementAsync(Number(incrementAmount) || 0));
+            dispatch(valueIncreasedAsync(Number(incrementAmount) || 0));
           }}
           disabled={status === 'pending'}
         >

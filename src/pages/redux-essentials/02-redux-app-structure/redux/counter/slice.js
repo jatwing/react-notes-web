@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { fetchCount } from './api';
+import { fetchCount } from '../../api/counter';
 
 /** writing async logic with thunks */
-export const incrementAsync = createAsyncThunk(
-  'counter/incrementAsync',
+export const valueIncreasedAsync = createAsyncThunk(
+  'counter/valueIncreasedAsync',
   async (amount) => {
     const response = await fetchCount(amount);
     return response.data;
@@ -20,27 +20,27 @@ const counterSlice = createSlice({
   },
   /** reducers and immutable updates */
   reducers: {
-    increment: (state) => {
+    valueIncreased: (state) => {
       state.value += 1;
     },
-    decrement: (state) => {
+    valueDecreased: (state) => {
       state.value -= 1;
     },
-    incrementByAmount: (state, action) => {
+    valueIncreasedByAmount: (state, action) => {
       state.value += action.payload;
     },
   },
   /** writing async logic with thunks */
   extraReducers: (builder) => {
     builder
-      .addCase(incrementAsync.pending, (state) => {
+      .addCase(valueIncreasedAsync.pending, (state) => {
         state.status = 'pending';
       })
-      .addCase(incrementAsync.fulfilled, (state, action) => {
+      .addCase(valueIncreasedAsync.fulfilled, (state, action) => {
         state.status = 'fulfilled';
         state.value += action.payload;
       })
-      .addCase(incrementAsync.rejected, (state, action) => {
+      .addCase(valueIncreasedAsync.rejected, (state, action) => {
         state.status = 'rejected';
         console.log(action);
       });
@@ -49,4 +49,5 @@ const counterSlice = createSlice({
 
 export const counterReducer = counterSlice.reducer;
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { valueIncreased, valueDecreased, valueIncreasedByAmount } =
+  counterSlice.actions;

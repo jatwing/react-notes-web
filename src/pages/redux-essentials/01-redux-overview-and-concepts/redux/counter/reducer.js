@@ -1,15 +1,15 @@
 import {
-  decrementType,
-  incrementAsyncFulfilledType,
-  incrementAsyncPendingType,
-  incrementAsyncRejectedType,
-  incrementByAmountType,
-  incrementType,
+  COUNTER_VALUE_DECREASED,
+  COUNTER_VALUE_INCREASED,
+  COUNTER_VALUE_INCREASED_ASYNC_FULFILLED,
+  COUNTER_VALUE_INCREASED_ASYNC_PENDING,
+  COUNTER_VALUE_INCREASED_ASYNC_REJECTED,
+  COUNTER_VALUE_INCREASED_BY_AMOUNT,
 } from './actions';
 
 export const counterReducer = (state, action) => {
   switch (action.type) {
-    case incrementType: {
+    case COUNTER_VALUE_INCREASED: {
       return {
         ...state,
         counter: {
@@ -18,7 +18,7 @@ export const counterReducer = (state, action) => {
         },
       };
     }
-    case decrementType: {
+    case COUNTER_VALUE_DECREASED: {
       return {
         ...state,
         counter: {
@@ -27,7 +27,7 @@ export const counterReducer = (state, action) => {
         },
       };
     }
-    case incrementByAmountType: {
+    case COUNTER_VALUE_INCREASED_BY_AMOUNT: {
       return {
         ...state,
         counter: {
@@ -36,7 +36,7 @@ export const counterReducer = (state, action) => {
         },
       };
     }
-    case incrementAsyncPendingType: {
+    case COUNTER_VALUE_INCREASED_ASYNC_PENDING: {
       return {
         ...state,
         counter: {
@@ -45,7 +45,7 @@ export const counterReducer = (state, action) => {
         },
       };
     }
-    case incrementAsyncFulfilledType: {
+    case COUNTER_VALUE_INCREASED_ASYNC_FULFILLED: {
       return {
         ...state,
         counter: {
@@ -55,7 +55,7 @@ export const counterReducer = (state, action) => {
         },
       };
     }
-    case incrementAsyncRejectedType: {
+    case COUNTER_VALUE_INCREASED_ASYNC_REJECTED: {
       console.log(action.error);
       return {
         ...state,

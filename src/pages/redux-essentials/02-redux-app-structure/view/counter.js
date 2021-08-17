@@ -6,10 +6,10 @@ import {
   selectCounterValue,
 } from '../redux/counter/selectors';
 import {
-  decrement,
-  increment,
-  incrementAsync,
-  incrementByAmount,
+  valueDecreased,
+  valueIncreased,
+  valueIncreasedAsync,
+  valueIncreasedByAmount,
 } from '../redux/counter/slice';
 import styles from './styles.module.css';
 
@@ -27,7 +27,7 @@ export const Counter = () => {
           aria-label="Increment value"
           onClick={
             /** dispatch */
-            () => dispatch(increment())
+            () => dispatch(valueIncreased())
           }
         >
           {'+'}
@@ -36,7 +36,7 @@ export const Counter = () => {
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={() => dispatch(valueDecreased())}
         >
           {'-'}
         </button>
@@ -52,7 +52,7 @@ export const Counter = () => {
         <button
           className={styles.button}
           onClick={() =>
-            dispatch(incrementByAmount(Number(incrementAmount) || 0))
+            dispatch(valueIncreasedByAmount(Number(incrementAmount) || 0))
           }
         >
           {'Add Amount'}
@@ -60,7 +60,7 @@ export const Counter = () => {
         <button
           className={styles.asyncButton}
           onClick={() => {
-            dispatch(incrementAsync(Number(incrementAmount) || 0));
+            dispatch(valueIncreasedAsync(Number(incrementAmount) || 0));
           }}
           disabled={status === 'pending'}
         >
