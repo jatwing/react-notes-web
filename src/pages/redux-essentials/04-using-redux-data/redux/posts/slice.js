@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { selectPostById } from './selectors';
-
 /** creating the posts slice */
 const initialState = [
   { id: '1', title: 'First Post!', content: 'Hello!' },
@@ -18,7 +16,12 @@ const postsSlice = createSlice({
     },
     postUpdated: (state, action) => {
       const { id, title, content } = action.payload;
-      const post = selectPostById(id)(state);
+
+      console.log(id)
+      console.log(state)
+
+ //     const post = selectPostById(id)(state);
+      const post = state.find(post => post.id === id)
       if (post) {
         post.title = title;
         post.content = content;

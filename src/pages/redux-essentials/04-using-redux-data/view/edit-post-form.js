@@ -7,19 +7,33 @@ import { postUpdated } from '../redux/posts/slice';
 /** editing posts */
 export const EditPostForm = () => {
   const posts = useSelector(selectPosts);
-  const [postId, setPostId] = useState('');
-  const post = useSelector(selectPostById(postId));
- // const post = posts.find(post => post.id === postId)
+  const [editedPost, setEditedPost] = useState(null);
 
-  const [title, setTitle] = useState(post?.title);
-  const [content, setContent] = useState(post?.content);
+  //const [postId, setPostId] = useState('');
+
+  //  const post = useSelector(selectPostById(postId));
+  // const post = posts.find(post => post.id === postId)
+
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
   const dispatch = useDispatch();
 
-  const handlePostChanged = (event) => {
-    setPostId(event.target.value);
+  useEffect(() => {
 
-    console.log('####idchagne')
+
+    setTitle(editedPost?.title || "");
+
+    setContent(editedPost?.content || "");
+  }, [editedPost]);
+
+  const handlePostChanged = (event) => {
+    const postId = event.target.value;
+
+    const test = posts.find((post) => post.id === postId);
+
+    setEditedPost(test);
+
   };
   const handleTitleChanged = (event) => {
     setTitle(event.target.value);
@@ -29,12 +43,9 @@ export const EditPostForm = () => {
   };
   const handleSavePostClicked = () => {
     if (title && content) {
-      dispatch(postUpdated({ id: postId, title, content }));
+      dispatch(postUpdated({ id: editedPost.id, title, content }));
     }
   };
-
-  console.log('##here')
-  console.log(post)
 
   return (
     <section>
@@ -44,7 +55,7 @@ export const EditPostForm = () => {
       <select
         id="posts"
         name="posts"
-        value={postId}
+        value={editedPost?.id}
         onChange={handlePostChanged}
       >
         <option value={''} key={''}>
@@ -56,11 +67,14 @@ export const EditPostForm = () => {
           </option>
         ))}
       </select>
-
-      {post ? (
+      {!!editedPost ? (
         <>
+
           <form>
+
             <label htmlFor="postTitle">{'Post Title:'}</label>
+
+
             <input
               type="text"
               id="postTitle"
@@ -75,6 +89,7 @@ export const EditPostForm = () => {
               value={content}
               onChange={handleContentChanged}
             />
+
           </form>
           <button type="button" onClick={handleSavePostClicked}>
             {'Save Post'}
