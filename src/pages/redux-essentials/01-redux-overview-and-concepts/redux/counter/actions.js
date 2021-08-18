@@ -17,18 +17,18 @@ export const valueIncreased = () => ({ type: COUNTER_VALUE_INCREASED });
 
 export const valueDecreased = () => ({ type: COUNTER_VALUE_DECREASED });
 
-export const valueIncreasedByAmount = (amount) => ({
+export const valueIncreasedByAmount = (payload) => ({
   type: COUNTER_VALUE_INCREASED_BY_AMOUNT,
-  payload: amount,
+  payload,
 });
 
 export const valueIncreasedAsyncPending = () => ({
   type: COUNTER_VALUE_INCREASED_ASYNC_PENDING,
 });
 
-export const valueIncreasedAsyncFulfilled = (promise) => ({
+export const valueIncreasedAsyncFulfilled = (payload) => ({
   type: COUNTER_VALUE_INCREASED_ASYNC_FULFILLED,
-  payload: promise,
+  payload,
 });
 
 export const valueIncreasedAsyncRejected = (error) => ({
@@ -36,14 +36,14 @@ export const valueIncreasedAsyncRejected = (error) => ({
   error: error.toString(),
 });
 
-export const valueIncreasedAsync = (amount) => async (dispatch, getState) => {
+export const valueIncreasedAsync = (payload) => async (dispatch, getState) => {
   const status = selectCounterStatus(getState());
   if (status === 'pending') {
     return;
   }
   dispatch(valueIncreasedAsyncPending());
   try {
-    const response = await fetchCount(amount);
+    const response = await fetchCount(payload);
     dispatch(valueIncreasedAsyncFulfilled(response));
   } catch (error) {
     dispatch(valueIncreasedAsyncRejected(error));

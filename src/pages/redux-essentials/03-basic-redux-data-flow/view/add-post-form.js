@@ -10,8 +10,8 @@ export const AddPostForm = () => {
   const [content, setContent] = useState('');
   const dispatch = useDispatch();
 
-  const handleTitleChange = (e) => setTitle(e.target.value);
-  const handleContentChange = (e) => setContent(e.target.value);
+  const handleTitleChange = (event) => setTitle(event.target.value);
+  const handleContentChange = (event) => setContent(event.target.value);
   /** dispatching the post added action */
   const handleSavePostClick = () => {
     if (title && content) {

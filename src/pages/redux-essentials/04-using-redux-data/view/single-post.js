@@ -1,41 +1,49 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectPostById, selectPosts } from '../redux/posts/selectors';
+import { selectPostById, selectPostsIds } from '../redux/posts/selectors';
+import { selectUserById } from '../redux/users/selectors';
 
 /** showing single posts */
 export const SinglePost = () => {
-  const posts = useSelector(selectPosts);
   const [postId, setPostId] = useState('');
+  const postsIds = useSelector(selectPostsIds);
   const post = useSelector(selectPostById(postId));
+  const author = useSelector(selectUserById(post?.author));
 
-  const handleChange = (event) => {
+  const canShow = !!post;
+  const handlePostIdChanged = (event) => {
     setPostId(event.target.value);
   };
 
   return (
     <section>
       <h2>{'Showing Single Posts'}</h2>
-      <label htmlFor="posts">{'Choose a post:'}</label>
-      <select id="posts" name="posts" value={postId} onChange={handleChange}>
-        <option value={''} key={''}>
-          {''}
-        </option>
-        {posts.map((post) => (
-          <option value={post.id} key={post.id}>
-            {post.title}
-          </option>
-        ))}
-      </select>
-
-      {post ? (
-        <article>
-          <h3>{post.title}</h3>
-          <p>{post.content}</p>
-        </article>
-      ) : (
-        <h3>{'Post not found!'}</h3>
-      )}
+      <form>
+        <label htmlFor="posts">{'Post:'}</label>
+        <select
+          id="posts"
+          name="posts"
+          value={postId}
+          onChange={handlePostIdChanged}
+        >
+          <option value={''} />
+          {postsIds.map((id) => (
+            <option value={id} key={id}>
+              {id}
+            </option>
+          ))}
+        </select>
+        {canShow ? (
+          <article>
+            <h3>{post.title}</h3>
+            <p>{`by ${author?.name ?? 'Unknown author'}`}</p>
+            <p>{post.content}</p>
+          </article>
+        ) : (
+          <h3>{'Post not found!'}</h3>
+        )}
+      </form>
     </section>
   );
 };
