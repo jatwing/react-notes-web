@@ -11,7 +11,6 @@ export const SinglePost = () => {
   const post = useSelector(selectPostById(postId));
   const author = useSelector(selectUserById(post?.author));
 
-  const canShow = !!post;
   const handlePostIdChanged = (event) => {
     setPostId(event.target.value);
   };
@@ -34,7 +33,7 @@ export const SinglePost = () => {
             </option>
           ))}
         </select>
-        {canShow ? (
+        {!!post ? (
           <article>
             <h3>{post.title}</h3>
             <p>{`by ${author?.name ?? 'Unknown author'}`}</p>

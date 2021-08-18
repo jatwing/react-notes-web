@@ -1,3 +1,4 @@
+import { is } from 'date-fns/locale';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,8 +20,7 @@ export const EditPostForm = () => {
     setContent(post?.content || '');
   }, [post]);
 
-  const canShow = !!post;
-  const canEdit = !!title && !!content;
+  const isEditable = !!title && !!content;
   const handlePostIdChanged = (event) => {
     setPostId(event.target.value);
   };
@@ -54,7 +54,7 @@ export const EditPostForm = () => {
             </option>
           ))}
         </select>
-        {canShow ? (
+        {!!post ? (
           <>
             <div>
               <label htmlFor="postTitle">{'Post Title:'}</label>
@@ -83,7 +83,7 @@ export const EditPostForm = () => {
               <button
                 type="button"
                 onClick={handleSavePostClicked}
-                disabled={!canEdit}
+                disabled={!isEditable}
               >
                 {'Save Post'}
               </button>
