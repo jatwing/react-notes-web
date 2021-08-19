@@ -33,7 +33,7 @@ export const SinglePost = () => {
             </option>
           ))}
         </select>
-        {!!post ? (
+        {post ? (
           <article>
             <h3>{post.title}</h3>
             <p>{`by ${author?.name ?? 'Unknown author'}`}</p>

@@ -54,7 +54,7 @@ export const EditPostForm = () => {
             </option>
           ))}
         </select>
-        {!!post ? (
+        {post ? (
           <>
             <div>
               <label htmlFor="postTitle">{'Post Title:'}</label>
