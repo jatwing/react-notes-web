@@ -8,10 +8,18 @@ import { useReadingProject } from 'src/hooks';
 import { directoryNodes, useMedia } from 'src/utils';
 
 import { useStyles } from './styles';
+import { db, getDocuments } from 'src/utils/firebase';
 
 const DirectoryNode = (props) => {
   const { node } = props;
   const { loading, error, data } = useReadingProject('react-notes');
+
+  useEffect(() => {
+    console.log("tete")
+    const result = getDocuments(db);
+    console.log(result)
+  })
+
 
   useEffect(() => {
     if (node.name && node.name !== 'src/pages') {
