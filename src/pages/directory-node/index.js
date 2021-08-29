@@ -7,18 +7,31 @@ import { MultirowTextCard } from 'src/components';
 import { useReadingProject } from 'src/hooks';
 import { directoryNodes, useMedia } from 'src/utils';
 
+
+/*
+ * try firebase and redux here TODO delete them all
+ *
+ */
+
+
 import { useStyles } from './styles';
 import { db, getDocuments } from 'src/utils/firebase';
+
+import { useDispatch } from 'react-redux' 
+import { fetchAuthors  } from 'src/redux/authors/slice'
+
 
 const DirectoryNode = (props) => {
   const { node } = props;
   const { loading, error, data } = useReadingProject('react-notes');
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    console.log("tete")
-    const result = getDocuments(db);
-    console.log(result)
-  })
+    console.log("here")
+    dispatch(fetchAuthors());
+  }, [])
+
 
 
   useEffect(() => {

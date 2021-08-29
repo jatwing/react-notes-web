@@ -1,5 +1,4 @@
 import 'src/utils/i18n.js';
-
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -13,6 +12,10 @@ import { directoryNodes, fileNodes } from 'src/utils';
 
 import { Layout } from './layout';
 import { Theme } from './theme';
+
+import { Provider } from 'react-redux'
+import { store } from 'src/redux/store'
+
 
 const directoryRoutes = directoryNodes.map((node) => (
   <Route
@@ -35,6 +38,7 @@ const fileRoutes = fileNodes.map((node) => (
 const App = () => {
   const { t } = useTranslation();
   return (
+    <Provider store={store}>
     <Theme>
       <Router>
         <Layout>
@@ -48,6 +52,7 @@ const App = () => {
         </Layout>
       </Router>
     </Theme>
+    </Provider>
   );
 };
 
