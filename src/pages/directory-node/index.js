@@ -12,12 +12,8 @@ import { directoryNodes, useMedia } from 'src/utils';
  * try firebase and redux here TODO delete them all
  *
  */
-
-
 import { useStyles } from './styles';
-
 import { useDispatch } from 'react-redux' 
-
 import { storage } from 'src/utils/firebase'
 import { ref, getDownloadURL } from 'firebase/storage'
 
@@ -26,17 +22,14 @@ const DirectoryNode = (props) => {
   const { loading, error, data } = useReadingProject('react-notes');
 
   const dispatch = useDispatch();
-
-  console.log('storage')
-  console.log(storage);
   const path ='images/jatwing-avatar.png'
   const imageRef = ref(storage, path);
-
   getDownloadURL(imageRef).then(
     url => {
       console.log(url)
     }
   ).catch(error => {
+    console.log('TODO DLETETE directory Nodes')
     console.log(error)
   })
 

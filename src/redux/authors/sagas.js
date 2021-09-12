@@ -11,7 +11,8 @@ export const authorsFetchedFulfilled = createAction(
   'authors/authorsFetched/fulfilled'
 );
 export const authorsFetchedRejected = createAction(
-  'authors/authorsFetched/rejected'
+  'authors/authorsFetched/rejected',
+  (error) => ({ error })
 );
 
 const fetchAuthors = async () => {
@@ -23,7 +24,7 @@ const fetchAuthors = async () => {
   }));
 };
 
-function* workAuthorsFetched(action) {
+function* workAuthorsFetched() {
   try {
     yield put(authorsFetchedPending());
     const data = yield call(fetchAuthors);

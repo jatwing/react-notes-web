@@ -8,6 +8,7 @@ import { getAssetUrl } from 'src/utils';
 
 import { useDialogStyles } from './dialogStyles';
 import { useStyles } from './styles';
+import { useAuthors } from 'src/redux/authors/context';
 
 const Context = createContext({});
 
@@ -55,30 +56,25 @@ const ProjectColumn = () => {
 };
 
 const AuthorColumn = () => {
-  const { readAuthor } = useContext(Context);
-  const { loading, error, data } = readAuthor;
-
+  const { isSucceed, authors } = useAuthors();
   const { t } = useTranslation();
   const classes = useStyles();
-  if (loading) {
+
+  if (!isSucceed) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
-  if (error) {
-    return <Typography className={classes.text}>Error!</Typography>;
-  }
 
-  const author = data.Author;
   return (
     <>
       <Typography className={classes.text}>Author</Typography>
       <ExternalLink
         text={t('email')}
-        href={author.email}
+        href={authors[0].email}
         className={classes.link}
       />
       <ExternalLink
         text={t('stackOverflow')}
-        href={author.stackOverflow}
+        href={authors[0].stackOverflow}
         className={classes.link}
       />
     </>
@@ -88,6 +84,8 @@ const AuthorColumn = () => {
 const Logo = () => {
   const { readProject } = useContext(Context);
   const { loading, error, data } = readProject;
+
+  const { authors, isSucceed } = useAuthors();
 
   const { t } = useTranslation();
   const classes = useStyles();
@@ -112,6 +110,9 @@ const Logo = () => {
 };
 
 const Footer = () => {
+  const { authors, isSucceed, error } = useAuthors();
+
+
   const readAuthor = useReadingAuthor('jatwing');
   const readProject = useReadingProject('react-notes');
   const value = {

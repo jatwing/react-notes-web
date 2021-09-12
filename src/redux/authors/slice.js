@@ -35,3 +35,8 @@ const authorsSlice = createSlice({
 });
 
 export const authorsReducer = authorsSlice.reducer;
+
+const authorsSelector = authorsAdapter.getSelectors((state) => state.authors);
+export const selectAuthors = authorsSelector.selectAll;
+export const selectStatus = (state) => state.authors.status;
+export const selectError = (state) => state.authors.error;
