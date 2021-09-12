@@ -1,37 +1,32 @@
-import { DocumentRenderer } from '@keystone-next/document-renderer';
 import { Box, Grid, Typography } from '@material-ui/core';
-import { createContext, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ClickableElementPopupDialog, ExternalLink } from 'src/components';
-import { useReadingAuthor, useReadingProject } from 'src/hooks';
 import { getAssetUrl } from 'src/utils';
 
 import { useDialogStyles } from './dialogStyles';
 import { useStyles } from './styles';
 import { useAuthors } from 'src/redux/authors/context';
-
-const Context = createContext({});
+import { useProjects } from 'src/redux/projects/hooks';
 
 const ProjectColumn = () => {
-  const { readProject } = useContext(Context);
-  const { loading, error, data } = readProject;
-
+  const { isSucceed, projects } = useProjects();
   const { t } = useTranslation();
   const classes = useStyles();
   const dialogClasses = useDialogStyles();
-  if (loading) {
+
+  if (!isSucceed) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
-  if (error) {
-    return <Typography className={classes.text}>Error!</Typography>;
-  }
 
-  const project = data.Project;
+  const project = projects[0];
   const element = <Typography className={classes.link}>Attribution</Typography>;
   const title = (
     <Typography className={dialogClasses.text}>Attribution</Typography>
   );
-  const content = <DocumentRenderer document={project.attribution.document} />;
+  const content = (
+    <div dangerouslySetInnerHTML={{ __html: project.attribution }}></div>
+  );
+
   return (
     <>
       <Typography className={classes.text}>Project</Typography>
@@ -82,26 +77,18 @@ const AuthorColumn = () => {
 };
 
 const Logo = () => {
-  const { readProject } = useContext(Context);
-  const { loading, error, data } = readProject;
-
-  const { authors, isSucceed } = useAuthors();
-
+  const { isSucceed, projects } = useProjects();
   const { t } = useTranslation();
   const classes = useStyles();
-  if (loading) {
+  if (!isSucceed) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
-  if (error) {
-    return <Typography className={classes.text}>Error!</Typography>;
-  }
-
-  const project = data.Project;
+  const project = projects[0];
   return (
     <>
       <img
-        src={getAssetUrl(project.avatar.src)}
-        alt={t('jatwing')}
+        src={project.avatar}
+        alt={t('avatar')}
         className={classes.image}
       />
       <Typography className={classes.text}>{project.copyright}</Typography>
@@ -110,33 +97,21 @@ const Logo = () => {
 };
 
 const Footer = () => {
-  const { authors, isSucceed, error } = useAuthors();
-
-
-  const readAuthor = useReadingAuthor('jatwing');
-  const readProject = useReadingProject('react-notes');
-  const value = {
-    readAuthor,
-    readProject,
-  };
-
   const classes = useStyles();
   return (
-    <Context.Provider value={value}>
-      <Box className={classes.container}>
-        <Grid container className={classes.internalContainer}>
-          <Grid item xs={6} sm={6} md={3} className={classes.column}>
-            <ProjectColumn />
-          </Grid>
-          <Grid item xs={6} sm={6} md={3} className={classes.column}>
-            <AuthorColumn />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6} className={classes.logo}>
-            <Logo />
-          </Grid>
+    <Box className={classes.container}>
+      <Grid container className={classes.internalContainer}>
+        <Grid item xs={6} sm={6} md={3} className={classes.column}>
+          <ProjectColumn />
         </Grid>
-      </Box>
-    </Context.Provider>
+        <Grid item xs={6} sm={6} md={3} className={classes.column}>
+          <AuthorColumn />
+        </Grid>
+        <Grid item xs={12} sm={12} md={6} className={classes.logo}>
+          <Logo />
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

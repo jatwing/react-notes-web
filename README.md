@@ -1,4 +1,4 @@
-# [React Notes Frontend](https://react-notes.jatwing.com/)
+# [React Notes Web](https://react-notes.jatwing.com/)
 
 ## Content
 
@@ -22,18 +22,12 @@
 
 ```
 DISABLE_ESLINT_PLUGIN=true
-REACT_APP_CMS_URL=https://example.com
-REACT_APP_CMS_GRAPHQL_URI=https://example.com/api/graphql
-
 REACT_APP_FIREBASE_API_KEY=******
 REACT_APP_FIREBASE_APP_ID=******
 REACT_APP_FIREBASE_AUTH_DOMAIN=******
 REACT_APP_FIREBASE_MESSAGING_SENDER_ID=******
 REACT_APP_FIREBASE_PROJECT_ID=******
 REACT_APP_FIREBASE_STORAGE_BUCKET=******
-
-
-
 ```
 
 ## Attribution
@@ -41,6 +35,8 @@ REACT_APP_FIREBASE_STORAGE_BUCKET=******
 [Tutorial: Intro to React](https://reactjs.org/tutorial/tutorial.html) by [React Community](https://github.com/reactjs) is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
 [Redux Official Tutorials](https://redux.js.org/tutorials/index) by [Redux](https://github.com/reduxjs) is licensed under the [MIT license](https://github.com/reduxjs/redux/blob/master/LICENSE.md).
+
+Redux Saga ...
 
 ## License
 

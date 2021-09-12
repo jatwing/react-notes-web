@@ -21,18 +21,6 @@ const DirectoryNode = (props) => {
   const { node } = props;
   const { loading, error, data } = useReadingProject('react-notes');
 
-  const dispatch = useDispatch();
-  const path ='images/jatwing-avatar.png'
-  const imageRef = ref(storage, path);
-  getDownloadURL(imageRef).then(
-    url => {
-      console.log(url)
-    }
-  ).catch(error => {
-    console.log('TODO DLETETE directory Nodes')
-    console.log(error)
-  })
-
 
   useEffect(() => {
     if (node.name && node.name !== 'src/pages') {

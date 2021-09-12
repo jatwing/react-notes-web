@@ -49,14 +49,14 @@ const useStyles = makeStyles((theme) => {
         marginTop: '0',
       },
       '& $image': {
-        width: '64px',
-        height: '64px',
-        backgroundColor: theme.palette.primary.contrastText,
+        width: '84px',
+        height: '74px',
+       // backgroundColor: theme.palette.primary.contrastText,
         transition: theme.transitions.create('background-color'),
-        borderRadius: '50%',
+        //borderRadius: '50%',
         marginBottom: '16px',
         '&:hover, &:focus': {
-          backgroundColor: theme.palette.contrast.text.secondary,
+        //  backgroundColor: theme.palette.contrast.text.secondary,
         },
       },
       '& $text': {

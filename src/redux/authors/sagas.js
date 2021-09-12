@@ -27,8 +27,8 @@ const fetchAuthors = async () => {
 function* workAuthorsFetched() {
   try {
     yield put(authorsFetchedPending());
-    const data = yield call(fetchAuthors);
-    yield put(authorsFetchedFulfilled(data));
+    const authors = yield call(fetchAuthors);
+    yield put(authorsFetchedFulfilled(authors));
   } catch (error) {
     yield put(authorsFetchedRejected(error));
   }
