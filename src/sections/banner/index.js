@@ -27,7 +27,9 @@ const ClosableRow = (props) => {
   );
 };
 
-const Banner = () => {
+const Banner = () => <></>;
+
+const Banner2 = () => {
   const { loading, error, data } = useReadingNotifications();
 
   const { t } = useTranslation();
