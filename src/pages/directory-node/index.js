@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MultirowTextCard } from 'src/components';
-import { useReadingProject } from 'src/hooks';
 import { directoryNodes, useMedia } from 'src/utils';
 
 
@@ -13,13 +12,12 @@ import { directoryNodes, useMedia } from 'src/utils';
  *
  */
 import { useStyles } from './styles';
-import { useDispatch } from 'react-redux' 
-import { storage } from 'src/utils/firebase'
-import { ref, getDownloadURL } from 'firebase/storage'
+import { useProjects } from 'src/redux/projects/hooks'
+
 
 const DirectoryNode = (props) => {
   const { node } = props;
-  const { loading, error, data } = useReadingProject('react-notes');
+  const { isSucceed, projects } = useProjects();
 
 
   useEffect(() => {
@@ -27,11 +25,11 @@ const DirectoryNode = (props) => {
       document.title = node.name;
       return;
     }
-    if (loading || error) {
+    if (!isSucceed) {
       return;
     }
-    document.title = data.Project.title;
-  }, [node, loading, error, data]);
+    document.title = projects[0].title;
+  }, [node, ]);
 
   const { t } = useTranslation();
   const getSubtree = (node) => ({

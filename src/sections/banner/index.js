@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import { filter, sortBy } from 'lodash';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useReadingNotifications } from 'src/hooks';
 import { buildDate } from 'src/utils';
 
 import { useStyles } from './styles';
@@ -30,7 +29,8 @@ const ClosableRow = (props) => {
 const Banner = () => <></>;
 
 const Banner2 = () => {
-  const { loading, error, data } = useReadingNotifications();
+  // TODO fix
+  const { loading, error, data } = null;
 
   const { t } = useTranslation();
   const classes = useStyles();
