@@ -14,7 +14,10 @@ export const useAuthors = () => {
   const isFailed = status === 'failed';
 
   if (isIdle) {
-    dispatch(authorsFetched());
+ //   dispatch(authorsFetched());
+
+    dispatch({ type: 'authors/authorsRead' });
+
   }
 
   return { authors, isIdle, isLoading, isSucceed, isFailed, error };

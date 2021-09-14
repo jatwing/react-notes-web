@@ -3,6 +3,7 @@ import {
   authorsFetchedPending,
   authorsFetchedFulfilled,
   authorsFetchedRejected,
+authorsReadActions  
 } from './sagas';
 
 const authorsAdapter = createEntityAdapter({
@@ -31,6 +32,17 @@ const authorsSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message;
     },
+    [authorsReadActions.pending]: (state, action) => {
+      state.status = 'loading';
+    },
+    [authorsReadActions.fulfilled]: (state, action) => {
+      state.status = 'succeeded';
+      authorsAdapter.setAll(state, action.payload);
+    },
+    [authorsReadActions.failed]: (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    }
   },
 });
 

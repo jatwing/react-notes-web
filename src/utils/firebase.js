@@ -5,6 +5,7 @@ import { zipObject } from 'lodash';
 import { call, all } from 'redux-saga/effects';
 
 
+/** initialization */
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -16,6 +17,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+
+/** firestore helper functions */
+export const readDocuments = (collectionName) => async() => {
+  const col = collection(db, collectionName);
+  const snapshot = await getDocs(col);
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};
+
+
+
+/** storage  helper functions */
+
+
 
 export function* getEntityUrl(entity, key) {
   const imageRef = ref(storage, entity[key]);

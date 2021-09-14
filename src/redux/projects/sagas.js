@@ -24,6 +24,15 @@ const fetchProjects = async () => {
   }));
 };
 
+/**
+ * if we create a template
+ *
+ * the yield* line
+ *
+ * is not very general.
+ */
+
+
 function* workProjectsFetched() {
   try {
     yield put(projectsFetchedPending());
