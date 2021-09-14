@@ -5,7 +5,7 @@ import {  authorsReducer } from './authors/slice'
 import { projectsReducer  } from './projects/slice';
 import  createSagaMiddleware  from 'redux-saga'
 
-import { watchAuthorsFetched, watchAuthorsRead } from './authors/sagas'
+import { watchAuthorsRead } from './authors/sagas'
 import {watchProjectsFetched  } from './projects/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -19,9 +19,8 @@ export const store = configureStore({
 })
 
 
-sagaMiddleware.run(watchAuthorsFetched);
+sagaMiddleware.run(watchAuthorsRead);
 sagaMiddleware.run(watchProjectsFetched);
 
-sagaMiddleware.run(watchAuthorsRead);
 
 

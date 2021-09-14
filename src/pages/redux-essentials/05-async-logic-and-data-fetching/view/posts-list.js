@@ -42,6 +42,8 @@ export const PostsList = () => {
 
   useEffect(() => {
     if (status === 'idle') {
+
+      console.log(fetchPosts())
       dispatch(fetchPosts());
     }
   }, [status, dispatch]);

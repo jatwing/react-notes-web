@@ -30,5 +30,6 @@ export const valueIncreasedAsyncSucceeded = (payload) => ({
 });
 export const valueIncreasedAsyncFailed = (error) => ({
   type: COUNTER_VALUE_INCREASED_ASYNC_REJECTED,
+  error
 });
 
