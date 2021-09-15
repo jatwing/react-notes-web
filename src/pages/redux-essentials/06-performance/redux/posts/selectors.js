@@ -1,4 +1,4 @@
-import { createSelector } from '@reduxjs/toolkit'
+import { createSelector } from '@reduxjs/toolkit';
 
 /** extracting posts selectos */
 export const selectAllPosts = (state) => state.posts.data;
@@ -16,5 +16,5 @@ export const selectPostsError = (state) => state.posts.error;
 /** memoizing selector functions */
 export const selectPostsByUser = createSelector(
   [selectAllPosts, (state, userId) => userId],
-  (posts, userId) => posts.filter(post => post.user === userId)
-)
+  (posts, userId) => posts.filter((post) => post.user === userId)
+);

@@ -2,8 +2,7 @@ export const COUNTER_VALUE_INCREASED = 'counter/valueIncreased';
 export const COUNTER_VALUE_DECREASED = 'counter/valueDecreased';
 export const COUNTER_VALUE_INCREASED_BY_AMOUNT =
   'counter/valueIncreasedByAmount';
-export const COUNTER_VALUE_INCREASED_ASYNC =
-  'counter/valueIncreasedAsync';
+export const COUNTER_VALUE_INCREASED_ASYNC = 'counter/valueIncreasedAsync';
 export const COUNTER_VALUE_INCREASED_ASYNC_PENDING =
   'counter/valueIncreasedAsync/pending';
 export const COUNTER_VALUE_INCREASED_ASYNC_FULFILLED =
@@ -30,6 +29,5 @@ export const valueIncreasedAsyncSucceeded = (payload) => ({
 });
 export const valueIncreasedAsyncFailed = (error) => ({
   type: COUNTER_VALUE_INCREASED_ASYNC_REJECTED,
-  error
+  error,
 });
-

@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { filter, sortBy } from 'lodash';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNotifications } from 'src/redux/notifications/hooks';
 import { buildDate } from 'src/utils';
 
 import { useStyles } from './styles';
@@ -26,35 +27,21 @@ const ClosableRow = (props) => {
   );
 };
 
-const Banner = () => <></>;
-
-const Banner2 = () => {
-  // TODO fix
-  const { loading, error, data } = null;
+const Banner = () => {
+  const notifications = useNotifications();
 
   const { t } = useTranslation();
   const classes = useStyles();
-  if (loading) {
+  if (!notifications.isSucceed) {
     return (
       <Box className={classes.content}>
         <Box className={classes.row}>{t('loading')}</Box>
       </Box>
     );
   }
-  if (error) {
-    return (
-      <Box className={classes.content}>
-        <ClosableRow>{`${t('error')} ${error.message}`}</ClosableRow>
-      </Box>
-    );
-  }
 
   const { date, time } = buildDate;
   const isDevelopmentMode = process.env.NODE_ENV === 'development';
-  const notifications = sortBy(
-    filter(data.allNotifications, 'isVisible'),
-    'order'
-  );
 
   return (
     <Box className={classes.content}>
@@ -63,9 +50,9 @@ const Banner2 = () => {
           <p>{t('developmentBuildAtTimeOnDate', { time, date })}</p>
         </ClosableRow>
       )}
-      {notifications.map((notification) => (
+      {notifications.entities.map((notification) => (
         <ClosableRow key={JSON.stringify(notification)}>
-          <DocumentRenderer document={notification.content.document} />
+          <p dangerouslySetInnerHTML={{ __html: notification.content }}></p>
         </ClosableRow>
       ))}
     </Box>

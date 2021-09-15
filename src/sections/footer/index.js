@@ -1,24 +1,23 @@
 import { Box, Grid, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { ClickableElementPopupDialog, ExternalLink } from 'src/components';
-import { getAssetUrl } from 'src/utils';
-
-import { useDialogStyles } from './dialogStyles';
-import { useStyles } from './styles';
 import { useAuthors } from 'src/redux/authors/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
 
+import { useDialogStyles } from './dialogStyles';
+import { useStyles } from './styles';
+
 const ProjectColumn = () => {
-  const { isSucceed, projects } = useProjects();
+  const projects = useProjects();
   const { t } = useTranslation();
   const classes = useStyles();
   const dialogClasses = useDialogStyles();
 
-  if (!isSucceed) {
+  if (!projects.isSucceed) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
 
-  const project = projects[0];
+  const project = projects.entities[0];
   const element = <Typography className={classes.link}>Attribution</Typography>;
   const title = (
     <Typography className={dialogClasses.text}>Attribution</Typography>
@@ -58,7 +57,7 @@ const AuthorColumn = () => {
   if (!authors.isSucceed) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
-  const author = authors.entities[0]
+  const author = authors.entities[0];
 
   return (
     <>
@@ -78,20 +77,16 @@ const AuthorColumn = () => {
 };
 
 const Logo = () => {
-  const { isSucceed, projects } = useProjects();
+  const projects = useProjects();
   const { t } = useTranslation();
   const classes = useStyles();
-  if (!isSucceed) {
+  if (!projects.isSucceed) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
-  const project = projects[0];
+  const project = projects.entities[0];
   return (
     <>
-      <img
-        src={project.avatar}
-        alt={t('avatar')}
-        className={classes.image}
-      />
+      <img src={project.avatar} alt={t('avatar')} className={classes.image} />
       <Typography className={classes.text}>{project.copyright}</Typography>
     </>
   );

@@ -1,9 +1,10 @@
+import { memo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectUserById, selectAllUsers } from '../redux/users/selectors';
+
 import { selectPostsByUser } from '../redux/posts/selectors';
-import { useState, memo } from 'react';
-import { UserSelect } from './user-select';
+import { selectAllUsers, selectUserById } from '../redux/users/selectors';
 import { TimeAgo } from './time-ago';
+import { UserSelect } from './user-select';
 
 const PostExcerpt = memo((props) => {
   const { post, user } = props;

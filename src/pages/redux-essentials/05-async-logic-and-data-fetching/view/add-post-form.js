@@ -6,7 +6,6 @@ import { addNewPost, postAdded } from '../redux/posts/slice';
 import { selectUsersIds } from '../redux/users/selectors';
 
 export const AddPostForm = () => {
-
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [userId, setUserId] = useState('');

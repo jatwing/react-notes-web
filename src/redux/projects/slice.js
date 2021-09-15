@@ -1,7 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import {
-  projectsRead,
-} from './sagas';
+
+import { projectsRead } from './sagas';
 
 const projectsAdapter = createEntityAdapter({
   selectId: (entity) => entity.name,
@@ -18,7 +17,7 @@ const projectsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [projectsRead.pending]: (state, action) => {
+    [projectsRead.pending]: (state) => {
       state.status = 'loading';
     },
     [projectsRead.fulfilled]: (state, action) => {
@@ -34,7 +33,9 @@ const projectsSlice = createSlice({
 
 export const projectsReducer = projectsSlice.reducer;
 
-const projectsSelectors = projectsAdapter.getSelectors((state) => state.projects);
+const projectsSelectors = projectsAdapter.getSelectors(
+  (state) => state.projects
+);
 export const selectEntities = projectsSelectors.selectAll;
 export const selectStatus = (state) => state.projects.status;
 export const selectError = (state) => state.projects.error;

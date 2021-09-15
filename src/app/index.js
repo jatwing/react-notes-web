@@ -1,6 +1,8 @@
 import 'src/utils/i18n.js';
+
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -8,13 +10,11 @@ import {
   Switch,
 } from 'react-router-dom';
 import { DirectoryNode, FileNode } from 'src/pages';
+import { store } from 'src/redux/store';
 import { directoryNodes, fileNodes } from 'src/utils';
 
 import { Layout } from './layout';
 import { Theme } from './theme';
-
-import { Provider } from 'react-redux'
-import { store } from 'src/redux/store'
 
 const directoryRoutes = directoryNodes.map((node) => (
   <Route
@@ -34,25 +34,23 @@ const fileRoutes = fileNodes.map((node) => (
   />
 ));
 
-
-
 const App = () => {
   const { t } = useTranslation();
   return (
     <Provider store={store}>
-    <Theme>
-      <Router>
-        <Layout>
-          <Switch>
-            <Suspense fallback={t('loading')}>
-              {directoryRoutes}
-              {fileRoutes}
-            </Suspense>
-            <Redirect to="/" />
-          </Switch>
-        </Layout>
-      </Router>
-    </Theme>
+      <Theme>
+        <Router>
+          <Layout>
+            <Switch>
+              <Suspense fallback={t('loading')}>
+                {directoryRoutes}
+                {fileRoutes}
+              </Suspense>
+              <Redirect to="/" />
+            </Switch>
+          </Layout>
+        </Router>
+      </Theme>
     </Provider>
   );
 };

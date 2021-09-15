@@ -51,12 +51,12 @@ const useStyles = makeStyles((theme) => {
       '& $image': {
         width: '84px',
         height: '74px',
-       // backgroundColor: theme.palette.primary.contrastText,
+        // backgroundColor: theme.palette.primary.contrastText,
         transition: theme.transitions.create('background-color'),
         //borderRadius: '50%',
         marginBottom: '16px',
         '&:hover, &:focus': {
-        //  backgroundColor: theme.palette.contrast.text.secondary,
+          //  backgroundColor: theme.palette.contrast.text.secondary,
         },
       },
       '& $text': {

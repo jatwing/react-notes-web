@@ -1,11 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { selectAllUsers } from '../redux/users/selectors';
-import { selectAllNotifications } from '../redux/notifications/selectors';
-import { fetchNotifications } from '../redux/notifications/slice';
-import { allNotificationsRead } from '../redux/notifications/slice';
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { selectAllNotifications } from '../redux/notifications/selectors';
+import {
+  allNotificationsRead,
+  fetchNotifications,
+} from '../redux/notifications/slice';
+import { selectAllUsers } from '../redux/users/selectors';
 
 const Notification = (props) => {
   const { notification, users } = props;
@@ -22,7 +24,7 @@ const Notification = (props) => {
     <div key={notification.id}>
       <div>
         {notification.isNew && '(new) '}
-        <b>{user.name}</b> 
+        <b>{user.name}</b>
         {notification.message}
       </div>
       <div title={notification.date}>
@@ -40,15 +42,18 @@ export const NotificationsList = () => {
   };
 
   useEffect(() => {
-    dispatch(allNotificationsRead())
-  })
-
+    dispatch(allNotificationsRead());
+  });
 
   return (
     <section>
       <h2>{'Notifications'}</h2>
       {notifications?.map((notification) => (
-        <Notification notification={notification} users={users} key={notification.id} />
+        <Notification
+          notification={notification}
+          users={users}
+          key={notification.id}
+        />
       ))}
       <button onClick={handleRefreshClicked}>{'Refresh Notifications'}</button>
     </section>

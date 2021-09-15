@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { selectAllNotifications } from './selectors';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { client } from '../../api/client';
+import { selectAllNotifications } from './selectors';
 
 /** notifications slice */
 export const fetchNotifications = createAsyncThunk(
@@ -47,4 +48,3 @@ const notificationsSlice = createSlice({
 export const notificationsReducer = notificationsSlice.reducer;
 
 export const { allNotificationsRead } = notificationsSlice.actions;
-

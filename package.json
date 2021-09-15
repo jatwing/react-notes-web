@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.3.21",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@keystone-next/document-renderer": "^4.0.0",
@@ -19,7 +18,6 @@
     "faker": "^5.5.3",
     "firebase": "^9.0.0",
     "global": "^4.4.0",
-    "graphql": "^15.5.1",
     "i18next": "^20.3.5",
     "i18next-browser-languagedetector": "^6.1.2",
     "lodash": "^4.17.21",

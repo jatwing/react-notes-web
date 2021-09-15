@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectEntities, selectStatus, selectError } from './slice';
-import { projectsRead  } from './sagas'
+
+import { projectsRead } from './sagas';
+import { selectEntities, selectError, selectStatus } from './slice';
 
 export const useProjects = () => {
-  const entities =  useSelector(selectEntities);
+  const entities = useSelector(selectEntities);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
   const dispatch = useDispatch();

@@ -1,9 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { collection, getDocs, getFirestore } from 'firebase/firestore/lite';
+import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import { zipObject } from 'lodash';
-import { call, all } from 'redux-saga/effects';
-
+import { all, call } from 'redux-saga/effects';
 
 /** initialization */
 const firebaseConfig = {
@@ -19,7 +18,7 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 
 /** firestore helper functions */
-export const readDocuments = (collectionName) => async() => {
+export const readDocuments = (collectionName) => async () => {
   const col = collection(db, collectionName);
   const snapshot = await getDocs(col);
   return snapshot.docs.map((doc) => ({
@@ -28,13 +27,8 @@ export const readDocuments = (collectionName) => async() => {
   }));
 };
 
-
-
-/** storage  helper functions */
-
-
-
-export function* getEntityUrl(entity, key) {
+/** storage helper functions */
+export function* readEntityUrl(entity, key) {
   const imageRef = ref(storage, entity[key]);
   const url = yield call(getDownloadURL, imageRef);
   return {
@@ -43,7 +37,7 @@ export function* getEntityUrl(entity, key) {
   };
 }
 
-export function* getEntityUrls(entity, keys) {
+export function* readEntityUrls(entity, keys) {
   const imageRefs = keys.map((key) => ref(storage, entity[key]));
   const descriptions = imageRefs.map((imageRef) =>
     call(getDownloadURL, imageRef)
@@ -55,9 +49,9 @@ export function* getEntityUrls(entity, keys) {
   };
 }
 
-export function* getEntitiesUrls(entities, keys) {
+export function* readEntitiesUrls(entities, keys) {
   const descriptions = entities.map((entity) =>
-    call(getEntityUrls, entity, keys)
+    call(readEntityUrls, entity, keys)
   );
   return yield all(descriptions);
 }

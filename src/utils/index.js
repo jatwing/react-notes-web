@@ -1,4 +1,3 @@
-import { client, getAssetUrl } from './cms';
 import {
   directoryNodes,
   fileNodes,
@@ -10,12 +9,10 @@ import { buildDate, pageTree } from './preval';
 
 export {
   buildDate,
-  client,
   directoryNodes,
   fileNodes,
   findNode,
   getAncestors,
-  getAssetUrl,
   getMediaQueries,
   pageTree,
   useMedia,

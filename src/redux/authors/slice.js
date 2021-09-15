@@ -1,7 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import {
-  authorsRead
-} from './sagas';
+
+import { authorsRead } from './sagas';
 
 const authorsAdapter = createEntityAdapter({
   selectId: (entity) => entity.name,
@@ -18,7 +17,7 @@ const authorsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [authorsRead.pending]: (state, action) => {
+    [authorsRead.pending]: (state) => {
       state.status = 'loading';
     },
     [authorsRead.fulfilled]: (state, action) => {
@@ -28,7 +27,7 @@ const authorsSlice = createSlice({
     [authorsRead.failed]: (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
-    }
+    },
   },
 });
 

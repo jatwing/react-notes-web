@@ -1,8 +1,7 @@
-
 import {
   COUNTER_VALUE_DECREASED,
   COUNTER_VALUE_INCREASED,
-    COUNTER_VALUE_INCREASED_ASYNC_FULFILLED,
+  COUNTER_VALUE_INCREASED_ASYNC_FULFILLED,
   COUNTER_VALUE_INCREASED_ASYNC_PENDING,
   COUNTER_VALUE_INCREASED_ASYNC_REJECTED,
   COUNTER_VALUE_INCREASED_BY_AMOUNT,
@@ -37,7 +36,7 @@ export const counterReducer = (state, action) => {
         },
       };
     }
-      case COUNTER_VALUE_INCREASED_ASYNC_PENDING: {
+    case COUNTER_VALUE_INCREASED_ASYNC_PENDING: {
       return {
         ...state,
         counter: {
@@ -70,5 +69,4 @@ export const counterReducer = (state, action) => {
       return state;
     }
   }
-}
-
+};

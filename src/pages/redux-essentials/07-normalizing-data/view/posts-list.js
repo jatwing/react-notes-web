@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectAllPosts,
-  fetchPosts,
-  selectPostIds,
-  selectPostById,
-} from '../redux/posts/slice';
 
 import { selectPostsError, selectPostsStatus } from '../redux/posts/selectors';
+import {
+  fetchPosts,
+  selectAllPosts,
+  selectPostById,
+  selectPostIds,
+} from '../redux/posts/slice';
 import { selectUserById } from '../redux/users/slice';
 import { ReactionButtons } from './reaction-buttons';
 import { TimeAgo } from './time-ago';
@@ -19,7 +19,7 @@ const PostExcerpt = (props) => {
   /**
    * TODO what is the standard form of selector
    */
-  const user = useSelector((state) => selectUserById(state,post.user));
+  const user = useSelector((state) => selectUserById(state, post.user));
   const userName = user
     ? `${user.firstName} ${user.lastName}`
     : 'Unknown author';
@@ -43,7 +43,7 @@ export const PostsList = () => {
   const dispatch = useDispatch();
   const sortedPostsIds = useSelector(selectPostIds);
 
-  console.log(sortedPostsIds)
+  console.log(sortedPostsIds);
 
   const status = useSelector(selectPostsStatus);
   const error = useSelector(selectPostsError);

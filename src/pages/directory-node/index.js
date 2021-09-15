@@ -4,21 +4,18 @@ import clsx from 'clsx';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MultirowTextCard } from 'src/components';
+import { useProjects } from 'src/redux/projects/hooks';
 import { directoryNodes, useMedia } from 'src/utils';
-
 
 /*
  * try firebase and redux here TODO delete them all
  *
  */
 import { useStyles } from './styles';
-import { useProjects } from 'src/redux/projects/hooks'
-
 
 const DirectoryNode = (props) => {
   const { node } = props;
   const { isSucceed, projects } = useProjects();
-
 
   useEffect(() => {
     if (node.name && node.name !== 'src/pages') {
@@ -29,7 +26,7 @@ const DirectoryNode = (props) => {
       return;
     }
     document.title = projects[0].title;
-  }, [node, ]);
+  }, [node]);
 
   const { t } = useTranslation();
   const getSubtree = (node) => ({

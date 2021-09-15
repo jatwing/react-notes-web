@@ -9,4 +9,3 @@ export default configureStore({
     users: usersReducer,
   },
 });
-

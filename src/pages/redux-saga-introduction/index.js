@@ -1,6 +1,6 @@
-import {Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
-import { store } from './redux/store'
+import { store } from './redux/store';
 import { Counter } from './view/counter';
 
 const ReduxSagaBeginnerTutorial = () => {
@@ -8,10 +8,7 @@ const ReduxSagaBeginnerTutorial = () => {
     <Provider store={store}>
       <Counter />
     </Provider>
-  )
-}
-
+  );
+};
 
 export default ReduxSagaBeginnerTutorial;
-
-

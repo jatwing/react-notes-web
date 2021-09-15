@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { authorsRead } from './sagas';
+import { notificationsRead } from './sagas';
 import { selectEntities, selectError, selectStatus } from './slice';
 
-export const useAuthors = () => {
+export const useNotifications = () => {
   const entities = useSelector(selectEntities);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
@@ -15,7 +15,7 @@ export const useAuthors = () => {
   const isFailed = status === 'failed';
 
   if (isIdle) {
-    dispatch(authorsRead());
+    dispatch(notificationsRead());
   }
 
   return { entities, isIdle, isLoading, isSucceed, isFailed, error };
