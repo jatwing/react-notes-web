@@ -5,7 +5,7 @@ import { getAssetUrl } from 'src/utils';
 
 import { useDialogStyles } from './dialogStyles';
 import { useStyles } from './styles';
-import { useAuthors } from 'src/redux/authors/context';
+import { useAuthors } from 'src/redux/authors/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
 
 const ProjectColumn = () => {
@@ -51,25 +51,26 @@ const ProjectColumn = () => {
 };
 
 const AuthorColumn = () => {
-  const { isSucceed, authors } = useAuthors();
+  const authors = useAuthors();
   const { t } = useTranslation();
   const classes = useStyles();
 
-  if (!isSucceed) {
+  if (!authors.isSucceed) {
     return <Typography className={classes.text}>Loading...</Typography>;
   }
+  const author = authors.entities[0]
 
   return (
     <>
       <Typography className={classes.text}>Author</Typography>
       <ExternalLink
         text={t('email')}
-        href={authors[0].email}
+        href={author.email}
         className={classes.link}
       />
       <ExternalLink
         text={t('stackOverflow')}
-        href={authors[0].stackOverflow}
+        href={author.stackOverflow}
         className={classes.link}
       />
     </>

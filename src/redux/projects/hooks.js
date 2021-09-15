@@ -1,10 +1,9 @@
-
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProjects, selectStatus, selectError } from './slice';
-import { projectsFetched  } from './sagas'
+import { selectEntities, selectStatus, selectError } from './slice';
+import { projectsRead  } from './sagas'
 
 export const useProjects = () => {
-  const projects = useSelector(selectProjects);
+  const entities =  useSelector(selectEntities);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
@@ -15,8 +14,8 @@ export const useProjects = () => {
   const isFailed = status === 'failed';
 
   if (isIdle) {
-    dispatch(projectsFetched());
+    dispatch(projectsRead());
   }
 
-  return { projects, isIdle, isLoading, isSucceed, isFailed, error };
+  return { entities, isIdle, isLoading, isSucceed, isFailed, error };
 };

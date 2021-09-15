@@ -1,22 +1,21 @@
 import { take, call, put } from 'redux-saga/effects';
-import { createLifecycleActions } from 'src/redux/helpers';
+import { createLifecycleActions } from 'src/redux/utils';
 import { readDocuments } from 'src/utils/firebase';
 
-export const authorsReadActions = createLifecycleActions('authors/authorsRead');
+export const authorsRead = createLifecycleActions('authors/authorsRead');
 
 function* workAuthorsRead() {
   try {
-    yield put(authorsReadActions.pending());
-    const authors = yield call(readDocuments('authors'));
-    yield put(authorsReadActions.fulfilled(authors));
+    yield put(authorsRead.pending());
+    const authors = yield call(readDocuments, 'authors');
+    yield put(authorsRead.fulfilled(authors));
   } catch (error) {
-    yield put(authorsReadActions.rejected(error));
+    yield put(authorsRead.rejected(error));
   }
 }
 
 export function* watchAuthorsRead() {
-  yield take(authorsReadActions.typePrefix)
+  yield take(authorsRead)
   yield call(workAuthorsRead)
-
- // yield takeLatest(authorsReadActions.typePrefix, workAuthorsRead);
 }
+

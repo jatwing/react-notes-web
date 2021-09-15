@@ -1,8 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import {
-  projectsFetchedPending,
-  projectsFetchedFulfilled,
-  projectsFetchedRejected,
+  projectsRead,
 } from './sagas';
 
 const projectsAdapter = createEntityAdapter({
@@ -20,14 +18,14 @@ const projectsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [projectsFetchedPending]: (state, action) => {
+    [projectsRead.pending]: (state, action) => {
       state.status = 'loading';
     },
-    [projectsFetchedFulfilled]: (state, action) => {
+    [projectsRead.fulfilled]: (state, action) => {
       state.status = 'succeeded';
       projectsAdapter.setAll(state, action.payload);
     },
-    [projectsFetchedRejected]: (state, action) => {
+    [projectsRead.rejected]: (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
     },
@@ -36,8 +34,7 @@ const projectsSlice = createSlice({
 
 export const projectsReducer = projectsSlice.reducer;
 
-const projectsSelector = projectsAdapter.getSelectors((state) => state.projects);
-
-export const selectProjects = projectsSelector.selectAll;
+const projectsSelectors = projectsAdapter.getSelectors((state) => state.projects);
+export const selectEntities = projectsSelectors.selectAll;
 export const selectStatus = (state) => state.projects.status;
 export const selectError = (state) => state.projects.error;

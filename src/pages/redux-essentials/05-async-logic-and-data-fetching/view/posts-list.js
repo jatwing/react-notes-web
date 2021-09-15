@@ -42,8 +42,7 @@ export const PostsList = () => {
 
   useEffect(() => {
     if (status === 'idle') {
-
-      console.log(fetchPosts())
+      console.log('aysnc thunk result')
       dispatch(fetchPosts());
     }
   }, [status, dispatch]);
