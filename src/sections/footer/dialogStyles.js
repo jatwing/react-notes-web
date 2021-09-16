@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 
-const useDialogStyles = makeStyles((theme) => {
+export const useDialogStyles = makeStyles((theme) => {
   return {
     /** modifier */
 
@@ -17,5 +17,3 @@ const useDialogStyles = makeStyles((theme) => {
     container: {},
   };
 });
-
-export { useDialogStyles };

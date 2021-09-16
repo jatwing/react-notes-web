@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme) => {
+export const useStyles = makeStyles((theme) => {
   return {
     /** modifier */
     hidden: {},
@@ -49,5 +49,3 @@ const useStyles = makeStyles((theme) => {
     },
   };
 });
-
-export { useStyles };

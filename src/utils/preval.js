@@ -1,6 +1,6 @@
 import preval from 'preval.macro';
 
-const buildDate = preval`
+export const buildDate = preval`
   const date = new Date();
 
   module.exports = {
@@ -9,7 +9,7 @@ const buildDate = preval`
   }
 `;
 
-const pageTree = preval`
+export const pageTree = preval`
   const { statSync, readdirSync } = require('fs');
   const { join } = require('path');
 
@@ -51,5 +51,3 @@ const pageTree = preval`
 
   module.exports = getNode('src/pages', 'src/pages');
 `;
-
-export { buildDate, pageTree };

@@ -1,10 +1,10 @@
 import { Card, Divider, List, ListItem, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import { Link } from 'src/components';
+import { Link } from 'src/components/link';
 
 import { useStyles } from './styles';
 
-const MultirowTextCard = (props) => {
+export const MultirowTextCard = (props) => {
   const { data, modifier } = props;
 
   const classes = useStyles();
@@ -42,5 +42,3 @@ const MultirowTextCard = (props) => {
     </Card>
   );
 };
-
-export { MultirowTextCard };

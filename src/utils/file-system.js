@@ -1,5 +1,8 @@
 import { pageTree } from './preval';
 
+/**
+ * helper functions
+ */
 const traverse = (node, leafNodeCallback = null, parentNodeCallback = null) => {
   /** leaf node */
   if (!node.children) {
@@ -25,7 +28,7 @@ const fixTree = (tree) => {
   traverse(tree, null, addChildrenParent);
 };
 
-const getSemanticDirectoryNodes = (tree) => {
+export const getSemanticDirectoryNodes = (tree) => {
   const nodes = [];
   const addNode = (node) => {
     nodes.push(node);
@@ -46,7 +49,7 @@ const getSemanticDirectoryNodes = (tree) => {
   return nodes.filter(isSemanticDirectory);
 };
 
-const getSemanticFileNodes = (tree) => {
+export const getSemanticFileNodes = (tree) => {
   const nodes = [];
   const addNode = (node) => {
     nodes.push(node);
@@ -70,7 +73,7 @@ const getSemanticFileNodes = (tree) => {
   return nodes.filter(isSemanticFile);
 };
 
-const findNode = (tree, evaluate) => {
+export const findNode = (tree, evaluate) => {
   let result;
   const find = (node) => {
     if (evaluate(node)) {
@@ -92,7 +95,7 @@ const reverse = (node, anteriorCallback = null, posteriorCallback = null) => {
   posteriorCallback && posteriorCallback(node);
 };
 
-const getAncestors = (node) => {
+export const getAncestors = (node) => {
   const nodes = [];
   const addParentNode = (node) => {
     nodes.push(node.parent);
@@ -102,10 +105,8 @@ const getAncestors = (node) => {
 };
 
 /**
- * context
+ * helper variables
  */
 fixTree(pageTree);
-const directoryNodes = getSemanticDirectoryNodes(pageTree);
-const fileNodes = getSemanticFileNodes(pageTree);
-
-export { directoryNodes, fileNodes, findNode, getAncestors };
+export const directoryNodes = getSemanticDirectoryNodes(pageTree);
+export const fileNodes = getSemanticFileNodes(pageTree);

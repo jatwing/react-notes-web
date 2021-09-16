@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   /** element */
   link: {},
   title: {},
@@ -54,5 +54,3 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-export { useStyles };

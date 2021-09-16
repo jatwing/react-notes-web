@@ -9,9 +9,10 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { DirectoryNode, FileNode } from 'src/pages';
+import { DirectoryNode } from 'src/pages/directory-node';
+import { FileNode } from 'src/pages/file-node';
 import { store } from 'src/redux/store';
-import { directoryNodes, fileNodes } from 'src/utils';
+import { directoryNodes, fileNodes } from 'src/utils/file-system';
 
 import { Layout } from './layout';
 import { Theme } from './theme';
@@ -34,7 +35,7 @@ const fileRoutes = fileNodes.map((node) => (
   />
 ));
 
-const App = () => {
+export const App = () => {
   const { t } = useTranslation();
   return (
     <Provider store={store}>
@@ -54,5 +55,3 @@ const App = () => {
     </Provider>
   );
 };
-
-export { App };

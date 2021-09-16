@@ -1,11 +1,28 @@
-import 'src/config/styles.css';
+import './styles.css';
 
 import { Box } from '@material-ui/core';
-import { Banner, Footer, Header } from 'src/sections';
+import { makeStyles } from '@material-ui/styles';
+import { Banner } from 'src/sections/banner';
+import { Footer } from 'src/sections/footer';
+import { Header } from 'src/sections/header';
 
-import { useStyles } from './styles';
+const useStyles = makeStyles((theme) => {
+  return {
+    /** block */
+    content: {
+      flex: '1',
+      padding: '32px',
+    },
+    /** container  */
+    container: {
+      display: 'flex',
+      flexFlow: 'column nowrap',
+      minHeight: '100vh',
+    },
+  };
+});
 
-const Layout = ({ children }) => {
+export const Layout = ({ children }) => {
   const classes = useStyles();
   return (
     <Box className={classes.container}>
@@ -16,5 +33,3 @@ const Layout = ({ children }) => {
     </Box>
   );
 };
-
-export { Layout };

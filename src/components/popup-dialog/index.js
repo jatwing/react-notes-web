@@ -9,11 +9,11 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import clsx from 'clsx';
-import { useMedia } from 'src/utils';
+import { useMedia } from 'src/utils/material-ui';
 
 import { useStyles } from './styles';
 
-const PopupDialog = (props) => {
+export const PopupDialog = (props) => {
   const {
     title = '',
     children = null,
@@ -80,5 +80,3 @@ const PopupDialog = (props) => {
     </Dialog>
   );
 };
-
-export { PopupDialog };

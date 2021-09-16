@@ -1,7 +1,7 @@
 import { Link as MaterialLink } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
-const Link = (props) => {
+export const Link = (props) => {
   const { href, onClick, ...otherProps } = props;
   const history = useHistory();
 
@@ -15,5 +15,3 @@ const Link = (props) => {
 
   return <MaterialLink href={href} onClick={handleClick} {...otherProps} />;
 };
-
-export { Link };

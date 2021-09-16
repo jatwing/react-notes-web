@@ -1,4 +1,9 @@
-const ExternalLink = (props) => {
+/**
+ * can internal link and external link be combined?
+ *
+ * it would blend with react-dom-router
+ */
+export const ExternalLink = (props) => {
   const {
     text,
     children,
@@ -14,5 +19,3 @@ const ExternalLink = (props) => {
     </a>
   );
 };
-
-export { ExternalLink };

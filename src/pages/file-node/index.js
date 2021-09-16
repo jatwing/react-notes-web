@@ -1,6 +1,6 @@
 import { createElement, lazy, useEffect } from 'react';
 
-const FileNode = (props) => {
+export const FileNode = (props) => {
   const { node } = props;
   /**
    * [Module methods](https://webpack.js.org/api/module-methods/)
@@ -15,5 +15,3 @@ const FileNode = (props) => {
   }, [node]);
   return createElement(component, null, null);
 };
-
-export { FileNode };

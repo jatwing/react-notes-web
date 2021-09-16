@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { ClickableElementPopupDialog, ExternalLink } from 'src/components';
+import { ClickableElementPopupDialog } from 'src/components/clickable-element-popup-dialog';
+import { ExternalLink } from 'src/components/external-link';
 import { useAuthors } from 'src/redux/authors/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
 
@@ -92,7 +93,7 @@ const Logo = () => {
   );
 };
 
-const Footer = () => {
+export const Footer = () => {
   const classes = useStyles();
   return (
     <Box className={classes.container}>
@@ -110,5 +111,3 @@ const Footer = () => {
     </Box>
   );
 };
-
-export { Footer };

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/styles';
-import { getMediaQueries } from 'src/utils/media';
+import { getMediaQueries } from 'src/utils/material-ui';
 
-const useStyles = makeStyles((theme) => {
+export const useStyles = makeStyles((theme) => {
   const { largeQuery, mediumLargeQuery } = getMediaQueries(theme);
   return {
     /** element */
@@ -79,5 +79,3 @@ const useStyles = makeStyles((theme) => {
     },
   };
 });
-
-export { useStyles };

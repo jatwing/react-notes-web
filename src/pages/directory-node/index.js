@@ -3,29 +3,26 @@ import { useTheme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MultirowTextCard } from 'src/components';
+import { MultirowTextCard } from 'src/components/multirow-text-card';
 import { useProjects } from 'src/redux/projects/hooks';
-import { directoryNodes, useMedia } from 'src/utils';
+import { directoryNodes } from 'src/utils/file-system';
+import { useMedia } from 'src/utils/material-ui';
 
-/*
- * try firebase and redux here TODO delete them all
- *
- */
 import { useStyles } from './styles';
 
-const DirectoryNode = (props) => {
+export const DirectoryNode = (props) => {
   const { node } = props;
-  const { isSucceed, projects } = useProjects();
+  const projects = useProjects();
 
   useEffect(() => {
     if (node.name && node.name !== 'src/pages') {
       document.title = node.name;
       return;
     }
-    if (!isSucceed) {
+    if (!projects.isSucceed) {
       return;
     }
-    document.title = projects[0].title;
+    document.title = projects.entities[0].title;
   }, [node]);
 
   const { t } = useTranslation();
@@ -74,5 +71,3 @@ const DirectoryNode = (props) => {
     </ImageList>
   );
 };
-
-export { DirectoryNode };

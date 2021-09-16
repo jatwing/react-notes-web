@@ -3,12 +3,14 @@ import { useTheme } from '@material-ui/core/styles';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { Link } from 'src/components';
-import { findNode, getAncestors, pageTree, useMedia } from 'src/utils';
+import { Link } from 'src/components/link';
+import { findNode, getAncestors } from 'src/utils/file-system';
+import { useMedia } from 'src/utils/material-ui';
+import { pageTree } from 'src/utils/preval';
 
 import { useStyles } from './styles';
 
-const Header = () => {
+export const Header = () => {
   const { pathname } = useLocation();
   const hasIdenticalUrl = (node) => node.url === pathname;
   const node = findNode(pageTree, hasIdenticalUrl);
@@ -66,5 +68,3 @@ const Header = () => {
     </AppBar>
   );
 };
-
-export { Header };

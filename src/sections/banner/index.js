@@ -1,4 +1,3 @@
-import { DocumentRenderer } from '@keystone-next/document-renderer';
 import { Box } from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import clsx from 'clsx';
@@ -6,7 +5,7 @@ import { filter, sortBy } from 'lodash';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNotifications } from 'src/redux/notifications/hooks';
-import { buildDate } from 'src/utils';
+import { buildDate } from 'src/utils/preval';
 
 import { useStyles } from './styles';
 
@@ -27,7 +26,7 @@ const ClosableRow = (props) => {
   );
 };
 
-const Banner = () => {
+export const Banner = () => {
   const notifications = useNotifications();
 
   const { t } = useTranslation();
@@ -58,5 +57,3 @@ const Banner = () => {
     </Box>
   );
 };
-
-export { Banner };
