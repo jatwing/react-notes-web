@@ -13,9 +13,10 @@ import { DirectoryNode } from 'src/pages/directory-node';
 import { FileNode } from 'src/pages/file-node';
 import { store } from 'src/redux/store';
 import { directoryNodes, fileNodes } from 'src/utils/file-system';
-
-import { Layout } from './layout';
+import { Layout, Layout2 } from './layout';
 import { Theme } from './theme';
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const directoryRoutes = directoryNodes.map((node) => (
   <Route
@@ -35,11 +36,39 @@ const fileRoutes = fileNodes.map((node) => (
   />
 ));
 
-export const App = () => {
+/** TODO delete */
+export const App2 = () => {
   const { t } = useTranslation();
   return (
     <Provider store={store}>
       <Theme>
+        <Router>
+          <Layout2>
+            <Switch>
+              <Suspense fallback={t('loading')}>
+                {directoryRoutes}
+                {fileRoutes}
+              </Suspense>
+              <Redirect to="/" />
+            </Switch>
+          </Layout2>
+        </Router>
+      </Theme>
+    </Provider>
+  );
+};
+
+/**
+ * the new app, using the theme-provider
+ * with the new package name
+ */
+const theme = createTheme({});
+
+export const App = () => {
+  const { t } = useTranslation();
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
         <Router>
           <Layout>
             <Switch>
@@ -51,7 +80,7 @@ export const App = () => {
             </Switch>
           </Layout>
         </Router>
-      </Theme>
+      </ThemeProvider>
     </Provider>
   );
 };

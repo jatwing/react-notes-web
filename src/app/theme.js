@@ -1,8 +1,6 @@
-import {
-  createTheme,
-  StyledEngineProvider,
-  ThemeProvider,
-} from '@material-ui/core/styles';
+import { createTheme, StyledEngineProvider } from '@mui/material/styles';
+
+import { ThemeProvider } from '@material-ui/core/styles';
 
 const originalDarkTheme = createTheme({ palette: { mode: 'dark' } });
 
