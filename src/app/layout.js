@@ -12,6 +12,7 @@ import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
 import { Button } from '@mui/material';
 
 import { useToggle } from 'src/utils/react';
+import {  traverse,pageUrls } from 'src/utils/url'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -53,17 +54,42 @@ export const Layout2 = ({ children }) => {
 };
 
 /**
+ * the pages file system / url values indep
+ * from component
+ */
+
+const getPageItems = (pageUrls) => {
+  const pageItems = pageUrls;
+  const modifyNode = (node) => {
+    if (node.urlType === 'directory') {
+      node.type = 'list'
+    } else if (node.urlType === 'file') {
+      node.type = 'item'
+    }
+    node.href = node.url;
+  }
+  traverse(pageItems, modifyNode)
+  return pageItems;
+}
+const pageItems = getPageItems(pageUrls);
+
+
+/**
  * test the drawer
  * and the new package name
  */
 export const Layout = ({ children }) => {
   const [isOpen, setIsOpen] = useToggle();
 
+  // NEW data online required on firebase maybe
+  // TODO retrieve the translation here, and update the node name
+
+
   const classes = useStyles();
   return (
     <Box className={classes.container}>
       <Box className={classes.containerTwo}>
-        <ResponsiveDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+        <ResponsiveDrawer isOpen={isOpen} setIsOpen={setIsOpen} items={pageItems}/>
         <Box>
           <div>{'app bar content and footer'}</div>
           <div>
