@@ -1,6 +1,11 @@
 import preval from 'preval.macro';
 
-export const pagePaths   = preval`
+import { pagePaths } from './preval'
+console.log('hree')
+console.log(pagePaths);
+
+
+export const pagePaths2   = preval`
   const { statSync, readdirSync } = require('fs');
   const { join } = require('path');
 
@@ -62,6 +67,53 @@ export const traverse = (node, callback = null) => {
     traverse(child, callback);
   });
 };
+
+
+const getUrls = (paths) => {
+  const urls = JSON.parse(JSON.stringify(paths));
+  const isDirectoryPath = (node) => node.pathType === 'directory';
+  const isFileUrl = (node) => {
+    let hasChildWithDirectoryPath = false;
+    let hasChildWithIndexFilename = false
+    node.children.forEach((child) => {
+      if (child.pathType === 'directory') {
+        hasChildWithDirectoryPath = true;
+      }
+      if (child.filename === 'index.js') {
+        hasChildWithIndexFilename = true;
+      }
+    });
+    if (hasChildWithDirectoryPath) {
+      return false;
+    }
+    if (hasChildWithIndexFilename) {
+      return true;
+    }
+    return null;
+  };
+  const modifyNode = (node) => {
+    node.url = node.path.substring(9) || '/'
+    /** directory */
+    if (!isFileSystemDirectory(node) || isUrlFile(node) === false) {
+      node.urlType = 'directory';
+      return;
+    }
+
+
+
+
+    node.urlType = isUrlFile(node) === true ? 'file' : 'null';
+    node.children = null;
+  };
+
+  traverse(pageUrls, modifyNode);
+
+  return pageUrls;
+};
+
+
+
+
 
 const getPageUrls = (pagePaths) => {
   const pageUrls = JSON.parse(JSON.stringify(pagePaths));
@@ -136,6 +188,6 @@ const reverse = (node, anteriorCallback = null, posteriorCallback = null) => {
  * TODO delete the legacy code
  */
 
-export const pageUrls = getPageUrls(pagePaths);
+export const pageUrls = getPageUrls(pagePaths2);
 
 /** we may need to fix the url tree  */
