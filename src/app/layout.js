@@ -14,6 +14,9 @@ import { Button } from '@mui/material';
 import { useToggle } from 'src/utils/react';
 import {  traverse,pageUrls } from 'src/utils/url'
 
+import { Anchor} from 'src/components/navigation/anchor';
+
+
 const useStyles = makeStyles((theme) => {
   return {
     /** block */
@@ -86,12 +89,19 @@ export const Layout = ({ children }) => {
 
 
   const classes = useStyles();
+
   return (
     <Box className={classes.container}>
       <Box className={classes.containerTwo}>
         <ResponsiveDrawer isOpen={isOpen} setIsOpen={setIsOpen} items={pageItems}/>
         <Box>
           <div>{'app bar content and footer'}</div>
+
+          <Anchor href="https://developer.mozilla.org/en-US/"> MDN</Anchor>
+
+          <Anchor href="/"> home</Anchor>
+
+
           <div>
             <Button onClick={() => setIsOpen(true)}>{'test button'}</Button>
           </div>

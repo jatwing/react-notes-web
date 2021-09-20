@@ -45,9 +45,6 @@ export const pagePaths   = preval`
 
 
 
-
-
-
 /**
  * helper functions
  */
