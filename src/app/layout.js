@@ -1,5 +1,5 @@
 import './styles.css';
-
+import { useEffect } from 'react';
 import { Box } from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
@@ -12,10 +12,11 @@ import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
 import { Button } from '@mui/material';
 
 import { useToggle } from 'src/utils/react';
-import {  traverse,pageUrls } from 'src/utils/url'
+import { traverse, pageItems } from 'src/utils/url';
 
-import { Anchor} from 'src/components/navigation/anchor';
+import { Anchor } from 'src/components/navigation/anchor';
 
+console.log(pageItems);
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -61,6 +62,7 @@ export const Layout2 = ({ children }) => {
  * from component
  */
 
+/*
 const getPageItems = (pageUrls) => {
   const pageItems = pageUrls;
   const modifyNode = (node) => {
@@ -75,7 +77,7 @@ const getPageItems = (pageUrls) => {
   return pageItems;
 }
 const pageItems = getPageItems(pageUrls);
-
+*/
 
 /**
  * test the drawer
@@ -87,20 +89,31 @@ export const Layout = ({ children }) => {
   // NEW data online required on firebase maybe
   // TODO retrieve the translation here, and update the node name
 
+  useEffect(() => {
+    const modifyNode = (node) => {
+      node.name = node.name + ':)';
+      // TODO translate
+      // TODO sort
+    };
+    traverse(pageItems, modifyNode)
+  }, []);
 
   const classes = useStyles();
 
   return (
     <Box className={classes.container}>
       <Box className={classes.containerTwo}>
-        <ResponsiveDrawer isOpen={isOpen} setIsOpen={setIsOpen} items={pageItems}/>
+        <ResponsiveDrawer
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          items={pageItems}
+        />
         <Box>
           <div>{'app bar content and footer'}</div>
 
           <Anchor href="https://developer.mozilla.org/en-US/"> MDN</Anchor>
 
           <Anchor href="/"> home</Anchor>
-
 
           <div>
             <Button onClick={() => setIsOpen(true)}>{'test button'}</Button>
