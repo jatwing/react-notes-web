@@ -1,7 +1,5 @@
 import { pageTree } from './preval';
 
-
-
 /**
  * helper functions
  */

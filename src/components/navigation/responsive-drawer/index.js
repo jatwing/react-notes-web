@@ -1,24 +1,26 @@
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
-  Drawer,
-  Toolbar,
+  Box,
+  Collapse,
   Divider,
+  Drawer,
   List,
   ListItem,
   ListItemText,
-  Box,
-  Collapse,
+  Toolbar,
 } from '@mui/material';
 import { useMediaQueries } from 'src/utils/mui';
 import { useToggle } from 'src/utils/react';
-
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { Anchor } from 'src/components/navigation/anchor';
 
 const ListItemLink = (props) => {
   const { item } = props;
   return (
+    <Anchor href={item.href} >
     <ListItem button key={item.href}>
       <ListItemText primary={item.name} />
     </ListItem>
+    </Anchor>
   );
 };
 
@@ -35,16 +37,17 @@ const NestedList = (props) => {
         {list?.children.map(
           (child) =>
             child.type === 'item' && (
-              <ListItem button key={child.href} sx={{ pl: 4}}>
-                <ListItemText secondary={child.name}/>
+              <Anchor href={child.href}>
+              <ListItem button key={child.href} sx={{ pl: 4 }}>
+                <ListItemText secondary={child.name} />
               </ListItem>
+              </Anchor>
             )
         )}
       </Collapse>
     </>
   );
 };
-
 
 export const ResponsiveDrawer = (props) => {
   const { isOpen, setIsOpen, items } = props;

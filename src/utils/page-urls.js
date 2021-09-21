@@ -20,14 +20,14 @@ export const traverse = (node, callback = null) => {
 
 export const reverse = (node, callback = null) => {
   if (!node) {
-    return 
+    return;
   }
   callback && callback(node);
   if (!node.parent) {
     return;
   }
   reverse(node.parent, callback);
-}
+};
 
 export const fix = (tree) => {
   const modify = (node) => {
@@ -36,10 +36,10 @@ export const fix = (tree) => {
     }
     node?.children.forEach((child) => {
       child.parent = node;
-    })
-  }
+    });
+  };
   traverse(tree, modify);
-}
+};
 
 /**
  * path tree, url tree and item tree
@@ -81,16 +81,16 @@ const getItems = (urls) => {
   const items = JSON.parse(JSON.stringify(urls));
   const modify = (node) => {
     if (node.urlType === 'directory') {
-      node.type = 'list'
+      node.type = 'list';
     } else if (node.urlType === 'file') {
-      node.type = 'item'
+      node.type = 'item';
     }
-    node.name = node.filename
+    node.name = node.filename;
     node.href = node.url;
-  }
-  traverse(items, modify)
+  };
+  traverse(items, modify);
   return items;
-}
+};
 
 export const pageUrls = getUrls(pagePaths);
 export const pageItems = getItems(pageUrls);

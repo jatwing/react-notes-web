@@ -9,8 +9,6 @@ import { useHistory } from 'react-router-dom';
  *
  */
 
-
-
 export const Link = (props) => {
   const { href, onClick, ...otherProps } = props;
   const history = useHistory();

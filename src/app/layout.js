@@ -1,21 +1,15 @@
 import './styles.css';
-import { useEffect } from 'react';
-import { Box } from '@mui/material';
 
+import { Box, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useEffect } from 'react';
+import { Anchor } from 'src/components/navigation/anchor';
+import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
 import { Banner } from 'src/sections/banner';
 import { Footer } from 'src/sections/footer';
 import { Header } from 'src/sections/header';
-
-import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
-
-import { Button } from '@mui/material';
-
+import { pageItems, traverse } from 'src/utils/page-urls';
 import { useToggle } from 'src/utils/react';
-import { traverse, pageItems } from 'src/utils/page-urls';
-
-import { Anchor } from 'src/components/navigation/anchor';
-
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -56,7 +50,6 @@ export const Layout2 = ({ children }) => {
   );
 };
 
-
 /**
  * and the new package name
  */
@@ -72,7 +65,7 @@ export const Layout = ({ children }) => {
       // TODO translate
       // TODO sort
     };
-    traverse(pageItems, modifyNode)
+    traverse(pageItems, modifyNode);
   }, []);
 
   const classes = useStyles();

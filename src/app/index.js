@@ -1,5 +1,6 @@
 import 'src/utils/i18n.js';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -13,10 +14,9 @@ import { DirectoryNode } from 'src/pages/directory-node';
 import { FileNode } from 'src/pages/file-node';
 import { store } from 'src/redux/store';
 import { directoryNodes, fileNodes } from 'src/utils/file-system';
+
 import { Layout, Layout2 } from './layout';
 import { Theme } from './theme';
-
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const directoryRoutes = directoryNodes.map((node) => (
   <Route

@@ -40,13 +40,7 @@ const getPaths = (filename, path, excludedPaths) => {
   return directory;
 };
 module.exports = getPaths('src/pages', 'src/pages', ['src/pages/file-node']);
-`
-
-
-
-
-
-
+`;
 
 export const pageTree = preval`
   const { statSync, readdirSync } = require('fs');

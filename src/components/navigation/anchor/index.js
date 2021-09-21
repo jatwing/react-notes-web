@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import style from './style.module.css';
 
 
 const isValidHttpUrl = (urlString) => {
@@ -8,24 +9,20 @@ const isValidHttpUrl = (urlString) => {
   } catch (error) {
     return false;
   }
-}
+};
 
 export const Anchor = (props) => {
-  const {
-    href,
-    children,
-    ...otherProps
-  } = props;
+  const { href, children, ...otherProps } = props;
   /** external link */
   if (isValidHttpUrl(href)) {
-    return <a href={href} target='_blank' rel='noreferrer noopener' {...otherProps}> 
-      { children }
-    </a>
+    return (
+      <a href={href} target="_blank" rel="noreferrer noopener" {...otherProps}
+      className={style.anchor}
+      >
+        {children}
+      </a>
+    );
   }
   /** internal link or invalid link */
-  return (
-    <Link to={href}>{children}</Link>
-  )
-}
-
-
+  return <Link to={href} className={style.anchor}>{children}</Link>;
+};
