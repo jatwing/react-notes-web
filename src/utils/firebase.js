@@ -20,7 +20,7 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 
 /**
- * firestore helper functions
+ * firestore
  */
 export const readDocuments = (collectionName) => async () => {
   const col = collection(db, collectionName);
@@ -32,7 +32,7 @@ export const readDocuments = (collectionName) => async () => {
 };
 
 /**
- * storage helper functions
+ * storage
  */
 export function* readEntityUrl(entity, key) {
   const imageRef = ref(storage, entity[key]);

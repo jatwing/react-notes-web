@@ -1,7 +1,7 @@
 import { pagePaths } from './preval';
 
 /**
- * tree helper functions
+ * tree
  */
 export const traverse = (node, callback = null) => {
   if (!node) {
@@ -18,36 +18,35 @@ export const traverse = (node, callback = null) => {
   });
 };
 
-const reverse = (node, anteriorCallback = null, posteriorCallback = null) => {
-  anteriorCallback && anteriorCallback(node);
-  /** before */
+export const reverse = (node, callback = null) => {
+  if (!node) {
+    return 
+  }
+  callback && callback(node);
   if (!node.parent) {
     return;
   }
-  reverse(node.parent, anteriorCallback, posteriorCallback);
-  /** after */
-  posteriorCallback && posteriorCallback(node);
-};
+  reverse(node.parent, callback);
+}
 
-const fixTree = (tree) => {
-  const addChildrenParent = (node) => {
+export const fix = (tree) => {
+  const modify = (node) => {
     if (!node.children) {
       return;
     }
-    node.children.forEach((child) => {
+    node?.children.forEach((child) => {
       child.parent = node;
-    });
-  };
-  traverse(tree, addChildrenParent);
-};
+    })
+  }
+  traverse(tree, modify);
+}
 
 /**
- * path tree, url tree and item tree helper functions
+ * path tree, url tree and item tree
  */
-
 const getUrls = (paths) => {
   const urls = JSON.parse(JSON.stringify(paths));
-  const modifyNode = (node) => {
+  const modify = (node) => {
     node.url = node.path.substring(9) || '/';
     const hasDirectoryPath = node.pathType === 'directory';
     let hasChildWithDirectoryPath = false;
@@ -63,31 +62,24 @@ const getUrls = (paths) => {
     if (!hasDirectoryPath) {
       node.urlType = 'file';
       node.children = null;
-    }
-    if (hasChildWithDirectoryPath) {
-      if (hasChildWithIndexFilename) {
-        node.urlType = null;
-        node.children = null;
-      } else {
-        node.urlType = 'directory';
-      }
+    } else if (hasChildWithDirectoryPath) {
+      /** ignore potential index.js file */
+      node.urlType = 'directory';
+    } else if (hasChildWithIndexFilename) {
+      node.urlType = 'file';
+      node.children = null;
     } else {
-      if (hasChildWithIndexFilename) {
-        node.urlType = 'file';
-        node.children = null;
-      } else {
-        node.urlType = null;
-        node.children = null;
-      }
+      node.urlType = null;
+      node.children = null;
     }
   };
-  traverse(urls, modifyNode);
+  traverse(urls, modify);
   return urls;
 };
 
 const getItems = (urls) => {
   const items = JSON.parse(JSON.stringify(urls));
-  const modifyNode = (node) => {
+  const modify = (node) => {
     if (node.urlType === 'directory') {
       node.type = 'list'
     } else if (node.urlType === 'file') {
@@ -96,12 +88,9 @@ const getItems = (urls) => {
     node.name = node.filename
     node.href = node.url;
   }
-  traverse(items, modifyNode)
+  traverse(items, modify)
   return items;
 }
 
-/**
- * helper variables
- */
 export const pageUrls = getUrls(pagePaths);
 export const pageItems = getItems(pageUrls);

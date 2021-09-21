@@ -12,11 +12,10 @@ import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
 import { Button } from '@mui/material';
 
 import { useToggle } from 'src/utils/react';
-import { traverse, pageItems } from 'src/utils/url';
+import { traverse, pageItems } from 'src/utils/page-urls';
 
 import { Anchor } from 'src/components/navigation/anchor';
 
-console.log(pageItems);
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -57,30 +56,8 @@ export const Layout2 = ({ children }) => {
   );
 };
 
-/**
- * the pages file system / url values indep
- * from component
- */
-
-/*
-const getPageItems = (pageUrls) => {
-  const pageItems = pageUrls;
-  const modifyNode = (node) => {
-    if (node.urlType === 'directory') {
-      node.type = 'list'
-    } else if (node.urlType === 'file') {
-      node.type = 'item'
-    }
-    node.href = node.url;
-  }
-  traverse(pageItems, modifyNode)
-  return pageItems;
-}
-const pageItems = getPageItems(pageUrls);
-*/
 
 /**
- * test the drawer
  * and the new package name
  */
 export const Layout = ({ children }) => {
