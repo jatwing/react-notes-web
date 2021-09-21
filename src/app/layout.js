@@ -10,6 +10,7 @@ import { Footer } from 'src/sections/footer';
 import { Header } from 'src/sections/header';
 import { pageItems, traverse } from 'src/utils/page-urls';
 import { useToggle } from 'src/utils/react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -56,8 +57,14 @@ export const Layout2 = ({ children }) => {
 export const Layout = ({ children }) => {
   const [isOpen, setIsOpen] = useToggle();
 
+  const { t} = useTranslation();
+
   // NEW data online required on firebase maybe
   // TODO retrieve the translation here, and update the node name
+
+
+  // use Translation
+
 
   useEffect(() => {
     const modifyNode = (node) => {
@@ -87,6 +94,11 @@ export const Layout = ({ children }) => {
 
           <div>
             <Button onClick={() => setIsOpen(true)}>{'test button'}</Button>
+          </div>
+
+
+          <div>
+            {t('test')}
           </div>
         </Box>
       </Box>
