@@ -77,6 +77,8 @@ export const Layout = ({ children }) => {
 
   const classes = useStyles();
 
+  console.log('#### layout render here test')
+
   return (
     <Box className={classes.container}>
       <Box className={classes.containerTwo}>
@@ -99,6 +101,9 @@ export const Layout = ({ children }) => {
 
           <div>
             {t('test')}
+          </div>
+          <div>
+            {t('apple')}
           </div>
         </Box>
       </Box>

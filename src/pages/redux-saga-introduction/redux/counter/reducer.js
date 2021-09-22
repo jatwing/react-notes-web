@@ -56,7 +56,7 @@ export const counterReducer = (state, action) => {
       };
     }
     case COUNTER_VALUE_INCREASED_ASYNC_REJECTED: {
-      console.log(action.error);
+      console.error(action.error);
       return {
         ...state,
         counter: {

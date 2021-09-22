@@ -37,8 +37,8 @@ const NestedList = (props) => {
         {list?.children.map(
           (child) =>
             child.type === 'item' && (
-              <Anchor href={child.href}>
-              <ListItem button key={child.href} sx={{ pl: 4 }}>
+              <Anchor href={child.href} key={child.href} >
+              <ListItem button sx={{ pl: 4 }}>
                 <ListItemText secondary={child.name} />
               </ListItem>
               </Anchor>

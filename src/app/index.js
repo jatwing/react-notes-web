@@ -1,4 +1,4 @@
-import 'src/utils/i18n.js';
+import 'src/utils/i18next.js';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Suspense } from 'react';
@@ -40,21 +40,23 @@ const fileRoutes = fileNodes.map((node) => (
 export const App2 = () => {
   const { t } = useTranslation();
   return (
-    <Provider store={store}>
-      <Theme>
-        <Router>
-          <Layout2>
-            <Switch>
-              <Suspense fallback={t('loading')}>
-                {directoryRoutes}
-                {fileRoutes}
-              </Suspense>
-              <Redirect to="/" />
-            </Switch>
-          </Layout2>
-        </Router>
-      </Theme>
-    </Provider>
+    <Suspense fallback={'translations loading'}>
+      <Provider store={store}>
+        <Theme>
+          <Router>
+            <Layout2>
+              <Switch>
+                <Suspense fallback={t('loading')}>
+                  {directoryRoutes}
+                  {fileRoutes}
+                </Suspense>
+                <Redirect to="/" />
+              </Switch>
+            </Layout2>
+          </Router>
+        </Theme>
+      </Provider>
+    </Suspense>
   );
 };
 

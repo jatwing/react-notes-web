@@ -3,7 +3,7 @@ class ChatApi {
   static statuses = {};
   static subscribeToFriendStatus(id, callback) {
     if (id in this.intervals) {
-      console.log('Error!');
+      console.error('Error!');
       return;
     }
     this.intervals[id] = setInterval(() => {
