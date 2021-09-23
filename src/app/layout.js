@@ -33,69 +33,33 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-/** TODO Delete */
-export const Layout2 = ({ children }) => {
-  const classes = useStyles();
-  return (
-    <Box className={classes.container}>
-      {/*
-      <Banner />
-    */}
-      <Box className={classes.containerTwo}>
-        <ResponsiveDrawer />
-        <Box>
-          <Header />
-          <Box className={classes.content}>{children}</Box>
-          <Footer />
-        </Box>
-      </Box>
-    </Box>
-  );
-};
-
-
-/**
- * sort by the ranks in the store,
- */
-const sort2 = (array, ranks, id) => {
-  if (!ranks || !(id in ranks)) {
-    return;
-  }
-  const getRank = (element) => {
-    if (element in ranks[id]) {
-      return ranks[id][element]
-    }
-    return Number.MAX_VALUE;
-  }
-  array.sort((a, b ) => { return getRank(a) - getRank(b)     })
-}
-
 
 /**
  * and the new package name
  */
 export const Layout = ({ children }) => {
   const [isOpen, setIsOpen] = useToggle();
-
   const { t } = useTranslation();
-
-  // NEW data online required on firebase maybe
-  // TODO retrieve the translation here, and update the node name
-
-  
   const { sort } = useRankSorter();
-
 
   useEffect(() => {
     const modifyNode = (node) => {
       node.name = t(node.name);
       // TODO sort
+      
+
+      if (node.children) {
+        sort(node.children, node.url, 'url');
+
+        console.log(node.children)
+      }
     };
     traverse(pageItems, modifyNode);
   }, [sort]);
 
   const classes = useStyles();
 
+ // console.log(pageItems)
 
   return (
     <Box className={classes.container}>
@@ -107,10 +71,6 @@ export const Layout = ({ children }) => {
         />
         <Box>
           <div>{'app bar content and footer'}</div>
-
-          <Anchor href="https://developer.mozilla.org/en-US/"> MDN</Anchor>
-
-          <Anchor href="/"> home</Anchor>
 
           <div>
             <Button onClick={() => setIsOpen(true)}>{'test button'}</Button>

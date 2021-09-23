@@ -20,7 +20,7 @@ const ranksSlice = createSlice({
       state.status = 'succeeded';
       action.payload.forEach(entity => {
         const { id, ...newEntity } = entity;
-        state.entities[id] = newEntity;
+        state.entities[id.replaceAll('\\', '/')] = newEntity;
       })
     },
     [ranksRead.failed]: (state, action) => {

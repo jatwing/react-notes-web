@@ -24,7 +24,7 @@ const useRanks = () => {
 export const useRankSorter = () => {
   const { entities, isSucceed } = useRanks()
 
-  const sort = (array, id) => {
+  const sort = (array, id, field =null) => {
     if (!isSucceed || !(id in entities)) {
       return array;
     }
@@ -32,7 +32,10 @@ export const useRankSorter = () => {
       if (!(element in entities[id])) {
         return Number.MAX_VALUE;
       }
-      const rank = entities[id][element];
+      if (!field &&  !(field in element)) {
+        return Number.MAX_VALUE;
+      }
+      const rank = !!field ? entities[id][element[field]] : entities[id][element];
       if (isNaN(rank)) {
         return Number.MAX_VALUE;
       }

@@ -15,7 +15,7 @@ import { FileNode } from 'src/pages/file-node';
 import { store } from 'src/redux/store';
 import { directoryNodes, fileNodes } from 'src/utils/file-system';
 
-import { Layout, Layout2 } from './layout';
+import { Layout, } from './layout';
 import { Theme } from './theme';
 
 const directoryRoutes = directoryNodes.map((node) => (
@@ -36,29 +36,6 @@ const fileRoutes = fileNodes.map((node) => (
   />
 ));
 
-/** TODO delete */
-export const App2 = () => {
-  const { t } = useTranslation();
-  return (
-    <Suspense fallback={'translations loading'}>
-      <Provider store={store}>
-        <Theme>
-          <Router>
-            <Layout2>
-              <Switch>
-                <Suspense fallback={t('loading')}>
-                  {directoryRoutes}
-                  {fileRoutes}
-                </Suspense>
-                <Redirect to="/" />
-              </Switch>
-            </Layout2>
-          </Router>
-        </Theme>
-      </Provider>
-    </Suspense>
-  );
-};
 
 /**
  * the new app, using the theme-provider
