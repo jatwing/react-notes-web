@@ -3,26 +3,30 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import { readDocuments } from 'src/utils/firebase';
 
+const languages = ['en-US', 'zh-TW']
+const namespaces = ['translation']
+const resources = {
+  'en-US': {
+    'translation': {
+      'error': 'Error!',
+      'loading': 'Loading...'
+    }
+  }
+};
+
 const options = {
   /** logging */
   debug: process.env.NODE_ENV === 'development',
-  /** resources */
-  resources: {
-    'en-US': {
-      translation: {
-        'error': 'Error!',
-        'loading': 'Loading...'
-      }
-    }
-  },
   /** languages */
-  fallbackLng: 'en-US',
-  supportedLngs: ['en-US', 'zh-TW'],
+  supportedLngs: languages,
+  fallbackLng: languages[0],
   load: 'currentOnly',
   /** namespaces */
-  ns: ['translation'],
-  defaultNS: 'translation',
-  fallbackNS: 'translation',
+  ns: namespaces,
+  defaultNS: namespaces[0],
+  fallbackNS: namespaces[0],
+  /** resources */
+  resources,
   /** translation defaults */
   interpolation: {
     escapeValue: false,
@@ -30,13 +34,14 @@ const options = {
   /** react i18next */
   react: {
     bindI18nStore: 'added',
+    useSuspense: false,
   },
-};
+}
 
 const callback = async (error, t) => {
   !!error && console.error(error);
-  for (const language of options.supportedLngs) {
-    for (const namespace of options.ns) {
+  for (const language of languages) {
+    for (const namespace of namespaces) {
       const resources = await readDocuments(
         `translations/${language}/${namespace}`
       )();
