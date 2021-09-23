@@ -3,14 +3,18 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import { readDocuments } from 'src/utils/firebase';
 
-import { EN_US_TRANSLATION } from './locales/en-us/translation';
-import { ZH_TW_TRANSLATION } from './locales/zh-tw/translation';
-
 const options = {
   /** logging */
   debug: process.env.NODE_ENV === 'development',
   /** resources */
-  resources: {},
+  resources: {
+    'en-US': {
+      translation: {
+        'error': 'Error!',
+        'loading': 'Loading...'
+      }
+    }
+  },
   /** languages */
   fallbackLng: 'en-US',
   supportedLngs: ['en-US', 'zh-TW'],

@@ -100,10 +100,7 @@ export const Layout = ({ children }) => {
 
 
           <div>
-            {t('test')}
-          </div>
-          <div>
-            {t('apple')}
+            {t('github')}
           </div>
         </Box>
       </Box>

@@ -9,7 +9,7 @@ export const notificationsRead = createLifecycleActions(
 function* workNotificationsRead() {
   try {
     yield put(notificationsRead.pending());
-    const entities = yield call(readDocuments('notifications'));
+    const entities = yield call(readDocuments('notifications', true));
     yield put(notificationsRead.fulfilled(entities));
   } catch (error) {
     yield put(notificationsRead.rejected(error));

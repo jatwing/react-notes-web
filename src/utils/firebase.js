@@ -22,35 +22,18 @@ export const storage = getStorage(app);
 /**
  * firestore
  */
-
-/**
- * TODO here
- *
- * translations can not have ids
- * redux store entities must have ids,
- *
- * so add a paramter 'haveIds'
- *
- * async function can work for two case?
- * but go back to double-check the generator version of this function.
- *
- */
-
-
-export const readDocuments = (collectionName) => async () => {
+export const readDocuments = (path, haveIds = false) => async () => {
   try {
-    const col = collection(db, collectionName);
+    const col = collection(db, path);
     const snapshot = await getDocs(col);
     return snapshot.docs.map((doc) => ({
-      id: doc.id,
+      ...(haveIds && {id: doc.id}),
       ...doc.data(),
     }));
   } catch (error) {
     console.error(error);
   }
 };
-
-
 
 /**
  * storage
