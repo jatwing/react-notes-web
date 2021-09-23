@@ -85,7 +85,6 @@ const getItems = (urls) => {
     } else if (node.urlType === 'file') {
       node.type = 'item';
     }
-    node.name = node.filename;
     node.href = node.url;
   };
   traverse(items, modify);

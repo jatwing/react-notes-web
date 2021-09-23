@@ -44,7 +44,7 @@ export const Layout = () => {
 
   useEffect(() => {
     const modifyNode = (node) => {
-       node.name = t(node.name);
+      node.name = t(node.filename);
       if (node.children) {
         rank(node.children, node.url, 'url');
       }

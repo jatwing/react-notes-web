@@ -56,7 +56,7 @@ export const ResponsiveDrawer = (props) => {
   const { isOpen, setIsOpen, items } = props;
   const { isSmall } = useMediaQueries();
   const isTemporary = isSmall ?? true;
-  const drawerWidth = 240;
+  const drawerWidth = 256;
   const handleDrawerClosed = () => {
     event.preventDefault();
     if (isTemporary) {
