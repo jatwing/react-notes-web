@@ -12,6 +12,9 @@ import { pageItems, traverse } from 'src/utils/page-urls';
 import { useToggle } from 'src/utils/react';
 import { useTranslation } from 'react-i18next';
 
+import { useRanks } from 'src/redux/ranks/hooks'
+
+
 const useStyles = makeStyles((theme) => {
   return {
     /** block */
@@ -64,6 +67,8 @@ export const Layout = ({ children }) => {
 
 
   // use Translation
+  
+  const ranks = useRanks(); 
 
 
   useEffect(() => {
