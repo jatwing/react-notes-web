@@ -6,8 +6,8 @@ import { watchNotificationsRead } from 'src/redux/notifications/sagas';
 import { notificationsReducer } from 'src/redux/notifications/slice';
 import { watchProjectsRead } from 'src/redux/projects/sagas';
 import { projectsReducer } from 'src/redux/projects/slice';
-import { watchRanksRead } from 'src/redux/ranks/sagas';
-import { ranksReducer } from 'src/redux/ranks/slice';
+import { watchRankingsRead } from 'src/redux/rankings/sagas';
+import { rankingsReducer } from 'src/redux/rankings/slice';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -16,7 +16,7 @@ export const store = configureStore({
     authors: authorsReducer,
     projects: projectsReducer,
     notifications: notificationsReducer,
-    ranks: ranksReducer,
+    rankings: rankingsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),
@@ -25,4 +25,4 @@ export const store = configureStore({
 sagaMiddleware.run(watchAuthorsRead);
 sagaMiddleware.run(watchProjectsRead);
 sagaMiddleware.run(watchNotificationsRead);
-sagaMiddleware.run(watchRanksRead);
+sagaMiddleware.run(watchRankingsRead);

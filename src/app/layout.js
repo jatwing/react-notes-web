@@ -3,7 +3,6 @@ import './styles.css';
 import { Box, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useEffect } from 'react';
-import { Anchor } from 'src/components/navigation/anchor';
 import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
 import { Banner } from 'src/sections/banner';
 import { Footer } from 'src/sections/footer';
@@ -12,7 +11,7 @@ import { pageItems, traverse } from 'src/utils/page-urls';
 import { useToggle } from 'src/utils/react';
 import { useTranslation } from 'react-i18next';
 
-import {  useRankSorter } from 'src/redux/ranks/hooks'
+import { useRankingHelper } from 'src/redux/rankings/hooks'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -37,29 +36,23 @@ const useStyles = makeStyles((theme) => {
 /**
  * and the new package name
  */
-export const Layout = ({ children }) => {
+export const Layout = () => {
+  const { rank }  = useRankingHelper();
   const [isOpen, setIsOpen] = useToggle();
+
   const { t } = useTranslation();
-  const { sort } = useRankSorter();
 
   useEffect(() => {
     const modifyNode = (node) => {
-      node.name = t(node.name);
-      // TODO sort
-      
-
+       node.name = t(node.name);
       if (node.children) {
-        sort(node.children, node.url, 'url');
-
-        console.log(node.children)
+        rank(node.children, node.url, 'url');
       }
     };
     traverse(pageItems, modifyNode);
-  }, [sort]);
+  }, [rank]);
 
   const classes = useStyles();
-
- // console.log(pageItems)
 
   return (
     <Box className={classes.container}>
