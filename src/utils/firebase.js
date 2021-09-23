@@ -22,7 +22,7 @@ export const storage = getStorage(app);
 /**
  * firestore
  */
-export const readDocuments = (path, haveIds = false) => async () => {
+export const readDocuments = (path, haveIds = true) => async () => {
   try {
     const col = collection(db, path);
     const snapshot = await getDocs(col);

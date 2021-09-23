@@ -12,8 +12,7 @@ import { pageItems, traverse } from 'src/utils/page-urls';
 import { useToggle } from 'src/utils/react';
 import { useTranslation } from 'react-i18next';
 
-import { useRanks } from 'src/redux/ranks/hooks'
-
+import {  useRankSorter } from 'src/redux/ranks/hooks'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -54,35 +53,49 @@ export const Layout2 = ({ children }) => {
   );
 };
 
+
+/**
+ * sort by the ranks in the store,
+ */
+const sort2 = (array, ranks, id) => {
+  if (!ranks || !(id in ranks)) {
+    return;
+  }
+  const getRank = (element) => {
+    if (element in ranks[id]) {
+      return ranks[id][element]
+    }
+    return Number.MAX_VALUE;
+  }
+  array.sort((a, b ) => { return getRank(a) - getRank(b)     })
+}
+
+
 /**
  * and the new package name
  */
 export const Layout = ({ children }) => {
   const [isOpen, setIsOpen] = useToggle();
 
-  const { t} = useTranslation();
+  const { t } = useTranslation();
 
   // NEW data online required on firebase maybe
   // TODO retrieve the translation here, and update the node name
 
-
-  // use Translation
   
-  const ranks = useRanks(); 
+  const { sort } = useRankSorter();
 
 
   useEffect(() => {
     const modifyNode = (node) => {
-      node.name = node.name + ':)';
-      // TODO translate
+      node.name = t(node.name);
       // TODO sort
     };
     traverse(pageItems, modifyNode);
-  }, []);
+  }, [sort]);
 
   const classes = useStyles();
 
-  console.log('#### layout render here test')
 
   return (
     <Box className={classes.container}>

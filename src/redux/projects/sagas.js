@@ -7,7 +7,7 @@ export const projectsRead = createLifecycleActions('projects/projectsRead');
 function* workProjectsRead() {
   try {
     yield put(projectsRead.pending());
-    let entities = yield call(readDocuments('projects', true));
+    let entities = yield call(readDocuments('projects'));
     entities = yield* readEntitiesUrls(entities, ['avatar']);
     yield put(projectsRead.fulfilled(entities));
   } catch (error) {

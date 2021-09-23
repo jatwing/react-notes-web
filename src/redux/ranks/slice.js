@@ -2,13 +2,11 @@ import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 
 import { ranksRead } from './sagas';
 
-
-const ranksAdapter = createEntityAdapter();
-
-const initialState = ranksAdapter.getInitialState({
+const initialState = {
+  entities: {},
   status: 'idle',
   error: null,
-});
+}
 
 const ranksSlice = createSlice({
   name: 'ranks',
@@ -20,7 +18,10 @@ const ranksSlice = createSlice({
     },
     [ranksRead.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      ranksAdapter.setAll(state, action.payload)
+      action.payload.forEach(entity => {
+        const { id, ...newEntity } = entity;
+        state.entities[id] = newEntity;
+      })
     },
     [ranksRead.failed]: (state, action) => {
       state.status = 'failed';
@@ -30,14 +31,8 @@ const ranksSlice = createSlice({
 });
 
 export const ranksReducer = ranksSlice.reducer;
-export const ranksSelectors = ranksAdapter.getSelectors(state => state.ranks);
-export const selectEntities = ranksSelectors.selectEntities;
 
-
-
+export const selectEntities = (state) => state.ranks.entities;
 export const selectStatus = (state) => state.ranks.status;
 export const selectError = (state) => state.ranks.error;
-
-
-export const mySelect = (state) => state.ranks;
 
