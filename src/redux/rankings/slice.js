@@ -1,4 +1,4 @@
-import {  createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { rankingsRead } from './sagas';
 
@@ -6,7 +6,7 @@ const initialState = {
   entities: {},
   status: 'idle',
   error: null,
-}
+};
 
 const rankingsSlice = createSlice({
   name: 'rankings',
@@ -18,10 +18,10 @@ const rankingsSlice = createSlice({
     },
     [rankingsRead.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      action.payload.forEach(entity => {
+      action.payload.forEach((entity) => {
         const { id, ...newEntity } = entity;
         state.entities[id] = newEntity;
-      })
+      });
     },
     [rankingsRead.failed]: (state, action) => {
       state.status = 'failed';

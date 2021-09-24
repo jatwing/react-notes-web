@@ -11,7 +11,9 @@ import { pageItems, traverse } from 'src/utils/page-urls';
 import { useToggle } from 'src/utils/react';
 import { useTranslation } from 'react-i18next';
 
-import { useRankingHelper } from 'src/redux/rankings/hooks'
+import { useRankingHelper } from 'src/redux/rankings/hooks';
+import { JatwingIcon } from 'src/components/data-display/icons';
+import { useProjects } from 'src/redux/projects/hooks'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -32,16 +34,14 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-
 /**
  * and the new package name
  */
 export const Layout = () => {
-  const { rank }  = useRankingHelper();
   const [isOpen, setIsOpen] = useToggle();
-
-  const { t } = useTranslation();
-
+  const projects = useProjects();
+  const { t, i18n } = useTranslation();
+  const rank = useRankingHelper();
   useEffect(() => {
     const modifyNode = (node) => {
       node.name = t(node.filename);
@@ -54,6 +54,7 @@ export const Layout = () => {
 
   const classes = useStyles();
 
+  const title = projects?.entities?.[0]?.title?.[i18n?.language];
   return (
     <Box className={classes.container}>
       <Box className={classes.containerTwo}>
@@ -61,6 +62,8 @@ export const Layout = () => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           items={pageItems}
+          Logo={JatwingIcon}
+          title={title}
         />
         <Box>
           <div>{'app bar content and footer'}</div>
@@ -69,10 +72,7 @@ export const Layout = () => {
             <Button onClick={() => setIsOpen(true)}>{'test button'}</Button>
           </div>
 
-
-          <div>
-            {t('github')}
-          </div>
+          <div>{t('github')}</div>
         </Box>
       </Box>
     </Box>
