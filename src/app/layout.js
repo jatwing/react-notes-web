@@ -11,7 +11,8 @@ import { pageItems, traverse } from 'src/utils/page-urls';
 import { useToggle } from 'src/utils/react';
 import { useTranslation } from 'react-i18next';
 
-import { useRankingHelper } from 'src/redux/rankings/hooks'
+import { useLocation } from 'react-router-dom'
+import { useRankingSort  } from 'src/redux/rankings/hooks'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -37,20 +38,25 @@ const useStyles = makeStyles((theme) => {
  * and the new package name
  */
 export const Layout = () => {
-  const { rank }  = useRankingHelper();
+
+  const sort = useRankingSort();
+
   const [isOpen, setIsOpen] = useToggle();
 
   const { t } = useTranslation();
+
+  const location = useLocation();
+  console.log(location)
 
   useEffect(() => {
     const modifyNode = (node) => {
       node.name = t(node.filename);
       if (node.children) {
-        rank(node.children, node.url, 'url');
+        sort(node.children, node.url, 'url');
       }
     };
     traverse(pageItems, modifyNode);
-  }, [rank]);
+  }, [sort]);
 
   const classes = useStyles();
 

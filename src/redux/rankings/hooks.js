@@ -21,9 +21,9 @@ const useRankings = () => {
   return { entities, isIdle, isLoading, isSucceed, isFailed, error };
 };
 
-export const useRankingHelper = () => {
+export const useRankingSort  =  () => {
   const { entities, isSucceed } = useRankings();
-  const rank = (unrankedArray, rankingsId, criterialField = null) => {
+  const sort= (unrankedArray, rankingsId, criterialField = null) => {
     if (!isSucceed || !(rankingsId in entities)) {
       return unrankedArray;
     }
@@ -40,6 +40,6 @@ export const useRankingHelper = () => {
     };
     unrankedArray.sort((a, b) => (getRanking(a) - getRanking(b)))
   };
-  return { rank };
+  return sort;
 };
 
