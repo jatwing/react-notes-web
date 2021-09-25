@@ -46,8 +46,11 @@ export const Layout = () => {
   const { t, i18n } = useTranslation();
   const sort = useRankingSort();
 
+
   useEffect(() => {
     const newItems = items;
+
+  //  const newItems = JSON.parse(JSON.stringify(items))
     traverse(newItems, (node) => {
       node.name = t(node.filename);
     });
@@ -55,6 +58,8 @@ export const Layout = () => {
   }, [t]);
   useEffect(() => {
     const newItems = items;
+
+  //  const newItems = JSON.parse(JSON.stringify(items))
     traverse(newItems, (node) => {
       if (node.children) {
         sort(node.children, node.url, 'url');
@@ -63,31 +68,30 @@ export const Layout = () => {
     setItems(newItems);
   }, [sort]);
 
-/*
   useEffect(() => {
-    console.log(' # EFF')
-    const newItems = items;
-    let selectedNode = null;
+    // deep copy, modify and set as new state
+    const newItems = JSON.parse(JSON.stringify(items))
+
+    console.log(location.pathname)
     traverse(newItems, (node) => {
-      if (node.url === location.pathname) {
-        selectedNode = node;
-      } else {
-        node.isSelected = false;
-      }
+      const regex = new RegExp(`^${node.url}([^/])*(/.+)*$`)
+      if (regex.test(location.pathname)) {
+        node.isSelected = true;
+        return;
+      } 
+      node.isSelected = false;
     });
-    if (!selectedNode) {
-      return;
-    }
+
+    // fail b.c. tree is not fixed, without parent.
+    /*
     reverse(selectedNode, (node) => {
-
+      console.log('rev')
       node.isSelected = true;
-      console.log(node)
+      console.log(node);
     });
+    */
     setItems(newItems);
-    console.log('a # EFF 2')
   }, [location]);
-*/
-
 
   const classes = useStyles();
 

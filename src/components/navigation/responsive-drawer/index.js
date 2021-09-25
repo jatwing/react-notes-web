@@ -15,7 +15,7 @@ import { useMediaQueries } from 'src/utils/mui';
 import { useToggle } from 'src/utils/react';
 import { Anchor } from 'src/components/navigation/anchor';
 import { useTheme } from '@mui/styles';
-
+import { useEffect } from 'react';
 
 /**
  * the selected item should based on the URL
@@ -23,16 +23,12 @@ import { useTheme } from '@mui/styles';
  * guess that the url should be store inside the center store.
  */
 
-
 const ListItemLink = (props) => {
   const { item, url } = props;
 
-  console.log('i run')
-  console.log(item.isSelected)
-
   return (
     <Anchor href={item.href}>
-      <ListItemButton key={item.href} selected={item.href === url}>
+      <ListItemButton key={item.href} selected={item.isSelected}>
         <ListItemText primary={item.name} />
       </ListItemButton>
     </Anchor>
@@ -40,10 +36,15 @@ const ListItemLink = (props) => {
 };
 
 const NestedList = (props) => {
-  const { list, url } = props;
-  const hasSelectedChild = list?.children.some(child =>  child.href === url)
-  const [isListOpen, toggle] = useToggle(!!hasSelectedChild);
+  const { list }  = props;
+  const [isListOpen, toggle] = useToggle();
+  useEffect(() => {
+    if (list.isSelected && !isListOpen) {
+      toggle();
+    }
+  }, [list]);
 
+  console.log(list);
 
   return (
     <>
@@ -56,7 +57,7 @@ const NestedList = (props) => {
           (child) =>
             child.type === 'item' && (
               <Anchor href={child.href} key={child.href}>
-                <ListItemButton sx={{ pl: 4 }} selected={child.href === url}>
+                <ListItemButton sx={{ pl: 4 }} selected={child.isSelected}>
                   <ListItemText secondary={child.name} />
                 </ListItemButton>
               </Anchor>
@@ -70,9 +71,9 @@ const NestedList = (props) => {
 export const ResponsiveDrawer = (props) => {
   const { isOpen, setIsOpen, items, Logo, title, url } = props;
   const { isSmall } = useMediaQueries();
-  const  theme  = useTheme();
+  const theme = useTheme();
 
-  console.log('drawe items re-render')
+  console.log('drawe items re-render');
   console.log(items);
 
   const isTemporary = isSmall ?? true;
@@ -101,9 +102,13 @@ export const ResponsiveDrawer = (props) => {
           },
         }}
       >
-        <Toolbar sx={{ justifyContent: 'space-between'  }}>
-          <Logo color="primary"  sx={{ fontSize: 32  }}   />
-          <Typography variant="body1" component="span" sx={{ fontFamily:  theme.typography.fontFamilies.monospace }} >
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Logo color="primary" sx={{ fontSize: 32 }} />
+          <Typography
+            variant="body1"
+            component="span"
+            sx={{ fontFamily: theme.typography.fontFamilies.monospace }}
+          >
             {title}
           </Typography>
         </Toolbar>
@@ -111,9 +116,14 @@ export const ResponsiveDrawer = (props) => {
         <List>
           {items?.children.map((child) =>
             child.type === 'list' ? (
-              <NestedList list={child} url={url}  key={child.href} />
+              <NestedList list={child} url={url} key={child.href} />
             ) : (
-              <ListItemLink item={child} url={url}  key={child.href} />
+              <ListItemLink
+                item={child}
+                url={url}
+                key={child.href}
+                test={child.isSelected}
+              />
             )
           )}
         </List>
