@@ -23,23 +23,22 @@ const useRankings = () => {
 
 export const useRankingSort  =  () => {
   const { entities, isSucceed } = useRankings();
-  const sort= (unrankedArray, rankingsId, criterialField = null) => {
+  const sort = (unrankedArray, rankingsId, criterialProperty = null) => {
     if (!isSucceed || !(rankingsId in entities)) {
       return unrankedArray;
     }
     const getRanking = (element) => {
-      const criterion = !!criterialField ? element[criterialField] : element;
+      const criterion = !!criterialProperty ? element[criterialProperty] : element;
       if (!criterion || !(criterion in entities[rankingsId])) {
         return Number.MAX_VALUE;
       }
       const ranking = entities[rankingsId][criterion];
       if (isNaN(ranking)) {
-        return Number.MAX_VALUE
+        return Number.MAX_VALUE;
       }
       return ranking;
     };
-    unrankedArray.sort((a, b) => (getRanking(a) - getRanking(b)))
+    unrankedArray.sort((a, b) => getRanking(a) - getRanking(b));
   };
   return sort;
 };
-

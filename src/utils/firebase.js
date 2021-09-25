@@ -22,18 +22,20 @@ export const storage = getStorage(app);
 /**
  * firestore
  */
-export const readDocuments = (path, haveIds = true) => async () => {
-  try {
-    const col = collection(db, path);
-    const snapshot = await getDocs(col);
-    return snapshot.docs.map((doc) => ({
-      ...(haveIds && {id: doc.id}),
-      ...doc.data(),
-    }));
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const readDocuments =
+  (path, haveIds = true) =>
+  async () => {
+    try {
+      const col = collection(db, path);
+      const snapshot = await getDocs(col);
+      return snapshot.docs.map((doc) => ({
+        ...(haveIds && { id: doc.id }),
+        ...doc.data(),
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 /**
  * storage

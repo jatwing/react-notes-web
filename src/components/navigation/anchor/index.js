@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import style from './style.module.css';
 
-
 const isValidHttpUrl = (urlString) => {
   try {
     const url = new URL(urlString);
@@ -16,13 +15,21 @@ export const Anchor = (props) => {
   /** external link */
   if (isValidHttpUrl(href)) {
     return (
-      <a href={href} target="_blank" rel="noreferrer noopener" {...otherProps}
-      className={style.anchor}
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer noopener"
+        {...otherProps}
+        className={style.anchor}
       >
         {children}
       </a>
     );
   }
   /** internal link or invalid link */
-  return <Link to={href} className={style.anchor}>{children}</Link>;
+  return (
+    <Link to={href} className={style.anchor}>
+      {children}
+    </Link>
+  );
 };

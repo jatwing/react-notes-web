@@ -1,7 +1,4 @@
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-
-
-
 import {
   Box,
   Collapse,
@@ -10,40 +7,58 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemButton,
   Toolbar,
+  Typography,
 } from '@mui/material';
 import { useMediaQueries } from 'src/utils/mui';
 import { useToggle } from 'src/utils/react';
 import { Anchor } from 'src/components/navigation/anchor';
+import { useTheme } from '@mui/styles';
+
+
+/**
+ * the selected item should based on the URL
+ * how to combine router-dom with this
+ * guess that the url should be store inside the center store.
+ */
+
 
 const ListItemLink = (props) => {
-  const { item } = props;
+  const { item, url } = props;
+
+  console.log('i run')
+  console.log(item.isSelected)
+
   return (
-    <Anchor href={item.href} >
-    <ListItem button key={item.href}>
-      <ListItemText primary={item.name} />
-    </ListItem>
+    <Anchor href={item.href}>
+      <ListItemButton key={item.href} selected={item.href === url}>
+        <ListItemText primary={item.name} />
+      </ListItemButton>
     </Anchor>
   );
 };
 
 const NestedList = (props) => {
-  const { list } = props;
-  const [isListOpen, toggle] = useToggle();
+  const { list, url } = props;
+  const hasSelectedChild = list?.children.some(child =>  child.href === url)
+  const [isListOpen, toggle] = useToggle(!!hasSelectedChild);
+
+
   return (
     <>
-      <ListItem button onClick={() => toggle()} key={list.href}>
+      <ListItemButton onClick={() => toggle()} key={list.href}>
         <ListItemText primary={list.name} />
         {isListOpen ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
+      </ListItemButton>
       <Collapse in={isListOpen} timeout="auto" unmountOnExit>
         {list?.children.map(
           (child) =>
             child.type === 'item' && (
-              <Anchor href={child.href} key={child.href} >
-              <ListItem button sx={{ pl: 4 }}>
-                <ListItemText secondary={child.name} />
-              </ListItem>
+              <Anchor href={child.href} key={child.href}>
+                <ListItemButton sx={{ pl: 4 }} selected={child.href === url}>
+                  <ListItemText secondary={child.name} />
+                </ListItemButton>
               </Anchor>
             )
         )}
@@ -53,8 +68,13 @@ const NestedList = (props) => {
 };
 
 export const ResponsiveDrawer = (props) => {
-  const { isOpen, setIsOpen, items } = props;
+  const { isOpen, setIsOpen, items, Logo, title, url } = props;
   const { isSmall } = useMediaQueries();
+  const  theme  = useTheme();
+
+  console.log('drawe items re-render')
+  console.log(items);
+
   const isTemporary = isSmall ?? true;
   const drawerWidth = 256;
   const handleDrawerClosed = () => {
@@ -63,6 +83,7 @@ export const ResponsiveDrawer = (props) => {
       setIsOpen(false);
     }
   };
+
   return (
     <Box
       component="nav"
@@ -80,14 +101,19 @@ export const ResponsiveDrawer = (props) => {
           },
         }}
       >
-        <Toolbar />
+        <Toolbar sx={{ justifyContent: 'space-between'  }}>
+          <Logo color="primary"  sx={{ fontSize: 32  }}   />
+          <Typography variant="body1" component="span" sx={{ fontFamily:  theme.typography.fontFamilies.monospace }} >
+            {title}
+          </Typography>
+        </Toolbar>
         <Divider />
         <List>
           {items?.children.map((child) =>
             child.type === 'list' ? (
-              <NestedList list={child} key={child.href} />
+              <NestedList list={child} url={url}  key={child.href} />
             ) : (
-              <ListItemLink item={child} key={child.href} />
+              <ListItemLink item={child} url={url}  key={child.href} />
             )
           )}
         </List>

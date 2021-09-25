@@ -3,15 +3,15 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import { readDocuments } from 'src/utils/firebase';
 
-const languages = ['en-US', 'zh-TW']
-const namespaces = ['translation']
+const languages = ['en-US', 'zh-TW'];
+const namespaces = ['translation'];
 const resources = {
   'en-US': {
-    'translation': {
-      'error': 'Error!',
-      'loading': 'Loading...'
-    }
-  }
+    translation: {
+      error: 'Error!',
+      loading: 'Loading...',
+    },
+  },
 };
 
 const options = {
@@ -36,14 +36,15 @@ const options = {
     bindI18nStore: 'added',
     useSuspense: false,
   },
-}
+};
 
 const callback = async (error, t) => {
   !!error && console.error(error);
   for (const language of languages) {
     for (const namespace of namespaces) {
       const resources = await readDocuments(
-        `translations/${language}/${namespace}`, false
+        `translations/${language}/${namespace}`,
+        false
       )();
       i18n.addResources(language, namespace, resources[0]);
     }
