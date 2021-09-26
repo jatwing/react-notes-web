@@ -46,51 +46,45 @@ export const Layout = () => {
   const { t, i18n } = useTranslation();
   const sort = useRankingSort();
 
-
   useEffect(() => {
-    const newItems = items;
+    setItems((items) => {
+      const newItems = items;
 
-  //  const newItems = JSON.parse(JSON.stringify(items))
-    traverse(newItems, (node) => {
-      node.name = t(node.filename);
+      //  const newItems = JSON.parse(JSON.stringify(items))
+      traverse(newItems, (node) => {
+        node.name = t(node.filename);
+      });
+      return newItems;
     });
-    setItems(newItems);
   }, [t]);
   useEffect(() => {
-    const newItems = items;
-
-  //  const newItems = JSON.parse(JSON.stringify(items))
-    traverse(newItems, (node) => {
-      if (node.children) {
-        sort(node.children, node.url, 'url');
-      }
+    setItems((items) => {
+      const newItems = items;
+      traverse(newItems, (node) => {
+        if (node.children) {
+          sort(node.children, node.url, 'url');
+        }
+      });
+      return newItems;
     });
-    setItems(newItems);
   }, [sort]);
 
   useEffect(() => {
-    // deep copy, modify and set as new state
-    const newItems = JSON.parse(JSON.stringify(items))
+    setItems((items) => {
+      // deep copy, modify and set as new state
+      const newItems = JSON.parse(JSON.stringify(items));
 
-    console.log(location.pathname)
-    traverse(newItems, (node) => {
-      const regex = new RegExp(`^${node.url}([^/])*(/.+)*$`)
-      if (regex.test(location.pathname)) {
-        node.isSelected = true;
-        return;
-      } 
-      node.isSelected = false;
+      console.log(location.pathname);
+      traverse(newItems, (node) => {
+        const regex = new RegExp(`^${node.url}([^/])*(/.+)*$`);
+        if (regex.test(location.pathname)) {
+          node.isSelected = true;
+          return;
+        }
+        node.isSelected = false;
+      });
+      return newItems;
     });
-
-    // fail b.c. tree is not fixed, without parent.
-    /*
-    reverse(selectedNode, (node) => {
-      console.log('rev')
-      node.isSelected = true;
-      console.log(node);
-    });
-    */
-    setItems(newItems);
   }, [location]);
 
   const classes = useStyles();
