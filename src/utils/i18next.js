@@ -1,8 +1,11 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next, useTranslation } from 'react-i18next';
 import { readDocuments } from 'src/utils/firebase';
 
+/**
+ * initialization
+ */
 const languages = ['en-US', 'zh-TW'];
 const namespaces = ['translation'];
 const resources = {
@@ -54,3 +57,24 @@ const callback = async (error, t) => {
 i18n.use(LanguageDetector).use(initReactI18next).init(options, callback);
 
 export default i18n;
+
+/**
+ * localization
+ */
+export const useLocalization = () => {
+  const { i18n } = useTranslation();
+  const localize = (object) => {
+    if (!object || !i18n || !('language' in i18n)) {
+      return '';
+    }
+    if (i18n.language in object) {
+      return object[i18n.language];
+    }
+    const fallbackLanguage = languages[0];
+    if (fallbackLanguage in object) {
+      return object[fallbackLanguage];
+    }
+    return '';
+  };
+  return localize;
+};

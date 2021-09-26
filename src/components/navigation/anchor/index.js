@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import style from './style.module.css';
+import style from './styles.module.css';
 
 const isValidHttpUrl = (urlString) => {
   try {

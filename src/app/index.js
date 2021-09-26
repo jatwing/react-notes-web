@@ -1,4 +1,5 @@
 import 'src/utils/i18next.js';
+import './styles.css'
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Suspense } from 'react';
@@ -15,7 +16,7 @@ import { FileNode } from 'src/pages/file-node';
 import { store } from 'src/redux/store';
 import { directoryNodes, fileNodes } from 'src/utils/file-system';
 
-import { Layout } from './layout';
+import { Layout } from 'src/containers/layout';
 import { Theme } from './theme';
 
 const directoryRoutes = directoryNodes.map((node) => (
@@ -27,6 +28,10 @@ const directoryRoutes = directoryNodes.map((node) => (
   />
 ));
 
+
+/**
+ * no longer have dir node, should be renamed to page.
+ */
 const fileRoutes = fileNodes.map((node) => (
   <Route
     exact={true}

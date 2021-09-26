@@ -24,8 +24,7 @@ import { useEffect } from 'react';
  */
 
 const ListItemLink = (props) => {
-  const { item, url } = props;
-
+  const { item } = props;
   return (
     <Anchor href={item.href}>
       <ListItemButton key={item.href} selected={item.isSelected}>
@@ -36,16 +35,13 @@ const ListItemLink = (props) => {
 };
 
 const NestedList = (props) => {
-  const { list }  = props;
+  const { list } = props;
   const [isListOpen, toggle] = useToggle();
   useEffect(() => {
     if (list.isSelected && !isListOpen) {
       toggle();
     }
   }, [list]);
-
-  console.log(list);
-
   return (
     <>
       <ListItemButton onClick={() => toggle()} key={list.href}>
@@ -72,10 +68,6 @@ export const ResponsiveDrawer = (props) => {
   const { isOpen, setIsOpen, items, Logo, title, url } = props;
   const { isSmall } = useMediaQueries();
   const theme = useTheme();
-
-  console.log('drawe items re-render');
-  console.log(items);
-
   const isTemporary = isSmall ?? true;
   const drawerWidth = 256;
   const handleDrawerClosed = () => {

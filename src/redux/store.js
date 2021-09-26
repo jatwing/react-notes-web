@@ -8,21 +8,27 @@ import { watchProjectsRead } from 'src/redux/projects/sagas';
 import { projectsReducer } from 'src/redux/projects/slice';
 import { watchRankingsRead } from 'src/redux/rankings/sagas';
 import { rankingsReducer } from 'src/redux/rankings/slice';
+import { pagesReducer } from 'src/redux/pages/slice';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
     authors: authorsReducer,
-    projects: projectsReducer,
     notifications: notificationsReducer,
+    pages: pagesReducer,
+    projects: projectsReducer,
     rankings: rankingsReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['pages/pagesTranslated', 'pages/pagesSorted'],
+      },
+    }).concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(watchAuthorsRead);
-sagaMiddleware.run(watchProjectsRead);
 sagaMiddleware.run(watchNotificationsRead);
+sagaMiddleware.run(watchProjectsRead);
 sagaMiddleware.run(watchRankingsRead);
