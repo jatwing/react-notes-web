@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import style from './styles.module.css';
+import { Link as RouterLink } from 'react-router-dom';
+import { Link as MaterialLink } from '@mui/material';
 
 const isValidHttpUrl = (urlString) => {
   try {
@@ -10,26 +10,27 @@ const isValidHttpUrl = (urlString) => {
   }
 };
 
-export const Anchor = (props) => {
-  const { href, children, ...otherProps } = props;
-  /** external link */
-  if (isValidHttpUrl(href)) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer noopener"
-        {...otherProps}
-        className={style.anchor}
-      >
-        {children}
-      </a>
-    );
+
+
+export const Anchor= (props) => {
+  const { href, target, rel, children, sx, ...otherProps } = props;
+  const newProps = {     
+    children,
+    sx: {
+      all: 'initial',
+      ...sx
+    },
+    ...otherProps
   }
-  /** internal link or invalid link */
-  return (
-    <Link to={href} className={style.anchor}>
-      {children}
-    </Link>
-  );
-};
+  if (isValidHttpUrl(href)) {
+    newProps.href = href;
+    newProps.target = target ?? '_blank';
+    newProps.rel = rel ?? 'noreferrer noreferrer'
+  } else {
+    newProps.to = href;
+    newProps.component = RouterLink;
+  }
+  return <MaterialLink {...newProps}/>
+}
+
+

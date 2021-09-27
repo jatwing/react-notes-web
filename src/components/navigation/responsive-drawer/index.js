@@ -91,16 +91,17 @@ export const ResponsiveDrawer = (props) => {
           },
         }}
       >
+
         <Toolbar sx={{ 
           '&.MuiToolbar-root': {
             paddingLeft: '0',
             paddingRight: '0'
           }
         }}>
-          <Anchor href='/'>
-          <ButtonBase sx={{ 
+        <Anchor href='/'   sx={{ width: '100%', minHeight: 'inherit'   }}>
+     <ButtonBase sx={{ 
             width: '100%',
-            height: '100%',
+            minHeight: 'inherit',
             padding: '0 16px',
             justifyContent: 'space-around',
           }}>
@@ -112,9 +113,11 @@ export const ResponsiveDrawer = (props) => {
             >
               {title}
             </Typography>
-          </ButtonBase>
-          </Anchor>
+    </ButtonBase>
+        </Anchor>
         </Toolbar>
+
+
         <Divider />
         <List>
           {items?.children.map((child) =>

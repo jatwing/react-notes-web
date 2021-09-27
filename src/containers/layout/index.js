@@ -6,9 +6,6 @@ import { JatwingIcon } from 'src/components/data-display/icons';
 import { useProjects } from 'src/redux/projects/hooks';
 import { usePages } from 'src/redux/pages/hooks';
 import { useLocalization } from 'src/utils/i18next';
-
-
-
 import { useToggle } from 'src/utils/react';
 import { Drawer  } from 'src/containers/drawer';
 
