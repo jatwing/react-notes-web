@@ -1,5 +1,5 @@
-import { Link as RouterLink } from 'react-router-dom';
 import { Link as MaterialLink } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 const isValidHttpUrl = (urlString) => {
   try {
@@ -10,27 +10,23 @@ const isValidHttpUrl = (urlString) => {
   }
 };
 
-
-
-export const Anchor= (props) => {
+export const Anchor = (props) => {
   const { href, target, rel, children, sx, ...otherProps } = props;
-  const newProps = {     
+  const newProps = {
     children,
     sx: {
       all: 'initial',
-      ...sx
+      ...sx,
     },
-    ...otherProps
-  }
+    ...otherProps,
+  };
   if (isValidHttpUrl(href)) {
     newProps.href = href;
     newProps.target = target ?? '_blank';
-    newProps.rel = rel ?? 'noreferrer noreferrer'
+    newProps.rel = rel ?? 'noreferrer noreferrer';
   } else {
     newProps.to = href;
     newProps.component = RouterLink;
   }
-  return <MaterialLink {...newProps}/>
-}
-
-
+  return <MaterialLink {...newProps} />;
+};

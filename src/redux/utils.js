@@ -14,4 +14,3 @@ export const createLifecycleActions = (typePrefix) => {
   }));
   return actionCreator;
 };
-

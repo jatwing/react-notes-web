@@ -1,24 +1,23 @@
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
   Box,
+  Button,
+  ButtonBase,
   Collapse,
   Divider,
   Drawer,
   List,
   ListItem,
-  ListItemText,
   ListItemButton,
+  ListItemText,
   Toolbar,
   Typography,
-  Button,
-  ButtonBase
 } from '@mui/material';
-import { useMediaQueries } from 'src/utils/mui';
-import { useToggle } from 'src/utils/react';
-import { Anchor } from 'src/components/navigation/anchor';
 import { useTheme } from '@mui/styles';
 import { useEffect } from 'react';
-
+import { Anchor } from 'src/components/navigation/anchor';
+import { useMediaQueries } from 'src/utils/mui';
+import { useToggle } from 'src/utils/react';
 
 const ListItemLink = (props) => {
   const { item } = props;
@@ -91,32 +90,34 @@ export const ResponsiveDrawer = (props) => {
           },
         }}
       >
-
-        <Toolbar sx={{ 
-          '&.MuiToolbar-root': {
-            paddingLeft: '0',
-            paddingRight: '0'
-          }
-        }}>
-        <Anchor href='/'   sx={{ width: '100%', minHeight: 'inherit'   }}>
-     <ButtonBase sx={{ 
-            width: '100%',
-            minHeight: 'inherit',
-            padding: '0 16px',
-            justifyContent: 'space-around',
-          }}>
-            <Logo color="primary" sx={{ fontSize: 32 }} />
-            <Typography
-              variant="body1"
-              component="span"
-              sx={{ fontFamily: theme.typography.fontFamilies.monospace }}
+        <Toolbar
+          sx={{
+            '&.MuiToolbar-root': {
+              paddingLeft: '0',
+              paddingRight: '0',
+            },
+          }}
+        >
+          <Anchor href="/" sx={{ width: '100%', minHeight: 'inherit' }}>
+            <ButtonBase
+              sx={{
+                width: '100%',
+                minHeight: 'inherit',
+                padding: '0 16px',
+                justifyContent: 'space-around',
+              }}
             >
-              {title}
-            </Typography>
-    </ButtonBase>
-        </Anchor>
+              <Logo color="primary" sx={{ fontSize: 32 }} />
+              <Typography
+                variant="body1"
+                component="span"
+                sx={{ fontFamily: theme.typography.fontFamilies.monospace }}
+              >
+                {title}
+              </Typography>
+            </ButtonBase>
+          </Anchor>
         </Toolbar>
-
 
         <Divider />
         <List>

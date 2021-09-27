@@ -1,7 +1,7 @@
 import 'src/utils/i18next.js';
-import './styles.css'
+import './styles.css';
 
-import {  ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -11,15 +11,11 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import { Layout } from 'src/containers/layout';
 import { DirectoryNode } from 'src/pages/directory-node';
 import { FileNode } from 'src/pages/file-node';
 import { store } from 'src/redux/store';
-
-import { Layout } from 'src/containers/layout';
-import { theme } from 'src/utils/mui'
-
-
-
+import { theme } from 'src/utils/mui';
 
 const directoryNodes = [];
 const fileNodes = [];
@@ -32,7 +28,6 @@ const directoryRoutes = directoryNodes.map((node) => (
     key={node.url}
   />
 ));
-
 
 /**
  * no longer have dir node, should be renamed to page.

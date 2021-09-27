@@ -4,11 +4,11 @@ import { watchAuthorsRead } from 'src/redux/authors/sagas';
 import { authorsReducer } from 'src/redux/authors/slice';
 import { watchNotificationsRead } from 'src/redux/notifications/sagas';
 import { notificationsReducer } from 'src/redux/notifications/slice';
+import { pagesReducer } from 'src/redux/pages/slice';
 import { watchProjectsRead } from 'src/redux/projects/sagas';
 import { projectsReducer } from 'src/redux/projects/slice';
 import { watchRankingsRead } from 'src/redux/rankings/sagas';
 import { rankingsReducer } from 'src/redux/rankings/slice';
-import { pagesReducer } from 'src/redux/pages/slice';
 
 const sagaMiddleware = createSagaMiddleware();
 

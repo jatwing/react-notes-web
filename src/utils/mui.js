@@ -1,5 +1,5 @@
 import { useMediaQuery } from '@mui/material';
-import { useTheme, createTheme } from '@mui/material/styles';
+import { createTheme, useTheme } from '@mui/material/styles';
 
 /**
  * theme
@@ -34,7 +34,6 @@ export const theme = createTheme({
     },
   },
 });
-
 
 /**
  * media query

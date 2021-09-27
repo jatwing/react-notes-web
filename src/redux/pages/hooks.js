@@ -1,19 +1,32 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { useRankingSort } from 'src/redux/rankings/hooks';
+
 import {
-  pagesTranslated,
-  pagesSorted,
   pagesSelected,
+  pagesSorted,
+  pagesTranslated,
   selectData,
 } from './slice';
-import { useRankingSort } from 'src/redux/rankings/hooks';
-import { useLocation } from 'react-router-dom';
+
+
+/**
+ * should it aware of the translated file loaded????
+ * i18n/18nResourcesAdded/fulfilled
+ */
 
 export const usePagesTranslated = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   dispatch(pagesTranslated(t));
 };
+
+/**
+ * it should be aware of ranking fetched
+ *
+ */
+
 
 export const usePagesSorted = () => {
   const sort = useRankingSort();
@@ -28,8 +41,18 @@ export const usePagesSelected = () => {
 };
 
 export const usePages = () => {
+  console.log('### use pages')
+
+
+  /**
+   * todo 
+   *
+   * CHANGE HERE
+   *
+   */
+
   usePagesTranslated();
-  usePagesSorted();
+  // usePagesSorted();
   usePagesSelected();
   return useSelector(selectData);
 };

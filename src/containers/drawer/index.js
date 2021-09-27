@@ -1,7 +1,7 @@
-import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
 import { JatwingIcon } from 'src/components/data-display/icons';
-import { useProjects } from 'src/redux/projects/hooks';
+import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
 import { usePages } from 'src/redux/pages/hooks';
+import { useProjects } from 'src/redux/projects/hooks';
 import { useLocalization } from 'src/utils/i18next';
 
 export const Drawer = (props) => {
@@ -12,11 +12,10 @@ export const Drawer = (props) => {
   return (
     <ResponsiveDrawer
       open={open}
-      onClose={onClose}
+      onClose={() => onClose()}
       items={pages}
       Logo={JatwingIcon}
       title={l(projects?.entities?.[0]?.title)}
     />
   );
 };
-
