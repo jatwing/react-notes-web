@@ -5,7 +5,8 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MultirowTextCard } from 'src/components/multirow-text-card';
 import { useProjects } from 'src/redux/projects/hooks';
-import { directoryNodes } from 'src/utils/file-system';
+// import { directoryNodes } from 'src/utils/file-system';
+const directoryNodes = null;
 import { useMedia } from 'src/utils/material-ui';
 
 import { useStyles } from './styles';

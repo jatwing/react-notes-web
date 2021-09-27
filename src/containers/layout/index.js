@@ -1,12 +1,17 @@
 import { Box, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
-import { useToggle } from 'src/utils/react';
 import { useTranslation } from 'react-i18next';
 import { JatwingIcon } from 'src/components/data-display/icons';
 import { useProjects } from 'src/redux/projects/hooks';
 import { usePages } from 'src/redux/pages/hooks';
 import { useLocalization } from 'src/utils/i18next';
+
+
+
+import { useToggle } from 'src/utils/react';
+import { Drawer  } from 'src/containers/drawer';
+
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -28,28 +33,24 @@ const useStyles = makeStyles((theme) => {
 });
 
 export const Layout = () => {
-  useLocalization();
-
   const pages = usePages();
-  const [isOpen, setIsOpen] = useToggle();
+  const { value : isDrawerOpen, setOn, setOff   }   = useToggle();
   const projects = useProjects();
   const l = useLocalization();
+
 
   const classes = useStyles();
   return (
     <Box className={classes.container}>
       <Box className={classes.containerTwo}>
-        <ResponsiveDrawer
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          items={pages}
-          Logo={JatwingIcon}
-          title={l(projects?.entities?.[0]?.title)}
+        <Drawer 
+          open={isDrawerOpen}
+          onClose={setOff}
         />
+
         <Box>
-          <div>{'app bar content and footer'}</div>
           <div>
-            <Button onClick={() => setIsOpen(true)}>{'test button'}</Button>
+            <Button onClick={setOn}>{'test button'}</Button>
           </div>
         </Box>
       </Box>

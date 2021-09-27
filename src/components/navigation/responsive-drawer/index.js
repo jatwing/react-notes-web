@@ -10,6 +10,8 @@ import {
   ListItemButton,
   Toolbar,
   Typography,
+  Button,
+  ButtonBase
 } from '@mui/material';
 import { useMediaQueries } from 'src/utils/mui';
 import { useToggle } from 'src/utils/react';
@@ -17,11 +19,6 @@ import { Anchor } from 'src/components/navigation/anchor';
 import { useTheme } from '@mui/styles';
 import { useEffect } from 'react';
 
-/**
- * the selected item should based on the URL
- * how to combine router-dom with this
- * guess that the url should be store inside the center store.
- */
 
 const ListItemLink = (props) => {
   const { item } = props;
@@ -36,7 +33,7 @@ const ListItemLink = (props) => {
 
 const NestedList = (props) => {
   const { list } = props;
-  const [isListOpen, toggle] = useToggle();
+  const { value: isListOpen, toggle } = useToggle();
   useEffect(() => {
     if (list.isSelected && !isListOpen) {
       toggle();
@@ -65,7 +62,7 @@ const NestedList = (props) => {
 };
 
 export const ResponsiveDrawer = (props) => {
-  const { isOpen, setIsOpen, items, Logo, title, url } = props;
+  const { open, onClose, items, Logo, title, url } = props;
   const { isSmall } = useMediaQueries();
   const theme = useTheme();
   const isTemporary = isSmall ?? true;
@@ -84,8 +81,8 @@ export const ResponsiveDrawer = (props) => {
     >
       <Drawer
         variant={isTemporary ? 'temporary' : 'permanent'}
-        open={isTemporary ? isOpen : true}
-        onClose={handleDrawerClosed}
+        open={isTemporary ? open : true}
+        onClose={onClose}
         ModalProps={{ keepMounted: true }}
         sx={{
           '& .MuiDrawer-paper': {
@@ -94,15 +91,29 @@ export const ResponsiveDrawer = (props) => {
           },
         }}
       >
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Logo color="primary" sx={{ fontSize: 32 }} />
-          <Typography
-            variant="body1"
-            component="span"
-            sx={{ fontFamily: theme.typography.fontFamilies.monospace }}
-          >
-            {title}
-          </Typography>
+        <Toolbar sx={{ 
+          '&.MuiToolbar-root': {
+            paddingLeft: '0',
+            paddingRight: '0'
+          }
+        }}>
+          <Anchor href='/'>
+          <ButtonBase sx={{ 
+            width: '100%',
+            height: '100%',
+            padding: '0 16px',
+            justifyContent: 'space-around',
+          }}>
+            <Logo color="primary" sx={{ fontSize: 32 }} />
+            <Typography
+              variant="body1"
+              component="span"
+              sx={{ fontFamily: theme.typography.fontFamilies.monospace }}
+            >
+              {title}
+            </Typography>
+          </ButtonBase>
+          </Anchor>
         </Toolbar>
         <Divider />
         <List>
