@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { useRankingSort } from 'src/redux/rankings/hooks';
+import { useRankings,  useRankingSort } from 'src/redux/rankings/hooks';
+
 
 import {
   pagesSelected,
@@ -41,7 +42,7 @@ export const usePagesSelected = () => {
 };
 
 export const usePages = () => {
-  console.log('### use pages')
+  useRankings();
 
 
   /**

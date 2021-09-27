@@ -1,12 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
 import { rankingsRead } from './sagas';
 
-const initialState = {
-  entities: {},
+/**
+ * id can also be a valid entity,
+ *
+ * to solve this issue, the adpter id should be _id, 
+ *
+ * then id can be used as others, if it exists inside entity.
+ *
+ */
+
+
+
+const rankingsAdapter = createEntityAdapter()
+
+const initialState = rankingsAdapter.getInitialState({
   status: 'idle',
   error: null,
-};
+});
 
 const rankingsSlice = createSlice({
   name: 'rankings',
@@ -18,10 +30,7 @@ const rankingsSlice = createSlice({
     },
     [rankingsRead.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      action.payload.forEach((entity) => {
-        const { id, ...newEntity } = entity;
-        state.entities[id] = newEntity;
-      });
+      rankingsAdapter.setAll(state, action.payload)
     },
     [rankingsRead.failed]: (state, action) => {
       state.status = 'failed';

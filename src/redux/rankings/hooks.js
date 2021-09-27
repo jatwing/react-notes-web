@@ -25,7 +25,7 @@ export const useRankingSort = () => {
       return unrankedArray;
     }
     const getRanking = (element) => {
-      const criterion = criterialProperty
+      const criterion = !!criterialProperty
         ? element[criterialProperty]
         : element;
       if (!criterion || !(criterion in entities[rankingsId])) {
@@ -41,4 +41,3 @@ export const useRankingSort = () => {
   };
   return sort;
 };
-

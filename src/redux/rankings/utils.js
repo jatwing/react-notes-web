@@ -1,4 +1,3 @@
-
 export const getRankingSort = (entities) => {
   const sort = (unrankedArray, rankingsId, criterialProperty = null) => {
     if (!entities || !(rankingsId in entities)) {
@@ -21,5 +20,4 @@ export const getRankingSort = (entities) => {
   };
   return sort;
 }
-
 
