@@ -2,16 +2,15 @@ import { call, put, take } from 'redux-saga/effects';
 import { createLifecycleActions } from 'src/redux/utils';
 import { readDocuments } from 'src/utils/firebase';
 
+
+
+
 export const rankingsRead = createLifecycleActions('rankings/rankingsRead');
 
 function* workRankingsRead() {
   try {
     yield put(rankingsRead.pending());
-
-    /* raw data  **/
-
-    const entities = yield call(readDocuments('rankings', true));
-
+    const entities = yield call(readDocuments('rankings'));
     const slashUnescape = (value) =>
       typeof value === 'string' || value instanceof String
         ? value.replaceAll('\\', '/')
@@ -25,8 +24,15 @@ function* workRankingsRead() {
       });
       return newEntity;
     });
-
     yield put(rankingsRead.fulfilled(newEntities));
+
+
+
+
+
+
+
+
   } catch (error) {
     yield put(rankingsRead.rejected(error));
   }

@@ -2,18 +2,11 @@ import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
 import { rankingsRead } from './sagas';
 
-/**
- * id can also be a valid entity,
- *
- * to solve this issue, the adpter id should be _id, 
- *
- * then id can be used as others, if it exists inside entity.
- *
- */
 
-
-
-const rankingsAdapter = createEntityAdapter()
+const rankingsAdapter = createEntityAdapter({
+  selectId: (entity) => entity._id,
+  sortComparer: (a, b) => a._id.localeCompare(b._id)
+})
 
 const initialState = rankingsAdapter.getInitialState({
   status: 'idle',

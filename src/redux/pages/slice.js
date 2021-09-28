@@ -4,7 +4,9 @@ import { rankingsRead } from 'src/redux/rankings/sagas'
 
 import { getRankingSort } from 'src/redux/rankings/utils';
 
-
+/**
+ * toDO change _id
+ */
 
 
 

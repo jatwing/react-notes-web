@@ -46,8 +46,7 @@ const callback = async (error, t) => {
   for (const language of languages) {
     for (const namespace of namespaces) {
       const resources = await readDocuments(
-        `translations/${language}/${namespace}`,
-        false
+        `translations/${language}/${namespace}`
       )();
       i18n.addResources(language, namespace, resources[0]);
     }

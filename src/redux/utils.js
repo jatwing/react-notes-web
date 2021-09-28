@@ -21,5 +21,10 @@ export const createLifecycleActions = (typePrefix) => {
   actionCreator.rejected = createAction(typePrefix + '/rejected', (error) => ({
     error,
   }));
+
+  actionCreator.settled = createAction(typePrefix + '/settled', (payload) => ({
+    payload
+  }))
+
   return actionCreator;
 };
