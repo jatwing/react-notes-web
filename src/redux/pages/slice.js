@@ -1,14 +1,7 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { pageItems, traverse } from 'src/utils/page-urls';
-import { rankingsRead } from 'src/redux/rankings/slice'
-
-import { getRankingSort } from 'src/redux/rankings/utils';
-
-/**
- * toDO change _id
- */
-
-
+import { rankingsRead } from 'src/redux/rankings/slice';
+import { resourcesAdded } from 'src/utils/i18next';
 
 const initialState = {
   data: pageItems,
@@ -20,7 +13,6 @@ const pagesSlice = createSlice({
   reducers: {
     pagesTranslated: {
       reducer: (state, action) => {
-        
         const t = action.payload;
         traverse(state.data, (node) => {
           node.name = t(node.filename);
@@ -66,9 +58,14 @@ const pagesSlice = createSlice({
         }
       });
     },
+    'i18n/resourcesAdded/settled': (state, action) => {
 
-  }
-
+   const t = action.payload;
+      traverse(state.data, (node) => {
+        node.name = t(node.filename);
+      });
+    },
+  },
 });
 
 export const { pagesTranslated, pagesSorted, pagesSelected } =

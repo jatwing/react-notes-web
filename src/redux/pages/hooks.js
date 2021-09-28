@@ -6,34 +6,16 @@ import { useRankings,  useRankingSort } from 'src/redux/rankings/hooks';
 
 import {
   pagesSelected,
-  pagesSorted,
-  pagesTranslated,
   selectData,
 } from './slice';
 
 
 /**
  * should it aware of the translated file loaded????
- * i18n/18nResourcesAdded/fulfilled
- */
-
-export const usePagesTranslated = () => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  dispatch(pagesTranslated(t));
-};
-
-/**
- * it should be aware of ranking fetched
- *
+ * i18n/18nResourcesAdded/settled
  */
 
 
-export const usePagesSorted = () => {
-  const sort = useRankingSort();
-  const dispatch = useDispatch();
-  dispatch(pagesSorted(sort));
-};
 
 export const usePagesSelected = () => {
   const location = useLocation();
@@ -43,17 +25,6 @@ export const usePagesSelected = () => {
 
 export const usePages = () => {
   useRankings();
-
-
-  /**
-   * todo 
-   *
-   * CHANGE HERE
-   *
-   */
-
-  usePagesTranslated();
-  // usePagesSorted();
   usePagesSelected();
   return useSelector(selectData);
 };

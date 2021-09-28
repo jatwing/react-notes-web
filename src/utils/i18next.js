@@ -2,6 +2,10 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next, useTranslation } from 'react-i18next';
 import { readDocuments } from 'src/utils/firebase';
+import { store } from 'src/redux/store'
+import { createLifecycleActions } from 'src/redux/utils';
+
+
 
 /**
  * initialization
@@ -41,6 +45,8 @@ const options = {
   },
 };
 
+
+export const resourcesAdded = createLifecycleActions('i18n/resourcesAdded')
 const callback = async (error, t) => {
   !!error && console.error(error);
   for (const language of languages) {
@@ -51,6 +57,7 @@ const callback = async (error, t) => {
       i18n.addResources(language, namespace, resources[0]);
     }
   }
+  store.dispatch(resourcesAdded.settled(t));
 };
 
 i18n.use(LanguageDetector).use(initReactI18next).init(options, callback);

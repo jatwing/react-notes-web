@@ -24,7 +24,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [rankingsRead.settled.toString() ,'pages/pagesTranslated', 'pages/pagesSorted'],
+        ignoredActions: [rankingsRead.settled.toString() ,'pages/pagesTranslated',
+          'pages/pagesSorted', 'i18n/resourcesAdded/settled' ],
       },
     }).concat(sagaMiddleware),
 });
@@ -33,3 +34,4 @@ sagaMiddleware.run(watchAuthorsRead);
 sagaMiddleware.run(watchNotificationsRead);
 sagaMiddleware.run(watchProjectsRead);
 sagaMiddleware.run(watchRankingsRead);
+
