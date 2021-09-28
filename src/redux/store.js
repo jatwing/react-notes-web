@@ -7,8 +7,9 @@ import { notificationsReducer } from 'src/redux/notifications/slice';
 import { watchProjectsRead } from 'src/redux/projects/sagas';
 import { projectsReducer } from 'src/redux/projects/slice';
 import { watchRankingsRead } from 'src/redux/rankings/sagas';
-import { rankingsReducer } from 'src/redux/rankings/slice';
+import { rankingsReducer, rankingsRead } from 'src/redux/rankings/slice';
 import { pagesReducer } from 'src/redux/pages/slice';
+
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -23,7 +24,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['pages/pagesTranslated', 'pages/pagesSorted'],
+        ignoredActions: [rankingsRead.settled.toString() ,'pages/pagesTranslated', 'pages/pagesSorted'],
       },
     }).concat(sagaMiddleware),
 });

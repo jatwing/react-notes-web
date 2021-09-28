@@ -1,3 +1,7 @@
+/**
+ * copied to sagas , directly return the sort, TODO delete
+ */
+
 export const getRankingSort = (entities) => {
   const sort = (unrankedArray, rankingsId, criterialProperty = null) => {
     if (!entities || !(rankingsId in entities)) {

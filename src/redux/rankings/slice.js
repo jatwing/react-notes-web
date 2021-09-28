@@ -1,6 +1,9 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
-import { rankingsRead } from './sagas';
+import { createLifecycleActions } from 'src/redux/utils';
+
+export const rankingsRead = createLifecycleActions('rankings/rankingsRead');
+
 
 
 const rankingsAdapter = createEntityAdapter({
@@ -16,7 +19,6 @@ const initialState = rankingsAdapter.getInitialState({
 const rankingsSlice = createSlice({
   name: 'rankings',
   initialState,
-  reducers: {},
   extraReducers: {
     [rankingsRead.pending]: (state) => {
       state.status = 'loading';

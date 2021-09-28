@@ -1,6 +1,6 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { pageItems, traverse } from 'src/utils/page-urls';
-import { rankingsRead } from 'src/redux/rankings/sagas'
+import { rankingsRead } from 'src/redux/rankings/slice'
 
 import { getRankingSort } from 'src/redux/rankings/utils';
 
@@ -58,20 +58,13 @@ const pagesSlice = createSlice({
   },
   extraReducers: {
     /** sort pages */
-    [rankingsRead.fulfilled]: (state, action) => {
-
-      const entities = {};
-      action.payload.forEach((entity) => {
-        const { id, ...newEntity } = entity;
-        entities[id] = newEntity;
+    [rankingsRead.settled]: (state, action) => {
+      const sort = action.payload;
+      traverse(state.data, (node) => {
+        if (node.children) {
+          sort(node.children, node.url, 'url');
+        }
       });
-
-      const sort = getRankingSort(action.payload);
-        traverse(state.data, (node) => {
-          if (node.children) {
-            sort(node.children, node.url, 'url');
-          }
-        });
     },
 
   }
