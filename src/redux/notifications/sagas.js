@@ -1,10 +1,6 @@
 import { call, put, take } from 'redux-saga/effects';
-import { createLifecycleActions } from 'src/redux/utils';
 import { readDocuments } from 'src/utils/firebase';
-
-export const notificationsRead = createLifecycleActions(
-  'notifications/notificationsRead'
-);
+import { notificationsRead } from './slice';
 
 function* workNotificationsRead() {
   try {

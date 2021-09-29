@@ -2,7 +2,7 @@ import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
 import { createLifecycleActions } from 'src/redux/utils';
 
-export const rankingsRead = createLifecycleActions('rankings/rankingsRead');
+export const rankingsRead = createLifecycleActions('rankings', 'rankingsRead');
 
 
 

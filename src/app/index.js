@@ -2,7 +2,7 @@ import 'src/utils/i18next.js';
 import './styles.css';
 
 import { ThemeProvider } from '@mui/material/styles';
-import { Suspense } from 'react';
+import { useEffect,Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Provider } from 'react-redux';
 import {
@@ -10,12 +10,14 @@ import {
   Redirect,
   Route,
   Switch,
+  useLocation,
 } from 'react-router-dom';
 import { Layout } from 'src/containers/layout';
 import { DirectoryNode } from 'src/pages/directory-node';
 import { FileNode } from 'src/pages/file-node';
 import { store } from 'src/redux/store';
 import { theme } from 'src/utils/mui';
+import { routeChanged } from 'src/redux/router/slice' 
 
 const directoryNodes = [];
 const fileNodes = [];
@@ -41,26 +43,49 @@ const fileRoutes = fileNodes.map((node) => (
   />
 ));
 
-/**
- * the new app, using the theme-provider
- * with the new package name
- */
+function usePageViews() {
+  let location = useLocation();
+  useEffect(() => {
+    console.log(location.pathname);
+
+    store.dispatch(routeChanged.settled(location.pathname))
+  }, [location]);
+}
+
+
+  /**
+   * reference:  https://reactrouter.com/web/api/Hooks/uselocation
+   *
+   * TODO: the hierarchy should be: route - app (with the hook inside)
+   * my code looks wired because containers are not well-defined
+   */
+export const Test = () => {
+  // Switch ? App ? Page?
+  usePageViews();
+  const { t } = useTranslation();
+
+  return (
+    <Layout>
+      <Switch>
+        <Suspense fallback={t('loading')}>
+          {directoryRoutes}
+          {fileRoutes}
+        </Suspense>
+        <Redirect to="/" />
+      </Switch>
+    </Layout>
+  );
+};
 
 export const App = () => {
+  //usePageViews();
+
   const { t } = useTranslation();
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Router>
-          <Layout>
-            <Switch>
-              <Suspense fallback={t('loading')}>
-                {directoryRoutes}
-                {fileRoutes}
-              </Suspense>
-              <Redirect to="/" />
-            </Switch>
-          </Layout>
+          <Test />
         </Router>
       </ThemeProvider>
     </Provider>

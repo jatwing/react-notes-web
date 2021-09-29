@@ -1,6 +1,10 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 
-import { notificationsRead } from './sagas';
+import { createLifecycleActions } from 'src/redux/utils';
+
+export const notificationsRead = createLifecycleActions(
+  'notifications', 'notificationsRead'
+);
 
 const notificationsAdapter = createEntityAdapter({
   selectId: (entity) => entity.name,

@@ -1,6 +1,8 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { createLifecycleActions } from 'src/redux/utils';
 
-import { authorsRead } from './sagas';
+/** actions */
+export const authorsRead = createLifecycleActions('authors', 'authorsRead');
 
 const authorsAdapter = createEntityAdapter({
   selectId: (entity) => entity.name,

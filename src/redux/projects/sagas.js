@@ -1,8 +1,6 @@
 import { call, put, take } from 'redux-saga/effects';
-import { createLifecycleActions } from 'src/redux/utils';
 import { readDocuments, readEntitiesUrls } from 'src/utils/firebase';
-
-export const projectsRead = createLifecycleActions('projects/projectsRead');
+import { projectsRead } from './slice';
 
 function* workProjectsRead() {
   try {

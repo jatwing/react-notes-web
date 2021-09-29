@@ -1,6 +1,8 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 
-import { projectsRead } from './sagas';
+import { createLifecycleActions } from 'src/redux/utils';
+
+export const projectsRead = createLifecycleActions('projects', 'projectsRead');
 
 const projectsAdapter = createEntityAdapter({
   selectId: (entity) => entity.name,
