@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { languages } from 'src/utils/i18next'
+import { languages } from 'src/lib/i18next'
 
 /**
  * TODO maybe

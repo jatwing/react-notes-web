@@ -5,6 +5,5 @@ export const useToggle = (initialValue = false) => {
   const setOn = useCallback(() => setValue(true), []);
   const setOff = useCallback(() => setValue(false), []);
   const toggle = useCallback(() => setValue((value) => !value), []);
-
   return { value, setOn, setOff, toggle };
 };

@@ -1,5 +1,5 @@
 import { call, put, take, select } from 'redux-saga/effects';
-import { readDocuments } from 'src/utils/firebase';
+import { readDocuments } from 'src/lib/firebase';
 import { selectEntities , rankingsRead } from './slice'
 
 export const getRankingSort = (entities) => {

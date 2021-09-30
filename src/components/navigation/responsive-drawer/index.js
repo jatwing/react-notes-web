@@ -16,8 +16,8 @@ import {
 import { useTheme } from '@mui/styles';
 import { useEffect } from 'react';
 import { Anchor } from 'src/components/navigation/anchor';
-import { useMediaQueries } from 'src/utils/mui';
-import { useToggle } from 'src/utils/react';
+import { useMediaQueries } from 'src/lib/mui';
+import { useToggle } from 'src/lib/react';
 
 const ListItemLink = (props) => {
   const { item } = props;

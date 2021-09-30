@@ -1,4 +1,4 @@
-import 'src/utils/i18next.js';
+import 'src/lib/i18next.js';
 import './styles.css';
 
 import { ThemeProvider } from '@mui/material/styles';
@@ -10,18 +10,20 @@ import {
   Redirect,
   Route,
   Switch,
-  useLocation,
 } from 'react-router-dom';
-import { Layout } from 'src/containers/layout';
+import { Page } from 'src/containers/page';
 import { DirectoryNode } from 'src/pages/directory-node';
 import { FileNode } from 'src/pages/file-node';
 import { store } from 'src/redux/store';
-import { theme } from 'src/utils/mui';
-import { routeChanged } from 'src/redux/router/slice' 
+import { theme } from 'src/lib/mui';
+
+import { usePageViews } from 'src/redux/router/hooks'
+
 
 const directoryNodes = [];
 const fileNodes = [];
 
+// it should render a Page component.
 const directoryRoutes = directoryNodes.map((node) => (
   <Route
     exact={true}
@@ -43,29 +45,13 @@ const fileRoutes = fileNodes.map((node) => (
   />
 ));
 
-function usePageViews() {
-  let location = useLocation();
-  useEffect(() => {
-    console.log(location.pathname);
-
-    store.dispatch(routeChanged.settled(location.pathname))
-  }, [location]);
-}
 
 
-  /**
-   * reference:  https://reactrouter.com/web/api/Hooks/uselocation
-   *
-   * TODO: the hierarchy should be: route - app (with the hook inside)
-   * my code looks wired because containers are not well-defined
-   */
-export const Test = () => {
-  // Switch ? App ? Page?
+export const PageSwitch  = () => {
   usePageViews();
   const { t } = useTranslation();
-
   return (
-    <Layout>
+    <Page>
       <Switch>
         <Suspense fallback={t('loading')}>
           {directoryRoutes}
@@ -73,19 +59,16 @@ export const Test = () => {
         </Suspense>
         <Redirect to="/" />
       </Switch>
-    </Layout>
+    </Page>
   );
 };
 
 export const App = () => {
-  //usePageViews();
-
-  const { t } = useTranslation();
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Router>
-          <Test />
+          <PageSwitch />
         </Router>
       </ThemeProvider>
     </Provider>

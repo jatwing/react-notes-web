@@ -4,9 +4,7 @@ import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import { zipObject } from 'lodash';
 import { all, call } from 'redux-saga/effects';
 
-/**
- * initialization
- */
+/** initialization */
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -19,9 +17,7 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-/**
- * firestore
- */
+/** firestore */
 export const readDocuments =
   (path) =>
   async () => {
@@ -37,9 +33,7 @@ export const readDocuments =
     }
   };
 
-/**
- * storage
- */
+/** storage */
 export function* readEntityUrl(entity, key) {
   const imageRef = ref(storage, entity[key]);
   const url = yield call(getDownloadURL, imageRef);

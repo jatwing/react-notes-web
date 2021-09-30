@@ -7,7 +7,7 @@ import { Drawer } from 'src/containers/drawer';
 import { usePages } from 'src/redux/pages/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
 import { useLocalization } from 'src/redux/i18n/hooks';
-import { useToggle } from 'src/utils/react';
+import { useToggle } from 'src/lib/react';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -28,11 +28,10 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-export const Layout = () => {
+export const Page  = () => {
   const { value: isDrawerOpen, setOn, setOff } = useToggle();
   const projects = useProjects();
   const l = useLocalization();
-
   const classes = useStyles();
   return (
     <Box className={classes.container}>

@@ -1,8 +1,6 @@
 import { pagePaths } from './preval';
 
-/**
- * tree
- */
+/** tree */
 export const traverse = (node, callback = null) => {
   if (!node) {
     return;
@@ -18,32 +16,7 @@ export const traverse = (node, callback = null) => {
   });
 };
 
-export const reverse = (node, callback = null) => {
-  if (!node) {
-    return;
-  }
-  callback && callback(node);
-  if (!node.parent) {
-    return;
-  }
-  reverse(node.parent, callback);
-};
-
-export const fix = (tree) => {
-  const modify = (node) => {
-    if (!node.children) {
-      return;
-    }
-    node?.children.forEach((child) => {
-      child.parent = node;
-    });
-  };
-  traverse(tree, modify);
-};
-
-/**
- * path tree, url tree and item tree
- */
+/** transform page path tree into page url tree */
 const getUrls = (paths) => {
   const urls = JSON.parse(JSON.stringify(paths));
   const modify = (node) => {
@@ -77,6 +50,7 @@ const getUrls = (paths) => {
   return urls;
 };
 
+/** transform page url tree into page item tree */
 const getItems = (urls) => {
   const items = JSON.parse(JSON.stringify(urls));
   const modify = (node) => {
