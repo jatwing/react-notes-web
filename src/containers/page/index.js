@@ -9,6 +9,8 @@ import { useProjects } from 'src/redux/projects/hooks';
 import { useLocalization } from 'src/redux/i18n/hooks';
 import { useToggle } from 'src/lib/react';
 
+import { Header} from 'src/containers/header'
+
 const useStyles = makeStyles((theme) => {
   return {
     /** block */
@@ -37,6 +39,8 @@ export const Page  = () => {
     <Box className={classes.container}>
       <Box className={classes.containerTwo}>
         <Drawer open={isDrawerOpen} onClose={setOff} />
+
+        <Header />
 
         <Box>
           <div>
