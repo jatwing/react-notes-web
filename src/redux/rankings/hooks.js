@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-
 import { rankingsRead } from './slice';
 import { selectEntities, selectError, selectStatus } from './slice';
 
@@ -16,28 +15,4 @@ export const useRankings = () => {
     dispatch(rankingsRead());
   }
   return { entities, isIdle, isLoading, isSucceed, isFailed, error };
-};
-
-export const useRankingSort = () => {
-  const { entities, isSucceed } = useRankings();
-  const sort = (unrankedArray, rankingsId, criterialProperty = null) => {
-    if (!isSucceed || !(rankingsId in entities)) {
-      return unrankedArray;
-    }
-    const getRanking = (element) => {
-      const criterion = !!criterialProperty
-        ? element[criterialProperty]
-        : element;
-      if (!criterion || !(criterion in entities[rankingsId])) {
-        return Number.MAX_VALUE;
-      }
-      const ranking = entities[rankingsId][criterion];
-      if (isNaN(ranking)) {
-        return Number.MAX_VALUE;
-      }
-      return ranking;
-    };
-    unrankedArray.sort((a, b) => getRanking(a) - getRanking(b));
-  };
-  return sort;
 };

@@ -2,6 +2,7 @@ import { call, put, take } from 'redux-saga/effects';
 import { readDocuments, readEntitiesUrls } from 'src/utils/firebase';
 import { projectsRead } from './slice';
 
+/** workers */
 function* workProjectsRead() {
   try {
     yield put(projectsRead.pending());
@@ -13,6 +14,7 @@ function* workProjectsRead() {
   }
 }
 
+/** watchers */
 export function* watchProjectsRead() {
   yield take(projectsRead);
   yield call(workProjectsRead);

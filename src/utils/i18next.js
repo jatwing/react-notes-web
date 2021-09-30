@@ -5,8 +5,8 @@ import { readDocuments } from 'src/utils/firebase';
 import { store } from 'src/redux/store'
 import { resourcesAdded } from 'src/redux/i18n/slice'
 
-/** initialization */
-const languages = ['en-US', 'zh-TW'];
+/** configurations */
+export const languages = ['en-US', 'zh-TW'];
 const namespaces = ['translation'];
 const resources = {
   'en-US': {
@@ -17,6 +17,7 @@ const resources = {
   },
 };
 
+/** initialization */
 const options = {
   /** logging */
   debug: process.env.NODE_ENV === 'development',
@@ -56,22 +57,3 @@ const callback = async (error, t) => {
 
 i18n.use(LanguageDetector).use(initReactI18next).init(options, callback);
 export default i18n;
-
-/** localization */
-export const useLocalization = () => {
-  const { i18n } = useTranslation();
-  const localize = (object) => {
-    if (!object || !i18n || !('language' in i18n)) {
-      return '';
-    }
-    if (i18n.language in object) {
-      return object[i18n.language];
-    }
-    const fallbackLanguage = languages[0];
-    if (fallbackLanguage in object) {
-      return object[fallbackLanguage];
-    }
-    return '';
-  };
-  return localize;
-};

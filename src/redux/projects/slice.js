@@ -2,8 +2,10 @@ import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 
 import { createLifecycleActions } from 'src/redux/utils';
 
+/** actions */
 export const projectsRead = createLifecycleActions('projects', 'projectsRead');
 
+/** state */
 const projectsAdapter = createEntityAdapter({
   selectId: (entity) => entity.name,
   sortComparer: (a, b) => a.name.localeCompare(b.name),
@@ -17,7 +19,7 @@ const initialState = projectsAdapter.getInitialState({
 const projectsSlice = createSlice({
   name: 'projects',
   initialState,
-  reducers: {},
+  /** reducer */
   extraReducers: {
     [projectsRead.pending]: (state) => {
       state.status = 'loading';
@@ -35,6 +37,7 @@ const projectsSlice = createSlice({
 
 export const projectsReducer = projectsSlice.reducer;
 
+/** selectors */
 const projectsSelectors = projectsAdapter.getSelectors(
   (state) => state.projects
 );

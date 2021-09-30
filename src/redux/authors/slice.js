@@ -4,6 +4,7 @@ import { createLifecycleActions } from 'src/redux/utils';
 /** actions */
 export const authorsRead = createLifecycleActions('authors', 'authorsRead');
 
+/** state */
 const authorsAdapter = createEntityAdapter({
   selectId: (entity) => entity.name,
   sortComparer: (a, b) => a.name.localeCompare(b.name),
@@ -17,7 +18,7 @@ const initialState = authorsAdapter.getInitialState({
 const authorsSlice = createSlice({
   name: 'authors',
   initialState,
-  reducers: {},
+  /** reducer */
   extraReducers: {
     [authorsRead.pending]: (state) => {
       state.status = 'loading';
@@ -35,6 +36,7 @@ const authorsSlice = createSlice({
 
 export const authorsReducer = authorsSlice.reducer;
 
+/** selectors */
 const authorsSelectors = authorsAdapter.getSelectors((state) => state.authors);
 export const selectEntities = authorsSelectors.selectAll;
 export const selectStatus = (state) => state.authors.status;

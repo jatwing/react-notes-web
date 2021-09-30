@@ -2,7 +2,6 @@ import { call, put, take, select } from 'redux-saga/effects';
 import { readDocuments } from 'src/utils/firebase';
 import { selectEntities , rankingsRead } from './slice'
 
-
 export const getRankingSort = (entities) => {
   const sort = (unrankedArray, rankingsId, criterialProperty = null) => {
     if (!entities || !(rankingsId in entities)) {
@@ -26,6 +25,7 @@ export const getRankingSort = (entities) => {
   return sort;
 }
 
+/** workers */
 function* workRankingsRead() {
   try {
     yield put(rankingsRead.pending());
@@ -45,12 +45,12 @@ function* workRankingsRead() {
     const statefulEntities = yield select(selectEntities);
     const sort = getRankingSort(statefulEntities);
     yield put(rankingsRead.settled(sort));
-
   } catch (error) {
     yield put(rankingsRead.rejected(error));
   }
 }
 
+/** watchers */
 export function* watchRankingsRead() {
   yield take(rankingsRead);
   yield call(workRankingsRead);

@@ -1,13 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 
-/**
- *   pending -> fulfilled -> settled
- *
- *   TODO add the settled one, somehow spread the message
- *
- *   guess that it can guarantee the receiver can freely use the state
- */
-
 export const createLifecycleActions = (domain, event) => {
   const actionCreator = createAction(`${domain}/${event}`);
   actionCreator.pending = createAction(`${domain}/${event}/pending`, () => ({
@@ -29,6 +21,5 @@ export const createLifecycleActions = (domain, event) => {
       payload,
     })
   );
-
   return actionCreator;
 };

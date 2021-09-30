@@ -4,6 +4,7 @@ import { rankingsRead } from 'src/redux/rankings/slice';
 import { resourcesAdded } from 'src/redux/i18n/slice';
 import { routeChanged } from 'src/redux/router/slice';
 
+/** state */
 const initialState = {
   data: pageItems,
 };
@@ -11,46 +12,8 @@ const initialState = {
 const pagesSlice = createSlice({
   name: 'pages',
   initialState,
-  reducers: {
-    pagesTranslated: {
-      reducer: (state, action) => {
-        const t = action.payload;
-        traverse(state.data, (node) => {
-          node.name = t(node.filename);
-        });
-      },
-    },
-
-    pagesSorted: {
-      reducer: (state, action) => {
-        const sort = action.payload;
-        traverse(state.data, (node) => {
-          if (node.children) {
-            sort(node.children, node.url, 'url');
-          }
-        });
-      },
-    },
-    pagesSelected: {
-      reducer: (state, action) => {
-        const url = action.payload;
-        traverse(state.data, (node) => {
-          if (node.url === '/') {
-            node.isSelected = true;
-            return;
-          }
-          const regex = new RegExp(`^${node.url}(/([^/])+)*$`);
-          if (regex.test(url)) {
-            node.isSelected = true;
-            return;
-          }
-          node.isSelected = false;
-        });
-      },
-    },
-  },
+  /** reducer */
   extraReducers: {
-    /** sort pages */
     [rankingsRead.settled]: (state, action) => {
       const sort = action.payload;
       traverse(state.data, (node) => {
@@ -68,6 +31,7 @@ const pagesSlice = createSlice({
     [routeChanged.settled]: (state, action) => {
       const route = action.payload;
       traverse(state.data, (node) => {
+        node.isSelected = false;
         if (node.url === '/') {
           node.isSelected = true;
           return;
@@ -75,18 +39,13 @@ const pagesSlice = createSlice({
         const regex = new RegExp(`^${node.url}(/([^/])+)*$`);
         if (regex.test(route)) {
           node.isSelected = true;
-          return;
         }
-        node.isSelected = false;
       });
     },
   },
 });
 
-/** actions */
-export const { pagesTranslated, pagesSorted, pagesSelected } =
-  pagesSlice.actions;
-
 export const pagesReducer = pagesSlice.reducer;
 
+/** selectors */
 export const selectData = (state) => state.pages.data;

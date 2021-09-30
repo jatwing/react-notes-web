@@ -6,7 +6,7 @@ import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
 import { Drawer } from 'src/containers/drawer';
 import { usePages } from 'src/redux/pages/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
-import { useLocalization } from 'src/utils/i18next';
+import { useLocalization } from 'src/redux/i18n/hooks';
 import { useToggle } from 'src/utils/react';
 
 const useStyles = makeStyles((theme) => {

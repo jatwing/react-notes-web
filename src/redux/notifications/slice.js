@@ -1,11 +1,12 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-
 import { createLifecycleActions } from 'src/redux/utils';
 
+/** actions */
 export const notificationsRead = createLifecycleActions(
   'notifications', 'notificationsRead'
 );
 
+/** state */
 const notificationsAdapter = createEntityAdapter({
   selectId: (entity) => entity.name,
   sortComparer: (a, b) => a.name.localeCompare(b.name),
@@ -19,7 +20,7 @@ const initialState = notificationsAdapter.getInitialState({
 const notificationsSlice = createSlice({
   name: 'notifications',
   initialState,
-  reducers: {},
+  /** reducer */
   extraReducers: {
     [notificationsRead.pending]: (state) => {
       state.status = 'loading';
@@ -37,6 +38,7 @@ const notificationsSlice = createSlice({
 
 export const notificationsReducer = notificationsSlice.reducer;
 
+/** selectors */
 const notificationsSelectors = notificationsAdapter.getSelectors(
   (state) => state.notifications
 );
