@@ -11,11 +11,8 @@ export const Header = (props) => {
   const { isSmall } = useMediaQueries();
   const projects = useProjects();
   const notifications = useNotifications();
-
-  console.log(notifications);
-
   const leftSlot = isSmall ? (
-    <IconButton size="small" onClick={setOn}>
+    <IconButton onClick={setOn}>
       <Menu />
     </IconButton>
   ) : (
@@ -28,11 +25,15 @@ export const Header = (props) => {
           <GitHub />
         </IconButton>
       </Anchor>
-
       <IconButton>
         <Notifications />
       </IconButton>
     </Box>
   );
-  return <AppBar position="sticky" slots={[leftSlot, rightSlot]} />;
+  return (
+    <AppBar>
+      {leftSlot}
+      {rightSlot}
+    </AppBar>
+  );
 };

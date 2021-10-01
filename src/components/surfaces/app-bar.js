@@ -1,7 +1,7 @@
 import { AppBar as MuiAppBar, Toolbar } from '@mui/material';
 
 export const AppBar = (props) => {
-  const { slots } = props;
+  const { children } = props;
   return (
     <MuiAppBar position="sticky">
       <Toolbar
@@ -15,7 +15,7 @@ export const AppBar = (props) => {
           },
         }}
       >
-        {slots}
+        {children}
       </Toolbar>
     </MuiAppBar>
   );

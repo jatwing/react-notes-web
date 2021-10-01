@@ -1,4 +1,4 @@
-import { Link as MuiLink  } from '@mui/material';
+import { Box, Link as MuiLink } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 const isValidHttpUrl = (urlString) => {
@@ -17,6 +17,7 @@ export const Anchor = (props) => {
     sx: {
       all: 'initial',
       color: 'inherit',
+      ...(!href && { pointerEvents: 'none' }),
       ...sx,
     },
     ...otherProps,
