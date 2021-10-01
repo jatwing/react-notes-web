@@ -1,20 +1,18 @@
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
   Box,
-  Button,
   ButtonBase,
   Collapse,
   Divider,
-  Drawer,
+  Drawer as MuiDrawer,
   List,
-  ListItem,
   ListItemButton,
   ListItemText,
   Toolbar,
   Typography,
 } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { useEffect } from 'react';
+import { createElement, useEffect } from 'react';
 import { Anchor } from 'src/components/navigation/anchor';
 import { useMediaQueries } from 'src/lib/mui';
 import { useToggle } from 'src/lib/react';
@@ -61,24 +59,18 @@ const NestedList = (props) => {
 };
 
 export const ResponsiveDrawer = (props) => {
-  const { open, onClose, items, Logo, title, url } = props;
+  const { open, onClose, items,  logo, title, url } = props;
   const { isSmall } = useMediaQueries();
   const theme = useTheme();
   const isTemporary = isSmall ?? true;
   const drawerWidth = 256;
-  const handleDrawerClosed = () => {
-    event.preventDefault();
-    if (isTemporary) {
-      setIsOpen(false);
-    }
-  };
 
   return (
     <Box
       component="nav"
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
     >
-      <Drawer
+      <MuiDrawer
         variant={isTemporary ? 'temporary' : 'permanent'}
         open={isTemporary ? open : true}
         onClose={onClose}
@@ -107,7 +99,7 @@ export const ResponsiveDrawer = (props) => {
                 justifyContent: 'space-around',
               }}
             >
-              <Logo color="primary" sx={{ fontSize: 32 }} />
+              { createElement(logo, { color: 'primary', sx :{ fontSize: 32} })  }
               <Typography
                 variant="body1"
                 component="span"
@@ -134,7 +126,7 @@ export const ResponsiveDrawer = (props) => {
             )
           )}
         </List>
-      </Drawer>
+      </MuiDrawer>
     </Box>
   );
 };
