@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { notificationsRead } from './sagas';
+import { notificationsRead } from './slice';
 import { selectEntities, selectError, selectStatus } from './slice';
 
 export const useNotifications = () => {

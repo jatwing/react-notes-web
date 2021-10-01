@@ -16,6 +16,7 @@ export const Anchor = (props) => {
     children,
     sx: {
       all: 'initial',
+      color: 'inherit',
       ...sx,
     },
     ...otherProps,
