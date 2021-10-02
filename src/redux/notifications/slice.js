@@ -3,7 +3,8 @@ import { createLifecycleActions } from 'src/redux/utils';
 
 /** actions */
 export const notificationsRead = createLifecycleActions(
-  'notifications', 'notificationsRead'
+  'notifications',
+  'notificationsRead'
 );
 
 /** state */

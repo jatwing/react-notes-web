@@ -1,14 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { languages } from 'src/lib/i18next'
+import { languages } from 'src/lib/i18next';
 
 /**
  * TODO maybe
  * re-rewrite t() and l()
- * to prevent re-rendering 
+ * to prevent re-rendering
  */
-
-
-
 
 export const useLocalization = () => {
   const { i18n } = useTranslation();

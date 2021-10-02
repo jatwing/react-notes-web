@@ -6,7 +6,7 @@ import { routeChanged } from 'src/redux/router/slice';
 
 /** state */
 const initialState = {
-  data: pageItemTree
+  data: pageItemTree,
 };
 
 const pagesSlice = createSlice({

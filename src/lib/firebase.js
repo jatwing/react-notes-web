@@ -18,20 +18,18 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 
 /** firestore */
-export const readDocuments =
-  (path) =>
-  async () => {
-    try {
-      const col = collection(db, path);
-      const snapshot = await getDocs(col);
-      return snapshot.docs.map((doc) => ({
-        _id: doc.id,
-        ...doc.data(),
-      }));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+export const readDocuments = (path) => async () => {
+  try {
+    const col = collection(db, path);
+    const snapshot = await getDocs(col);
+    return snapshot.docs.map((doc) => ({
+      _id: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 /** storage */
 export function* readEntityUrl(entity, key) {

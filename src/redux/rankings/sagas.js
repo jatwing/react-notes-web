@@ -1,6 +1,6 @@
 import { call, put, take, select } from 'redux-saga/effects';
 import { readDocuments } from 'src/lib/firebase';
-import { selectEntities , rankingsRead } from './slice'
+import { selectEntities, rankingsRead } from './slice';
 
 export const getRankingSort = (entities) => {
   const sort = (unrankedArray, rankingsId, criterialProperty = null) => {
@@ -23,7 +23,7 @@ export const getRankingSort = (entities) => {
     unrankedArray.sort((a, b) => getRanking(a) - getRanking(b));
   };
   return sort;
-}
+};
 
 /** workers */
 function* workRankingsRead() {
@@ -35,12 +35,12 @@ function* workRankingsRead() {
         ? value.replaceAll('\\', '/')
         : value;
     const processedEntities = rawEntities.map((rawEntity) => {
-      const processedEntity = {}
+      const processedEntity = {};
       Object.keys(rawEntity).forEach((key) => {
-        processedEntity[slashUnescape(key)] = slashUnescape(rawEntity[key]) 
-      })
+        processedEntity[slashUnescape(key)] = slashUnescape(rawEntity[key]);
+      });
       return processedEntity;
-    })
+    });
     yield put(rankingsRead.fulfilled(processedEntities));
     const statefulEntities = yield select(selectEntities);
     const sort = getRankingSort(statefulEntities);

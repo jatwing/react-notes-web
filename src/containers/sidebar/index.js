@@ -14,11 +14,8 @@ export const Sidebar = (props) => {
       open={open}
       onClose={onClose}
       items={pages}
-      Logo={JatwingIcon}
       logo={JatwingIcon}
       title={l(projects?.entities?.[0]?.title)}
     />
   );
 };
-
-

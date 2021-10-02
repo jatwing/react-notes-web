@@ -7,8 +7,8 @@ export const rankingsRead = createLifecycleActions('rankings', 'rankingsRead');
 /** state */
 const rankingsAdapter = createEntityAdapter({
   selectId: (entity) => entity._id,
-  sortComparer: (a, b) => a._id.localeCompare(b._id)
-})
+  sortComparer: (a, b) => a._id.localeCompare(b._id),
+});
 
 const initialState = rankingsAdapter.getInitialState({
   status: 'idle',
@@ -25,7 +25,7 @@ const rankingsSlice = createSlice({
     },
     [rankingsRead.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      rankingsAdapter.setAll(state, action.payload)
+      rankingsAdapter.setAll(state, action.payload);
     },
     [rankingsRead.failed]: (state, action) => {
       state.status = 'failed';

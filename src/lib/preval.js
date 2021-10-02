@@ -40,4 +40,3 @@ const getPagePathTree = (filename, path) => {
 };
 module.exports = getPagePathTree('src/pages', 'src/pages');
 `;
-
