@@ -18,7 +18,6 @@ import { useMediaQueries } from 'src/lib/mui';
 import { useToggle } from 'src/lib/react';
 
 
-
 const ListItemLink = (props) => {
   const { item } = props;
   return (
@@ -101,7 +100,7 @@ export const ResponsiveDrawer = (props) => {
                 justifyContent: 'space-around',
               }}
             >
-              { createElement(logo, { color: 'primary', sx :{ fontSize: 32} })  }
+              { !!logo && createElement(logo, { color: 'primary', sx :{ fontSize: 32} })  }
               <Typography
                 variant="body1"
                 component="span"

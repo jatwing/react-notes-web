@@ -11,10 +11,9 @@ module.exports = {
 }
 `;
 
-export const pagePaths = preval`
+export const pagePathTree = preval`
 const { statSync, readdirSync } = require('fs');
-const { join } = require('path');
-const getPaths = (filename, path, excludedPaths) => {
+const getPagePathTree = (filename, path) => {
   /** file */
   if (!statSync(path).isDirectory()) {
     if (filename !== 'index.js') {
@@ -31,10 +30,7 @@ const getPaths = (filename, path, excludedPaths) => {
   };
   readdirSync(path).forEach((childFilename) => {
     const childPath = path + '/' + childFilename;
-    if (excludedPaths.includes(childPath)) {
-      return;
-    }
-    const child = getPaths(childFilename, childPath, excludedPaths);
+    const child = getPagePathTree(childFilename, childPath);
     child && directory.children.push(child);
   });
   if (directory.children.length === 0) {
@@ -42,6 +38,6 @@ const getPaths = (filename, path, excludedPaths) => {
   }
   return directory;
 };
-module.exports = getPaths('src/pages', 'src/pages', []);
+module.exports = getPagePathTree('src/pages', 'src/pages');
 `;
 

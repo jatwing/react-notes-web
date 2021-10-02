@@ -1,9 +1,7 @@
 import { useMediaQuery } from '@mui/material';
 import { createTheme, useTheme } from '@mui/material/styles';
 
-/**
- * theme
- */
+/** theme */
 export const theme = createTheme({
   palette: {
     mode: 'light',
@@ -35,9 +33,7 @@ export const theme = createTheme({
   },
 });
 
-/**
- * media query
- */
+/** media query */
 export const useMediaQueryStrings = () => {
   const theme = useTheme();
   const smallQuery = theme.breakpoints.down('sm');

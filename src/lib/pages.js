@@ -1,4 +1,4 @@
-import { pagePaths } from './preval';
+import { pagePathTree } from './preval';
 
 /** tree */
 export const traverse = (node, callback = null) => {
@@ -16,10 +16,10 @@ export const traverse = (node, callback = null) => {
   });
 };
 
-/** transform page path tree into page url tree */
-const getUrls = (paths) => {
-  const urls = JSON.parse(JSON.stringify(paths));
-  const modify = (node) => {
+/** convert path tree into url tree */
+const getUrlTree = (pathTree) => {
+  const urlTree = JSON.parse(JSON.stringify(pathTree));
+  traverse(urlTree, (node) => {
     node.url = node.path.substring(9) || '/';
     const hasDirectoryPath = node.pathType === 'directory';
     let hasChildWithDirectoryPath = false;
@@ -45,25 +45,34 @@ const getUrls = (paths) => {
       node.urlType = null;
       node.children = null;
     }
-  };
-  traverse(urls, modify);
-  return urls;
+  });
+  return urlTree;
 };
 
-/** transform page url tree into page item tree */
-const getItems = (urls) => {
-  const items = JSON.parse(JSON.stringify(urls));
-  const modify = (node) => {
+/** convert url tree into item tree */
+const getItemTree = (urlTree) => {
+  const itemTree = JSON.parse(JSON.stringify(urlTree));
+  traverse(itemTree, (node) => {
     if (node.urlType === 'directory') {
       node.type = 'list';
     } else if (node.urlType === 'file') {
       node.type = 'item';
     }
     node.href = node.url;
-  };
-  traverse(items, modify);
-  return items;
+  });
+  return itemTree;
 };
 
-export const pageUrls = getUrls(pagePaths);
-export const pageItems = getItems(pageUrls);
+const getItemsUrls = (itemTree) => {
+  const urls = [];
+  traverse(itemTree, (node) => {
+    if (node.type === 'item') {
+      urls.push(node.url);
+    }
+  });
+  return urls;
+};
+
+export const pageUrlTree = getUrlTree(pagePathTree);
+export const pageItemTree = getItemTree(pageUrlTree);
+export const pageItemsUrls = getItemsUrls(pageItemTree);
