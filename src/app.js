@@ -1,5 +1,4 @@
 import 'src/lib/i18next.js';
-import './styles.css';
 import { ThemeProvider } from '@mui/material/styles';
 import { Suspense, lazy } from 'react';
 import { useTranslation } from 'react-i18next';

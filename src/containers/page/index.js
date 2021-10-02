@@ -2,15 +2,14 @@ import { Box } from '@mui/material';
 import { useToggle } from 'src/lib/react';
 import { Sidebar } from 'src/containers/sidebar';
 import { Header } from 'src/containers/header';
+import { Toolbar } from '@mui/material';
 
-import { CssBaseline, Typography } from '@mui/material';
 
 export const Page = (props) => {
   const { children }  = props;
   const { value: isDrawerOpen, setOn, setOff } = useToggle();
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
       <Sidebar open={isDrawerOpen} onClose={setOff} />
       <Box
         sx={{
@@ -21,10 +20,11 @@ export const Page = (props) => {
         }}
       >
         <Header setOn={setOn} />
-        <div sx={{ flex: '1', padding: '32px' }}>
+        <Toolbar />
+
+        <Box sx={{ flex: '1', padding: '32px' }}>
           { children }
-          <Box sx={{ height: '1000px' }}>{'test'}</Box>
-        </div>
+        </Box>
       </Box>
     </Box>
   );
