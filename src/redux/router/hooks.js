@@ -1,8 +1,7 @@
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { store } from 'src/redux/store';
-
+import { useLocation } from 'react-router-dom';
 import { routeChanged } from 'src/redux/router/slice';
+import { store } from 'src/redux/store';
 
 export const usePageViews = () => {
   const location = useLocation();

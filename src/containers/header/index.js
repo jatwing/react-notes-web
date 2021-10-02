@@ -1,10 +1,10 @@
-import { AppBar } from 'src/components/surfaces/app-bar';
-import { Link, Box, IconButton } from '@mui/material';
-import { Menu, GitHub, Notifications } from '@mui/icons-material';
-import { useMediaQueries } from 'src/lib/mui';
+import { GitHub, Menu, Notifications } from '@mui/icons-material';
+import { Box, IconButton} from '@mui/material';
 import { Anchor } from 'src/components/navigation/anchor';
-import { useProjects } from 'src/redux/projects/hooks';
+import { AppBar } from 'src/components/surfaces/app-bar';
+import { useMediaQueries } from 'src/lib/mui';
 import { useNotifications } from 'src/redux/notifications/hooks';
+import { useProjects } from 'src/redux/projects/hooks';
 
 export const Header = (props) => {
   const { setOn } = props;

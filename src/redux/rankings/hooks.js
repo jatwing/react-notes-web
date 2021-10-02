@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { rankingsRead } from './slice';
-import { selectEntities, selectError, selectStatus } from './slice';
+
+import { rankingsRead , selectEntities, selectError, selectStatus } from './slice';
+
 
 export const useRankings = () => {
   const entities = useSelector(selectEntities);

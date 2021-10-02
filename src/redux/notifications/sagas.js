@@ -1,5 +1,6 @@
 import { call, put, take } from 'redux-saga/effects';
 import { readDocuments } from 'src/lib/firebase';
+
 import { notificationsRead } from './slice';
 
 /** workers */

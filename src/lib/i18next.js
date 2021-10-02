@@ -1,9 +1,9 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { initReactI18next, useTranslation } from 'react-i18next';
+import { initReactI18next } from 'react-i18next';
 import { readDocuments } from 'src/lib/firebase';
-import { store } from 'src/redux/store';
 import { resourcesAdded } from 'src/redux/i18n/slice';
+import { store } from 'src/redux/store';
 
 /** configurations */
 export const languages = ['en-US', 'zh-TW'];

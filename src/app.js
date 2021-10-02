@@ -1,6 +1,8 @@
 import 'src/lib/i18next.js';
+
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import { Suspense, lazy } from 'react';
+import { lazy,Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Provider } from 'react-redux';
 import {
@@ -10,11 +12,10 @@ import {
   Switch,
 } from 'react-router-dom';
 import { Page } from 'src/containers/page';
-import { store } from 'src/redux/store';
 import { theme } from 'src/lib/mui';
-import { usePageViews } from 'src/redux/router/hooks';
 import { pageItemsUrls } from 'src/lib/pages';
-import { CssBaseline } from '@mui/material';
+import { usePageViews } from 'src/redux/router/hooks';
+import { store } from 'src/redux/store';
 
 export const PageSwitch = () => {
   usePageViews();

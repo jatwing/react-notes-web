@@ -1,5 +1,4 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-
 import { createLifecycleActions } from 'src/redux/utils';
 
 /** actions */

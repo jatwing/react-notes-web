@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { pageItemTree, traverse } from 'src/lib/pages';
-import { rankingsRead } from 'src/redux/rankings/slice';
 import { resourcesAdded } from 'src/redux/i18n/slice';
+import { rankingsRead } from 'src/redux/rankings/slice';
 import { routeChanged } from 'src/redux/router/slice';
 
 /** state */

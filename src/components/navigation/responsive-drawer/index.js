@@ -30,15 +30,15 @@ const ListItemLink = (props) => {
 
 const NestedList = (props) => {
   const { list, onClose } = props;
-  const { value: isListOpen, toggle } = useToggle();
+  const { value: isListOpen, setOn, toggle } = useToggle();
   useEffect(() => {
-    if (list.isSelected && !isListOpen) {
-      toggle();
+    if (list.isSelected) {
+      setOn();
     }
-  }, [list]);
+  }, [list, setOn]);
   return (
     <>
-      <ListItemButton onClick={() => toggle()} key={list.href}>
+      <ListItemButton onClick={toggle} key={list.href}>
         <ListItemText primary={list.name} />
         {isListOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
@@ -65,58 +65,65 @@ export const ResponsiveDrawer = (props) => {
   const isTemporary = isSmall ?? true;
   const drawerWidth = 256;
   return (
-    <MuiDrawer
-      variant={isTemporary ? 'temporary' : 'permanent'}
-      open={isTemporary ? open : true}
-      onClose={onClose}
-      ModalProps={{ keepMounted: true }}
+    <Box
+      component="nav"
       sx={{
-        '& .MuiDrawer-paper': {
-          boxSizing: 'border-box',
-          width: drawerWidth,
-        },
+        width: { sm: drawerWidth },
+        flexShrink: { sm: 0 },
       }}
     >
-      <Toolbar
+      <MuiDrawer
+        variant={isTemporary ? 'temporary' : 'permanent'}
+        open={isTemporary ? open : true}
+        onClose={onClose}
+        ModalProps={{ keepMounted: true }}
         sx={{
-          '&.MuiToolbar-root': {
-            paddingLeft: '0',
-            paddingRight: '0',
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: drawerWidth,
           },
         }}
       >
-        <Anchor href="/" sx={{ width: '100%', minHeight: 'inherit' }}>
-          <ButtonBase
-            sx={{
-              width: '100%',
-              minHeight: 'inherit',
-              padding: '0 16px',
-              justifyContent: 'space-around',
-            }}
-          >
-            {!!logo &&
-              createElement(logo, { color: 'primary', sx: { fontSize: 32 } })}
-            <Typography
-              variant="body1"
-              component="span"
-              sx={{ fontFamily: theme.typography.fontFamilies.monospace }}
+        <Toolbar
+          sx={{
+            '&.MuiToolbar-root': {
+              paddingLeft: '0',
+              paddingRight: '0',
+            },
+          }}
+        >
+          <Anchor href="/" sx={{ width: '100%', minHeight: 'inherit' }}>
+            <ButtonBase
+              sx={{
+                width: '100%',
+                minHeight: 'inherit',
+                padding: '0 16px',
+                justifyContent: 'space-around',
+              }}
             >
-              {title}
-            </Typography>
-          </ButtonBase>
-        </Anchor>
-      </Toolbar>
-
-      <Divider />
-      <List>
-        {items?.children.map((child) =>
-          child.type === 'list' ? (
-            <NestedList list={child} onClose={onClose} key={child.href} />
-          ) : (
-            <ListItemLink item={child} onClose={onClose} key={child.href} />
-          )
-        )}
-      </List>
-    </MuiDrawer>
+              {!!logo &&
+                createElement(logo, { color: 'primary', sx: { fontSize: 32 } })}
+              <Typography
+                variant="body1"
+                component="span"
+                sx={{ fontFamily: theme.typography.fontFamilies.monospace }}
+              >
+                {title}
+              </Typography>
+            </ButtonBase>
+          </Anchor>
+        </Toolbar>
+        <Divider />
+        <List>
+          {items?.children.map((child) =>
+            child.type === 'list' ? (
+              <NestedList list={child} onClose={onClose} key={child.href} />
+            ) : (
+              <ListItemLink item={child} onClose={onClose} key={child.href} />
+            )
+          )}
+        </List>
+      </MuiDrawer>
+    </Box>
   );
 };

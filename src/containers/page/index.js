@@ -1,7 +1,9 @@
 import { Box } from '@mui/material';
-import { useToggle } from 'src/lib/react';
-import { Sidebar } from 'src/containers/sidebar';
 import { Header } from 'src/containers/header';
+import { Sidebar } from 'src/containers/sidebar';
+import { useToggle } from 'src/lib/react';
+import { MainContent } from 'src/containers/main-content';
+import { Footer } from 'src/containers/footer'
 
 export const Page = (props) => {
   const { children } = props;
@@ -18,8 +20,10 @@ export const Page = (props) => {
         }}
       >
         <Header setOn={setOn} />
-
-        <Box sx={{ flex: '1', padding: '32px' }}>{children}</Box>
+        <MainContent children={children} sx={{ 
+// this one does not work, TODO pass sx
+          flexGrow: '1' }}/>
+        <Footer />
       </Box>
     </Box>
   );
