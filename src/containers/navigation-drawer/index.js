@@ -4,7 +4,7 @@ import { useLocalization } from 'src/redux/i18n/hooks';
 import { usePages } from 'src/redux/pages/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
 
-export const Sidebar = (props) => {
+export const NavigationDrawer  = (props) => {
   const { open, onClose } = props;
   const pages = usePages();
   const projects = useProjects();

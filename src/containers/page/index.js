@@ -1,16 +1,16 @@
 import { Box } from '@mui/material';
 import { Header } from 'src/containers/header';
-import { Sidebar } from 'src/containers/sidebar';
+import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
 import { MainContent } from 'src/containers/main-content';
-import { Footer } from 'src/containers/footer'
+import { Footer } from 'src/containers/footer';
 
 export const Page = (props) => {
   const { children } = props;
   const { value: isDrawerOpen, setOn, setOff } = useToggle();
   return (
     <Box sx={{ display: 'flex' }}>
-      <Sidebar open={isDrawerOpen} onClose={setOff} />
+      <NavigationDrawer open={isDrawerOpen} onClose={setOff} />
       <Box
         sx={{
           flexGrow: '1',
@@ -20,9 +20,12 @@ export const Page = (props) => {
         }}
       >
         <Header setOn={setOn} />
-        <MainContent children={children} sx={{ 
-// this one does not work, TODO pass sx
-          flexGrow: '1' }}/>
+        <MainContent
+          children={children}
+          sx={{
+            flexGrow: '1',
+          }}
+        />
         <Footer />
       </Box>
     </Box>
