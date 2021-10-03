@@ -8,6 +8,7 @@ export const Footer = (props) => {
       : Math.trunc(12 / (columns.length + (!!logo && 1)));
   return (
     <Container
+      component="footer"
       sx={{
         '&.MuiContainer-root': {
           p: '40px',
@@ -29,8 +30,8 @@ export const Footer = (props) => {
             {logo}
           </Grid>
         )}
-        {columns.map((column) => (
-          <Grid item xs={6} md={columnWidth}>
+        {columns.map((column, index) => (
+          <Grid item xs={6} md={columnWidth} key={index}>
             {column}
           </Grid>
         ))}

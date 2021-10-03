@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { authorsRead } from './sagas';
-import { selectEntities, selectError, selectStatus } from './slice';
+import {
+  authorsRead,
+  selectEntities,
+  selectError,
+  selectStatus,
+} from './slice';
 
 export const useAuthors = () => {
   const entities = useSelector(selectEntities);
@@ -16,4 +20,10 @@ export const useAuthors = () => {
     dispatch(authorsRead());
   }
   return { entities, isIdle, isLoading, isSucceed, isFailed, error };
+};
+
+export const useAuthor = () => {
+  const { entities, isSucceed } = useAuthors();
+  const entity = isSucceed ? entities[0] : {};
+  return { entity, isSucceed };
 };

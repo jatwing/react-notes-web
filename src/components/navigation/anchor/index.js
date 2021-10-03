@@ -4,7 +4,8 @@ import { Link as RouterLink } from 'react-router-dom';
 const isValidHttpUrl = (urlString) => {
   try {
     const url = new URL(urlString);
-    return url.protocol === 'http:' || url.protocol === 'https:';
+    const schemes = ['http:', 'https:', 'mailto:'];
+    return schemes.includes(url.protocol);
   } catch (error) {
     return false;
   }

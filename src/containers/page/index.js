@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
+import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
+import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
-import { MainContent } from 'src/containers/main-content';
-import { Footer } from 'src/containers/footer';
 
 export const Page = (props) => {
   const { children } = props;

@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { notificationsRead , selectEntities, selectError, selectStatus } from './slice';
-
+import {
+  notificationsRead,
+  selectEntities,
+  selectError,
+  selectStatus,
+} from './slice';
 
 export const useNotifications = () => {
   const entities = useSelector(selectEntities);

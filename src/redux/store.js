@@ -9,7 +9,7 @@ import { pagesReducer } from 'src/redux/pages/slice';
 import { watchProjectsRead } from 'src/redux/projects/sagas';
 import { projectsReducer } from 'src/redux/projects/slice';
 import { watchRankingsRead } from 'src/redux/rankings/sagas';
-import { rankingsRead,rankingsReducer } from 'src/redux/rankings/slice';
+import { rankingsRead, rankingsReducer } from 'src/redux/rankings/slice';
 
 const sagaMiddleware = createSagaMiddleware();
 

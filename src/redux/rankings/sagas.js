@@ -1,7 +1,7 @@
-import { call, put, select,take } from 'redux-saga/effects';
+import { call, put, select, take } from 'redux-saga/effects';
 import { readDocuments } from 'src/lib/firebase';
 
-import { rankingsRead,selectEntities } from './slice';
+import { rankingsRead, selectEntities } from './slice';
 
 export const getRankingSort = (entities) => {
   const sort = (unrankedArray, rankingsId, criterialProperty = null) => {
