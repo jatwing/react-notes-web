@@ -1,4 +1,3 @@
-
 /**
  * solution may be:
  *
@@ -10,11 +9,8 @@
  *
  */
 
-
 import { Link as MuiLink } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-
-
 
 // remove Duplicated code
 const isValidHttpUrl = (urlString) => {
@@ -27,20 +23,37 @@ const isValidHttpUrl = (urlString) => {
   }
 };
 
-export const TestLink  = (props) => {
+/**
+ * find a way to combine Anchor and Link
+ *
+ * how about 
+ *
+ * 1. Link Function (link to url) , button opens url.
+ * 2. Link Style (for text underline and color), text opens dialog.
+ * 3. Combined, original a or MuiLink, text opens url.
+ *    even only case 3, need to consider replacing the component.
+ */
+
+export const TestLink = (props) => {
   const { href, target, rel, children, sx, ...otherProps } = props;
   const newProps = {
     children,
     sx: {
       '&.MuiLink-root': {
-        textDecoration: 'none'
+        textDecoration: 'none',
       },
-      '&.MuiLink-root:hover': {
+      '& .MuiTypography-root': {
+        textDecoration: 'none',
+      },
+      '&:hover .MuiTypography-root, &:focus .MuiTypography-root': {
         textDecoration: 'underline',
-        textDecorationColor: 'currentColor'
-        // cannot use current color hree
+        textDecorationColor: 'currentColor',
       },
-
+      '&:active .MuiTypography-root': {
+        textDecoration: 'none',
+        // not very genral, consider opacity
+        color: 'secondary.main',
+      },
       ...sx,
     },
     ...otherProps,
@@ -48,7 +61,7 @@ export const TestLink  = (props) => {
   if (isValidHttpUrl(href)) {
     newProps.href = href;
     newProps.target = target ?? '_blank';
-    newProps.rel = rel ?? 'noreferrer noreferrer';
+    newProps.rel = rel ?? 'noreferrer noopener';
   } else {
     newProps.to = href;
     newProps.component = RouterLink;

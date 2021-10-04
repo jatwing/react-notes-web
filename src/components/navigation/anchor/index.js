@@ -26,7 +26,7 @@ export const Anchor = (props) => {
   if (isValidHttpUrl(href)) {
     newProps.href = href;
     newProps.target = target ?? '_blank';
-    newProps.rel = rel ?? 'noreferrer noreferrer';
+    newProps.rel = rel ?? 'noreferrer noopener';
   } else {
     newProps.to = href;
     newProps.component = RouterLink;
