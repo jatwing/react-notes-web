@@ -1,4 +1,4 @@
-import { List, ListItemText } from '@mui/material';
+import { List, ListItemText, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { JatwingIcon } from 'src/components/data-display/icons';
 import { Footer as FooterComponent } from 'src/components/layout/footer';
@@ -34,9 +34,11 @@ export const Footer = () => {
   const projectColumn = project.isSucceed ? (
     <List>
       <ListItemText primary={t('project')} />
-      <Anchor href={project.entity.github}>
+
+      <Link href="#" underline="hover">
         <ListItemText secondary={t('attribution')} />
-      </Anchor>
+      </Link>
+
       <Anchor href={project.entity.github}>
         <ListItemText secondary={t('github')} />
       </Anchor>
@@ -48,7 +50,6 @@ export const Footer = () => {
 
   return (
     <FooterComponent
-      logo={<JatwingIcon />}
       columns={[authorColumn, projectColumn]}
       copyright={project.isSucceed ? project.entity.copyright : ''}
     />

@@ -20,11 +20,6 @@ export const Header = (props) => {
   );
   const rightSlot = (
     <Box sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-      <Anchor href={projects.isSucceed ? projects.entities[0].github : ''}>
-        <IconButton>
-          <GitHub />
-        </IconButton>
-      </Anchor>
       <IconButton>
         <Notifications />
       </IconButton>

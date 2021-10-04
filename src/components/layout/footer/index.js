@@ -1,4 +1,4 @@
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Divider } from '@mui/material';
 
 export const Footer = (props) => {
   const { logo, columns, copyright } = props;
@@ -15,6 +15,7 @@ export const Footer = (props) => {
         },
       }}
     >
+      <Divider />
       <Grid container>
         {!!logo && (
           <Grid
