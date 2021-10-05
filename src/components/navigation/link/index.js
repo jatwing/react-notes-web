@@ -1,18 +1,6 @@
-/**
- * solution may be:
- *
- * creating useable link component based on the @mui link
- *
- * the validation and component similar to Anchor
- *
- * but directly write the style inside
- *
- */
-
 import { Link as MuiLink } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-// remove Duplicated code
 const isValidHttpUrl = (urlString) => {
   try {
     const url = new URL(urlString);
@@ -34,6 +22,63 @@ const isValidHttpUrl = (urlString) => {
  *    even only case 3, need to consider replacing the component.
  */
 
+
+// 1. link without style, button opens url.
+export const LinkBase  = (props) => {
+  const { href, target, rel, children, sx, ...otherProps } = props;
+  const newProps = {
+    children,
+    sx: {
+      all: 'initial',
+      color: 'inherit',
+      ...(!href && { pointerEvents: 'none' }),
+      ...sx,
+    },
+    ...otherProps,
+  };
+  if (isValidHttpUrl(href)) {
+    newProps.href = href;
+    newProps.target = target ?? '_blank';
+    newProps.rel = rel ?? 'noreferrer noopener';
+  } else {
+    newProps.to = href;
+    newProps.component = RouterLink;
+  }
+  return <MuiLink {...newProps} />;
+};
+
+
+// maybe create the common sx style here.
+
+const style = {
+  sx: { toDO: '1'} 
+}
+
+
+// 2. link without function, text use onClick.
+export const LinkStyle = () => {
+  // note the component should be replaced by 'span'
+
+  return <></>
+}
+
+
+// 3. complete text   link.
+export const Link = () => {
+
+  // maybe we can use the base.
+
+
+  return <></>
+}
+
+
+
+
+
+
+
+// deletet the code below;
 export const TestLink = (props) => {
   const { href, target, rel, children, sx, ...otherProps } = props;
   const newProps = {
