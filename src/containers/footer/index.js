@@ -6,7 +6,6 @@ import { Anchor } from 'src/components/navigation/anchor';
 import { useAuthor } from 'src/redux/authors/hooks';
 import { useProject } from 'src/redux/projects/hooks';
 
-import { TestLink } from 'src/components/navigation/link'
 
 
 export const Footer = () => {
@@ -39,9 +38,6 @@ export const Footer = () => {
       <ListItemText primary={t('project')} />
 
 
-      <TestLink href="https://google.com" >
-        <ListItemText secondary={t('attribution') + 'test'}   />
-      </TestLink>
 
       <Link href="#" underline="hover">
         <ListItemText secondary={t('attribution')} />

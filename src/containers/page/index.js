@@ -5,8 +5,14 @@ import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
 
-import { LinkBase, LinkStyle, Link } from 'src/components/navigation/link'
+import {
+  AnchorBase,
+  AnchorStyle,
+  Anchor,
+} from 'src/components/navigation/link';
 
+import { Typography } from '@mui/material';
+// ??? pros and cons of using typography
 
 export const Page = (props) => {
   const { children } = props;
@@ -30,14 +36,20 @@ export const Page = (props) => {
           }}
         />
 
-    { 'test 3 link here.'}
+        {'test 3 link here.'}
 
-      <LinkBase>{'linkbase'}</LinkBase>
-      <LinkStyle>{'link style'}</LinkStyle>
+        <AnchorBase href="https://developer.mozilla.org/en-US/">
+          <Typography>
+            {'linkbase , wrong, clear too much style'}
+          </Typography>
+        </AnchorBase>
+        <AnchorStyle>
+          <Typography>{'link style'}</Typography>
+        </AnchorStyle>
 
-      <Link>{'link function and style'}</Link>
-
-
+        <Anchor href="https://developer.mozilla.org/en-US/">
+          <Typography>{'link '}</Typography>
+        </Anchor>
 
         <Footer />
       </Box>

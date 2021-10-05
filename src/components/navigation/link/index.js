@@ -1,4 +1,4 @@
-import { Link as MuiLink } from '@mui/material';
+import { Box, Link as MuiLink } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 const isValidHttpUrl = (urlString) => {
@@ -11,105 +11,75 @@ const isValidHttpUrl = (urlString) => {
   }
 };
 
-/**
- * find a way to combine Anchor and Link
- *
- * how about 
- *
- * 1. Link Function (link to url) , button opens url.
- * 2. Link Style (for text underline and color), text opens dialog.
- * 3. Combined, original a or MuiLink, text opens url.
- *    even only case 3, need to consider replacing the component.
- */
-
-
-// 1. link without style, button opens url.
-export const LinkBase  = (props) => {
-  const { href, target, rel, children, sx, ...otherProps } = props;
+/** anchor without style */
+export const AnchorBase = (props) => {
+  const {
+    href,
+    target = '_blank',
+    rel = 'noreferrer noopener',
+    children,
+    sx,
+  } = props;
+  if (!href) {
+    return <Box children={children} sx={sx} />;
+  }
   const newProps = {
     children,
+    ...(isValidHttpUrl(href)
+      ? { href, target, rel }
+      : { to: href, component: RouterLink }),
     sx: {
       all: 'initial',
+      '& .MuiTypography-root': {
+        textDecoration: 'none',
+        color: 'inherit',
+      },
+
       color: 'inherit',
-      ...(!href && { pointerEvents: 'none' }),
       ...sx,
     },
-    ...otherProps,
   };
-  if (isValidHttpUrl(href)) {
-    newProps.href = href;
-    newProps.target = target ?? '_blank';
-    newProps.rel = rel ?? 'noreferrer noopener';
-  } else {
-    newProps.to = href;
-    newProps.component = RouterLink;
-  }
   return <MuiLink {...newProps} />;
 };
 
+/** anchor style */
+const anchorStyle = {
+  display: 'inline',
+  '& .MuiTypography-root': {
+    textDecoration: 'none',
+  },
+  '&:hover .MuiTypography-root, &:focus .MuiTypography-root': {
+    textDecoration: 'underline',
+    textDecorationColor: 'currentColor',
+  },
+  '&:active .MuiTypography-root': {
+    textDecoration: 'none',
+    color: 'text.disabled',
+  },
+};
 
-// maybe create the common sx style here.
-
-const style = {
-  sx: { toDO: '1'} 
-}
-
-
-// 2. link without function, text use onClick.
-export const LinkStyle = () => {
-  // note the component should be replaced by 'span'
-
-  return <></>
-}
-
-
-// 3. complete text   link.
-export const Link = () => {
-
-  // maybe we can use the base.
-
-
-  return <></>
-}
-
-
-
-
-
-
-
-// deletet the code below;
-export const TestLink = (props) => {
-  const { href, target, rel, children, sx, ...otherProps } = props;
+/** span with anchor style */
+export const AnchorStyle = (props) => {
+  const { children, sx } = props;
   const newProps = {
     children,
     sx: {
-      '&.MuiLink-root': {
-        textDecoration: 'none',
-      },
-      '& .MuiTypography-root': {
-        textDecoration: 'none',
-      },
-      '&:hover .MuiTypography-root, &:focus .MuiTypography-root': {
-        textDecoration: 'underline',
-        textDecorationColor: 'currentColor',
-      },
-      '&:active .MuiTypography-root': {
-        textDecoration: 'none',
-        // not very genral, consider opacity
-        color: 'secondary.main',
-      },
+      anchorStyle,
+      ...sx,
+    },
+  };
+  return <Box component="a" {...newProps} />;
+};
+
+/** complete anchor */
+export const Anchor = (props) => {
+  const { sx, ...otherProps } = props;
+  const newProps = {
+    sx: {
+      anchorStyle,
       ...sx,
     },
     ...otherProps,
   };
-  if (isValidHttpUrl(href)) {
-    newProps.href = href;
-    newProps.target = target ?? '_blank';
-    newProps.rel = rel ?? 'noreferrer noopener';
-  } else {
-    newProps.to = href;
-    newProps.component = RouterLink;
-  }
-  return <MuiLink {...newProps} />;
+  return <AnchorBase {...newProps} />;
 };
