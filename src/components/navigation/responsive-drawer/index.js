@@ -13,18 +13,21 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { createElement, useEffect } from 'react';
-import { Anchor } from 'src/components/navigation/anchor';
 import { useMediaQueries } from 'src/lib/mui';
 import { useToggle } from 'src/lib/react';
+
+
+import { LinkBase } from 'src/components/navigation/link'
+
 
 const ListItemLink = (props) => {
   const { item, onClose } = props;
   return (
-    <Anchor href={item.href} onClick={onClose}>
+    <LinkBase href={item.href} onClick={onClose}>
       <ListItemButton selected={item.isSelected} key={item.href}>
         <ListItemText primary={item.name} />
       </ListItemButton>
-    </Anchor>
+    </LinkBase>
   );
 };
 
@@ -46,11 +49,11 @@ const NestedList = (props) => {
         {list?.children.map(
           (child) =>
             child.type === 'item' && (
-              <Anchor href={child.href} onClick={onClose} key={child.href}>
+              <LinkBase href={child.href} onClick={onClose} key={child.href}>
                 <ListItemButton sx={{ pl: 4 }} selected={child.isSelected}>
                   <ListItemText secondary={child.name} />
                 </ListItemButton>
-              </Anchor>
+              </LinkBase>
             )
         )}
       </Collapse>
@@ -92,7 +95,7 @@ export const ResponsiveDrawer = (props) => {
             },
           }}
         >
-          <Anchor href="/" sx={{ width: '100%', minHeight: 'inherit' }}>
+          <LinkBase  href="/" sx={{ width: '100%', minHeight: 'inherit' }}>
             <ButtonBase
               sx={{
                 width: '100%',
@@ -111,7 +114,7 @@ export const ResponsiveDrawer = (props) => {
                 {title}
               </Typography>
             </ButtonBase>
-          </Anchor>
+          </LinkBase>
         </Toolbar>
         <Divider />
         <List>

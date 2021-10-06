@@ -11,13 +11,13 @@ const isValidHttpUrl = (urlString) => {
   }
 };
 
-/** anchor without style */
-export const AnchorBase = (props) => {
+/** link without style */
+export const LinkBase = (props) => {
   const {
     href,
+    children,
     target = '_blank',
     rel = 'noreferrer noopener',
-    children,
     sx,
   } = props;
   if (!href) {
@@ -39,46 +39,41 @@ export const AnchorBase = (props) => {
   return <MuiLink {...newProps} />;
 };
 
-/** anchor style for typography or component that contains typography */
-export const anchorStyle = {
+
+
+// cannot pass the testing on firefox
+// visited link will have an underline with current color
+
+
+
+/** link style for typography or component that contains typography */
+export const linkStyle = {
   cursor: 'pointer',
-  '&.MuiTypography-root': {
+  '&.MuiTypography-root & .MuiTypography-root': {
     textDecoration: 'none',
   },
-  '&:hover.MuiTypography-root, &:focus.MuiTypography-root, &:hover .MuiTypography-root, &:focus .MuiTypography-root': {
+  '&.MuiTypography-root:hover, &.MuiTypography-root:focus, &:hover .MuiTypography-root, &:focus .MuiTypography-root': {
     textDecoration: 'underline',
     textDecorationColor: 'currentColor',
   },
-  '&:active.MuiTypography-root, &:active .MuiTypography-root': { 
+  '&.MuiTypography-root:active, &:active .MuiTypography-root': { 
     textDecoration: 'none',
-   // color: 'text.disabled',
-    opacity: theme => theme.palette.action.activatedOpacity,
+  },
+  '&.MuiTypography-root:visited, &:visited .MuiTypography-root': { 
+    // textDecorationColor: 'transparent',
+//    textDecorationColor: 'red',
   },
 };
 
-/** span with anchor style */
-export const AnchorStyle = (props) => {
-  const { children, sx } = props;
-  const newProps = {
-    children,
-    sx: {
-      ...anchorStyle,
-      ...sx,
-
-    },
-  };
-  return <Box component="span" {...newProps} />;
-};
-
-/** anchor with style */
-export const Anchor = (props) => {
+/** link with style */
+export const Link = (props) => {
   const { sx, ...otherProps } = props;
   const newProps = {
     sx: {
-      ...anchorStyle,
+      ...linkStyle,
       ...sx,
     },
     ...otherProps,
   };
-  return <AnchorBase {...newProps} />;
+  return <LinkBase {...newProps} />;
 };

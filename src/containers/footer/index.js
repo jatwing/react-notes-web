@@ -1,11 +1,11 @@
-import { List, ListItemText, Link } from '@mui/material';
+import { List, ListItemText} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { JatwingIcon } from 'src/components/data-display/icons';
 import { Footer as FooterComponent } from 'src/components/layout/footer';
-import { Anchor } from 'src/components/navigation/anchor';
 import { useAuthor } from 'src/redux/authors/hooks';
 import { useProject } from 'src/redux/projects/hooks';
 
+import { Link, linkStyle } from 'src/components/navigation/link';
 
 
 export const Footer = () => {
@@ -22,33 +22,31 @@ export const Footer = () => {
   const authorColumn = author.isSucceed ? (
     <List>
       <ListItemText primary={t('author')} />
-      <Anchor href={author.entity.email}>
+      <Link href={author.entity.email}>
         <ListItemText secondary={t('email')} />
-      </Anchor>
-      <Anchor href={author.entity.stackOverflow}>
+      </Link>
+      <Link href={author.entity.stackOverflow}>
         <ListItemText secondary={t('stack_overflow')} />
-      </Anchor>
-      <Anchor href={author.entity.twitter}>
+      </Link>
+      <Link href={author.entity.twitter}>
         <ListItemText secondary={t('twitter')} />
-      </Anchor>
+      </Link>
     </List>
   ) : null;
   const projectColumn = project.isSucceed ? (
     <List>
       <ListItemText primary={t('project')} />
 
-
-
       <Link href="#" underline="hover">
         <ListItemText secondary={t('attribution')} />
       </Link>
 
-      <Anchor href={project.entity.github}>
+      <Link href={project.entity.github}>
         <ListItemText secondary={t('github')} />
-      </Anchor>
-      <Anchor href={project.entity.license}>
+      </Link>
+      <Link href={project.entity.license}>
         <ListItemText secondary={t('license')} />
-      </Anchor>
+      </Link>
     </List>
   ) : null;
 
