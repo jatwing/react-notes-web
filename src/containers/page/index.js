@@ -9,6 +9,7 @@ import {
   AnchorBase,
   AnchorStyle,
   Anchor,
+  anchorStyle
 } from 'src/components/navigation/link';
 
 import { Typography } from '@mui/material';
@@ -38,14 +39,39 @@ export const Page = (props) => {
 
         {'test 3 link here.'}
 
+    <Box>
+      <Typography sx={{ color : 'red' }}>
+        {'vs  anchor base'}
+      </Typography>
+    </Box>
+
+
         <AnchorBase href="https://developer.mozilla.org/en-US/">
-          <Typography>
+          <Typography sx={{ color: 'red'  }}>
             {'linkbase , wrong, clear too much style'}
           </Typography>
         </AnchorBase>
-        <AnchorStyle>
-          <Typography>{'link style'}</Typography>
-        </AnchorStyle>
+
+<Box sx={{ height: '100px'  }}/>
+
+
+
+      <Typography sx={{  }}>
+        {'vs  anchor style, e.g. text open dialog'}
+      </Typography>
+
+
+      <Box sx={anchorStyle}>
+        <Typography sx={{  }}>
+          {'not create directly'}
+        </Typography>
+      </Box>
+
+          <Typography sx={{ ...anchorStyle  , color: 'purple' }}>{'link style span'}</Typography>
+
+
+
+
 
         <Anchor href="https://developer.mozilla.org/en-US/">
           <Typography>{'link '}</Typography>

@@ -29,32 +29,30 @@ export const AnchorBase = (props) => {
       ? { href, target, rel }
       : { to: href, component: RouterLink }),
     sx: {
-      all: 'initial',
-      '& .MuiTypography-root': {
+      '&.MuiTypography-root': {
         textDecoration: 'none',
         color: 'inherit',
       },
-
-      color: 'inherit',
       ...sx,
     },
   };
   return <MuiLink {...newProps} />;
 };
 
-/** anchor style */
-const anchorStyle = {
-  display: 'inline',
-  '& .MuiTypography-root': {
+/** anchor style for typography or component that contains typography */
+export const anchorStyle = {
+  cursor: 'pointer',
+  '&.MuiTypography-root': {
     textDecoration: 'none',
   },
-  '&:hover .MuiTypography-root, &:focus .MuiTypography-root': {
+  '&:hover.MuiTypography-root, &:focus.MuiTypography-root, &:hover .MuiTypography-root, &:focus .MuiTypography-root': {
     textDecoration: 'underline',
     textDecorationColor: 'currentColor',
   },
-  '&:active .MuiTypography-root': {
+  '&:active.MuiTypography-root, &:active .MuiTypography-root': { 
     textDecoration: 'none',
-    color: 'text.disabled',
+   // color: 'text.disabled',
+    opacity: theme => theme.palette.action.activatedOpacity,
   },
 };
 
@@ -64,19 +62,20 @@ export const AnchorStyle = (props) => {
   const newProps = {
     children,
     sx: {
-      anchorStyle,
+      ...anchorStyle,
       ...sx,
+
     },
   };
-  return <Box component="a" {...newProps} />;
+  return <Box component="span" {...newProps} />;
 };
 
-/** complete anchor */
+/** anchor with style */
 export const Anchor = (props) => {
   const { sx, ...otherProps } = props;
   const newProps = {
     sx: {
-      anchorStyle,
+      ...anchorStyle,
       ...sx,
     },
     ...otherProps,
