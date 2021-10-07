@@ -1,6 +1,6 @@
 import 'src/lib/i18next.js';
 
-import { ScopedCssBaseline } from '@mui/material';
+import {  CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -43,11 +43,10 @@ export const App = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <ScopedCssBaseline>
+          <CssBaseline />
           <Router>
             <PageSwitch />
           </Router>
-        </ScopedCssBaseline>
       </ThemeProvider>
     </Provider>
   );

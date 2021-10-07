@@ -8,6 +8,37 @@ import { useProjects } from 'src/redux/projects/hooks';
 import { useDialogStyles } from './dialogStyles';
 import { useStyles } from './styles';
 
+
+const AuthorColumn = () => {
+  const authors = useAuthors();
+  const { t } = useTranslation();
+  const classes = useStyles();
+  if (!authors.isSucceed) {
+    return <Typography className={classes.text}>Loading...</Typography>;
+  }
+  const author = authors.entities[0];
+  return (
+    <>
+      <Typography className={classes.text}>Author</Typography>
+      <ExternalLink
+        text={t('email')}
+        href={author.email}
+        className={classes.link}
+      />
+      <ExternalLink
+        text={t('slack')}
+        href={author.slack}
+        className={classes.link}
+      />
+      <ExternalLink
+        text={t('stackOverflow')}
+        href={author.stackOverflow}
+        className={classes.link}
+      />
+    </>
+  );
+};
+
 const ProjectColumn = () => {
   const projects = useProjects();
   const { t } = useTranslation();
@@ -44,33 +75,6 @@ const ProjectColumn = () => {
       <ExternalLink
         text={t('license')}
         href={project.license}
-        className={classes.link}
-      />
-    </>
-  );
-};
-
-const AuthorColumn = () => {
-  const authors = useAuthors();
-  const { t } = useTranslation();
-  const classes = useStyles();
-
-  if (!authors.isSucceed) {
-    return <Typography className={classes.text}>Loading...</Typography>;
-  }
-  const author = authors.entities[0];
-
-  return (
-    <>
-      <Typography className={classes.text}>Author</Typography>
-      <ExternalLink
-        text={t('email')}
-        href={author.email}
-        className={classes.link}
-      />
-      <ExternalLink
-        text={t('stackOverflow')}
-        href={author.stackOverflow}
         className={classes.link}
       />
     </>

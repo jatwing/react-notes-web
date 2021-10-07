@@ -1,47 +1,50 @@
-import { Container, Grid, Divider } from '@mui/material';
+import { Container, Grid, Divider, Box } from '@mui/material';
 
 export const Footer = (props) => {
-  const { logo, columns, copyright } = props;
-  const columnWidth =
-    columns.length === 0
-      ? 0
-      : Math.trunc(12 / (columns.length + (!!logo && 1)));
+  const { columns, copyright } = props;
   return (
     <Container
       component="footer"
       sx={{
         '&.MuiContainer-root': {
-          p: '40px',
+          px: '40px',
         },
       }}
     >
-      <Divider />
-      <Grid container>
-        {!!logo && (
-          <Grid
-            item
-            xs={12}
-            md={12 - columnWidth * columns.length}
-            sx={{
-              '& .MuiSvgIcon-root': {
-                fontSize: '64px',
-              },
-            }}
+      <Divider sx={{
+        mx: '-40px',
+      }}/>
+      <Grid container
+
+          sx={{ py:'8px' }}
+    >
+        {columns?.map((column, index) => (
+          <Grid item xs={12} sm={6} md={
+            Math.max(Math.trunc(12 / columns.length), 2)
+          } key={index} 
+          sx={{ 
+            '& .MuiListItemText-primary': {
+
+               fontWeight: 'fontWeightBold',
+            },
+          }}
+
           >
-            {logo}
-          </Grid>
-        )}
-        {columns.map((column, index) => (
-          <Grid item xs={6} md={columnWidth} key={index}>
             {column}
           </Grid>
         ))}
-        {!!copyright && (
-          <Grid item xs={12}>
-            {copyright}
-          </Grid>
-        )}
+
       </Grid>
+      <Divider />
+      {copyright &&  <Box
+          sx={{ 
+            py: '16px',
+            '& .MuiTypography-root': {
+              typography: 'body2',
+              color: 'text.secondary'
+            } }}>
+            {copyright}
+      </Box> }
     </Container>
   );
 };

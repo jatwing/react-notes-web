@@ -1,4 +1,4 @@
-import { List, ListItemText} from '@mui/material';
+import { List, ListItemText, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { JatwingIcon } from 'src/components/data-display/icons';
 import { Footer as FooterComponent } from 'src/components/layout/footer';
@@ -6,12 +6,15 @@ import { useAuthor } from 'src/redux/authors/hooks';
 import { useProject } from 'src/redux/projects/hooks';
 
 import { Link, linkStyle } from 'src/components/navigation/link';
+import { useLocalization } from 'src/redux/i18n/hooks';
 
 
 export const Footer = () => {
   const project = useProject();
   const author = useAuthor();
   const { t } = useTranslation();
+  const l = useLocalization();
+
 
   // TODO
   // 1. the style is bad :<, edit the css
@@ -25,11 +28,11 @@ export const Footer = () => {
       <Link href={author.entity.email}>
         <ListItemText secondary={t('email')} />
       </Link>
+      <Link href={author.entity.slack}>
+        <ListItemText secondary={t('slack')} />
+      </Link>
       <Link href={author.entity.stackOverflow}>
         <ListItemText secondary={t('stack_overflow')} />
-      </Link>
-      <Link href={author.entity.twitter}>
-        <ListItemText secondary={t('twitter')} />
       </Link>
     </List>
   ) : null;
@@ -50,10 +53,18 @@ export const Footer = () => {
     </List>
   ) : null;
 
+  const copyright = project.isSucceed ? (
+    <Typography>
+      {l(project.entity.copyright)}
+    </Typography>
+  ) : '';
+
   return (
     <FooterComponent
-      columns={[authorColumn, projectColumn]}
-      copyright={project.isSucceed ? project.entity.copyright : ''}
+      columns={[
+        authorColumn, 
+        projectColumn]}
+      copyright={copyright}
     />
   );
 };
