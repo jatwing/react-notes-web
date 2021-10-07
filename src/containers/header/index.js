@@ -1,6 +1,5 @@
 import { GitHub, Menu, Notifications } from '@mui/icons-material';
 import { Box, IconButton } from '@mui/material';
-import { Anchor } from 'src/components/navigation/anchor';
 import { AppBar } from 'src/components/surfaces/app-bar';
 import { useMediaQueries } from 'src/lib/mui';
 import { useNotifications } from 'src/redux/notifications/hooks';

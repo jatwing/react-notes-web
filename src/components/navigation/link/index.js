@@ -39,17 +39,10 @@ export const LinkBase = (props) => {
   return <MuiLink {...newProps} />;
 };
 
-
-
-// cannot pass the testing on firefox
-// visited link will have an underline with current color
-
-
-
 /** link style for typography or component that contains typography */
 export const linkStyle = {
   cursor: 'pointer',
-  '&.MuiTypography-root & .MuiTypography-root': {
+  '&.MuiTypography-root, & .MuiTypography-root': {
     textDecoration: 'none',
   },
   '&.MuiTypography-root:hover, &.MuiTypography-root:focus, &:hover .MuiTypography-root, &:focus .MuiTypography-root': {
@@ -59,10 +52,6 @@ export const linkStyle = {
   '&.MuiTypography-root:active, &:active .MuiTypography-root': { 
     textDecoration: 'none',
   },
-  '&.MuiTypography-root:visited, &:visited .MuiTypography-root': { 
-    // textDecorationColor: 'transparent',
-//    textDecorationColor: 'red',
-  },
 };
 
 /** link with style */
@@ -70,8 +59,8 @@ export const Link = (props) => {
   const { sx, ...otherProps } = props;
   const newProps = {
     sx: {
-      ...linkStyle,
-      ...sx,
+     ...linkStyle,
+     ...sx,
     },
     ...otherProps,
   };
