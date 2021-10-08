@@ -7,24 +7,23 @@ export const Footer = (props) => {
       component="footer"
       sx={{
         '&.MuiContainer-root': {
-          px: '40px',
+          px: '24px',
         },
       }}
     >
-      <Divider sx={{
-        mx: '-40px',
-      }}/>
       <Grid container
 
-          sx={{ py:'8px' }}
+          sx={{ py:'12px' }}
     >
         {columns?.map((column, index) => (
           <Grid item xs={12} sm={6} md={
             Math.max(Math.trunc(12 / columns.length), 2)
           } key={index} 
           sx={{ 
+            '& .MuiList-root': {
+              py: '12px',
+            },
             '& .MuiListItemText-primary': {
-
                fontWeight: 'fontWeightBold',
             },
           }}
@@ -38,7 +37,7 @@ export const Footer = (props) => {
       <Divider />
       {copyright &&  <Box
           sx={{ 
-            py: '16px',
+            py: '24px',
             '& .MuiTypography-root': {
               typography: 'body2',
               color: 'text.secondary'

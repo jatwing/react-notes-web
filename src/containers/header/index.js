@@ -4,6 +4,7 @@ import { AppBar } from 'src/components/surfaces/app-bar';
 import { useMediaQueries } from 'src/lib/mui';
 import { useNotifications } from 'src/redux/notifications/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
+import { Logo } from 'src/containers/logo'
 
 export const Header = (props) => {
   const { setOn } = props;
@@ -11,9 +12,12 @@ export const Header = (props) => {
   const projects = useProjects();
   const notifications = useNotifications();
   const leftSlot = isSmall ? (
-    <IconButton onClick={setOn}>
+    <Box sx={{  display: 'flex', alignItems: 'center'  }}>   
+    <IconButton onClick={setOn} sx={{ mr: '8px'}}>
       <Menu />
     </IconButton>
+    <Logo />
+    </Box>
   ) : (
     <span></span>
   );

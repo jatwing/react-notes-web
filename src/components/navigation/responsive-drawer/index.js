@@ -1,10 +1,12 @@
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { ExpandLess, ExpandMore, Close} from '@mui/icons-material';
 import {
   Box,
+  Button,
   ButtonBase,
   Collapse,
   Divider,
   Drawer as MuiDrawer,
+  IconButton,
   List,
   ListItemButton,
   ListItemText,
@@ -15,8 +17,6 @@ import { useTheme } from '@mui/styles';
 import { createElement, useEffect } from 'react';
 import { useMediaQueries } from 'src/lib/mui';
 import { useToggle } from 'src/lib/react';
-
-
 import { LinkBase } from 'src/components/navigation/link'
 
 
@@ -87,33 +87,19 @@ export const ResponsiveDrawer = (props) => {
           },
         }}
       >
-        <Toolbar
-          sx={{
-            '&.MuiToolbar-root': {
-              paddingLeft: '0',
-              paddingRight: '0',
-            },
-          }}
-        >
-          <LinkBase  href="/" sx={{ width: '100%', minHeight: 'inherit' }}>
-            <ButtonBase
-              sx={{
-                width: '100%',
-                minHeight: 'inherit',
-                padding: '0 16px',
-                justifyContent: 'space-around',
-              }}
-            >
-              {!!logo &&
-                createElement(logo, { color: 'primary', sx: { fontSize: 32 } })}
-              <Typography
-                variant="body1"
-                component="span"
-                sx={{ fontFamily: theme.typography.fontFamilies.monospace }}
-              >
-                {title}
-              </Typography>
-            </ButtonBase>
+        <Toolbar sx={{ 
+          '&.MuiToolbar-root': {
+            alignItems: 'center',
+            px: '16px',
+          }
+        }}>
+          { isSmall &&  <IconButton onClick={onClose} sx={{ mr: '8px' }}>
+            <Close/>
+          </IconButton> }
+          <LinkBase  href="/" >
+            <Button sx={{ p: '0' }}>
+              { logo }
+            </Button>
           </LinkBase>
         </Toolbar>
         <Divider />

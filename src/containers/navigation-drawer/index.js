@@ -1,8 +1,8 @@
-import { JatwingIcon } from 'src/components/data-display/icons';
 import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
 import { useLocalization } from 'src/redux/i18n/hooks';
 import { usePages } from 'src/redux/pages/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
+import { Logo } from 'src/containers/logo';
 
 export const NavigationDrawer = (props) => {
   const { open, onClose } = props;
@@ -14,7 +14,7 @@ export const NavigationDrawer = (props) => {
       open={open}
       onClose={onClose}
       items={pages}
-      logo={JatwingIcon}
+      logo={<Logo />}
       title={l(projects?.entities?.[0]?.title)}
     />
   );
