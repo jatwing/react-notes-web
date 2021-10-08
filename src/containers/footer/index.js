@@ -15,13 +15,7 @@ export const Footer = () => {
   const { t } = useTranslation();
   const l = useLocalization();
 
-
-  // TODO
-  // 1. the style is bad :<, edit the css
-  // 2. the translations except for entity key,
-  //    should use snake case such as  "happy_bird"
-  // 3. that means pages filename should be escaped.
-  // 4. the attribution popup
+// 4. the attribution popup
   const authorColumn = author.isSucceed ? (
     <List>
       <ListItemText primary={t('author')} />

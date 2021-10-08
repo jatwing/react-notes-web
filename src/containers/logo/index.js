@@ -30,7 +30,7 @@ export const Logo = () => {
         fontFamily: theme.typography.fontFamilies.monospace,
         fontSize: 'htmlFontSize',
         fontWeight: 'fontWeightBold',
-        ml: '8px',
+        ml: '16px',
       }}>{ project.isSucceed ? l(project.entity.title) : ''   }</Typography>
     </Box>
   )

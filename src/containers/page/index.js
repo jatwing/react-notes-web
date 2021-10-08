@@ -33,7 +33,6 @@ export const Page = (props) => {
             flexGrow: '1',
           }}
         />
-        <Logo />
         <Divider />
         <Footer />
       </Box>

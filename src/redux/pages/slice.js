@@ -25,7 +25,7 @@ const pagesSlice = createSlice({
     [resourcesAdded.settled]: (state, action) => {
       const t = action.payload;
       traverse(state.data, (node) => {
-        node.name = t(node.filename);
+        node.name = t(node.filename.replaceAll('-', '_'));
       });
     },
     [routeChanged.settled]: (state, action) => {
