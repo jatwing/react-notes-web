@@ -26,7 +26,7 @@ export const Page = (props) => {
           minHeight: '100vh',
         }}
       >
-        <Header setOn={setOn} />
+        <Header setDrawerOpen={setOn} />
         <MainContent
           children={children}
           sx={{

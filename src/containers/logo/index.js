@@ -4,16 +4,14 @@ import { useProject  } from 'src/redux/projects/hooks'
 import { useLocalization } from 'src/redux/i18n/hooks'
 import { useTheme } from '@mui/styles'
 
-
-// Logo = Icon + Text
-
-export const Logo = () => {
+export const Logo = (props) => {
+  const { sx }  = props;
   const project = useProject();
   const l = useLocalization();
   const theme = useTheme();
   return (
     <Box sx={{
-      p: '8px',
+      ...sx,
       display: 'flex',
       alignItems: 'center',
     }}>

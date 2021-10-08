@@ -93,11 +93,11 @@ export const ResponsiveDrawer = (props) => {
             px: '16px',
           }
         }}>
-          { isSmall &&  <IconButton onClick={onClose} sx={{ mr: '8px' }}>
+          { isSmall &&  <IconButton onClick={onClose} >
             <Close/>
           </IconButton> }
-          <LinkBase  href="/" >
-            <Button sx={{ p: '0' }}>
+          <LinkBase  href="/" onClick={onClose} >
+            <Button sx={{ p: '8px' }}>
               { logo }
             </Button>
           </LinkBase>
