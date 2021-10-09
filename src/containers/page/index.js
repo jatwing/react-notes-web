@@ -4,13 +4,6 @@ import { Header } from 'src/containers/header';
 import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
-import { Link,  linkStyle } from 'src/components/navigation/link'
-import { List, ListItemText} from '@mui/material';
-import { Link as MuiLink } from '@mui/material'
-
-import { Logo } from 'src/containers/logo'
-
-
 
 export const Page = (props) => {
   const { children } = props;
@@ -36,7 +29,6 @@ export const Page = (props) => {
         <Divider />
         <Footer />
       </Box>
-      
     </Box>
   );
 };

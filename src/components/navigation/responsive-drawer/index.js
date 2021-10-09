@@ -14,8 +14,8 @@ import {
   Typography,
 } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { createElement, useEffect } from 'react';
 import { useMediaQueries } from 'src/lib/mui';
+import {  useEffect } from 'react';
 import { useToggle } from 'src/lib/react';
 import { LinkBase } from 'src/components/navigation/link'
 
