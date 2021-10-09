@@ -1,22 +1,16 @@
-import {  Menu, Notifications } from '@mui/icons-material';
-import {
-  Box,
-  IconButton,
-  List,
-  ListItemText,
-  ListItem,
-} from '@mui/material';
+import { Menu, Notifications } from '@mui/icons-material';
+import { Box, IconButton, List, ListItemText, ListItem } from '@mui/material';
 import { AppBar } from 'src/components/surfaces/app-bar';
 import { useMediaQueries } from 'src/lib/mui';
 import { useNotifications } from 'src/redux/notifications/hooks';
 import { Logo } from 'src/containers/logo';
-import { ClickableComponentWithPopover } from 'src/components/utils/popover';
+import { ClickableComponentWithPopover } from 'src/components/feedback/popover';
+import { usePageContext } from 'src/containers/page';
 
-export const Header = (props) => {
-  const { setDrawerOpen } = props;
+const LeftSlot = () => {
   const { isSmall } = useMediaQueries();
-  const notifications = useNotifications();
-  const leftSlot = isSmall ? (
+  const { setDrawerOpen } = usePageContext();
+  return isSmall ? (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <IconButton onClick={setDrawerOpen}>
         <Menu />
@@ -26,7 +20,11 @@ export const Header = (props) => {
   ) : (
     <span></span>
   );
-  const rightSlot = (
+};
+
+const RightSlot = () => {
+  const notifications = useNotifications();
+  return (
     <Box sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
       <ClickableComponentWithPopover
         component={
@@ -52,10 +50,13 @@ export const Header = (props) => {
       />
     </Box>
   );
+};
+
+export const Header = () => {
   return (
     <AppBar>
-      {leftSlot}
-      {rightSlot}
+      <LeftSlot />
+      <RightSlot />
     </AppBar>
   );
 };
