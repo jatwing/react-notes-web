@@ -18,7 +18,7 @@
 
 ## Environment Variables
 
-**`.env`**
+**`.env.local`**
 
 ```
 DISABLE_ESLINT_PLUGIN=true
