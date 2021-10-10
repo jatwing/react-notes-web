@@ -1,21 +1,17 @@
-import { List, ListItemText, Typography } from '@mui/material';
+import { List, ListItemText, Typography, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { JatwingIcon } from 'src/components/data-display/icons';
 import { Footer as FooterComponent } from 'src/components/layout/footer';
 import { useAuthor } from 'src/redux/authors/hooks';
 import { useProject } from 'src/redux/projects/hooks';
-
 import { Link, linkStyle } from 'src/components/navigation/link';
 import { useLocalization } from 'src/redux/i18n/hooks';
-
+import { ClickableComponentWithDialog } from 'src/components/feedback/dialog';
 
 export const Footer = () => {
   const project = useProject();
   const author = useAuthor();
   const { t } = useTranslation();
   const l = useLocalization();
-
-// 4. the attribution popup
   const authorColumn = author.isSucceed ? (
     <List>
       <ListItemText primary={t('author')} />
@@ -30,14 +26,16 @@ export const Footer = () => {
       </Link>
     </List>
   ) : null;
+
+  console.log(project)
   const projectColumn = project.isSucceed ? (
     <List>
       <ListItemText primary={t('project')} />
-
-      <Link href="#" underline="hover">
-        <ListItemText secondary={t('attribution')} />
-      </Link>
-
+      <ClickableComponentWithDialog
+        component={<ListItemText secondary={t('attribution')} sx={linkStyle}/>}
+        title={t('attribution')}
+        content={<Box dangerouslySetInnerHTML={{ __html : project.entity.attribution  }}    />}
+      />
       <Link href={project.entity.github}>
         <ListItemText secondary={t('github')} />
       </Link>
@@ -46,18 +44,14 @@ export const Footer = () => {
       </Link>
     </List>
   ) : null;
-
   const copyright = project.isSucceed ? (
-    <Typography>
-      {l(project.entity.copyright)}
-    </Typography>
-  ) : '';
-
+    <Typography>{l(project.entity.copyright)}</Typography>
+  ) : (
+    ''
+  );
   return (
     <FooterComponent
-      columns={[
-        authorColumn, 
-        projectColumn]}
+      columns={[authorColumn, projectColumn]}
       copyright={copyright}
     />
   );

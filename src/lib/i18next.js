@@ -49,6 +49,9 @@ const callback = async (error, t) => {
       const resources = await readDocuments(
         `translations/${language}/${namespace}`
       )();
+      if (!resources) {
+        continue;
+      }
       i18n.addResources(language, namespace, resources[0]);
     }
   }
