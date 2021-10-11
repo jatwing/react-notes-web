@@ -6,6 +6,7 @@ import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
 
+
 const PageContext = createContext({});
 
 export const usePageContext = () => {
@@ -41,6 +42,8 @@ export const Page = (props) => {
               flexGrow: '1',
             }}
           />
+  
+
           <Divider />
           <Footer />
         </Box>

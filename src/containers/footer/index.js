@@ -6,6 +6,8 @@ import { useProject } from 'src/redux/projects/hooks';
 import { Link, linkStyle } from 'src/components/navigation/link';
 import { useLocalization } from 'src/redux/i18n/hooks';
 import { ClickableComponentWithDialog } from 'src/components/feedback/dialog';
+import { InnerHtml } from 'src/components/data-display/inner-html';
+
 
 export const Footer = () => {
   const project = useProject();
@@ -26,15 +28,17 @@ export const Footer = () => {
       </Link>
     </List>
   ) : null;
-
-  console.log(project)
   const projectColumn = project.isSucceed ? (
     <List>
       <ListItemText primary={t('project')} />
       <ClickableComponentWithDialog
         component={<ListItemText secondary={t('attribution')} sx={linkStyle}/>}
         title={t('attribution')}
-        content={<Box dangerouslySetInnerHTML={{ __html : project.entity.attribution  }}    />}
+        content={
+          <InnerHtml html={project.entity.attribution}  sx={{
+            color: 'text.secondary'
+          }}   />
+        }
       />
       <Link href={project.entity.github}>
         <ListItemText secondary={t('github')} />

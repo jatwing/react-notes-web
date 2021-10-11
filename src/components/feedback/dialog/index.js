@@ -12,7 +12,7 @@ import { cloneElement } from 'react';
 
 export const Dialog = (props) => {
   const { value: isDialogOpen, setOff: setDialogClosed } = useToggle();
-  const { isSmall, isMedium } = useMediaQueries();
+  const { isMedium, isLarge } = useMediaQueries();
   const {
     title = '',
     content = null,
@@ -20,7 +20,7 @@ export const Dialog = (props) => {
     open = isDialogOpen,
     onClose = setDialogClosed,
     fullWidth = true,
-    maxWidth = isSmall ? 'sm' : isMedium ? 'md' : 'lg',
+    maxWidth = isLarge ? 'lg' : (isMedium ? 'md' : 'sm'),
     sx,
   } = props;
   const newProps = {
