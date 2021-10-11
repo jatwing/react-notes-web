@@ -25,6 +25,7 @@ export const Logo = (props) => {
       <Typography sx={{ 
         display: 'inline-block',
         textTransform: 'capitalize',
+        whiteSpace: 'nowrap',
         fontFamily: theme.typography.fontFamilies.monospace,
         fontSize: 'htmlFontSize',
         fontWeight: 'fontWeightBold',
