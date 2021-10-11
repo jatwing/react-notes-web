@@ -5,6 +5,10 @@ import { Header } from 'src/containers/header';
 import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
+import { Code } from 'src/containers/code';
+
+import { usePages } from 'src/redux/pages/hooks';
+
 
 
 const PageContext = createContext({});
@@ -42,7 +46,8 @@ export const Page = (props) => {
               flexGrow: '1',
             }}
           />
-  
+          <Divider />
+          <Code />
 
           <Divider />
           <Footer />

@@ -33,13 +33,14 @@ const getUrlTree = (pathTree) => {
       }
     });
     if (!hasDirectoryPath) {
-      node.urlType = 'file';
+      node.urlType = null;
       node.children = null;
     } else if (hasChildWithDirectoryPath) {
       /** ignore potential index.js file */
       node.urlType = 'directory';
     } else if (hasChildWithIndexFilename) {
       node.urlType = 'file';
+      node.content = node.children.find(child => child.filename === 'index.js').content;
       node.children = null;
     } else {
       node.urlType = null;
@@ -63,16 +64,27 @@ const getItemTree = (urlTree) => {
   return itemTree;
 };
 
-const getItemsUrls = (itemTree) => {
-  const urls = [];
+/**
+ * suggested names for re-rewrite
+ *  - getPageFiles (tree indeed)
+ *  - getpageItems (tree indeed)
+ *  - getPageUrlsAndCodes ([], {})
+ *
+ * the helper url tree to be deleted
+ *
+ * test child index file should used regex, similar to preval
+ */
+
+const getItemsUrlsAndCodes = (itemTree) => {
+  const urlsAndCodes = {}
   traverse(itemTree, (node) => {
     if (node.type === 'item') {
-      urls.push(node.url);
+      urlsAndCodes[node.url] = node.content
     }
   });
-  return urls;
+  return urlsAndCodes;
 };
 
 export const pageUrlTree = getUrlTree(pagePathTree);
 export const pageItemTree = getItemTree(pageUrlTree);
-export const pageItemsUrls = getItemsUrls(pageItemTree);
+export const pageItemsUrlsAndCodes = getItemsUrlsAndCodes(pageItemTree);
