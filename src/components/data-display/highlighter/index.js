@@ -22,7 +22,7 @@ export const Highlighter = (props) => {
 
   useEffect(() => {
     Prism.highlightAll();
-  }, []);
+  }, [code]);
   return (
     <div className="Code">
       <pre>
