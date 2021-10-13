@@ -1,35 +1,31 @@
 const { statSync, readdirSync, readFileSync } = require('fs');
-const getPagePathTree = (filename, path) => {
-  /** file */
-  if (!statSync(path).isDirectory()) {
-    if (/^test.(js|jsx|ts|tsx)$/.test(filename)) {
+const getPageFiles = (filename, path) => {
+  if (statSync(path).isDirectory()) {
+    const children = readdirSync(path)
+      .map((childFilename) =>
+        getPageFiles(childFilename, path + '/' + childFilename)
+      )
+      .filter((child) => !!child);
+    if (!children.length) {
       return null;
     }
-    const content = readFileSync(path, 'utf8');
+    return {
+      filename,
+      path,
+      pathType: 'directory',
+      children,
+    };
+  } else if (
+    statSync(path).isFile() &&
+    /^index.(js|jsx|ts|tsx)$/.test(filename)
+  ) {
     return {
       filename,
       path,
       pathType: 'file',
-      content,
+      content: readFileSync(path, 'utf8'),
     };
   }
-  /** directory */
-  const directory = {
-    filename,
-    path,
-    pathType: 'directory',
-    children: [],
-  };
-  readdirSync(path).forEach((childFilename) => {
-    const childPath = path + '/' + childFilename;
-    const child = getPagePathTree(childFilename, childPath);
-    child && directory.children.push(child);
-  });
-  if (directory.children.length === 0) {
-    return null;
-  }
-  return directory;
+  return null;
 };
-const a = getPagePathTree('src/pages', 'src/pages');
-
-console.log(a.children[5]);
+module.exports = getPageFiles('src/pages', 'src/pages');

@@ -2,7 +2,7 @@ import 'src/lib/i18next.js';
 
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import { lazy, Suspense,cloneElement } from 'react';
+import { lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Provider } from 'react-redux';
 import {
@@ -13,7 +13,7 @@ import {
 } from 'react-router-dom';
 import { Page } from 'src/containers/page';
 import { theme } from 'src/lib/mui';
-import { pageItemsUrlsAndCodes } from 'src/lib/pages';
+import { pageItemUrls  } from 'src/lib/pages';
 import { usePageViews } from 'src/redux/router/hooks';
 import { store } from 'src/redux/store';
 
@@ -24,7 +24,7 @@ export const PageSwitch = () => {
     <Page>
       <Switch>
         <Suspense fallback={t('loading')}>
-          {Object.keys(pageItemsUrlsAndCodes).map((url) => (
+          {pageItemUrls.map((url) => (
             <Route
               exact={true}
               path={url}

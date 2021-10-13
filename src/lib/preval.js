@@ -1,5 +1,39 @@
 import preval from 'preval.macro';
 
+export const pageFileTree = preval`
+const { statSync, readdirSync, readFileSync } = require('fs');
+const getPageFileTree = (filename, path) => {
+  if (statSync(path).isDirectory()) {
+    const children = readdirSync(path)
+      .map((childFilename) =>
+        getPageFileTree(childFilename, path + '/' + childFilename)
+      )
+      .filter((child) => !!child);
+    if (!children.length) {
+      return null;
+    }
+    return {
+      filename,
+      path,
+      pathType: 'directory',
+      children,
+    };
+  } else if (
+    statSync(path).isFile() &&
+    /^index.(js|jsx|ts|tsx)$/.test(filename)
+  ) {
+    return {
+      filename,
+      path,
+      pathType: 'file',
+      content: readFileSync(path, 'utf8'),
+    };
+  }
+  return null;
+};
+module.exports = getPageFileTree('src/pages', 'src/pages');
+`;
+
 /**
  * TODO can we obtain the object
  */
@@ -9,40 +43,4 @@ module.exports = {
   date: date.toDateString(),
   time: date.toTimeString(),
 }
-`;
-
-export const pagePathTree = preval`
-const { statSync, readdirSync, readFileSync } = require('fs');
-const getPagePathTree = (filename, path) => {
-  /** file */
-  if (!statSync(path).isDirectory()) {
-    if (!/^index.(js|jsx|ts|tsx)$/.test(filename)) {
-      return null;
-    }
-    const content = readFileSync(path, 'utf8');
-    return {
-      filename,
-      path,
-      pathType: 'file',
-      content,
-    };
-  }
-  /** directory */
-  const directory = {
-    filename,
-    path,
-    pathType: 'directory',
-    children: [],
-  };
-  readdirSync(path).forEach((childFilename) => {
-    const childPath = path + '/' + childFilename;
-    const child = getPagePathTree(childFilename, childPath);
-    child && directory.children.push(child);
-  });
-  if (directory.children.length === 0) {
-    return null;
-  }
-  return directory;
-};
-module.exports = getPagePathTree('src/pages', 'src/pages');
 `;

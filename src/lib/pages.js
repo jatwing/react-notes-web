@@ -1,90 +1,59 @@
-import { pagePathTree } from './preval';
+import { pageFileTree } from './preval';
 
 /** tree */
 export const traverse = (node, callback = null) => {
   if (!node) {
     return;
   }
-  callback && callback(node);
-  /** leaf node */
-  if (!(node?.children?.length > 0)) {
-    return;
+  if (callback) {
+    callback(node);
   }
-  /** parent node  */
-  node.children.forEach((child) => {
+  node?.children?.forEach((child) => {
     traverse(child, callback);
   });
 };
 
-/** convert path tree into url tree */
-const getUrlTree = (pathTree) => {
-  const urlTree = JSON.parse(JSON.stringify(pathTree));
-  traverse(urlTree, (node) => {
+const getPageItemTree = (pageFileTree) => {
+  const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
+  const isIndexFile = (node) => /^index.(js|jsx|ts|tsx)$/.test(node.filename);
+  traverse(pageItemTree, (node) => {
     node.url = node.path.substring(9) || '/';
-    const hasDirectoryPath = node.pathType === 'directory';
-    let hasChildWithDirectoryPath = false;
-    let hasChildWithIndexFilename = false;
-    node.children.forEach((child) => {
-      if (child.pathType === 'directory') {
-        hasChildWithDirectoryPath = true;
+    if (node.pathType === 'directory') {
+      if (node.children.some((child) => child.pathType === 'directory')) {
+        /** ignore potential index files */
+        node.type = 'list';
+      } else if (node.children.some(isIndexFile)) {
+        node.type = 'item';
+        node.content = node.children.find(isIndexFile).content;
+      } else {
+        node.type = null;
+        node.children = null;
       }
-      if (child.filename === 'index.js') {
-        hasChildWithIndexFilename = true;
-      }
-    });
-    if (!hasDirectoryPath) {
-      node.urlType = null;
-      node.children = null;
-    } else if (hasChildWithDirectoryPath) {
-      /** ignore potential index.js file */
-      node.urlType = 'directory';
-    } else if (hasChildWithIndexFilename) {
-      node.urlType = 'file';
-      node.content = node.children.find(child => child.filename === 'index.js').content;
-      node.children = null;
-    } else {
-      node.urlType = null;
-      node.children = null;
     }
   });
-  return urlTree;
+  return pageItemTree;
 };
 
-/** convert url tree into item tree */
-const getItemTree = (urlTree) => {
-  const itemTree = JSON.parse(JSON.stringify(urlTree));
-  traverse(itemTree, (node) => {
-    if (node.urlType === 'directory') {
-      node.type = 'list';
-    } else if (node.urlType === 'file') {
-      node.type = 'item';
-    }
-    node.href = node.url;
-  });
-  return itemTree;
-};
-
-/**
- * suggested names for re-rewrite
- *  - getPageFiles (tree indeed)
- *  - getpageItems (tree indeed)
- *  - getPageUrlsAndCodes ([], {})
- *
- * the helper url tree to be deleted
- *
- * test child index file should used regex, similar to preval
- */
-
-const getItemsUrlsAndCodes = (itemTree) => {
-  const urlsAndCodes = {}
-  traverse(itemTree, (node) => {
+export const getPageItemUrls = (pageItemTree) => {
+  const urls = [];
+  traverse(pageItemTree, (node) => {
     if (node.type === 'item') {
-      urlsAndCodes[node.url] = node.content
+      urls.push(node.url);
     }
   });
-  return urlsAndCodes;
+  return urls;
 };
 
-export const pageUrlTree = getUrlTree(pagePathTree);
-export const pageItemTree = getItemTree(pageUrlTree);
-export const pageItemsUrlsAndCodes = getItemsUrlsAndCodes(pageItemTree);
+export const getPageItemCodes = (pageItemTree) => {
+  const codes = {};
+  traverse(pageItemTree, (node) => {
+    if (node.type === 'item') {
+      codes[node.url] = node.content;
+    }
+  });
+  return codes;
+};
+
+export const pageItemTree = getPageItemTree(pageFileTree);
+export const pageItemUrls = getPageItemUrls(pageItemTree);
+export const pageItemCodes = getPageItemCodes(pageItemTree);

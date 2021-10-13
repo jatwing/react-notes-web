@@ -1,8 +1,7 @@
-import { ExpandLess, ExpandMore, Close} from '@mui/icons-material';
+import { ExpandLess, ExpandMore, Close } from '@mui/icons-material';
 import {
   Box,
   Button,
-  ButtonBase,
   Collapse,
   Divider,
   Drawer as MuiDrawer,
@@ -11,20 +10,18 @@ import {
   ListItemButton,
   ListItemText,
   Toolbar,
-  Typography,
 } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { useMediaQueries } from 'src/lib/mui';
-import {  useEffect } from 'react';
+import { useEffect } from 'react';
 import { useToggle } from 'src/lib/react';
-import { LinkBase } from 'src/components/navigation/link'
-
+import { LinkBase } from 'src/components/navigation/link';
 
 const ListItemLink = (props) => {
   const { item, onClose } = props;
   return (
-    <LinkBase href={item.href} onClick={onClose}>
-      <ListItemButton selected={item.isSelected} key={item.href}>
+    <LinkBase href={item.url} onClick={onClose}>
+      <ListItemButton selected={item.isSelected}>
         <ListItemText primary={item.name} />
       </ListItemButton>
     </LinkBase>
@@ -41,7 +38,7 @@ const NestedList = (props) => {
   }, [list, setOn]);
   return (
     <>
-      <ListItemButton onClick={toggle} key={list.href}>
+      <ListItemButton onClick={toggle}>
         <ListItemText primary={list.name} />
         {isListOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
@@ -49,7 +46,7 @@ const NestedList = (props) => {
         {list?.children.map(
           (child) =>
             child.type === 'item' && (
-              <LinkBase href={child.href} onClick={onClose} key={child.href}>
+              <LinkBase href={child.url} onClick={onClose} key={child.url}>
                 <ListItemButton sx={{ pl: 4 }} selected={child.isSelected}>
                   <ListItemText secondary={child.name} />
                 </ListItemButton>
@@ -62,9 +59,8 @@ const NestedList = (props) => {
 };
 
 export const ResponsiveDrawer = (props) => {
-  const { open, onClose, items, logo, title } = props;
+  const { open, onClose, items, logo } = props;
   const { isSmall } = useMediaQueries();
-  const theme = useTheme();
   const isTemporary = isSmall ?? true;
   const drawerWidth = 256;
   return (
@@ -87,28 +83,30 @@ export const ResponsiveDrawer = (props) => {
           },
         }}
       >
-        <Toolbar sx={{ 
-          '&.MuiToolbar-root': {
-            alignItems: 'center',
-            px: '16px',
-          }
-        }}>
-          { isSmall &&  <IconButton onClick={onClose} >
-            <Close/>
-          </IconButton> }
-          <LinkBase  href="/" onClick={onClose} >
-            <Button sx={{ p: '8px' }}>
-              { logo }
-            </Button>
+        <Toolbar
+          sx={{
+            '&.MuiToolbar-root': {
+              alignItems: 'center',
+              px: '16px',
+            },
+          }}
+        >
+          {isSmall && (
+            <IconButton onClick={onClose}>
+              <Close />
+            </IconButton>
+          )}
+          <LinkBase href="/" onClick={onClose}>
+            <Button sx={{ p: '8px' }}>{logo}</Button>
           </LinkBase>
         </Toolbar>
         <Divider />
         <List>
           {items?.children.map((child) =>
             child.type === 'list' ? (
-              <NestedList list={child} onClose={onClose} key={child.href} />
+              <NestedList list={child} onClose={onClose} key={child.url} />
             ) : (
-              <ListItemLink item={child} onClose={onClose} key={child.href} />
+              <ListItemLink item={child} onClose={onClose} key={child.url} />
             )
           )}
         </List>
