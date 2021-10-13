@@ -6,8 +6,7 @@ import { Header } from 'src/containers/header';
 import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
-
-import { Container } from '@mui/material';
+import { Container } from 'src/components/layout/container';
 
 const PageContext = createContext({});
 
@@ -41,42 +40,16 @@ export const Page = (props) => {
           <Box
             component="main"
             sx={{
+              flexGrow: '1',
               mt: {
                 xs: '56px',
                 sm: '64px',
               },
             }}
           >
-    {/*
-            <MainContent
-              children={children}
-              sx={{
-                flexGrow: '1',
-              }}
-            />
-*/}
+            <Container component="article">{children}</Container>
             <Code />
           </Box>
-
-
-    {/*
-          <Container sx={{ 
-             // width: '200px',
-              background: 'green',
-              boxSizing: 'content-box',
-           //   width: 'calc(100% - 48px)',
-                overflowX: 'auto',
-          }}>
-            {'test'}
-            <Box sx={{  
-                width: '2400px', 
-                background: 'red',
-              //  overflowX: 'auto',
-            }} >{'test box'}
-          </Box>
-          </Container>
-*/}
-
           <Divider />
           <Footer />
         </Box>
