@@ -6,7 +6,8 @@ import { Header } from 'src/containers/header';
 import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
-import { usePages } from 'src/redux/pages/hooks';
+
+import { Container } from '@mui/material';
 
 const PageContext = createContext({});
 
@@ -46,14 +47,36 @@ export const Page = (props) => {
               },
             }}
           >
+    {/*
             <MainContent
               children={children}
               sx={{
                 flexGrow: '1',
               }}
             />
+*/}
             <Code />
           </Box>
+
+
+    {/*
+          <Container sx={{ 
+             // width: '200px',
+              background: 'green',
+              boxSizing: 'content-box',
+           //   width: 'calc(100% - 48px)',
+                overflowX: 'auto',
+          }}>
+            {'test'}
+            <Box sx={{  
+                width: '2400px', 
+                background: 'red',
+              //  overflowX: 'auto',
+            }} >{'test box'}
+          </Box>
+          </Container>
+*/}
+
           <Divider />
           <Footer />
         </Box>

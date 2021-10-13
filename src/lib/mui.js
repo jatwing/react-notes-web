@@ -37,16 +37,14 @@ export const theme = createTheme({
 export const useMediaQueryStrings = () => {
   const theme = useTheme();
   const smallQuery = theme.breakpoints.down('sm');
-  const notSmallQuery = theme.breakpoints.up('sm');
   const mediumQuery = theme.breakpoints.between('sm', 'md');
   const largeQuery = theme.breakpoints.up('md');
-  const notLargeQuery = theme.breakpoints.down('md');
-  return { smallQuery, notSmallQuery, mediumQuery, largeQuery, notLargeQuery };
+  return { smallQuery, mediumQuery, largeQuery };
 };
 
 export const useMediaQueries = () => {
-  const theme = useTheme();
-  const { smallQuery, mediumQuery, largeQuery } = useMediaQueryStrings(theme);
+  const { smallQuery,  mediumQuery, largeQuery } =
+    useMediaQueryStrings();
   const isSmall = useMediaQuery(smallQuery);
   const isMedium = useMediaQuery(mediumQuery);
   const isLarge = useMediaQuery(largeQuery);

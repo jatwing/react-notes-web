@@ -2,7 +2,6 @@ import { useTheme } from '@mui/styles';
 import Prism from 'prismjs';
 import { useEffect } from 'react';
 
-// import 'prismjs/themes/prism-tomorrow.css';
 /**
  * 4. node that the responsive view may break, can we set the 80 characters rules ??
  *    guess that finally it depends on the contaienr of the Code.
@@ -24,7 +23,10 @@ export const Code = (props) => {
     }
   }, [theme]);
   return (
-    <pre style={{ margin: '0' }}>
+    <pre style={{ 
+      fontSize: theme?.typography?.fontSize ?? '14px',
+      margin: '0' 
+    }}>
       <code className={`language-javascript`}>{code}</code>
     </pre>
   );

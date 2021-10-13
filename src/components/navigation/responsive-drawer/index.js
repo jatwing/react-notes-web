@@ -11,7 +11,6 @@ import {
   ListItemText,
   Toolbar,
 } from '@mui/material';
-import { useTheme } from '@mui/styles';
 import { useEffect } from 'react';
 import { LinkBase } from 'src/components/navigation/link';
 import { useMediaQueries } from 'src/lib/mui';
@@ -60,20 +59,19 @@ const NestedList = (props) => {
 
 export const ResponsiveDrawer = (props) => {
   const { open, onClose, items, logo } = props;
-  const { isSmall } = useMediaQueries();
-  const isTemporary = isSmall ?? true;
+  const { isLarge } = useMediaQueries();
   const drawerWidth = 256;
   return (
     <Box
       component="nav"
       sx={{
-        width: { sm: drawerWidth },
-        flexShrink: { sm: 0 },
+        width: { md: drawerWidth },
+        flexShrink: { md: 0 },
       }}
     >
       <MuiDrawer
-        variant={isTemporary ? 'temporary' : 'permanent'}
-        open={isTemporary ? open : true}
+        variant={isLarge ? 'permanent' : 'temporary'}
+        open={isLarge ? true : open }
         onClose={onClose}
         ModalProps={{ keepMounted: true }}
         sx={{
@@ -91,7 +89,7 @@ export const ResponsiveDrawer = (props) => {
             },
           }}
         >
-          {isSmall && (
+          {!isLarge && (
             <IconButton onClick={onClose}>
               <Close />
             </IconButton>

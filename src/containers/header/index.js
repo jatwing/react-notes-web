@@ -8,9 +8,9 @@ import { useMediaQueries } from 'src/lib/mui';
 import { useNotifications } from 'src/redux/notifications/hooks';
 
 const LeftSlot = () => {
-  const { isSmall } = useMediaQueries();
+  const { isLarge } = useMediaQueries();
   const { setDrawerOpen } = usePageContext();
-  return isSmall ? (
+  return !isLarge ? (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <IconButton onClick={setDrawerOpen}>
         <Menu />
