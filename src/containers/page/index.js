@@ -1,12 +1,12 @@
 import { Box, Divider } from '@mui/material';
 import { createContext, useContext } from 'react';
+import { Container } from 'src/components/layout/container';
 import { Code } from 'src/containers/code';
 import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
 import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
-import { Container } from 'src/components/layout/container';
 
 const PageContext = createContext({});
 

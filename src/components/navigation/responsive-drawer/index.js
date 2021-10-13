@@ -71,7 +71,7 @@ export const ResponsiveDrawer = (props) => {
     >
       <MuiDrawer
         variant={isLarge ? 'permanent' : 'temporary'}
-        open={isLarge ? true : open }
+        open={isLarge ? true : open}
         onClose={onClose}
         ModalProps={{ keepMounted: true }}
         sx={{

@@ -12,7 +12,6 @@ export const Container = (props) => {
           sm: '32px',
         },
       },
-      ...sx,
     },
   };
   return <MuiContainer {...newProps} />;

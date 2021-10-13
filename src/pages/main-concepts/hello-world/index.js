@@ -1,6 +1,4 @@
-// hello * is the 80th char                                                   * 
 import { Component } from 'react';
-
 
 /*
  * note that ReactDOM.render() differs from Component.render()

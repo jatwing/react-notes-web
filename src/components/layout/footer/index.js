@@ -7,21 +7,35 @@ export const Footer = (props) => {
       component="footer"
       sx={{
         '&.MuiContainer-root': {
-          px: '24px',
+          px: {
+            xs: '24px',
+            sm: '32px',
+          },
         },
       }}
     >
-      <Grid container sx={{ py: '12px' }}>
+      <Grid
+        container
+        sx={{
+          py: {
+            xs: '12px',
+            sm: '16px',
+          },
+        }}
+      >
         {columns?.map((column, index) => (
           <Grid
             item
             xs={12}
             sm={6}
-            md={Math.max(Math.trunc(12 / columns.length), 2)}
+            md={Math.max(Math.trunc(12 / columns.length), 3)}
             key={index}
             sx={{
               '& .MuiList-root': {
-                py: '12px',
+                py: {
+                  xs: '12px',
+                  sm: '16px',
+                },
               },
               '& .MuiListItemText-primary': {
                 fontWeight: 'fontWeightBold',
@@ -36,7 +50,10 @@ export const Footer = (props) => {
       {copyright && (
         <Box
           sx={{
-            py: '24px',
+            py: {
+              xs: '24px',
+              sm: '32px',
+            },
             '& .MuiTypography-root': {
               typography: 'body2',
               color: 'text.secondary',

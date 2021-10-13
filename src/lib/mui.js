@@ -43,8 +43,7 @@ export const useMediaQueryStrings = () => {
 };
 
 export const useMediaQueries = () => {
-  const { smallQuery,  mediumQuery, largeQuery } =
-    useMediaQueryStrings();
+  const { smallQuery, mediumQuery, largeQuery } = useMediaQueryStrings();
   const isSmall = useMediaQuery(smallQuery);
   const isMedium = useMediaQuery(mediumQuery);
   const isLarge = useMediaQuery(largeQuery);
