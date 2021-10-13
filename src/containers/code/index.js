@@ -1,18 +1,19 @@
-// they are ground truth
-// call them from lib is suitable or not ?
-
-import { pageItemCodes } from 'src/lib/pages';
+import { Container } from '@mui/material';
 import { useLocation } from 'react-router-dom';
-
-import { Highlighter } from 'src/components/data-display/highlighter';
+import { Code as MuiCode } from 'src/components/data-display/code';
+import { pageItemCodes } from 'src/lib/pages';
 
 export const Code = () => {
   const location = useLocation();
   const code = pageItemCodes[location.pathname];
-
   return (
-    <>
-      <Highlighter code={code} />
-    </>
+    <Container
+      component="aside"
+      sx={{
+        '&.MuiContainer-root': { padding: '24px' },
+      }}
+    >
+      <MuiCode code={code} />
+    </Container>
   );
 };

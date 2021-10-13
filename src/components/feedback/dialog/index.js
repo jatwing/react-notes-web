@@ -1,14 +1,14 @@
+import { Close } from '@mui/icons-material';
 import {
   Dialog as MuiDialog,
-  DialogTitle,
-  DialogContent,
   DialogActions,
+  DialogContent,
+  DialogTitle,
   IconButton,
 } from '@mui/material';
-import { Close } from '@mui/icons-material';
-import { useToggle } from 'src/lib/react';
-import { useMediaQueries } from 'src/lib/mui';
 import { cloneElement } from 'react';
+import { useMediaQueries } from 'src/lib/mui';
+import { useToggle } from 'src/lib/react';
 
 export const Dialog = (props) => {
   const { value: isDialogOpen, setOff: setDialogClosed } = useToggle();
@@ -20,7 +20,7 @@ export const Dialog = (props) => {
     open = isDialogOpen,
     onClose = setDialogClosed,
     fullWidth = true,
-    maxWidth = isLarge ? 'lg' : (isMedium ? 'md' : 'sm'),
+    maxWidth = isLarge ? 'lg' : isMedium ? 'md' : 'sm',
     sx,
   } = props;
   const newProps = {

@@ -13,7 +13,7 @@ import {
 } from 'react-router-dom';
 import { Page } from 'src/containers/page';
 import { theme } from 'src/lib/mui';
-import { pageItemUrls  } from 'src/lib/pages';
+import { pageItemUrls } from 'src/lib/pages';
 import { usePageViews } from 'src/redux/router/hooks';
 import { store } from 'src/redux/store';
 
@@ -28,9 +28,7 @@ export const PageSwitch = () => {
             <Route
               exact={true}
               path={url}
-              component={
-                lazy(() => import(`src/pages${url}/index.js`))
-              }
+              component={lazy(() => import(`src/pages${url}/index.js`))}
               key={url}
             />
           ))}

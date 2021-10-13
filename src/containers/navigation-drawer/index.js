@@ -1,9 +1,9 @@
 import { ResponsiveDrawer } from 'src/components/navigation/responsive-drawer';
+import { Logo } from 'src/containers/logo';
+import { usePageContext } from 'src/containers/page';
 import { useLocalization } from 'src/redux/i18n/hooks';
 import { usePages } from 'src/redux/pages/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
-import { Logo } from 'src/containers/logo';
-import { usePageContext } from 'src/containers/page';
 
 export const NavigationDrawer = () => {
   const { isDrawerOpen, setDrawerClosed } = usePageContext();

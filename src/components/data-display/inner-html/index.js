@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box } from '@mui/material';
 
 /**
 // take the style from the old popup and define unified styles for this one.
@@ -10,7 +10,8 @@ import { Box } from '@mui/material'
 export const InnerHtml = (props) => {
   const { html, sx } = props;
   return (
-    <Box dangerouslySetInnerHTML={{ __html: html }}
+    <Box
+      dangerouslySetInnerHTML={{ __html: html }}
       sx={{
         ...sx,
         '& p:not(:last-child)': {
@@ -21,19 +22,18 @@ export const InnerHtml = (props) => {
         },
         '& a': {
           textDecoration: 'none',
-          color: 'inherit'
+          color: 'inherit',
         },
         '& a:hover, & a:focus': {
           textDecoration: 'underline',
           textDecorationColor: 'currentColor',
-          color: 'inherit'
+          color: 'inherit',
         },
         '& a': {
           textDecoration: 'none',
-          color: 'inherit'
+          color: 'inherit',
         },
       }}
     />
-  )
-}
-
+  );
+};

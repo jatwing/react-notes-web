@@ -4,10 +4,10 @@ export const MainContent = (props) => {
   const { children, sx } = props;
   return (
     <Container
-      component="main"
+      component="article"
       sx={{
         ...sx,
-        '&.MuiContainer-root': { padding: '40px' },
+        '&.MuiContainer-root': { padding: '24px' },
       }}
     >
       {children}

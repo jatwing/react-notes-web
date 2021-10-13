@@ -45,11 +45,12 @@ export const linkStyle = {
   '&.MuiTypography-root, & .MuiTypography-root': {
     textDecoration: 'none',
   },
-  '&.MuiTypography-root:hover, &.MuiTypography-root:focus, &:hover .MuiTypography-root, &:focus .MuiTypography-root': {
-    textDecoration: 'underline',
-    textDecorationColor: 'currentColor',
-  },
-  '&.MuiTypography-root:active, &:active .MuiTypography-root': { 
+  '&.MuiTypography-root:hover, &.MuiTypography-root:focus, &:hover .MuiTypography-root, &:focus .MuiTypography-root':
+    {
+      textDecoration: 'underline',
+      textDecorationColor: 'currentColor',
+    },
+  '&.MuiTypography-root:active, &:active .MuiTypography-root': {
     textDecoration: 'none',
   },
 };
@@ -59,8 +60,8 @@ export const Link = (props) => {
   const { sx, ...otherProps } = props;
   const newProps = {
     sx: {
-     ...linkStyle,
-     ...sx,
+      ...linkStyle,
+      ...sx,
     },
     ...otherProps,
   };

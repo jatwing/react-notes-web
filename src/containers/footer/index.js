@@ -1,13 +1,12 @@
-import { List, ListItemText, Typography, Box } from '@mui/material';
+import { Box, List, ListItemText, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { Footer as FooterComponent } from 'src/components/layout/footer';
-import { useAuthor } from 'src/redux/authors/hooks';
-import { useProject } from 'src/redux/projects/hooks';
-import { Link, linkStyle } from 'src/components/navigation/link';
-import { useLocalization } from 'src/redux/i18n/hooks';
-import { ClickableComponentWithDialog } from 'src/components/feedback/dialog';
 import { InnerHtml } from 'src/components/data-display/inner-html';
-
+import { ClickableComponentWithDialog } from 'src/components/feedback/dialog';
+import { Footer as FooterComponent } from 'src/components/layout/footer';
+import { Link, linkStyle } from 'src/components/navigation/link';
+import { useAuthor } from 'src/redux/authors/hooks';
+import { useLocalization } from 'src/redux/i18n/hooks';
+import { useProject } from 'src/redux/projects/hooks';
 
 export const Footer = () => {
   const project = useProject();
@@ -32,12 +31,15 @@ export const Footer = () => {
     <List>
       <ListItemText primary={t('project')} />
       <ClickableComponentWithDialog
-        component={<ListItemText secondary={t('attribution')} sx={linkStyle}/>}
+        component={<ListItemText secondary={t('attribution')} sx={linkStyle} />}
         title={t('attribution')}
         content={
-          <InnerHtml html={project.entity.attribution}  sx={{
-            color: 'text.secondary'
-          }}   />
+          <InnerHtml
+            html={project.entity.attribution}
+            sx={{
+              color: 'text.secondary',
+            }}
+          />
         }
       />
       <Link href={project.entity.github}>

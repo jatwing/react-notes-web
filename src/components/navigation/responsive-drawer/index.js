@@ -1,4 +1,4 @@
-import { ExpandLess, ExpandMore, Close } from '@mui/icons-material';
+import { Close, ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -12,10 +12,10 @@ import {
   Toolbar,
 } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { useMediaQueries } from 'src/lib/mui';
 import { useEffect } from 'react';
-import { useToggle } from 'src/lib/react';
 import { LinkBase } from 'src/components/navigation/link';
+import { useMediaQueries } from 'src/lib/mui';
+import { useToggle } from 'src/lib/react';
 
 const ListItemLink = (props) => {
   const { item, onClose } = props;

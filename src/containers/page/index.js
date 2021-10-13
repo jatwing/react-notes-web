@@ -1,15 +1,12 @@
-import { createContext, useContext } from 'react';
 import { Box, Divider } from '@mui/material';
+import { createContext, useContext } from 'react';
+import { Code } from 'src/containers/code';
 import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
 import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
-import { Code } from 'src/containers/code';
-
 import { usePages } from 'src/redux/pages/hooks';
-
-
 
 const PageContext = createContext({});
 
@@ -40,15 +37,23 @@ export const Page = (props) => {
           }}
         >
           <Header setDrawerOpen={setDrawerOpen} />
-          <MainContent
-            children={children}
+          <Box
+            component="main"
             sx={{
-              flexGrow: '1',
+              mt: {
+                xs: '56px',
+                sm: '64px',
+              },
             }}
-          />
-          <Divider />
-          <Code />
-
+          >
+            <MainContent
+              children={children}
+              sx={{
+                flexGrow: '1',
+              }}
+            />
+            <Code />
+          </Box>
           <Divider />
           <Footer />
         </Box>
