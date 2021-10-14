@@ -9,6 +9,10 @@ export const Logo = (props) => {
   const project = useProject();
   const l = useLocalization();
   const theme = useTheme();
+
+  console.log(l)
+  console.log(project?.entity?.title)
+
   return (
     <Box
       sx={{

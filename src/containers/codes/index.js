@@ -1,19 +1,26 @@
-import { Card } from '@mui/material';
+import { Card, Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { Code } from 'src/components/data-display/code';
-import { Container } from 'src/components/layout/container';
 import { pageItemCodes } from 'src/lib/pages';
 
 export const Codes = () => {
   const location = useLocation();
   const codes = pageItemCodes[location.pathname];
   return (
-    <Container component="aside">
+    <Box component="aside">
       {codes?.map((code) => (
-        <Card variant="outlined">
+        <Card
+          variant="outlined"
+          sx={{
+            my: {
+              xs: '24px',
+              sm: '32px',
+            }
+          }}
+        >
           <Code code={code} key={code} />
         </Card>
       ))}
-    </Container>
+    </Box>
   );
 };

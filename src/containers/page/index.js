@@ -1,10 +1,10 @@
-import { Box, Divider } from '@mui/material';
+import { Box, Divider, Container } from '@mui/material';
 import { createContext, useContext } from 'react';
-import { Container } from 'src/components/layout/container';
+//import { Container } from 'src/components/layout/container';
+
 import { Codes } from 'src/containers/codes';
 import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
-import { MainContent } from 'src/containers/main-content';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
 
@@ -37,19 +37,33 @@ export const Page = (props) => {
           }}
         >
           <Header setDrawerOpen={setDrawerOpen} />
-          <Box
+          <Container
             component="main"
             sx={{
               flexGrow: '1',
+              px: {
+                xs: '24px',
+                sm: '32px',
+              },
               mt: {
                 xs: '56px',
                 sm: '64px',
               },
             }}
           >
-            <Container component="article">{children}</Container>
+            <Box
+              component="article"
+              sx={{
+                my: {
+                  xs: '24px',
+                  sm: '32px',
+                },
+              }}
+            >
+              {children}
+            </Box>
             <Codes />
-          </Box>
+          </Container>
           <Divider />
           <Footer />
         </Box>
