@@ -1,6 +1,3 @@
-import preval from 'preval.macro';
-
-export const pageFileTree = preval`
 const {
   posix: { basename },
 } = require('path');
@@ -48,9 +45,6 @@ const getPageFileTree = (path, discipline = '') => {
   }
   return null;
 };
-module.exports = getPageFileTree('src/pages');
-`;
 
-export const buildTimeString = preval`
-module.exports = JSON.stringify(new Date());
-`;
+const a = getPageFileTree('src/pages');
+console.log(a.children[0].children[0]);

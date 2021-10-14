@@ -15,29 +15,31 @@ export const traverse = (node, callback = null) => {
 
 const getPageItemTree = (pageFileTree) => {
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
-  const isIndexFile = (node) => /^index.(js|jsx|ts|tsx)$/.test(node.filename);
   traverse(pageItemTree, (node) => {
     node.url = node.path.substring(9) || '/';
-    if (node.pathType === 'directory') {
-      if (node.children.some((child) => child.pathType === 'directory')) {
-        node.type = 'list';
-
-
-        /**
-         * or we can do it here,
-         * it must have index.js child only,
-         * but may be its  children deleted by preval have redux/slice.js
-         * the content should be [slice.js, ..., index.js]
-         */
-
-
-      } else if (node.children.some(isIndexFile)) {
-        node.type = 'item';
-        node.content = node.children.find(isIndexFile).content;
-      } else {
-        node.type = null;
-        node.children = null;
+    if (node.pathType !== 'directory') {
+      node.type = null;
+      node.codes = null;
+      node.children = null;
+    } else if (node.children.some((child) => child.isIndexFile)) {
+      node.type = 'item';
+      node.codes = [];
+      /** add codes of slice files in directory and subdirectory */
+      traverse(node, (childNode) => {
+        if (childNode.isSliceFile) {
+          node.codes.push(childNode.content);
+        }
+      });
+      /** add code of index file in directory */
+      if (node.codes.length === 0) {
+        node.codes.push(
+          node.children.find((child) => child.isIndexFile).content
+        );
       }
+      node.children = null;
+    } else if (node.children.some((child) => child.pathType === 'directory')) {
+      node.type = 'list';
+      node.codes = null;
     }
   });
   return pageItemTree;
@@ -57,7 +59,7 @@ export const getPageItemCodes = (pageItemTree) => {
   const codes = {};
   traverse(pageItemTree, (node) => {
     if (node.type === 'item') {
-      codes[node.url] = node.content;
+      codes[node.url] = node.codes;
     }
   });
   return codes;

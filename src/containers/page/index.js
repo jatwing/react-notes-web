@@ -1,7 +1,7 @@
 import { Box, Divider } from '@mui/material';
 import { createContext, useContext } from 'react';
 import { Container } from 'src/components/layout/container';
-import { Code } from 'src/containers/code';
+import { Codes } from 'src/containers/codes';
 import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
 import { MainContent } from 'src/containers/main-content';
@@ -48,7 +48,7 @@ export const Page = (props) => {
             }}
           >
             <Container component="article">{children}</Container>
-            <Code />
+            <Codes />
           </Box>
           <Divider />
           <Footer />
