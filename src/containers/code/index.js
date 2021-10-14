@@ -6,6 +6,17 @@ import { pageItemCodes } from 'src/lib/pages';
 
 export const Code = () => {
   const location = useLocation();
+
+  /**
+   * page item index code is orginal one
+   * before that we check page item slice codes (one or more)
+   *
+   * if existed, show the slice code or codes.
+   * else show the index code
+   */
+
+
+
   const code = pageItemCodes[location.pathname];
   return (
     <Container component="aside">

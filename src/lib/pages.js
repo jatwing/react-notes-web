@@ -20,8 +20,17 @@ const getPageItemTree = (pageFileTree) => {
     node.url = node.path.substring(9) || '/';
     if (node.pathType === 'directory') {
       if (node.children.some((child) => child.pathType === 'directory')) {
-        /** ignore potential index files */
         node.type = 'list';
+
+
+        /**
+         * or we can do it here,
+         * it must have index.js child only,
+         * but may be its  children deleted by preval have redux/slice.js
+         * the content should be [slice.js, ..., index.js]
+         */
+
+
       } else if (node.children.some(isIndexFile)) {
         node.type = 'item';
         node.content = node.children.find(isIndexFile).content;

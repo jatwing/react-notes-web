@@ -1,5 +1,9 @@
 import preval from 'preval.macro';
 
+/**
+ * it is the common version of getting pages,
+ * out task needs slice.js, so have to modify the code
+ */
 export const pageFileTree = preval`
 const { statSync, readdirSync, readFileSync } = require('fs');
 const getPageFileTree = (filename, path) => {
