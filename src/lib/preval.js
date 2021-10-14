@@ -34,13 +34,7 @@ const getPageFileTree = (filename, path) => {
 module.exports = getPageFileTree('src/pages', 'src/pages');
 `;
 
-/**
- * TODO can we obtain the object
- */
-export const buildDate = preval`
-const date = new Date();
-module.exports = {
-  date: date.toDateString(),
-  time: date.toTimeString(),
-}
+export const buildTimeString = preval`
+module.exports = JSON.stringify(new Date());
 `;
+
