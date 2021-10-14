@@ -1,7 +1,6 @@
-import { Box, Divider, Container } from '@mui/material';
+import { Box, Container, Divider } from '@mui/material';
 import { createContext, useContext } from 'react';
 //import { Container } from 'src/components/layout/container';
-
 import { Codes } from 'src/containers/codes';
 import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';

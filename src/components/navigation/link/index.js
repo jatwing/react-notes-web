@@ -18,6 +18,7 @@ export const LinkBase = (props) => {
     children,
     target = '_blank',
     rel = 'noreferrer noopener',
+    onClick,
     sx,
   } = props;
   if (!href) {
@@ -28,6 +29,7 @@ export const LinkBase = (props) => {
     ...(isValidHttpUrl(href)
       ? { href, target, rel }
       : { to: href, component: RouterLink }),
+    onClick,
     sx: {
       '&.MuiTypography-root': {
         textDecoration: 'none',

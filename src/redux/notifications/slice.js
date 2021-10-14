@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { createLifecycleActions } from 'src/redux/utils';
-import { resourcesAdded } from 'src/redux/i18n/slice';
 import { buildTimeString } from 'src/lib/preval';
+import { resourcesAdded } from 'src/redux/i18n/slice';
+import { createLifecycleActions } from 'src/redux/utils';
 
 /** actions */
 export const notificationsRead = createLifecycleActions(
@@ -41,7 +41,7 @@ const notificationsSlice = createSlice({
         return;
       }
       const t = action.payload;
-      const buildTime  = new Date(JSON.parse(buildTimeString));
+      const buildTime = new Date(JSON.parse(buildTimeString));
       const entity = {
         name: 'build_date',
         content: t('development_build_at_time_on_date', {
