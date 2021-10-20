@@ -15,7 +15,7 @@ export const NavigationDrawer = () => {
       open={isDrawerOpen}
       onClose={setDrawerClosed}
       items={pages}
-      logo={<Logo />}
+      logo={<Logo variant='colorful' />}
       title={l(projects?.entities?.[0]?.title)}
     />
   );
