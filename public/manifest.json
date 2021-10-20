@@ -1,5 +1,6 @@
 {
-  "name": "React Tutorial",
+  "name": "React Notes",
+  "short_name": "React Notes",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

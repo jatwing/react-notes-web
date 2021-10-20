@@ -31,6 +31,7 @@ export const JatwingIcon = (props) => {
 
 export const ReactNotesIcon = (props) => {
   const { variant } = props;
+  const isColorful = variant === 'colorful';
   return (
     <SvgIcon {...props}>
       <path
@@ -39,9 +40,10 @@ export const ReactNotesIcon = (props) => {
           strokeWidth: '8.792px',
           strokeLinecap: 'round',
           /** react blue, rgb(97, 218, 251), grayscale(186) */
-          stroke: variant === 'colorful' ? '#61dafb' : 'currentColor', 
+          stroke: isColorful ? '#61dafb' : 'currentColor',
           fill: 'none',
-          opacity: /** (255 - 186) / 255 */ '0.271',
+          /** (255 - 186) / 255 = 0.271 */
+          opacity: isColorful ? '1' : '0.271',
         }}
       />
       <path
@@ -50,9 +52,10 @@ export const ReactNotesIcon = (props) => {
           strokeWidth: '8.792px',
           strokeLinecap: 'round',
           /** saga green, rgb(134, 212, 107), grayscale(177) */
-          stroke: variant === 'colorful' ? '#86d46b' : 'currentColor',
+          stroke: isColorful ? '#86d46b' : 'currentColor',
           fill: 'none',
-          opacity: /** (255 - 177) / 255 */ '0.306',
+          /** (255 - 177) / 255 = 0.306 */
+          opacity: isColorful ? '1' : '0.306',
         }}
       />
       <path
@@ -61,9 +64,10 @@ export const ReactNotesIcon = (props) => {
           strokeWidth: '8.792px',
           strokeLinecap: 'round',
           /** redux purple, rgb(118, 74, 188), grayscale(100) */
-          stroke: variant === 'colorful' ? '#764abc' : 'currentColor', 
+          stroke: isColorful ? '#764abc' : 'currentColor',
           fill: 'none',
-          opacity: /** (255 - 100) / 255 */ '0.608',
+          /** (255 - 100) / 255 = 0.608 */ 
+          opacity: isColorful ? '1' : '0.608',
         }}
       />
     </SvgIcon>
