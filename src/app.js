@@ -11,7 +11,8 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { Page } from 'src/containers/page';
+import { HomePage } from 'src/containers/home-page';
+import { PageContainer  } from 'src/containers/page-container';
 import { theme } from 'src/lib/mui';
 import { pageItemUrls } from 'src/lib/pages';
 import { usePageViews } from 'src/redux/router/hooks';
@@ -21,9 +22,9 @@ export const PageSwitch = () => {
   usePageViews();
   const { t } = useTranslation();
   return (
-    <Page>
+    <PageContainer>
       <Switch>
-        <Suspense fallback={t('loading')}>
+        <Suspense fallback={'TODO use skeleton'}>
           {pageItemUrls.map((url) => (
             <Route
               exact={true}
@@ -32,10 +33,15 @@ export const PageSwitch = () => {
               key={url}
             />
           ))}
+          <Route
+            exact={true}
+            path='/'
+            component={HomePage}
+          />
+          <Redirect to='/'  />
         </Suspense>
-        <Redirect to="/" />
       </Switch>
-    </Page>
+    </PageContainer>
   );
 };
 

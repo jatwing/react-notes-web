@@ -1,6 +1,5 @@
 import { Box, Container, Divider } from '@mui/material';
 import { createContext, useContext } from 'react';
-//import { Container } from 'src/components/layout/container';
 import { Codes } from 'src/containers/codes';
 import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
@@ -14,7 +13,7 @@ export const usePageContext = () => {
   return context;
 };
 
-export const Page = (props) => {
+export const PageContainer = (props) => {
   const { children } = props;
   const {
     value: isDrawerOpen,

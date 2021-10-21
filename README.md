@@ -1,4 +1,4 @@
-# [React Notes Web](https://react-notes.jatwing.com/)
+# React Notes (Web)
 
 ## Content
 
