@@ -1,18 +1,18 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  width="512"
-  height="512"
+  width="606"
+  height="606"
 >
-  <path 
-    d="M 144.475 320.475 L 218.825 191.525" 
-    style="stroke-width: 128.950px; stroke-linecap: round; stroke: #000000; fill:none; opacity:0.271;"
+  <path
+    d="M 111 414 L 239 192"
+    style="stroke-width: 222px; stroke-linecap: round; stroke: #000000; fill: none; opacity: 0.271;"
   />
   <path
-    d="M 293.175 320.475 L 367.525 191.525"
-    style="stroke-width: 128.950px; stroke-linecap: round; stroke: #000000; fill:none; opacity:0.306;"
+    d="M 367 414 L 495 192"
+    style="stroke-width: 222px; stroke-linecap: round; stroke: #000000; fill: none; opacity: 0.306;"
   />
   <path
-    d="M 218.825 191.525 L 293.175 320.475"
-    style="stroke-width: 128.950px; stroke-linecap: round; stroke: #000000; fill:none; opacity:0.608;"
-  />
+    d="M 239 192 L 367 414"
+    style="stroke-width: 222px; stroke-linecap: round; stroke: #000000; fill: none; opacity: 0.608;"
+   />
 </svg>
