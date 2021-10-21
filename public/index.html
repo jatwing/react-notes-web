@@ -44,19 +44,21 @@
     />
     <!-- android chrome, home screen icon. 192x192, 512x512. -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!-- windows, live tile icon. 70x70, 144x144, 150x150, 310x150, 310x310. -->
+    <!-- windows ie 10, live tile icon. 144x144. -->
     <meta
       name="msapplication-TileImage"
       content="%PUBLIC_URL%/mstile-144x144.png"
     />
     <meta name="msapplication-TileColor" content="#3d87c3" />
+    <!-- windows ie 11, live tile icon. 70x70, 150x150, 310x150, 310x310. -->
+    <meta name="msapplication-config" content="ie-config.xml" />
     <!-- macos safari, pinned tab icon. -->
     <link
       rel="mask-icon"
-      href="%PUBLIC_URL%/website_icon.svg"
+      href="%PUBLIC_URL%/website-icon.svg"
       color="#764abc"
     />
-    <!-- safari and chrome, page or surrounding ui suggested color. -->
+    <!-- safari or chrome, page or surrounding ui suggested color. -->
     <meta name="theme-color" content="#ffffff" />
     <title>React Notes</title>
   </head>
