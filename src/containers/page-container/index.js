@@ -5,6 +5,7 @@ import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
+import { Breadcrumbs } from 'src/containers/breadcrumbs';
 
 const PageContext = createContext({});
 
@@ -49,6 +50,15 @@ export const PageContainer = (props) => {
               },
             }}
           >
+            <Breadcrumbs 
+              sx={{
+                my: {
+                  xs: '24px',
+                  sm: '32px',
+                },
+              }}
+
+             />
             <Box
               component="article"
               sx={{
@@ -60,7 +70,15 @@ export const PageContainer = (props) => {
             >
               {children}
             </Box>
-            <Codes />
+            <Codes 
+              sx={{
+                my: {
+                  xs: '24px',
+                  sm: '32px',
+                },
+              }}
+
+    />
           </Container>
           <Divider />
           <Footer />

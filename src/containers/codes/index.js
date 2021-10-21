@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { Code } from 'src/components/data-display/code';
 import { pageItemCodes } from 'src/lib/pages';
 
-export const Codes = () => {
+export const Codes = (props) => {
+  const { sx } = props;
   const location = useLocation();
   const codes = pageItemCodes[location.pathname];
   return (
@@ -12,12 +13,7 @@ export const Codes = () => {
         <Card
           variant="outlined"
           key={code}
-          sx={{
-            my: {
-              xs: '24px',
-              sm: '32px',
-            },
-          }}
+          sx={ { ...sx } }
         >
           <Code code={code} />
         </Card>
