@@ -48,37 +48,17 @@ export const PageContainer = (props) => {
                 xs: '56px',
                 sm: '64px',
               },
+              '& > .MuiBox-root, & > .MuiPaper-root': {
+                my: {
+                  xs: '24px',
+                  sm: '32px',
+                },
+              },
             }}
           >
-            <Breadcrumbs 
-              sx={{
-                my: {
-                  xs: '24px',
-                  sm: '32px',
-                },
-              }}
-
-             />
-            <Box
-              component="article"
-              sx={{
-                my: {
-                  xs: '24px',
-                  sm: '32px',
-                },
-              }}
-            >
-              {children}
-            </Box>
-            <Codes 
-              sx={{
-                my: {
-                  xs: '24px',
-                  sm: '32px',
-                },
-              }}
-
-    />
+            <Breadcrumbs />
+            <Box children={children} component="article" />
+            <Codes />
           </Container>
           <Divider />
           <Footer />

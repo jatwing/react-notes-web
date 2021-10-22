@@ -9,7 +9,7 @@ const getFileContent = (path) => {
   return '';
 };
 module.exports = getFileContent('README.md');
-`
+`;
 
 export const pageFileTree = preval`
 const {

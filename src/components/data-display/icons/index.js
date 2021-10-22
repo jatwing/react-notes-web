@@ -66,7 +66,7 @@ export const ReactNotesIcon = (props) => {
           /** redux purple, rgb(118, 74, 188), grayscale(100) */
           stroke: isColorful ? '#764abc' : 'currentColor',
           fill: 'none',
-          /** (255 - 100) / 255 = 0.608 */ 
+          /** (255 - 100) / 255 = 0.608 */
           opacity: isColorful ? '1' : '0.608',
         }}
       />

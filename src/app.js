@@ -12,7 +12,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { HomePage } from 'src/containers/home-page';
-import { PageContainer  } from 'src/containers/page-container';
+import { PageContainer } from 'src/containers/page-container';
 import { theme } from 'src/lib/mui';
 import { pageItemUrls } from 'src/lib/pages';
 import { usePageViews } from 'src/redux/router/hooks';
@@ -33,12 +33,8 @@ export const PageSwitch = () => {
               key={url}
             />
           ))}
-          <Route
-            exact={true}
-            path='/'
-            component={HomePage}
-          />
-          <Redirect to='/'  />
+          <Route exact={true} path="/" component={HomePage} />
+          <Redirect to="/" />
         </Suspense>
       </Switch>
     </PageContainer>
