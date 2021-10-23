@@ -14,18 +14,23 @@ import {
 import { HomePage } from 'src/containers/home-page';
 import { PageContainer } from 'src/containers/page-container';
 import { theme } from 'src/lib/mui';
-import { pageItemUrls } from 'src/lib/pages';
 import { usePageViews } from 'src/redux/router/hooks';
 import { store } from 'src/redux/store';
+import { traverse, pageItemTree } from 'src/lib/pages';
 
 export const PageSwitch = () => {
   usePageViews();
-  const { t } = useTranslation();
+  const urls = [];
+  traverse(pageItemTree, (node) => {
+    if (node.type === 'item') {
+      urls.push(node.url);
+    }
+  });
   return (
     <PageContainer>
       <Switch>
         <Suspense fallback={'TODO use skeleton'}>
-          {pageItemUrls.map((url) => (
+          {urls.map((url) => (
             <Route
               exact={true}
               path={url}

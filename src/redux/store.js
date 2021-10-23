@@ -2,7 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { watchAuthorsRead } from 'src/redux/authors/sagas';
 import { authorsReducer } from 'src/redux/authors/slice';
-import { resourcesAdded } from 'src/redux/i18n/slice';
+import {
+  instanceInitialized,
+  resourcesAdded,
+  languageChanged,
+} from 'src/redux/i18n/slice';
 import { watchNotificationsRead } from 'src/redux/notifications/sagas';
 import { notificationsReducer } from 'src/redux/notifications/slice';
 import { pagesReducer } from 'src/redux/pages/slice';
@@ -26,7 +30,9 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [
           rankingsRead.settled.toString(),
+          instanceInitialized.settled.toString(),
           resourcesAdded.settled.toString(),
+          languageChanged.settled.toString(),
         ],
       },
     }).concat(sagaMiddleware),

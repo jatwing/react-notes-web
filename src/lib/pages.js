@@ -13,6 +13,7 @@ export const traverse = (node, callback = null) => {
   });
 };
 
+/** page item tree */
 const getPageItemTree = (pageFileTree) => {
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
   traverse(pageItemTree, (node) => {
@@ -45,26 +46,4 @@ const getPageItemTree = (pageFileTree) => {
   return pageItemTree;
 };
 
-export const getPageItemUrls = (pageItemTree) => {
-  const urls = [];
-  traverse(pageItemTree, (node) => {
-    if (node.type === 'item') {
-      urls.push(node.url);
-    }
-  });
-  return urls;
-};
-
-export const getPageItemCodes = (pageItemTree) => {
-  const codes = {};
-  traverse(pageItemTree, (node) => {
-    if (node.type === 'item') {
-      codes[node.url] = node.codes;
-    }
-  });
-  return codes;
-};
-
 export const pageItemTree = getPageItemTree(pageFileTree);
-export const pageItemUrls = getPageItemUrls(pageItemTree);
-export const pageItemCodes = getPageItemCodes(pageItemTree);

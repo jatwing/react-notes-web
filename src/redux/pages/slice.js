@@ -22,18 +22,19 @@ const pagesSlice = createSlice({
         }
       });
     },
-    // TODO this reducer is wrong,
-    // can not deal with language changed.
-    // does not solve the general translation problem.
+
+    // TODO to use the function t
     [resourcesAdded.settled]: (state, action) => {
-      const t = action.payload;
+      const { t } = action.payload;
       traverse(state.entities, (node) => {
         node.name = t(node.filename.replaceAll('-', '_'));
       });
     },
+
+
     [routeChanged.settled]: (state, action) => {
       traverse(state.entities, (node) => {
-        const route = action.payload;
+        const route = action.payload
         node.isMatched = node.url === route;
         node.isSelected =
           node.url === '/' ||

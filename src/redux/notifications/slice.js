@@ -36,11 +36,19 @@ const notificationsSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message;
     },
+
+    // TODO
+    // listen to the language change function
+    // get the t
+    // check the key 'build_date' to decide replace or not.
+
+
+
     [resourcesAdded.settled]: (state, action) => {
       if (process.env.NODE_ENV !== 'development') {
         return;
       }
-      const t = action.payload;
+      const {t }  = action.payload;
       const buildTime = new Date(JSON.parse(buildTimeString));
       const entity = {
         name: 'build_date',
