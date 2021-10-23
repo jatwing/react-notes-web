@@ -1,18 +1,13 @@
-import { Box, Typography } from '@mui/material';
-import { NavigateNext } from '@mui/icons-material';
+import {  Typography } from '@mui/material';
 import { Breadcrumbs as BreadcrumbsComponent } from 'src/components/navigation/breadcrumbs';
-import { usePage } from 'src/redux/pages/hooks';
+import { useSelectedPages } from 'src/redux/pages/hooks';
 
 export const Breadcrumbs = (props) => {
-  const { sx } = props;
-
-  const page = usePage();
-
-  console.log(page);
+  const selectedPages = useSelectedPages();
 
   //
   // do not forget the translation
-  const data = [<Typography children={'home'} />];
+  const data = [<Typography children={'home'} key="test" />];
 
   /*
    *   Home > Hooks > State Hook
@@ -22,18 +17,6 @@ export const Breadcrumbs = (props) => {
    *  2. Hooks to force drawer somehow highlight the folder ?
    *  3. State Hook: typography.
    */
-
-  const datadummy = [
-    <Typography key="1132" color="text.primary">
-      Bre1
-    </Typography>,
-    <Typography key="sss2" color="text.primary">
-      Brea2
-    </Typography>,
-    <Typography key="dd" color="text.primary">
-      Breadc3
-    </Typography>,
-  ];
 
   return <BreadcrumbsComponent children={data} />;
 };

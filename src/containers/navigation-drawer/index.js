@@ -8,6 +8,8 @@ import { useProjects } from 'src/redux/projects/hooks';
 export const NavigationDrawer = () => {
   const { isDrawerOpen, setDrawerClosed } = usePageContext();
   const pages = usePages();
+
+
   const projects = useProjects();
   const l = useLocalization();
   return (
