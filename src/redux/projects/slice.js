@@ -31,6 +31,10 @@ const projectsSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message;
     },
+    [projectsRead.settled]: (state, action) => {
+      console.log('hrer')
+      console.log(action);
+    }
 
    // TODO  try to use l on the attribution text fields.
 

@@ -79,10 +79,6 @@ const callback = async (error, t) => {
   }));
 };
 
-i18n.on('initialized', (_) => {
-  store.dispatch(instanceInitialized.settled({}));
-});
-
 i18n.on('languageChanged', (_) => {
   store.dispatch(
     languageChanged.settled({

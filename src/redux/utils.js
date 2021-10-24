@@ -11,15 +11,11 @@ export const createLifecycleActions = (domain, event) => {
   );
   actionCreator.rejected = createAction(
     `${domain}/${event}/rejected`,
-    (error) => ({
-      error,
-    })
+    (error) => ({ error })
   );
   actionCreator.settled = createAction(
     `${domain}/${event}/settled`,
-    (payload) => ({
-      payload,
-    })
+    (payload) => ({ payload })
   );
   return actionCreator;
 };
