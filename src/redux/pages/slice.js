@@ -24,7 +24,7 @@ const pagesSlice = createSlice({
     },
 
     // TODO to use the function t
-    [resourcesAdded.settled]: (state, action) => {
+    [resourcesAdded]: (state, action) => {
       const { t } = action.payload;
       traverse(state.entities, (node) => {
         node.name = t(node.filename.replaceAll('-', '_'));

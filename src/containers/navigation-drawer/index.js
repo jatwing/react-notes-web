@@ -4,28 +4,10 @@ import { usePageContext } from 'src/containers/page-container';
 import { useLocalization } from 'src/redux/i18n/hooks';
 import { usePages } from 'src/redux/pages/hooks';
 import { useProjects } from 'src/redux/projects/hooks';
-import { useTranslation } from 'react-i18next';
-import { traverse } from 'src/lib/pages'
 
 export const NavigationDrawer = () => {
   const { isDrawerOpen, setDrawerClosed } = usePageContext();
   const pages = usePages();
-
-  /*
-   * drop these code because it is tedious to copy the object.
-   * maybe have to solve inside the redux.
-   *
-   *
-
-  const pages2 = JSON.parse(JSON.stringify(pages))
-  const { t} = useTranslation();
-  traverse(pages2, (node) => {
-    node.name = t(node.filename.replaceAll('-', '_'));
-  })
-
-*/
-
-
   const projects = useProjects();
   const l = useLocalization();
   return (
@@ -34,7 +16,7 @@ export const NavigationDrawer = () => {
       onClose={setDrawerClosed}
       items={pages}
       logo={<Logo variant="colorful" />}
-      title={l(projects?.entities?.[0]?.title)}
+      title={projects?.entities?.[0]?.title}
     />
   );
 };

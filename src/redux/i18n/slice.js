@@ -1,8 +1,5 @@
-import { createLifecycleActions } from 'src/redux/utils';
+import { createAction } from '@reduxjs/toolkit';
 
 /** actions */
-export const resourcesAdded = createLifecycleActions('i18n', 'resourcesAdded');
-export const languageChanged = createLifecycleActions(
-  'i18n',
-  'languageChanged'
-);
+export const resourcesAdded = createAction('i18n/resourcesAdded');
+export const languageChanged = createAction('i18n/languageChanged');

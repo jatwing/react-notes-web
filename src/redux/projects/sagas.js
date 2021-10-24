@@ -1,7 +1,7 @@
-import { call, put, take, all, takeEvery } from 'redux-saga/effects';
+import { call, put, take, all } from 'redux-saga/effects';
 import { readDocuments } from 'src/lib/firebase';
 
-import { projectsRead } from './slice';
+import { projectsRead, projectsLocalized } from './slice';
 import { resourcesAdded, languageChanged } from 'src/redux/i18n/slice';
 
 /** workers */
@@ -15,10 +15,6 @@ function* workProjectsRead() {
   }
 }
 
-export function* test() {
-  yield put(projectsRead.settled('test2'));
-}
-
 /** watchers */
 export function* watchProjectsRead() {
   const [
@@ -26,14 +22,12 @@ export function* watchProjectsRead() {
     {
       payload: { t, l },
     },
-  ] = yield all([
-    take(projectsRead),
-    take([resourcesAdded.settled, languageChanged.settled]),
-  ]);
+  ] = yield all([take(projectsRead), take([resourcesAdded, languageChanged])]);
   yield call(workProjectsRead);
-  yield put(projectsRead.settled({ t, l }));
+  yield put(projectsLocalized({ t, l }));
+  // miss sth
   while (true) {
-    yield take([resourcesAdded.settled, languageChanged.settled]);
-    yield put(projectsRead.settled({ t, l }));
+    yield take([resourcesAdded, languageChanged]);
+    yield put(projectsLocalized({ t, l }));
   }
 }

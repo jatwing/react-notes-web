@@ -2,21 +2,16 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import { readDocuments } from 'src/lib/firebase';
-import {
-  instanceInitialized,
-  resourcesAdded,
-  languageChanged,
-} from 'src/redux/i18n/slice';
+import { resourcesAdded, languageChanged } from 'src/redux/i18n/slice';
 import { store } from 'src/redux/store';
 
 /** localize */
-i18n.l = function (texts) {
+const localize = (i18n) => (texts) => {
   if (!texts) {
     return '';
   }
-  return texts?.[this.language] || texts?.[this.options.fallbackLng] || '';
-};
-
+  return texts?.[i18n.language] || texts?.[i18n.options.fallbackLng] || '';
+}
 
 // TODO delete this section
 /** configurations */
@@ -52,6 +47,7 @@ const options = {
     escapeValue: false,
   },
   /** react i18next */
+  // TODO delete react settings
   react: {
     bindI18nStore: 'added',
     useSuspense: false,
@@ -73,17 +69,19 @@ const callback = async (error, t) => {
       i18n.addResources(language, namespace, resources[0]);
     }
   }
-  store.dispatch(resourcesAdded.settled({
-    t,
-    l: i18n.l,
-  }));
+  store.dispatch(
+    resourcesAdded({
+      t,
+      l: localize(i18n)
+    })
+  );
 };
 
 i18n.on('languageChanged', (_) => {
   store.dispatch(
-    languageChanged.settled({
+    languageChanged({
       t: i18n.t,
-      l: i18n.l
+      l: localize(i18n)
     })
   );
 });

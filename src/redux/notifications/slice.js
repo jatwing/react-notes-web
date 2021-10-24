@@ -44,7 +44,7 @@ const notificationsSlice = createSlice({
 
 
 
-    [resourcesAdded.settled]: (state, action) => {
+    [resourcesAdded]: (state, action) => {
       if (process.env.NODE_ENV !== 'development') {
         return;
       }
