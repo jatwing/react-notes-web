@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ReactNotesIcon } from 'src/components/data-display/icons';
-import { useLocalization } from 'src/redux/i18n/hooks';
 import { useProject } from 'src/redux/projects/hooks';
 
 export const Logo = (props) => {

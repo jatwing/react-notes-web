@@ -46,4 +46,15 @@ const getPageItemTree = (pageFileTree) => {
   return pageItemTree;
 };
 
+const getPageItemUrls = (pageItemTree) => {
+  const urls = [];
+  traverse(pageItemTree, (node) => {
+    if (node.type === 'item') {
+      urls.push(node.url);
+    }
+  });
+  return urls;
+};
+
 export const pageItemTree = getPageItemTree(pageFileTree);
+export const pageItemUrls = getPageItemUrls(pageItemTree);

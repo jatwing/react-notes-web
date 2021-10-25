@@ -3,6 +3,7 @@ import { readDocuments } from 'src/lib/firebase';
 
 import { projectsRead, projectsLocalized } from './slice';
 import { resourcesAdded, languageChanged } from 'src/redux/i18n/slice';
+import { watchEntitiesOperationWithLocalization } from 'src/redux/i18n/sagas';
 
 /** workers */
 function* workProjectsRead() {
@@ -17,17 +18,9 @@ function* workProjectsRead() {
 
 /** watchers */
 export function* watchProjectsRead() {
-  const [
-    _,
-    {
-      payload: { t, l },
-    },
-  ] = yield all([take(projectsRead), take([resourcesAdded, languageChanged])]);
-  yield call(workProjectsRead);
-  yield put(projectsLocalized({ t, l }));
-  // miss sth
-  while (true) {
-    yield take([resourcesAdded, languageChanged]);
-    yield put(projectsLocalized({ t, l }));
-  }
+  yield watchEntitiesOperationWithLocalization(
+    projectsRead,
+    workProjectsRead,
+    projectsLocalized
+  );
 }

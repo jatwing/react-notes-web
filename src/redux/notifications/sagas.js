@@ -1,7 +1,8 @@
-import { call, put, take } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { readDocuments } from 'src/lib/firebase';
 
-import { notificationsRead } from './slice';
+import { notificationsRead, notificationsLocalized } from './slice';
+import { watchEntitiesOperationWithLocalization } from 'src/redux/i18n/sagas';
 
 /** workers */
 function* workNotificationsRead() {
@@ -16,6 +17,10 @@ function* workNotificationsRead() {
 
 /** watchers */
 export function* watchNotificationsRead() {
-  yield take(notificationsRead);
-  yield call(workNotificationsRead);
+  yield watchEntitiesOperationWithLocalization(
+    notificationsRead,
+    workNotificationsRead,
+    notificationsLocalized
+  )
 }
+

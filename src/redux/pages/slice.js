@@ -1,8 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 import { pageItemTree, traverse } from 'src/lib/pages';
-import { resourcesAdded } from 'src/redux/i18n/slice';
 import { rankingsRead } from 'src/redux/rankings/slice';
-import { routeChanged } from 'src/redux/router/slice';
+
+/** actions */
+export const pagesLocalized = createAction('pages/pagesLocalized');
+export const routeChanged = createAction('pages/routerChanged');
 
 /** state */
 const initialState = {
@@ -14,6 +16,12 @@ const pagesSlice = createSlice({
   initialState,
   /** reducer */
   extraReducers: {
+    [pagesLocalized.toString()]: (state, action) => {
+      const { t } = action.payload;
+      traverse(state.entities, (node) => {
+        node.name = t(node.filename.replaceAll('-', '_'));
+      });
+    },
     [rankingsRead.settled]: (state, action) => {
       const sort = action.payload;
       traverse(state.entities, (node) => {
@@ -22,19 +30,9 @@ const pagesSlice = createSlice({
         }
       });
     },
-
-    // TODO to use the function t
-    [resourcesAdded]: (state, action) => {
-      const { t } = action.payload;
+    [routeChanged]: (state, action) => {
       traverse(state.entities, (node) => {
-        node.name = t(node.filename.replaceAll('-', '_'));
-      });
-    },
-
-
-    [routeChanged.settled]: (state, action) => {
-      traverse(state.entities, (node) => {
-        const route = action.payload
+        const route = action.payload;
         node.isMatched = node.url === route;
         node.isSelected =
           node.url === '/' ||
