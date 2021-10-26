@@ -1,9 +1,9 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import { pageItemTree, traverse } from 'src/lib/pages';
 import { rankingsRead } from 'src/redux/rankings/slice';
-import { translationAccessible } from 'src/redux/i18n/slice';
 
 /** actions */
+export const pagesTranslated = createAction('pages/pagesTranslated');
 export const routeChanged = createAction('pages/routerChanged');
 
 /** state */
@@ -16,8 +16,8 @@ const pagesSlice = createSlice({
   initialState,
   /** reducer */
   extraReducers: {
-    [translationAccessible]: (state, action) => {
-      const  t  = action.payload;
+    [pagesTranslated]: (state, action) => {
+      const t = action.payload;
       traverse(state.entities, (node) => {
         node.name = t(node.filename.replaceAll('-', '_'));
       });

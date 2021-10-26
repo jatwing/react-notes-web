@@ -11,7 +11,7 @@ export const notificationsRead = createLifecycleActions(
   'notifications',
   'notificationsRead'
 );
-export const notificationsTranslated = createAction('notifications/notificationsRead');
+export const notificationsTranslated = createAction('notifications/notificationsTranslated');
 
 /** state */
 const notificationsAdapter = createEntityAdapter({

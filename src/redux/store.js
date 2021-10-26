@@ -12,14 +12,19 @@ import {
 import {
   watchTranslationAccessible,
   watchLocalizationAccessible,
-} from 'src/redux/i18n/sagas'
+} from 'src/redux/i18n/sagas';
 import { watchNotificationsRead } from 'src/redux/notifications/sagas';
-import { notificationsReducer, notificationsTranslated } from 'src/redux/notifications/slice';
-import { pagesReducer } from 'src/redux/pages/slice';
+import {
+  notificationsReducer,
+  notificationsTranslated,
+} from 'src/redux/notifications/slice';
+import { pagesReducer, pagesTranslated } from 'src/redux/pages/slice';
 import { watchProjectsRead } from 'src/redux/projects/sagas';
 import { projectsReducer, projectsLocalized } from 'src/redux/projects/slice';
 import { watchRankingsRead } from 'src/redux/rankings/sagas';
 import { rankingsReducer, rankingsRead } from 'src/redux/rankings/slice';
+import { watchPagesTranslated } from 'src/redux/pages/sagas';
+import { pageTranslated } from 'src/redux/pages/slice';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -41,6 +46,7 @@ export const store = configureStore({
           translationAccessible.toString(),
           localizationAccessible.toString(),
           notificationsTranslated.toString(),
+          pagesTranslated.toString(),
           projectsLocalized.toString(),
           rankingsRead.settled.toString(),
         ],
@@ -49,8 +55,9 @@ export const store = configureStore({
 });
 
 sagaMiddleware.run(watchAuthorsRead);
-sagaMiddleware.run(watchTranslationAccessible)
-sagaMiddleware.run(watchLocalizationAccessible)
+sagaMiddleware.run(watchTranslationAccessible);
+sagaMiddleware.run(watchLocalizationAccessible);
 sagaMiddleware.run(watchNotificationsRead);
+sagaMiddleware.run(watchPagesTranslated);
 sagaMiddleware.run(watchProjectsRead);
 sagaMiddleware.run(watchRankingsRead);
