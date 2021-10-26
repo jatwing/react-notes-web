@@ -36,7 +36,9 @@ const pagesSlice = createSlice({
     [resourcesAdded.settled]: (state, action) => {
       const t = action.payload;
       Object.values(state.entities).forEach((entity) => {
-        entity.name = t(entity.filename.replaceAll('-', '_'))
+       // entity.name = t(entity.filename.replaceAll('-', '_'))
+        
+        entity.name ='test'
       })
       state.status = 'tran';
     },
