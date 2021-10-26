@@ -1,11 +1,10 @@
-import { Box, Card } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import {  Card } from '@mui/material';
 import { Code } from 'src/components/data-display/code';
-import { pageItemCodes } from 'src/lib/pages';
+import { useMatchedPage } from 'src/redux/pages/hooks';
 
-export const Codes = (props) => {
-  const location = useLocation();
-  const codes = pageItemCodes[location.pathname];
+export const Codes = () => {
+  const matchedPages = useMatchedPage();
+  const codes = matchedPages?.codes;
   return (
     <>
       {codes?.map((code) => (

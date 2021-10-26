@@ -1,13 +1,11 @@
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ReactNotesIcon } from 'src/components/data-display/icons';
-import { useLocalization } from 'src/redux/i18n/hooks';
 import { useProject } from 'src/redux/projects/hooks';
 
 export const Logo = (props) => {
   const { variant, sx } = props;
   const project = useProject();
-  const l = useLocalization();
   const theme = useTheme();
   return (
     <Box
@@ -37,7 +35,7 @@ export const Logo = (props) => {
           ml: '16px',
         }}
       >
-        {project.isSucceed ? l(project.entity.title) : ''}
+        {project.isSucceed ? project.entity.title : ''}
       </Typography>
     </Box>
   );

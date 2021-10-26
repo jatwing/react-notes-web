@@ -62,6 +62,7 @@ const getPageFileTree = (path, discipline = '') => {
 module.exports = getPageFileTree('src/pages');
 `;
 
-export const buildTimeString = preval`
+const buildTimeString = preval`
 module.exports = JSON.stringify(new Date());
 `;
+export const buildTime = new Date(JSON.parse(buildTimeString));

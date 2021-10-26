@@ -1,6 +1,9 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { buildTimeString } from 'src/lib/preval';
-import { resourcesAdded } from 'src/redux/i18n/slice';
+import {
+  createEntityAdapter,
+  createSlice,
+  createAction,
+} from '@reduxjs/toolkit';
+import { buildTime } from 'src/lib/preval';
 import { createLifecycleActions } from 'src/redux/utils';
 
 /** actions */
@@ -8,6 +11,7 @@ export const notificationsRead = createLifecycleActions(
   'notifications',
   'notificationsRead'
 );
+export const notificationsTranslated = createAction('notifications/notificationsRead');
 
 /** state */
 const notificationsAdapter = createEntityAdapter({
@@ -36,12 +40,11 @@ const notificationsSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message;
     },
-    [resourcesAdded.settled]: (state, action) => {
+    [notificationsTranslated]: (state, action) => {
       if (process.env.NODE_ENV !== 'development') {
         return;
       }
       const t = action.payload;
-      const buildTime = new Date(JSON.parse(buildTimeString));
       const entity = {
         name: 'build_date',
         content: t('development_build_at_time_on_date', {
@@ -49,7 +52,7 @@ const notificationsSlice = createSlice({
           date: buildTime.toDateString(),
         }),
       };
-      notificationsAdapter.addOne(state, entity);
+      notificationsAdapter.setOne(state, entity);
     },
   },
 });
