@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ReactNotesIcon } from 'src/components/data-display/icons';
-import { useProject } from 'src/redux/projects/hooks';
+import { useProject } from 'src/redux/project/hooks';
 
 export const Logo = (props) => {
   const { variant, sx } = props;

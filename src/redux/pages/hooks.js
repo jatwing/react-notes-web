@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { store } from 'src/redux/store';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { useRankings } from 'src/redux/rankings/hooks';
+import { store } from 'src/redux/store';
+
 import {
-  selectPages,
-  selectMatchedPage,
-  selectSelectedPages,
   routeChanged,
+  selectMatchedPage,
+  selectPages,
+  selectSelectedPages,
 } from './slice';
 
 export const usePages = () => {

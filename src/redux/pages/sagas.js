@@ -1,6 +1,7 @@
-import { take, put } from 'redux-saga/effects'
-import { pagesTranslated } from './slice';
+import { put, take } from 'redux-saga/effects';
 import { translationAccessible } from 'src/redux/i18n/slice';
+
+import { pagesTranslated } from './slice';
 
 /** watchers */
 export function* watchPagesTranslated() {

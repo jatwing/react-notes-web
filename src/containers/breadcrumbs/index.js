@@ -1,4 +1,4 @@
-import {  Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Breadcrumbs as BreadcrumbsComponent } from 'src/components/navigation/breadcrumbs';
 import { useSelectedPages } from 'src/redux/pages/hooks';
 

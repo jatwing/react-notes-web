@@ -1,4 +1,4 @@
-import {  Card } from '@mui/material';
+import { Card } from '@mui/material';
 import { Code } from 'src/components/data-display/code';
 import { useMatchedPage } from 'src/redux/pages/hooks';
 

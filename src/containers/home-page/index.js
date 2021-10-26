@@ -1,6 +1,6 @@
-import { readmeMarkdown } from 'src/lib/preval';
-import { Markdown } from 'src/components/data-display/markdown';
 import { useTranslation } from 'react-i18next';
+import { Markdown } from 'src/components/data-display/markdown';
+import { readmeMarkdown } from 'src/lib/preval';
 
 export const HomePage = () => {
   const { i18n } = useTranslation();
@@ -29,5 +29,5 @@ export const HomePage = () => {
       </button>
       <Markdown markdown={readmeMarkdown} />;
     </>
-  )
+  );
 };

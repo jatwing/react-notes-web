@@ -3,28 +3,31 @@ import createSagaMiddleware from 'redux-saga';
 import { watchAuthorRead } from 'src/redux/author/sagas';
 import { authorReducer } from 'src/redux/author/slice';
 import {
-  instanceInitialized,
-  resourcesAdded,
-  languageChanged,
-  translationAccessible,
-  localizationAccessible,
-} from 'src/redux/i18n/slice';
-import {
-  watchTranslationAccessible,
   watchLocalizationAccessible,
+  watchTranslationAccessible,
 } from 'src/redux/i18n/sagas';
+import {
+  instanceInitialized,
+  languageChanged,
+  localizationAccessible,
+  resourcesAdded,
+  translationAccessible,
+} from 'src/redux/i18n/slice';
 import { watchNotificationsRead } from 'src/redux/notifications/sagas';
 import {
   notificationsReducer,
   notificationsTranslated,
 } from 'src/redux/notifications/slice';
-import { pagesReducer, pagesTranslated } from 'src/redux/pages/slice';
-import { watchProjectRead } from 'src/redux/project/sagas';
-import { projectReducer, projectLocalized } from 'src/redux/project/slice';
-import { watchRankingsRead } from 'src/redux/rankings/sagas';
-import { rankingsReducer, rankingsRead } from 'src/redux/rankings/slice';
 import { watchPagesTranslated } from 'src/redux/pages/sagas';
-import { pageTranslated } from 'src/redux/pages/slice';
+import {
+  pagesReducer,
+  pagesTranslated,
+  pageTranslated,
+} from 'src/redux/pages/slice';
+import { watchProjectRead } from 'src/redux/project/sagas';
+import { projectLocalized, projectReducer } from 'src/redux/project/slice';
+import { watchRankingsRead } from 'src/redux/rankings/sagas';
+import { rankingsRead, rankingsReducer } from 'src/redux/rankings/slice';
 
 const sagaMiddleware = createSagaMiddleware();
 

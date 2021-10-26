@@ -4,8 +4,8 @@ import { initReactI18next } from 'react-i18next';
 import { readDocuments } from 'src/lib/firebase';
 import {
   instanceInitialized,
-  resourcesAdded,
   languageChanged,
+  resourcesAdded,
 } from 'src/redux/i18n/slice';
 import { store } from 'src/redux/store';
 
@@ -73,9 +73,7 @@ const callback = async (error, t) => {
       i18n.addResources(language, namespace, resources[0]);
     }
   }
-  store.dispatch(
-    resourcesAdded(i18n.t.bind(i18n))
-  );
+  store.dispatch(resourcesAdded(i18n.t.bind(i18n)));
 };
 
 i18n.on('initialized', () => {

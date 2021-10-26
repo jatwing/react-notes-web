@@ -1,7 +1,7 @@
 import {
+  createAction,
   createEntityAdapter,
   createSlice,
-  createAction,
 } from '@reduxjs/toolkit';
 import { buildTime } from 'src/lib/preval';
 import { createLifecycleActions } from 'src/redux/utils';
@@ -11,7 +11,9 @@ export const notificationsRead = createLifecycleActions(
   'notifications',
   'notificationsRead'
 );
-export const notificationsTranslated = createAction('notifications/notificationsTranslated');
+export const notificationsTranslated = createAction(
+  'notifications/notificationsTranslated'
+);
 
 /** state */
 const notificationsAdapter = createEntityAdapter({

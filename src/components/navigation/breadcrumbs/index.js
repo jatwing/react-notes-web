@@ -1,6 +1,5 @@
-import { Breadcrumbs as MuiBreadcrumbs } from '@mui/material';
-
 import { NavigateNext } from '@mui/icons-material';
+import { Breadcrumbs as MuiBreadcrumbs } from '@mui/material';
 
 export const Breadcrumbs = (props) => {
   /**

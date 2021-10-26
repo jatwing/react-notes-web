@@ -1,11 +1,12 @@
+import { put, take } from 'redux-saga/effects';
+
 import {
   instanceInitialized,
-  resourcesAdded,
   languageChanged,
-  translationAccessible,
   localizationAccessible,
+  resourcesAdded,
+  translationAccessible,
 } from './slice';
-import { put, take } from 'redux-saga/effects';
 
 /** watchers */
 export function* watchTranslationAccessible() {
