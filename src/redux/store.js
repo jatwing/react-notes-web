@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import { watchAuthorsRead } from 'src/redux/authors/sagas';
-import { authorsReducer } from 'src/redux/authors/slice';
+import { watchAuthorRead } from 'src/redux/author/sagas';
+import { authorReducer } from 'src/redux/author/slice';
 import {
   instanceInitialized,
   resourcesAdded,
@@ -19,8 +19,8 @@ import {
   notificationsTranslated,
 } from 'src/redux/notifications/slice';
 import { pagesReducer, pagesTranslated } from 'src/redux/pages/slice';
-import { watchProjectsRead } from 'src/redux/projects/sagas';
-import { projectsReducer, projectsLocalized } from 'src/redux/projects/slice';
+import { watchProjectRead } from 'src/redux/project/sagas';
+import { projectReducer, projectLocalized } from 'src/redux/project/slice';
 import { watchRankingsRead } from 'src/redux/rankings/sagas';
 import { rankingsReducer, rankingsRead } from 'src/redux/rankings/slice';
 import { watchPagesTranslated } from 'src/redux/pages/sagas';
@@ -30,10 +30,10 @@ const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
-    authors: authorsReducer,
+    author: authorReducer,
     notifications: notificationsReducer,
     pages: pagesReducer,
-    projects: projectsReducer,
+    project: projectReducer,
     rankings: rankingsReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -47,17 +47,17 @@ export const store = configureStore({
           localizationAccessible.toString(),
           notificationsTranslated.toString(),
           pagesTranslated.toString(),
-          projectsLocalized.toString(),
+          projectLocalized.toString(),
           rankingsRead.settled.toString(),
         ],
       },
     }).concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(watchAuthorsRead);
+sagaMiddleware.run(watchAuthorRead);
 sagaMiddleware.run(watchTranslationAccessible);
 sagaMiddleware.run(watchLocalizationAccessible);
 sagaMiddleware.run(watchNotificationsRead);
 sagaMiddleware.run(watchPagesTranslated);
-sagaMiddleware.run(watchProjectsRead);
+sagaMiddleware.run(watchProjectRead);
 sagaMiddleware.run(watchRankingsRead);

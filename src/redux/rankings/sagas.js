@@ -3,15 +3,6 @@ import { readDocuments } from 'src/lib/firebase';
 
 import { rankingsRead, selectEntities } from './slice';
 
-
-/**
- * why sort([], entity.url, 'url')
- *
- * are the first two params enough?
- *
- */
-
-
 export const getRankingSort = (entities) => {
   const sort = (unrankedArray, rankingsId, criterialProperty = null) => {
     if (!entities || !(rankingsId in entities)) {

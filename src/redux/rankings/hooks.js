@@ -11,11 +11,11 @@ export const useRankings = () => {
   const entities = useSelector(selectEntities);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
-  const dispatch = useDispatch();
   const isIdle = status === 'idle';
   const isLoading = status === 'loading';
   const isSucceed = status === 'succeeded';
   const isFailed = status === 'failed';
+  const dispatch = useDispatch();
   if (isIdle) {
     dispatch(rankingsRead());
   }

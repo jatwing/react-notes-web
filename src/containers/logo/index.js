@@ -35,7 +35,7 @@ export const Logo = (props) => {
           ml: '16px',
         }}
       >
-        {project.isSucceed ? project.entity.title : ''}
+        {project.isSucceed ? project.entity.name : ''}
       </Typography>
     </Box>
   );

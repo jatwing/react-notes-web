@@ -4,7 +4,7 @@ import { InnerHtml } from 'src/components/data-display/inner-html';
 import { ClickableComponentWithDialog } from 'src/components/feedback/dialog';
 import { Footer as FooterComponent } from 'src/components/layout/footer';
 import { Link, linkStyle } from 'src/components/navigation/link';
-import { useAuthor } from 'src/redux/authors/hooks';
+import { useAuthor } from 'src/redux/author/hooks';
 import { useProject } from 'src/redux/projects/hooks';
 
 export const Footer = () => {

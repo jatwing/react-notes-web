@@ -1,14 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  notificationsRead,
-  selectEntities,
-  selectError,
-  selectStatus,
-} from './slice';
+import { authorRead, selectEntity, selectError, selectStatus } from './slice';
 
-export const useNotifications = () => {
-  const entities = useSelector(selectEntities);
+export const useAuthor = () => {
+  const entity = useSelector(selectEntity);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
   const isIdle = status === 'idle';
@@ -17,7 +12,7 @@ export const useNotifications = () => {
   const isFailed = status === 'failed';
   const dispatch = useDispatch();
   if (isIdle) {
-    dispatch(notificationsRead());
+    dispatch(authorRead());
   }
-  return { entities, isIdle, isLoading, isSucceed, isFailed, error };
+  return { entity, isIdle, isLoading, isSucceed, isFailed, error };
 };
