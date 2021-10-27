@@ -17,6 +17,7 @@ export const PageSwitch = () => {
   return (
     <Page>
       <Switch>
+        <Route exact={true} path="/" component={HomePage} />
         <Suspense fallback={'TODO use skeleton'}>
           {pageItemUrls.map((url) => (
             <Route

@@ -6,7 +6,8 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#764abc'
+      /** (76, 4a, bc) + (86, d4, 6b) - (76, 4a, bc) */
+      main: '#9b442c'
     },
     react: {
       main: '#61dafb'
