@@ -14,7 +14,7 @@ export const usePageContext = () => {
   return context;
 };
 
-export const PageContainer = (props) => {
+export const Page = (props) => {
   const { children } = props;
   const {
     value: isDrawerOpen,
@@ -48,7 +48,7 @@ export const PageContainer = (props) => {
                 xs: '56px',
                 sm: '64px',
               },
-              '& > .MuiBox-root, & > .MuiPaper-root': {
+              '& > .MuiTypography-root, & > .MuiBox-root, & > .MuiPaper-root': {
                 my: {
                   xs: '24px',
                   sm: '32px',

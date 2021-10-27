@@ -6,7 +6,7 @@ import { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { HomePage } from 'src/containers/home-page';
-import { PageContainer } from 'src/containers/page-container';
+import { Page} from 'src/containers/page';
 import { theme } from 'src/lib/mui';
 import { pageItemUrls } from 'src/lib/pages';
 import { usePageViews } from 'src/redux/pages/hooks';
@@ -15,7 +15,7 @@ import { store } from 'src/redux/store';
 export const PageSwitch = () => {
   usePageViews();
   return (
-    <PageContainer>
+    <Page>
       <Switch>
         <Suspense fallback={'TODO use skeleton'}>
           {pageItemUrls.map((url) => (
@@ -29,7 +29,7 @@ export const PageSwitch = () => {
           <Route path="/" component={HomePage} />
         </Suspense>
       </Switch>
-    </PageContainer>
+    </Page>
   );
 };
 

@@ -6,22 +6,16 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: /** 露草色 */ '#3d87c3',
+      main: '#764abc'
     },
-    secondary: {
-      main: /** 木賊色 */ '#40684f',
+    react: {
+      main: '#61dafb'
     },
-    error: {
-      main: /** 茜色 */ '#b13546',
+    redux: {
+      main: '#764abc'
     },
-    warning: {
-      main: /** 躑躅色 */ '#dc4473',
-    },
-    info: {
-      main: /** 向日葵色 */ '#ffba20',
-    },
-    success: {
-      main: /** 菫色 */ '#654e99',
+    saga: {
+      main: '#86d46b'
     },
   },
   typography: {

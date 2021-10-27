@@ -3,7 +3,7 @@ import { Box, IconButton, List, ListItem, ListItemText } from '@mui/material';
 import { ClickableComponentWithPopover } from 'src/components/feedback/popover';
 import { AppBar } from 'src/components/surfaces/app-bar';
 import { Logo } from 'src/containers/logo';
-import { usePageContext } from 'src/containers/page-container';
+import { usePageContext } from 'src/containers/page';
 import { useMediaQueries } from 'src/lib/mui';
 import { useNotifications } from 'src/redux/notifications/hooks';
 

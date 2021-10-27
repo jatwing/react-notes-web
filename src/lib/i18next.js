@@ -9,20 +9,12 @@ import {
 } from 'src/redux/i18n/slice';
 import { store } from 'src/redux/store';
 
-/** localize */
-const localize = (i18n) => (texts) => {
-  if (!texts) {
-    return '';
-  }
-  return texts?.[i18n.language] || texts?.[i18n.options.fallbackLng] || '';
-};
+
+/** configurations */
+const languages = ['en-US', 'zh-TW'];
+const namespaces = ['translation'];
 
 // TODO delete this section
-/** configurations */
-export const languages = ['en-US', 'zh-TW'];
-const namespaces = ['translation'];
-const fallbackLng = languages[0];
-const defaultNS = namespaces[0];
 const resources = {
   'en-US': {
     translation: {
@@ -38,23 +30,17 @@ const options = {
   debug: process.env.NODE_ENV === 'development',
   /** languages */
   supportedLngs: languages,
-  fallbackLng,
+  fallbackLng: 'en-US',
   load: 'currentOnly',
   /** namespaces */
   ns: namespaces,
-  defaultNS,
-  fallbackNS: defaultNS,
+  defaultNS: 'translation',
+  fallbackNS: 'translation',
   /** resources */
   resources,
   /** translation defaults */
   interpolation: {
     escapeValue: false,
-  },
-  /** react i18next */
-  // TODO delete react settings
-  react: {
-    bindI18nStore: 'added',
-    useSuspense: false,
   },
 };
 
@@ -76,11 +62,18 @@ const callback = async (error, t) => {
   store.dispatch(resourcesAdded(i18n.t.bind(i18n)));
 };
 
+const localize = (i18n) => (texts) => {
+  if (!texts) {
+    return '';
+  }
+  return texts?.[i18n.language] || texts?.[i18n.options.fallbackLng] || '';
+};
+
 i18n.on('initialized', () => {
   store.dispatch(instanceInitialized(localize(i18n)));
 });
 
-i18n.on('languageChanged', (_) => {
+i18n.on('languageChanged', () => {
   store.dispatch(
     languageChanged({
       t: i18n.t.bind(i18n),
