@@ -22,14 +22,15 @@ const disciplines = {
   'src/pages/advanced-guides': 'react',
   'src/pages/hooks': 'react',
   'src/pages/redux-essentials': 'redux',
-  'src/pages/beginner-tutorial': 'redux-saga',
+  'src/pages/beginner-tutorial': 'saga',
 };
 const getPageFileTree = (path, discipline = '') => {
   const filename = basename(path);
+  const subDiscipline = disciplines[path] || discipline;
   if (statSync(path).isDirectory()) {
     const children = readdirSync(path)
       .map((childFilename) =>
-        getPageFileTree(path + '/' + childFilename, discipline)
+        getPageFileTree(path + '/' + childFilename, subDiscipline)
       )
       .filter((child) => !!child);
     if (!children.length) {
@@ -40,7 +41,7 @@ const getPageFileTree = (path, discipline = '') => {
       path,
       pathType: 'directory',
       children,
-      discipline: disciplines[path] || discipline,
+      discipline: subDiscipline,
     };
   } else if (statSync(path).isFile()) {
     const isIndexFile = /^index.(js|jsx|ts|tsx)$/.test(filename);
