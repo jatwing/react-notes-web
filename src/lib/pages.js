@@ -1,6 +1,8 @@
 import { pageFileTree } from './preval';
 
-/** tree */
+/** tree traversal dfs */
+// TODO the callback return  === false, should end the recursion.
+
 export const traverse = (node, callback = null) => {
   if (!node) {
     return;
@@ -18,6 +20,9 @@ const getPageItemTree = (pageFileTree) => {
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
   traverse(pageItemTree, (node) => {
     node.url = node.path.substring(9) || '/';
+    if (node.url === '/') {
+      node.color = 'primary.dark';
+    }
     if (node.pathType !== 'directory') {
       node.type = null;
     } else if (node.children.some((child) => child.isIndexFile)) {
@@ -36,6 +41,7 @@ const getPageItemTree = (pageFileTree) => {
         );
       }
       node.children = null;
+      node.color = node.discipline ? `${node.discipline}.dark` : 'primary.dark';
     } else if (node.children.some((child) => child.pathType === 'directory')) {
       node.type = 'list';
     }

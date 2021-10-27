@@ -5,26 +5,26 @@ import { createTheme, useTheme } from '@mui/material/styles';
 export const theme = createTheme({
   palette: {
     mode: 'light',
-    primary: {
-      /** (76, 4a, bc) + (86, d4, 6b) - (76, 4a, bc) */
-      main: '#9b442c',
-      light: '#d07156',
-      dark: '#671702',
-    },
     react: {
-      main: '#61dafb',
+      main: '#61dafb', /** rgb(97, 218, 251) */
       light: '#9affff',
       dark: '#10a8c8',
     },
     redux: {
-      main: '#764abc',
+      main: '#764abc', /** rgb(118, 74, 188) */
       light: '#a877ef',
       dark: '#441e8b',
     },
     saga: {
-      main: '#86d46b',
+      main: '#86d46b', /** rgb(134, 212, 107) */
       light: '#b9ff9b',
       dark: '#54a23d',
+    },
+    primary: {
+      /** (97, 218, 251) - (134, 212, 107) = (118, 74, 188) - (155, 68, 44) */
+      main: '#9b442c', /** rgb(155, 68, 44) */
+      light: '#d07156',
+      dark: '#671702',
     },
   },
   typography: {

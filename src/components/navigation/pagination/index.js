@@ -13,7 +13,7 @@ export const SimplePagination = (props) => {
       {!previousPage ? (
         <Box
           sx={{
-            flexGrow: '1',
+            flex: '1 0',
             maxWidth: '50%',
             mr: '16px',
           }}
@@ -22,7 +22,7 @@ export const SimplePagination = (props) => {
         <LinkBase
           href={previousPage.url ?? '/'}
           sx={{
-            flexGrow: '1',
+            flex: '1 0',
             maxWidth: '50%',
             mr: '16px',
           }}
@@ -62,7 +62,7 @@ export const SimplePagination = (props) => {
       {!nextPage ? (
         <Box
           sx={{
-            flexGrow: '1',
+            flex: '1 0',
             maxWidth: '50%',
           }}
         />
@@ -70,7 +70,7 @@ export const SimplePagination = (props) => {
         <LinkBase
           href={nextPage.url ?? ''}
           sx={{
-            flexGrow: '1',
+            flex: '1 0',
             maxWidth: '50%',
           }}
         >

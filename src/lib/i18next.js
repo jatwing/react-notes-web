@@ -41,6 +41,11 @@ const options = {
   interpolation: {
     escapeValue: false,
   },
+  /** react i18next */
+  react: {
+    bindI18nStore: 'added',
+    useSuspense: false,
+  },
 };
 
 const callback = async (error, t) => {

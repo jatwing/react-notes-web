@@ -19,6 +19,10 @@ const pagesSlice = createSlice({
     [pagesTranslated]: (state, action) => {
       const t = action.payload;
       traverse(state.entities, (node) => {
+        if (node.filename === 'pages') {
+          node.name = t('home');
+          return;
+        }
         node.name = t(node.filename.replaceAll('-', '_'));
       });
     },
@@ -65,4 +69,28 @@ export const selectSelectedPages = (state) => {
     }
   });
   return selectedPages;
+};
+
+export const selectAdjacentPages = (state) => {
+  let previousPage = null;
+  let nextPage = null;
+  let isMatched = false;
+  traverse(state.pages.entities, (node) => {
+    if (node.type !== 'item' && node.url !== '/') {
+      return;
+    }
+    if (isMatched && nextPage) {
+      return;
+    }
+    if (isMatched) {
+      nextPage = node;
+      return;
+    }
+    if (node.isMatched) {
+      isMatched = true;
+    } else {
+      previousPage = node;
+    }
+  });
+  return [previousPage, nextPage];
 };
