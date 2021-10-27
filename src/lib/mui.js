@@ -7,16 +7,24 @@ export const theme = createTheme({
     mode: 'light',
     primary: {
       /** (76, 4a, bc) + (86, d4, 6b) - (76, 4a, bc) */
-      main: '#9b442c'
+      main: '#9b442c',
+      light: '#d07156',
+      dark: '#671702',
     },
     react: {
-      main: '#61dafb'
+      main: '#61dafb',
+      light: '#9affff',
+      dark: '#10a8c8',
     },
     redux: {
-      main: '#764abc'
+      main: '#764abc',
+      light: '#a877ef',
+      dark: '#441e8b',
     },
     saga: {
-      main: '#86d46b'
+      main: '#86d46b',
+      light: '#b9ff9b',
+      dark: '#54a23d',
     },
   },
   typography: {

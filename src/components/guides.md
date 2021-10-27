@@ -11,6 +11,8 @@
 
 2. the function implemnet detail may be hiddren from them
 
+3. actually they are aware of theme object.
+
 ## About containers, no pure.
 
 1. have to slightly modify the css

@@ -9,7 +9,6 @@ import {
 } from 'src/redux/i18n/slice';
 import { store } from 'src/redux/store';
 
-
 /** configurations */
 const languages = ['en-US', 'zh-TW'];
 const namespaces = ['translation'];

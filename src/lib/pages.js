@@ -20,8 +20,6 @@ const getPageItemTree = (pageFileTree) => {
     node.url = node.path.substring(9) || '/';
     if (node.pathType !== 'directory') {
       node.type = null;
-      node.codes = null;
-      node.children = null;
     } else if (node.children.some((child) => child.isIndexFile)) {
       node.type = 'item';
       node.codes = [];
@@ -40,7 +38,6 @@ const getPageItemTree = (pageFileTree) => {
       node.children = null;
     } else if (node.children.some((child) => child.pathType === 'directory')) {
       node.type = 'list';
-      node.codes = null;
     }
   });
   return pageItemTree;

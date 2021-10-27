@@ -4,9 +4,14 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import { HomePage } from 'src/containers/home-page';
-import { Page} from 'src/containers/page';
+import { Page } from 'src/containers/page';
 import { theme } from 'src/lib/mui';
 import { pageItemUrls } from 'src/lib/pages';
 import { usePageViews } from 'src/redux/pages/hooks';
@@ -16,9 +21,9 @@ export const PageSwitch = () => {
   usePageViews();
   return (
     <Page>
-      <Switch>
-        <Route exact={true} path="/" component={HomePage} />
-        <Suspense fallback={'TODO use skeleton'}>
+      <Suspense fallback={'TODO use skeleton'}>
+        <Switch>
+          <Route exact={true} path="/" component={HomePage} />
           {pageItemUrls.map((url) => (
             <Route
               exact={true}
@@ -27,9 +32,9 @@ export const PageSwitch = () => {
               key={url}
             />
           ))}
-          <Route path="/" component={HomePage} />
-        </Suspense>
-      </Switch>
+          <Redirect to="/" />
+        </Switch>
+      </Suspense>
     </Page>
   );
 };
@@ -39,6 +44,7 @@ export const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+
         <Router>
           <PageSwitch />
         </Router>

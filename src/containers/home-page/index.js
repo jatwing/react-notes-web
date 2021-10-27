@@ -8,7 +8,7 @@ export const HomePage = () => {
   return (
     <>
       {'us this page for testing'}
-      { ' TODO delete this container, move to app.js'}
+      {' TODO delete this container, move to app.js'}
       <button
         onClick={() => {
           i18n.changeLanguage('en-US').then(() => {

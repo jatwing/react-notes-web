@@ -6,6 +6,7 @@ import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
 import { useToggle } from 'src/lib/react';
+import { Pagination } from 'src/containers/pagination';
 
 const PageContext = createContext({});
 
@@ -59,6 +60,7 @@ export const Page = (props) => {
             <Breadcrumbs />
             <Box children={children} component="article" />
             <Codes />
+            <Pagination />
           </Container>
           <Divider />
           <Footer />
