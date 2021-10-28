@@ -1,18 +1,26 @@
 import { pageFileTree } from './preval';
 
-/** tree traversal dfs */
-// TODO the callback return  === false, should end the recursion.
-
-export const traverse = (node, callback = null) => {
-  if (!node) {
+/** depth first search */
+export const traverse = (node, callback, isFalsityPropagated = false) => {
+  if (!node || !callback) {
     return;
   }
-  if (callback) {
-    callback(node);
+  /** false literal returned by callback() terminates this function */
+  if (callback(node) === false) {
+    return false;
   }
-  node?.children?.forEach((child) => {
-    traverse(child, callback);
-  });
+  if (!node.children) {
+    return;
+  }
+  for (const child of node.children) {
+    /** false literal returned by traverse() terminates this function */
+    if (
+      traverse(child, callback, isFalsityPropagated) === false &&
+      isFalsityPropagated
+    ) {
+      return false;
+    }
+  }
 };
 
 /** page item tree */
@@ -20,9 +28,6 @@ const getPageItemTree = (pageFileTree) => {
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
   traverse(pageItemTree, (node) => {
     node.url = node.path.substring(9) || '/';
-    if (node.url === '/') {
-      node.color = 'primary.dark';
-    }
     if (node.pathType !== 'directory') {
       node.type = null;
     } else if (node.children.some((child) => child.isIndexFile)) {
@@ -41,7 +46,8 @@ const getPageItemTree = (pageFileTree) => {
         );
       }
       node.children = null;
-      node.color = node.discipline ? `${node.discipline}.dark` : 'primary.dark';
+      node.color = node.discipline ? `${node.discipline}.dark` : '';
+      return false;
     } else if (node.children.some((child) => child.pathType === 'directory')) {
       node.type = 'list';
     }

@@ -19,11 +19,11 @@ const pagesSlice = createSlice({
     [pagesTranslated]: (state, action) => {
       const t = action.payload;
       traverse(state.entities, (node) => {
-        if (node.filename === 'pages') {
+        if (node.url === '/') {
           node.name = t('home');
-          return;
+        } else {
+          node.name = t(node.filename.replaceAll('-', '_'));
         }
-        node.name = t(node.filename.replaceAll('-', '_'));
       });
     },
     [rankingsRead.settled]: (state, action) => {
@@ -53,11 +53,16 @@ export const selectPages = (state) => state.pages.entities;
 
 export const selectMatchedPage = (state) => {
   let matchedPage = null;
-  traverse(state.pages.entities, (node) => {
-    if (node.isMatched) {
-      matchedPage = node;
-    }
-  });
+  traverse(
+    state.pages.entities,
+    (node) => {
+      if (node.isMatched) {
+        matchedPage = node;
+        return false;
+      }
+    },
+    true
+  );
   return matchedPage;
 };
 
@@ -66,6 +71,8 @@ export const selectSelectedPages = (state) => {
   traverse(state.pages.entities, (node) => {
     if (node.isSelected) {
       selectedPages.push(node);
+    } else {
+      return false;
     }
   });
   return selectedPages;
@@ -73,24 +80,25 @@ export const selectSelectedPages = (state) => {
 
 export const selectAdjacentPages = (state) => {
   let previousPage = null;
+  let matchedPage = null;
   let nextPage = null;
-  let isMatched = false;
-  traverse(state.pages.entities, (node) => {
-    if (node.type !== 'item' && node.url !== '/') {
-      return;
-    }
-    if (isMatched && nextPage) {
-      return;
-    }
-    if (isMatched) {
-      nextPage = node;
-      return;
-    }
-    if (node.isMatched) {
-      isMatched = true;
-    } else {
-      previousPage = node;
-    }
-  });
+  traverse(
+    state.pages.entities,
+    (node) => {
+      if (node.type !== 'item' && node.url !== '/') {
+        return;
+      }
+      if (matchedPage) {
+        nextPage = node;
+        return false;
+      }
+      if (node.isMatched) {
+        matchedPage = node;
+      } else {
+        previousPage = node;
+      }
+    },
+    true
+  );
   return [previousPage, nextPage];
 };
