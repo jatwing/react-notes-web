@@ -2,7 +2,7 @@ import { Box, Card, Typography } from '@mui/material';
 import { LinkBase } from 'src/components/navigation/link';
 
 const PaginationCard = (props) => {
-  const { page, label } = props;
+  const { type, label, page } = props;
   if (!page) {
     return (
       <Box
@@ -19,6 +19,7 @@ const PaginationCard = (props) => {
       sx={{
         flex: '1 0',
         maxWidth: '50%',
+        ...(type === 'next' && { textAlign: 'right', ml: '16px' }),
       }}
     >
       <Card
@@ -42,7 +43,11 @@ const PaginationCard = (props) => {
           sx={{ color: 'text.secondary', mb: '4px' }}
         />
         <Typography
-          children={page.name ? `« ${page.name}` : '«'}
+          children={
+            (type === 'previous' ? '« ' : '') +
+            (page.name ?? '') +
+            (type === 'next' ? ' »' : '')
+          }
           variant="subtitle1"
           component="h1"
           sx={{
@@ -65,14 +70,14 @@ export const SimplePagination = (props) => {
       component="nav"
       sx={{
         display: 'flex',
-        '& > .MuiLink-root:nth-child(2)': {
-          textAlign: 'right',
-          ml: '16px'
-        },
       }}
     >
-      <PaginationCard page={previousPage} label={previousLabel} />
-      <PaginationCard page={nextPage} label={nextLabel} />
+      <PaginationCard
+        type="previous"
+        label={previousLabel}
+        page={previousPage}
+      />
+      <PaginationCard type="next" label={nextLabel} page={nextPage} />
     </Box>
   );
 };
