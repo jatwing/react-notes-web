@@ -95,7 +95,15 @@ export const ResponsiveDrawer = (props) => {
             </IconButton>
           )}
           <LinkBase href="/" onClick={onClose}>
-            <Button sx={{ color: 'text.secondary', p: '8px' }}>{logo}</Button>
+            <Button
+              color="inherit"
+              sx={{
+                color: 'text.secondary',
+                p: '8px',
+              }}
+            >
+              {logo}
+            </Button>
           </LinkBase>
         </Toolbar>
         <Divider />
