@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { ReactNotesIcon } from 'src/components/data-display/icons';
+import { ReactNotes } from 'src/components/data-display/icons';
 import { useProject } from 'src/redux/project/hooks';
 
 export const Logo = (props) => {
@@ -15,7 +15,7 @@ export const Logo = (props) => {
         alignItems: 'center',
       }}
     >
-      <ReactNotesIcon
+      <ReactNotes
         variant={variant}
         sx={{
           '&.MuiSvgIcon-root': {
