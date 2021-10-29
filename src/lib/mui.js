@@ -6,25 +6,25 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     react: {
-      main: '#61dafb', /** rgb(97, 218, 251) */
+      main: '#61dafb' /** rgb(97, 218, 251) */,
       light: '#9affff',
       dark: '#10a8c8',
     },
     redux: {
-      main: '#764abc', /** rgb(118, 74, 188) */
+      main: '#764abc' /** rgb(118, 74, 188) */,
       light: '#a877ef',
       dark: '#441e8b',
     },
     saga: {
-      main: '#89d96d', /** rgb(134, 212, 107) */  /** TODO use wrong value to fix */
-      light: '#b9ff9b',
-      dark: '#54a23d',
+      main: '#89d96d' /** rgb(137, 217, 109) */,
+      light: '#bcff9d',
+      dark: '#57a73f',
     },
     primary: {
-      /** (97, 218, 251) - (134, 212, 107) = (118, 74, 188) - (155, 68, 44) */
-      main: '#9b442c', /** rgb(155, 68, 44) */
-      light: '#d07156',
-      dark: '#671702',
+      /** (97, 218, 251) - (137, 217, 109) = (118, 74, 188) - (158, 73, 46) */
+      main: '#9e492e' /** rgb(158, 73, 46) */,
+      light: '#d37658',
+      dark: '#6a1d05',
     },
   },
   typography: {

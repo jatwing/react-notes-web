@@ -1,8 +1,10 @@
 import { SvgIcon } from '@mui/material';
+import { useTheme } from '@mui/styles';
 
-export const ReactNotesIcon  = (props) => {
+export const ReactNotesIcon = (props) => {
   const { variant, ...otherProps } = props;
   const isColorful = variant === 'colorful';
+  const theme = useTheme();
   return (
     <SvgIcon {...otherProps}>
       <path
@@ -11,7 +13,7 @@ export const ReactNotesIcon  = (props) => {
           strokeWidth: '8.792px',
           strokeLinecap: 'round',
           /** react blue, rgb(97, 218, 251), grayscale(186) */
-          stroke: isColorful ? '#61dafb' : 'currentColor',
+          stroke: isColorful ? theme.palette.react.main : 'currentColor',
           fill: 'none',
           /** (255 - 186) / 255 = 0.271 */
           opacity: isColorful ? '1' : '0.271',
@@ -22,11 +24,11 @@ export const ReactNotesIcon  = (props) => {
         style={{
           strokeWidth: '8.792px',
           strokeLinecap: 'round',
-          /** saga green, rgb(134, 212, 107), grayscale(177) */
-          stroke: isColorful ? '#86d46b' : 'currentColor',
+          /** saga green, rgb(137, 217, 109), grayscale(181) */
+          stroke: isColorful ? theme.palette.saga.main : 'currentColor',
           fill: 'none',
-          /** (255 - 177) / 255 = 0.306 */
-          opacity: isColorful ? '1' : '0.306',
+          /** (255 - 181) / 255 = 0.290 */
+          opacity: isColorful ? '1' : '0.290',
         }}
       />
       <path
@@ -35,7 +37,7 @@ export const ReactNotesIcon  = (props) => {
           strokeWidth: '8.792px',
           strokeLinecap: 'round',
           /** redux purple, rgb(118, 74, 188), grayscale(100) */
-          stroke: isColorful ? '#764abc' : 'currentColor',
+          stroke: isColorful ? theme.palette.redux.main : 'currentColor',
           fill: 'none',
           /** (255 - 100) / 255 = 0.608 */
           opacity: isColorful ? '1' : '0.608',
