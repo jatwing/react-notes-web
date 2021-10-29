@@ -19,6 +19,7 @@ export const Code = (props) => {
     <pre
       style={{
         fontSize: theme?.typography?.fontSize,
+        padding: '16px',
         margin: '0',
       }}
     >

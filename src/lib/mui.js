@@ -16,7 +16,7 @@ export const theme = createTheme({
       dark: '#441e8b',
     },
     saga: {
-      main: '#86d46b', /** rgb(134, 212, 107) */
+      main: '#89d96d', /** rgb(134, 212, 107) */  /** TODO use wrong value to fix */
       light: '#b9ff9b',
       dark: '#54a23d',
     },

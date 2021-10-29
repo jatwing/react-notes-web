@@ -1,21 +1,26 @@
-import { Card  } from '@mui/material';
+import { Card } from '@mui/material';
 import { Code } from 'src/components/data-display/code';
 import { useMatchedPage } from 'src/redux/pages/hooks';
-
-import { ReactNotes  } from 'src/components/data-display/icons';
+import { ReactNotes, React, Redux, Saga } from 'src/components/data-display/icons';
 
 export const Codes = () => {
   const matchedPage = useMatchedPage();
   const codes = matchedPage?.codes;
+
   let Icon = null;
-  console.log(matchedPage)
+  console.log(matchedPage);
 
   // page.discipline.
   //
   // display when larger than md
   //
-  Icon = ReactNotes;
 
+  Icon = Saga;
+
+  // switch
+  if (matchedPage?.discipline) {
+  //  Icon = Redux;
+  }
 
   return (
     <>
@@ -27,7 +32,7 @@ export const Codes = () => {
           sx={{
             position: 'relative',
             '&:hover .MuiSvgIcon-root, &:focus .MuiSvgIcon-root': {
-              color: 'text.secondary',
+              opacity: '0',
             },
           }}
         >
@@ -35,10 +40,11 @@ export const Codes = () => {
             sx={{
               width: '48px',
               height: '48px',
-              color: 'text.disabled',
+              color: 'action.focus',
               position: 'absolute',
-              right: '24px',
-              top: '24px',
+              right: '16px',
+              top: '16px',
+              transition: (theme) => theme.transitions.create('opacity'),
             }}
           />
           <Code code={code} />
