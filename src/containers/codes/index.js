@@ -1,27 +1,34 @@
 import { Card } from '@mui/material';
 import { Code } from 'src/components/data-display/code';
 import { useMatchedPage } from 'src/redux/pages/hooks';
-import { ReactNotes, React, Redux, Saga } from 'src/components/data-display/icons';
+import {
+  ReactNotes,
+  React,
+  Redux,
+  Saga,
+} from 'src/components/data-display/icons';
+
+const getDiscipline = (discipline) => {
+  switch (discipline) {
+    case 'react': {
+      return React;
+    }
+    case 'redux': {
+      return Redux;
+    }
+    case 'saga': {
+      return Saga;
+    }
+    default: {
+      return ReactNotes;
+    }
+  }
+};
 
 export const Codes = () => {
   const matchedPage = useMatchedPage();
   const codes = matchedPage?.codes;
-
-  let Icon = null;
-  console.log(matchedPage);
-
-  // page.discipline.
-  //
-  // display when larger than md
-  //
-
-  Icon = Saga;
-
-  // switch
-  if (matchedPage?.discipline) {
-  //  Icon = Redux;
-  }
-
+  const Discipline = getDiscipline(matchedPage?.discipline);
   return (
     <>
       {codes?.map((code) => (
@@ -36,7 +43,7 @@ export const Codes = () => {
             },
           }}
         >
-          <Icon
+          <Discipline
             sx={{
               width: '48px',
               height: '48px',

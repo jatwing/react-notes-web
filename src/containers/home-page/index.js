@@ -1,15 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { Markdown } from 'src/components/data-display/markdown';
 import { readmeMarkdown } from 'src/lib/preval';
-import { Saga } from 'src/components/data-display/icons'
 
 export const HomePage = () => {
   const { i18n } = useTranslation();
 
   return (
     <>
-      {'us this page for testing'}
-      <Saga variant="colorful"/>
 
       {' TODO delete this container, move to app.js'}
       <button
