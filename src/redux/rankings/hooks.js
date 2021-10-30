@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -16,8 +17,10 @@ export const useRankings = () => {
   const isSucceed = status === 'succeeded';
   const isFailed = status === 'failed';
   const dispatch = useDispatch();
-  if (isIdle) {
-    dispatch(rankingsRead());
-  }
+  useEffect(() => {
+    if (isIdle) {
+      dispatch(rankingsRead());
+    }
+  }, []);
   return { entities, isIdle, isLoading, isSucceed, isFailed, error };
 };

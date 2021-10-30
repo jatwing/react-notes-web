@@ -1,13 +1,14 @@
 import 'src/lib/i18next.js';
+
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom';
 import { HomePage } from 'src/containers/home-page';
 import { Page } from 'src/containers/page';
@@ -43,7 +44,6 @@ export const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-
         <Router>
           <PageSwitch />
         </Router>

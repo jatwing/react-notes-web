@@ -7,7 +7,6 @@ export const HomePage = () => {
 
   return (
     <>
-
       {' TODO delete this container, move to app.js'}
       <button
         onClick={() => {

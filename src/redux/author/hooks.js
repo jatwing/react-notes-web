@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { authorRead, selectEntity, selectError, selectStatus } from './slice';
@@ -11,8 +12,10 @@ export const useAuthor = () => {
   const isSucceed = status === 'succeeded';
   const isFailed = status === 'failed';
   const dispatch = useDispatch();
-  if (isIdle) {
-    dispatch(authorRead());
-  }
+  useEffect(() => {
+    if (isIdle) {
+      dispatch(authorRead());
+    }
+  }, []);
   return { entity, isIdle, isLoading, isSucceed, isFailed, error };
 };

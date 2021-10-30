@@ -89,4 +89,3 @@ i18n.on('languageChanged', () => {
 i18n.use(LanguageDetector).use(initReactI18next).init(options, callback);
 
 export default i18n;
-

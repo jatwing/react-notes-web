@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { projectRead, selectEntity, selectError, selectStatus } from './slice';
@@ -11,8 +12,10 @@ export const useProject = () => {
   const isSucceed = status === 'succeeded';
   const isFailed = status === 'failed';
   const dispatch = useDispatch();
-  if (isIdle) {
-    dispatch(projectRead());
-  }
+  useEffect(() => {
+    if (isIdle) {
+      dispatch(projectRead());
+    }
+  }, []);
   return { entity, isIdle, isLoading, isSucceed, isFailed, error };
 };

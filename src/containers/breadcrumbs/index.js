@@ -1,13 +1,10 @@
 import { Typography } from '@mui/material';
 import { Breadcrumbs as BreadcrumbsComponent } from 'src/components/navigation/breadcrumbs';
-import { useSelectedPages } from 'src/redux/pages/hooks';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'src/components/navigation/link';
+import { useSelectedPages } from 'src/redux/pages/hooks';
 
 export const Breadcrumbs = () => {
   const selectedPages = useSelectedPages();
-  const { t } = useTranslation();
-
   return (
     <BreadcrumbsComponent>
       {selectedPages.map((page) =>

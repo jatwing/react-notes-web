@@ -6,10 +6,10 @@ import { store } from 'src/redux/store';
 
 import {
   routeChanged,
+  selectAdjacentPages,
   selectMatchedPage,
   selectPages,
   selectSelectedPages,
-  selectAdjacentPages,
 } from './slice';
 
 export const usePages = () => {
@@ -25,8 +25,11 @@ export const useAdjacentPages = () => useSelector(selectAdjacentPages);
 
 export const usePageViews = () => {
   const location = useLocation();
+  const matchedPage = useMatchedPage();
   useEffect(() => {
     store.dispatch(routeChanged(location.pathname));
   }, [location]);
+  useEffect(() => {
+    //   document.title = matchedPage?.name ?? '';
+  }, [matchedPage]);
 };
-

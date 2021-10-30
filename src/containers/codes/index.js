@@ -1,14 +1,14 @@
 import { Card } from '@mui/material';
 import { Code } from 'src/components/data-display/code';
-import { useMatchedPage } from 'src/redux/pages/hooks';
 import {
-  ReactNotes,
   React,
+  ReactNotes,
   Redux,
   Saga,
 } from 'src/components/data-display/icons';
+import { useMatchedPage } from 'src/redux/pages/hooks';
 
-const getDiscipline = (discipline) => {
+const getDisciplineIcon = (discipline) => {
   switch (discipline) {
     case 'react': {
       return React;
@@ -28,7 +28,7 @@ const getDiscipline = (discipline) => {
 export const Codes = () => {
   const matchedPage = useMatchedPage();
   const codes = matchedPage?.codes;
-  const Discipline = getDiscipline(matchedPage?.discipline);
+  const DisciplineIcon = getDisciplineIcon(matchedPage?.discipline);
   return (
     <>
       {codes?.map((code) => (
@@ -43,7 +43,7 @@ export const Codes = () => {
             },
           }}
         >
-          <Discipline
+          <DisciplineIcon
             sx={{
               width: '48px',
               height: '48px',

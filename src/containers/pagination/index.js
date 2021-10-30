@@ -1,5 +1,5 @@
-import { SimplePagination } from 'src/components/navigation/pagination';
 import { useTranslation } from 'react-i18next';
+import { SimplePagination } from 'src/components/navigation/pagination';
 import { useAdjacentPages } from 'src/redux/pages/hooks';
 
 export const Pagination = () => {

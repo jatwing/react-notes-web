@@ -5,8 +5,8 @@ import { Codes } from 'src/containers/codes';
 import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
 import { NavigationDrawer } from 'src/containers/navigation-drawer';
-import { useToggle } from 'src/lib/react';
 import { Pagination } from 'src/containers/pagination';
+import { useToggle } from 'src/lib/react';
 
 const PageContext = createContext({});
 
