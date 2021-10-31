@@ -18,6 +18,9 @@ import { useToggle } from 'src/lib/react';
 
 const ListItemLink = (props) => {
   const { item, onClose } = props;
+  if (item.url === '/') {
+    return <></>;
+  }
   return (
     <LinkBase href={item.url} onClick={onClose}>
       <ListItemButton selected={item.isSelected}>

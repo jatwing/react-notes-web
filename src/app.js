@@ -10,25 +10,25 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { HomePage } from 'src/containers/home-page';
 import { Page } from 'src/containers/page';
 import { theme } from 'src/lib/mui';
 import { pageItemUrls } from 'src/lib/pages';
 import { usePageViews } from 'src/redux/pages/hooks';
 import { store } from 'src/redux/store';
 
-export const PageSwitch = () => {
+const PageSwitch = () => {
   usePageViews();
   return (
     <Page>
       <Suspense fallback={'TODO use skeleton'}>
         <Switch>
-          <Route exact={true} path="/" component={HomePage} />
           {pageItemUrls.map((url) => (
             <Route
               exact={true}
               path={url}
-              component={lazy(() => import(`src/pages${url}/index.js`))}
+              component={lazy(() =>
+                import(`src/pages${url === '/' ? '' : url}/index.js`)
+              )}
               key={url}
             />
           ))}

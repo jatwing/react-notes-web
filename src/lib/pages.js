@@ -27,29 +27,40 @@ export const traverse = (node, callback, isFalsityPropagated = false) => {
 const getPageItemTree = (pageFileTree) => {
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
   traverse(pageItemTree, (node) => {
-    node.url = node.path.substring(9) || '/';
-    if (node.pathType !== 'directory') {
-      node.type = null;
-    } else if (node.children.some((child) => child.isIndexFile)) {
-      node.type = 'item';
-      node.codes = [];
-      /** add codes of slice files in directory and subdirectory */
-      traverse(node, (childNode) => {
-        if (childNode.isSliceFile) {
-          node.codes.push(childNode.content);
-        }
-      });
-      /** add code of index file in directory */
-      if (node.codes.length === 0) {
-        node.codes.push(
-          node.children.find((child) => child.isIndexFile).content
-        );
+    if (node.pathType === 'file') {
+      if (node.isIndexFile) {
+        node.type = 'item';
+        node.url = /^src\/pages(.*)\/index.js$/.exec(node.path)[1] || '/';
+        node.codes = [node.content];
+      } else {
+        node.type = null;
       }
-      node.children = null;
-      node.color = node.discipline ? `${node.discipline}.dark` : '';
-      return false;
-    } else if (node.children.some((child) => child.pathType === 'directory')) {
-      node.type = 'list';
+    } else if (node.pathType === 'directory') {
+      if (node.children.some((child) => child.pathType === 'directory')) {
+        node.type = 'list';
+        node.url = /^src\/pages(.*)$/.exec(node.path)[1] || '/';
+      } else if (node.children.some((child) => child.isIndexFile)) {
+        node.type = 'item';
+        node.url = /^src\/pages(.*)$/.exec(node.path)[1] || '/';
+        node.codes = [];
+        /** add codes of slice files in directory and subdirectory */
+        traverse(node, (childNode) => {
+          if (childNode.isSliceFile) {
+            node.codes.push(childNode.content);
+          }
+        });
+        /** add code of index file in directory */
+        if (node.codes.length === 0) {
+          node.codes.push(
+            node.children.find((child) => child.isIndexFile).content
+          );
+        }
+        node.children = null;
+        return false;
+      } else {
+        node.type = null;
+        node.children = null;
+      }
     }
   });
   return pageItemTree;
