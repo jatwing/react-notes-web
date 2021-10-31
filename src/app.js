@@ -22,13 +22,17 @@ const PageSwitch = () => {
     <Page>
       <Suspense fallback={'TODO use skeleton'}>
         <Switch>
+          <Route
+            exact={true}
+            path="/"
+            component={lazy(() => import('src/pages/index.js'))}
+            key="/"
+          />
           {pageItemUrls.map((url) => (
             <Route
               exact={true}
               path={url}
-              component={lazy(() =>
-                import(`src/pages${url === '/' ? '' : url}/index.js`)
-              )}
+              component={lazy(() => import(`src/pages${url}/index.js`))}
               key={url}
             />
           ))}

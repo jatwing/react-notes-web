@@ -18,9 +18,6 @@ import { useToggle } from 'src/lib/react';
 
 const ListItemLink = (props) => {
   const { item, onClose } = props;
-  if (item.url === '/') {
-    return <></>;
-  }
   return (
     <LinkBase href={item.url} onClick={onClose}>
       <ListItemButton selected={item.isSelected}>
@@ -114,9 +111,9 @@ export const ResponsiveDrawer = (props) => {
           {items?.children.map((child) =>
             child.type === 'list' ? (
               <NestedList list={child} onClose={onClose} key={child.url} />
-            ) : (
+            ) : child.type === 'item' ? (
               <ListItemLink item={child} onClose={onClose} key={child.url} />
-            )
+            ) : null
           )}
         </List>
       </MuiDrawer>

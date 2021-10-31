@@ -6,6 +6,7 @@ import { usePages } from 'src/redux/pages/hooks';
 export const NavigationDrawer = () => {
   const { isDrawerOpen, setDrawerClosed } = usePageContext();
   const pages = usePages();
+  console.log(pages);
   return (
     <ResponsiveDrawer
       open={isDrawerOpen}

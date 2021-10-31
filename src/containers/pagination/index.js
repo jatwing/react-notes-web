@@ -13,6 +13,10 @@ const getDisciplineColor = (discipline) => {
 export const Pagination = () => {
   const { t } = useTranslation();
   const [previousPage, nextPage] = useAdjacentPages();
+
+
+  
+
   return (
     <SimplePagination
       previousLabel={t('previous')}

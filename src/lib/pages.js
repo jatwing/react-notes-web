@@ -27,40 +27,45 @@ export const traverse = (node, callback, isFalsityPropagated = false) => {
 const getPageItemTree = (pageFileTree) => {
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
   traverse(pageItemTree, (node) => {
-    if (node.pathType === 'file') {
-      if (node.isIndexFile) {
-        node.type = 'item';
-        node.url = /^src\/pages(.*)\/index.js$/.exec(node.path)[1] || '/';
-        node.codes = [node.content];
-      } else {
-        node.type = null;
-      }
-    } else if (node.pathType === 'directory') {
-      if (node.children.some((child) => child.pathType === 'directory')) {
-        node.type = 'list';
-        node.url = /^src\/pages(.*)$/.exec(node.path)[1] || '/';
-      } else if (node.children.some((child) => child.isIndexFile)) {
-        node.type = 'item';
-        node.url = /^src\/pages(.*)$/.exec(node.path)[1] || '/';
-        node.codes = [];
-        /** add codes of slice files in directory and subdirectory */
-        traverse(node, (childNode) => {
-          if (childNode.isSliceFile) {
-            node.codes.push(childNode.content);
+    if (node.pathType === 'directory') {
+      node.url = /^src\/pages(.*)$/.exec(node.path)[1] || '/';
+      const hasIndexChild = node.children.some((child) => child.isIndexFile);
+      const hasDirectoryChild = node.children.some(
+        (child) => child.pathType === 'directory'
+      );
+      if (hasIndexChild) {
+        if (hasDirectoryChild) {
+          node.type = /** tolerant */ 'list';
+          node.codes = [
+            node.children.find((child) => child.isIndexFile).content,
+          ];
+        } else {
+          node.type = 'item';
+          node.codes = [];
+          /** add codes of slice files in directory and subdirectory */
+          traverse(node, (childNode) => {
+            if (childNode.isSliceFile) {
+              node.codes.push(childNode.content);
+            }
+          });
+          /** add code of index file in directory */
+          if (node.codes.length === 0) {
+            node.codes.push(
+              node.children.find((child) => child.isIndexFile).content
+            );
           }
-        });
-        /** add code of index file in directory */
-        if (node.codes.length === 0) {
-          node.codes.push(
-            node.children.find((child) => child.isIndexFile).content
-          );
+          node.children = null;
         }
-        node.children = null;
-        return false;
       } else {
-        node.type = null;
-        node.children = null;
+        if (hasDirectoryChild) {
+          node.type = 'list';
+        } else {
+          node.type = null;
+        }
       }
+    } else if (node.pathType === 'file') {
+      node.type = null;
+      node.codes = null;
     }
   });
   return pageItemTree;
