@@ -4,17 +4,13 @@ import { useAdjacentPages } from 'src/redux/pages/hooks';
 
 const getDisciplineColor = (discipline) => {
   switch (discipline) {
-    case 'react': {
-      return 'react.dark';
-    }
-    case 'redux': {
-      return 'redux.dark';
-    }
+    case 'react':
+    case 'redux':
     case 'saga': {
-      return 'saga.dark';
+      return discipline;
     }
     default: {
-      return 'primary.dark';
+      return 'primary';
     }
   }
 };

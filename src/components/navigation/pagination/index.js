@@ -1,4 +1,4 @@
-import { Box, Card, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import { LinkBase } from 'src/components/navigation/link';
 
 const PaginationCard = (props) => {
@@ -9,29 +9,36 @@ const PaginationCard = (props) => {
         sx={{
           flex: '1 0',
           maxWidth: '50%',
+          ...(type === 'previous' && { mr: '16px' }),
         }}
       />
     );
   }
+  const color = page.color || 'primary';
   return (
     <LinkBase
       href={page.url ?? '/'}
       sx={{
         flex: '1 0',
         maxWidth: '50%',
-        ...(type === 'next' && { textAlign: 'right', ml: '16px' }),
+        ...(type === 'previous' && { mr: '16px' }),
       }}
     >
-      <Card
+      <Button
         variant="outlined"
+        color={color}
         sx={{
           height: '100%',
-          color: page.color ?? 'primary.main',
+          width: '100%',
+          display: 'block',
+          textAlign: type === 'previous' ? 'left' : 'right',
+          textTransform: 'none',
+          borderColor: 'text.disabled',
           p: '16px',
-          '&:hover': {
-            borderColor: 'currentcolor',
+          '&:hover, &:focus': {
+            borderColor: `${color}.dark`,
             '& > .MuiTypography-subtitle1': {
-              color: 'currentcolor',
+              color: `${color}.dark`,
             },
           },
         }}
@@ -55,7 +62,7 @@ const PaginationCard = (props) => {
             color: 'text.primary',
           }}
         />
-      </Card>
+      </Button>
     </LinkBase>
   );
 };
