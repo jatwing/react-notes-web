@@ -10,6 +10,7 @@ export const useAuthor = () => {
   const isIdle = status === 'idle';
   const isLoading = status === 'loading';
   const isSucceed = status === 'succeeded';
+
   const isFailed = status === 'failed';
   const dispatch = useDispatch();
   useEffect(() => {

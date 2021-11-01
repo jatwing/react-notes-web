@@ -7,6 +7,7 @@ import {
   Saga,
 } from 'src/components/data-display/icons';
 import { useMatchedPage } from 'src/redux/pages/hooks';
+import { SkeletonRectangular  } from 'src/components/feedback/skeleton'
 
 const getDisciplineIcon = (discipline) => {
   switch (discipline) {
@@ -29,34 +30,34 @@ export const Codes = () => {
   const matchedPage = useMatchedPage();
   const codes = matchedPage?.codes;
   const DisciplineIcon = getDisciplineIcon(matchedPage?.discipline);
-  return (
-    <>
-      {codes?.map((code) => (
-        <Card
-          component="aside"
-          variant="outlined"
-          key={code}
-          sx={{
-            position: 'relative',
-            '&:hover .MuiSvgIcon-root, &:focus .MuiSvgIcon-root': {
-              opacity: '0',
-            },
-          }}
-        >
-          <DisciplineIcon
-            sx={{
-              width: '48px',
-              height: '48px',
-              color: 'action.focus',
-              position: 'absolute',
-              right: '16px',
-              top: '16px',
-              transition: (theme) => theme.transitions.create('opacity'),
-            }}
-          />
-          <Code code={code} />
-        </Card>
-      ))}
-    </>
-  );
+  if (!codes) {
+    return <SkeletonRectangular />;
+  }
+
+  return codes?.map((code) => (
+    <Card
+      component="aside"
+      variant="outlined"
+      key={code}
+      sx={{
+        position: 'relative',
+        '&:hover .MuiSvgIcon-root, &:focus .MuiSvgIcon-root': {
+          opacity: '0',
+        },
+      }}
+    >
+      <DisciplineIcon
+        sx={{
+          width: '48px',
+          height: '48px',
+          color: 'action.focus',
+          position: 'absolute',
+          right: '16px',
+          top: '16px',
+          transition: (theme) => theme.transitions.create('opacity'),
+        }}
+      />
+      <Code code={code} />
+    </Card>
+  ));
 };

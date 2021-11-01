@@ -13,6 +13,8 @@
 
 3. actually they are aware of theme object.
 
+4. while dealing skeleton, components still do not know the detail about the data status.
+
 ## About containers, no pure.
 
 1. have to slightly modify the css

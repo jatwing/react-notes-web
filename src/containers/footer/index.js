@@ -6,6 +6,7 @@ import { Footer as FooterComponent } from 'src/components/layout/footer';
 import { Link, linkStyle } from 'src/components/navigation/link';
 import { useAuthor } from 'src/redux/author/hooks';
 import { useProject } from 'src/redux/project/hooks';
+import { SkeletonText } from 'src/components/feedback/skeleton';
 
 export const Footer = () => {
   const project = useProject();
@@ -24,7 +25,15 @@ export const Footer = () => {
         <ListItemText secondary={t('stack_overflow')} />
       </Link>
     </List>
-  ) : null;
+  ) : (
+    <List>
+      <ListItemText primary={<SkeletonText variant="primary" />} />
+      <ListItemText secondary={<SkeletonText variant="secondary" />} />
+      <ListItemText secondary={<SkeletonText variant="secondary" />} />
+      <ListItemText secondary={<SkeletonText variant="secondary" />} />
+    </List>
+  );
+
   const projectColumn = project.isSucceed ? (
     <List>
       <ListItemText primary={t('project')} />
@@ -47,11 +56,21 @@ export const Footer = () => {
         <ListItemText secondary={t('license')} />
       </Link>
     </List>
-  ) : null;
+  ) : (
+    <List>
+      <ListItemText primary={<SkeletonText variant="primary" />} />
+      <ListItemText secondary={<SkeletonText variant="secondary" />} />
+      <ListItemText secondary={<SkeletonText variant="secondary" />} />
+      <ListItemText secondary={<SkeletonText variant="secondary" />} />
+    </List>
+  );
+
   const copyright = project.isSucceed ? (
     <Typography>{project.entity.copyright}</Typography>
   ) : (
-    ''
+    <Typography>
+      <SkeletonText variant="primary" />
+    </Typography>
   );
   return (
     <FooterComponent

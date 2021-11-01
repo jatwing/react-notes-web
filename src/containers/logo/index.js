@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ReactNotes } from 'src/components/data-display/icons';
 import { useProject } from 'src/redux/project/hooks';
+import { SkeletonText } from 'src/components/feedback/skeleton';
 
 export const Logo = (props) => {
   const { variant, sx } = props;
@@ -35,7 +36,7 @@ export const Logo = (props) => {
           ml: '16px',
         }}
       >
-        {project.isSucceed ? project.entity.name : ''}
+        {project?.entity?.name || <SkeletonText variant="word" />}
       </Typography>
     </Box>
   );

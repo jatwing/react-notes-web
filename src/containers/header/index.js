@@ -6,6 +6,7 @@ import { Logo } from 'src/containers/logo';
 import { usePageContext } from 'src/containers/page';
 import { useMediaQueries } from 'src/lib/mui';
 import { useNotifications } from 'src/redux/notifications/hooks';
+import { SkeletonText } from 'src/components/feedback/skeleton'
 
 const LeftSlot = () => {
   const { isLarge } = useMediaQueries();
@@ -42,7 +43,13 @@ const RightSlot = () => {
               ))}
             </List>
           ) : (
-            <></>
+            <List>
+              <ListItem>
+                <ListItemText>
+                  <SkeletonText variant="primary" />
+                </ListItemText>
+              </ListItem>
+            </List>
           )
         }
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
