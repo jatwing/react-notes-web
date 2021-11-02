@@ -1,7 +1,7 @@
-import { useTranslation } from 'src/redux/i18n/hooks';
 import { SkeletonText } from 'src/components/feedback/skeleton';
 import { SimplePagination } from 'src/components/navigation/pagination';
-import { usePages, useAdjacentPages } from 'src/redux/pages/hooks';
+import { useTranslation } from 'src/redux/i18n/hooks';
+import { useAdjacentPages, usePages } from 'src/redux/pages/hooks';
 
 const getDisciplineColor = (discipline) => {
   switch (discipline) {

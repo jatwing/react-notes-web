@@ -7,12 +7,12 @@ import {
   watchTranslationAccessible,
 } from 'src/redux/i18n/sagas';
 import {
+  i18nReducer,
   instanceInitialized,
   languageChanged,
   localizationAccessible,
   resourcesAdded,
   translationAccessible,
-  i18nReducer,
 } from 'src/redux/i18n/slice';
 import { watchNotificationsRead } from 'src/redux/notifications/sagas';
 import {

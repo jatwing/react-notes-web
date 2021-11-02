@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ReactNotes } from 'src/components/data-display/icons';
-import { useProject } from 'src/redux/project/hooks';
 import { SkeletonText } from 'src/components/feedback/skeleton';
+import { useProject } from 'src/redux/project/hooks';
 
 export const Logo = (props) => {
   const { variant, sx } = props;

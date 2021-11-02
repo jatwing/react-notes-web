@@ -10,15 +10,16 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import { Fallback } from 'src/containers/fallback';
 import { Page } from 'src/containers/page';
 import { theme } from 'src/lib/mui';
 import { pageItemUrls } from 'src/lib/pages';
-import { usePageViews } from 'src/redux/pages/hooks';
+import { useDocumentTitle, usePageViews } from 'src/redux/pages/hooks';
 import { store } from 'src/redux/store';
-import { Fallback } from 'src/containers/fallback';
 
 const PageSwitch = () => {
   usePageViews();
+  useDocumentTitle();
   return (
     <Page>
       <Suspense fallback={<Fallback />}>

@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { LinkBase } from 'src/components/navigation/link';
 
 const PaginationCard = (props) => {

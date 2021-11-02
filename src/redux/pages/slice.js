@@ -1,7 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import { pageItemTree, traverse } from 'src/lib/pages';
-import { rankingsRead } from 'src/redux/rankings/slice';
 import { translationAccessible } from 'src/redux/i18n/slice';
+import { rankingsRead } from 'src/redux/rankings/slice';
 
 /** actions */
 export const routeChanged = createAction('pages/routerChanged');

@@ -6,11 +6,11 @@ import { store } from 'src/redux/store';
 
 import {
   routeChanged,
-  selectStatus,
   selectAdjacentPages,
   selectMatchedPage,
   selectPages,
   selectSelectedPages,
+  selectStatus,
 } from './slice';
 
 export const usePages = () => {
@@ -29,7 +29,6 @@ export const useAdjacentPages = () => useSelector(selectAdjacentPages);
 
 export const usePageViews = () => {
   const location = useLocation();
-  const matchedPage = useMatchedPage();
   useEffect(() => {
     store.dispatch(routeChanged(location.pathname));
   }, [location]);

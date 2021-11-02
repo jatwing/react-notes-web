@@ -1,12 +1,12 @@
 import { List, ListItemText, Typography } from '@mui/material';
-import { useTranslation } from 'src/redux/i18n/hooks';
 import { InnerHtml } from 'src/components/data-display/inner-html';
 import { ClickableComponentWithDialog } from 'src/components/feedback/dialog';
+import { SkeletonText } from 'src/components/feedback/skeleton';
 import { Footer as FooterComponent } from 'src/components/layout/footer';
 import { Link, linkStyle } from 'src/components/navigation/link';
 import { useAuthor } from 'src/redux/author/hooks';
+import { useTranslation } from 'src/redux/i18n/hooks';
 import { useProject } from 'src/redux/project/hooks';
-import { SkeletonText } from 'src/components/feedback/skeleton';
 
 export const Footer = () => {
   const author = useAuthor();

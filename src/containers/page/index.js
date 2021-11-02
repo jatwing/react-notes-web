@@ -2,12 +2,11 @@ import { Box, Container, Divider } from '@mui/material';
 import { createContext, useContext } from 'react';
 import { Breadcrumbs } from 'src/containers/breadcrumbs';
 import { Codes } from 'src/containers/codes';
+import { Drawer } from 'src/containers/drawer';
 import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
-import { Drawer } from 'src/containers/drawer';
 import { Pagination } from 'src/containers/pagination';
 import { useToggle } from 'src/lib/react';
-
 
 const PageContext = createContext({});
 

@@ -1,8 +1,8 @@
+import { SkeletonText } from 'src/components/feedback/skeleton';
 import { ResponsiveDrawer } from 'src/components/navigation/drawer';
 import { Logo } from 'src/containers/logo';
 import { usePageContext } from 'src/containers/page';
 import { usePages } from 'src/redux/pages/hooks';
-import { SkeletonText } from 'src/components/feedback/skeleton';
 
 export const Drawer = () => {
   const { isDrawerOpen, setDrawerClosed } = usePageContext();

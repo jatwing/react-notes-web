@@ -24,7 +24,7 @@ export const Code = (props) => {
       }}
     >
       <code
-        style={{ whiteSpace: 'pre-line' }}
+        style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}
         className={'language-javascript'}
       >
         {code}

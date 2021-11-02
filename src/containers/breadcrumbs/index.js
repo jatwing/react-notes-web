@@ -1,9 +1,9 @@
 import { Typography } from '@mui/material';
+import { createElement } from 'react';
+import { SkeletonText } from 'src/components/feedback/skeleton';
 import { Breadcrumbs as BreadcrumbsComponent } from 'src/components/navigation/breadcrumbs';
 import { Link } from 'src/components/navigation/link';
 import { usePages, useSelectedPages } from 'src/redux/pages/hooks';
-import { SkeletonText } from 'src/components/feedback/skeleton';
-import { createElement } from 'react';
 
 export const Breadcrumbs = () => {
   const pages = usePages();

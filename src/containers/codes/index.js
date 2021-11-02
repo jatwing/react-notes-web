@@ -1,4 +1,4 @@
-import { Card, Box } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import { Code } from 'src/components/data-display/code';
 import {
   React,
@@ -6,8 +6,8 @@ import {
   Redux,
   Saga,
 } from 'src/components/data-display/icons';
-import { usePages, useMatchedPage } from 'src/redux/pages/hooks';
 import { SkeletonRectangular } from 'src/components/feedback/skeleton';
+import { useMatchedPage, usePages } from 'src/redux/pages/hooks';
 
 const getDisciplineIcon = (discipline) => {
   switch (discipline) {
