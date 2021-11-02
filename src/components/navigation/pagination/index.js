@@ -27,6 +27,7 @@ const PaginationCard = (props) => {
       <Button
         variant="outlined"
         color={color}
+        component="div"
         sx={{
           display: 'block',
           height: '100%',
@@ -44,14 +45,15 @@ const PaginationCard = (props) => {
         }}
       >
         <Typography
+          component="p"
+          role="doc-subtitle"
           children={label}
           variant="subtitle2"
-          component="h6"
           sx={{ color: 'text.secondary', mb: '4px' }}
         />
         <Typography
           variant="subtitle1"
-          component="h1"
+          component="h2"
           sx={{
             fontWeight: 'bold',
             color: 'text.primary',
