@@ -4,13 +4,24 @@ export const SkeletonText = (props) => {
   const { variant, sx } = props;
   switch (variant) {
     case 'word': {
-      return <Skeleton variant="text" sx={{ width: '2.5em', ...sx }} />;
+      return (
+        <Skeleton
+          variant="text"
+          sx={{
+            width: '2.5em',
+            ...sx,
+          }}
+        />
+      );
     }
     case 'secondary': {
       return (
         <Skeleton
           variant="text"
-          sx={{ width: '50%', minWidth: '128px', ...sx }}
+          sx={{
+            width: '50%',
+            ...sx,
+          }}
         />
       );
     }
@@ -19,7 +30,10 @@ export const SkeletonText = (props) => {
       return (
         <Skeleton
           variant="text"
-          sx={{ width: '75%', minWidth: '196px', ...sx }}
+          sx={{
+            width: '75%',
+            ...sx,
+          }}
         />
       );
     }

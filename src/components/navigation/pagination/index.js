@@ -17,7 +17,7 @@ const PaginationCard = (props) => {
   const color = page.color || 'primary';
   return (
     <LinkBase
-      href={page.url ?? '/'}
+      href={page.url}
       sx={{
         flex: '1 0',
         maxWidth: '50%',
@@ -28,9 +28,9 @@ const PaginationCard = (props) => {
         variant="outlined"
         color={color}
         sx={{
+          display: 'block',
           height: '100%',
           width: '100%',
-          display: 'block',
           textAlign: type === 'previous' ? 'left' : 'right',
           textTransform: 'none',
           borderColor: 'text.disabled',
@@ -50,18 +50,21 @@ const PaginationCard = (props) => {
           sx={{ color: 'text.secondary', mb: '4px' }}
         />
         <Typography
-          children={
-            (type === 'previous' ? '« ' : '') +
-            (page.name ?? '') +
-            (type === 'next' ? ' »' : '')
-          }
           variant="subtitle1"
           component="h1"
           sx={{
             fontWeight: 'bold',
             color: 'text.primary',
+            '&::before': {
+              content: type === 'previous' ? "'« '" : "''",
+            },
+            '&::after': {
+              content: type === 'next' ? "' »'" : "''",
+            },
           }}
-        />
+        >
+          {page.name}
+        </Typography>
       </Button>
     </LinkBase>
   );

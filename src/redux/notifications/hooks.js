@@ -22,6 +22,6 @@ export const useNotifications = () => {
     console.error(error);
     return;
   }
-  const isAvailable = status === 'settled';
-  return { entities, isAvailable };
+  const areAvailable = status === 'settled';
+  return { entities, areAvailable };
 };

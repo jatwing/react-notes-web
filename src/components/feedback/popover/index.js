@@ -45,7 +45,16 @@ export const ClickableComponentWithPopover = (props) => {
       {cloneElement(component, {
         onClick: handleElementClicked,
       })}
-      <Popover {...newProps}>{content}</Popover>
+      <Popover
+        {...newProps}
+        sx={{
+          '&.MuiPopover-root > *': {
+            minWidth: '256px',
+          },
+        }}
+      >
+        {content}
+      </Popover>
     </>
   );
 };

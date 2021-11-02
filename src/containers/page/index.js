@@ -4,9 +4,10 @@ import { Breadcrumbs } from 'src/containers/breadcrumbs';
 import { Codes } from 'src/containers/codes';
 import { Footer } from 'src/containers/footer';
 import { Header } from 'src/containers/header';
-import { NavigationDrawer } from 'src/containers/navigation-drawer';
+import { Drawer } from 'src/containers/drawer';
 import { Pagination } from 'src/containers/pagination';
 import { useToggle } from 'src/lib/react';
+
 
 const PageContext = createContext({});
 
@@ -27,7 +28,7 @@ export const Page = (props) => {
       value={{ isDrawerOpen, setDrawerOpen, setDrawerClosed }}
     >
       <Box sx={{ display: 'flex' }}>
-        <NavigationDrawer />
+        <Drawer />
         <Box
           sx={{
             flexGrow: '1',

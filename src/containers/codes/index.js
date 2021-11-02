@@ -1,4 +1,4 @@
-import { Card } from '@mui/material';
+import { Card, Box } from '@mui/material';
 import { Code } from 'src/components/data-display/code';
 import {
   React,
@@ -6,8 +6,8 @@ import {
   Redux,
   Saga,
 } from 'src/components/data-display/icons';
-import { useMatchedPage } from 'src/redux/pages/hooks';
-import { SkeletonRectangular  } from 'src/components/feedback/skeleton'
+import { usePages, useMatchedPage } from 'src/redux/pages/hooks';
+import { SkeletonRectangular } from 'src/components/feedback/skeleton';
 
 const getDisciplineIcon = (discipline) => {
   switch (discipline) {
@@ -27,14 +27,17 @@ const getDisciplineIcon = (discipline) => {
 };
 
 export const Codes = () => {
+  const pages = usePages();
   const matchedPage = useMatchedPage();
-  const codes = matchedPage?.codes;
-  const DisciplineIcon = getDisciplineIcon(matchedPage?.discipline);
-  if (!codes) {
-    return <SkeletonRectangular />;
+  if (!pages.areAvailable && !matchedPage) {
+    return (
+      <Box>
+        <SkeletonRectangular />
+      </Box>
+    );
   }
-
-  return codes?.map((code) => (
+  const DisciplineIcon = getDisciplineIcon(matchedPage?.discipline);
+  return matchedPage?.codes?.map((code) => (
     <Card
       component="aside"
       variant="outlined"

@@ -20,10 +20,31 @@ export const Pagination = () => {
   const t = useTranslation();
   const pages = usePages();
   const [previousPage, nextPage] = useAdjacentPages();
-  return t && pages.isAvailable ? (
+  if (!pages.areAvailable || !t) {
+    return (
+      <SimplePagination
+        previousLabel={
+          <SkeletonText variant="secondary" sx={{ display: 'inline-block' }} />
+        }
+        previousPage={{
+          name: (
+            <SkeletonText variant="primary" sx={{ display: 'inline-block' }} />
+          ),
+        }}
+        nextLabel={
+          <SkeletonText variant="secondary" sx={{ display: 'inline-block' }} />
+        }
+        nextPage={{
+          name: (
+            <SkeletonText variant="primary" sx={{ display: 'inline-block' }} />
+          ),
+        }}
+      />
+    );
+  }
+  return (
     <SimplePagination
       previousLabel={t('previous')}
-      nextLabel={t('next')}
       previousPage={
         previousPage
           ? {
@@ -32,6 +53,7 @@ export const Pagination = () => {
             }
           : null
       }
+      nextLabel={t('next')}
       nextPage={
         nextPage
           ? {
@@ -41,7 +63,5 @@ export const Pagination = () => {
           : null
       }
     />
-  ) : (
-    <>{'need to handle the link'}</>
   );
 };

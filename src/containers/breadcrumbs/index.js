@@ -1,29 +1,23 @@
 import { Typography } from '@mui/material';
 import { Breadcrumbs as BreadcrumbsComponent } from 'src/components/navigation/breadcrumbs';
 import { Link } from 'src/components/navigation/link';
-import { useSelectedPages } from 'src/redux/pages/hooks';
+import { usePages, useSelectedPages } from 'src/redux/pages/hooks';
 import { SkeletonText } from 'src/components/feedback/skeleton';
+import { createElement } from 'react';
 
 export const Breadcrumbs = () => {
+  const pages = usePages();
   const selectedPages = useSelectedPages();
-  if (selectedPages.length === 0) {
-    return (
-      <BreadcrumbsComponent>
-        <SkeletonText variant="primary" />;
-      </BreadcrumbsComponent>
-    );
+  if (!pages.areAvailable || selectedPages.length === 0) {
+    return <Typography children={<SkeletonText variant="primary" />} />;
   }
   return (
     <BreadcrumbsComponent>
       {selectedPages.map((page) =>
         page.url === '/' ? (
-          <Link href="/" key="/">
-            {page.name || <SkeletonText variant="word" />}
-          </Link>
+          <Link children={page.name} href="/" key="/" />
         ) : (
-          <Typography key={page.url}>
-            {page.name || <SkeletonText variant="word" />}
-          </Typography>
+          <Typography children={page.name} key={page.url} />
         )
       )}
     </BreadcrumbsComponent>

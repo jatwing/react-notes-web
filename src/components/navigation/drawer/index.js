@@ -98,6 +98,7 @@ export const ResponsiveDrawer = (props) => {
             <Button
               color="inherit"
               sx={{
+                textTransform: 'capitalize',
                 color: 'text.secondary',
                 p: '8px',
               }}
@@ -108,11 +109,19 @@ export const ResponsiveDrawer = (props) => {
         </Toolbar>
         <Divider />
         <List>
-          {items?.children.map((child) =>
+          {items?.children.map((child, index) =>
             child.type === 'list' ? (
-              <NestedList list={child} onClose={onClose} key={child.url} />
+              <NestedList
+                list={child}
+                onClose={onClose}
+                key={child.url || index}
+              />
             ) : child.type === 'item' ? (
-              <ListItemLink item={child} onClose={onClose} key={child.url} />
+              <ListItemLink
+                item={child}
+                onClose={onClose}
+                key={child.url || index}
+              />
             ) : null
           )}
         </List>

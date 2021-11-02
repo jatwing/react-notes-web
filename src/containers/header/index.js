@@ -7,24 +7,30 @@ import { usePageContext } from 'src/containers/page';
 import { useMediaQueries } from 'src/lib/mui';
 import { useNotifications } from 'src/redux/notifications/hooks';
 import { SkeletonText } from 'src/components/feedback/skeleton';
+import { useTranslation } from 'src/redux/i18n/hooks';
 
 const LeftSlot = () => {
   const { isLarge } = useMediaQueries();
   const { setDrawerOpen } = usePageContext();
-  return !isLarge ? (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        visibility: isLarge ? 'hidden' : 'visible',
+      }}
+    >
       <IconButton onClick={setDrawerOpen}>
         <Menu />
       </IconButton>
       <Logo sx={{ p: '8px' }} />
     </Box>
-  ) : (
-    <span></span>
   );
 };
 
 const RightSlot = () => {
   const notifications = useNotifications();
+  const t = useTranslation();
   return (
     <Box sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
       <ClickableComponentWithPopover
@@ -34,21 +40,30 @@ const RightSlot = () => {
           </IconButton>
         }
         content={
-          notifications.isAvailable ? (
+          !notifications.areAvailable || !t ? (
             <List>
-              {notifications.entities.map((entity) => (
-                <ListItem key={entity.content}>
-                  <ListItemText>{entity.content}</ListItemText>
-                </ListItem>
-              ))}
+              <ListItem>
+                <ListItemText children={<SkeletonText variant="primary" />} />
+              </ListItem>
+            </List>
+          ) : notifications.entities.length === 0 ? (
+            <List>
+              <ListItem>
+                <ListItemText
+                  children={t('no_notifications_yet')}
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                />
+              </ListItem>
             </List>
           ) : (
             <List>
-              <ListItem>
-                <ListItemText>
-                  <SkeletonText variant="primary" />
-                </ListItemText>
-              </ListItem>
+              {notifications.entities.map((entity) => (
+                <ListItem key={entity.content}>
+                  <ListItemText children={entity.content} />
+                </ListItem>
+              ))}
             </List>
           )
         }

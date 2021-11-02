@@ -6,6 +6,7 @@ import { store } from 'src/redux/store';
 
 import {
   routeChanged,
+  selectStatus,
   selectAdjacentPages,
   selectMatchedPage,
   selectPages,
@@ -13,8 +14,11 @@ import {
 } from './slice';
 
 export const usePages = () => {
+  const entities = useSelector(selectPages);
+  const status = useSelector(selectStatus);
   useRankings();
-  return useSelector(selectPages);
+  const areAvailable = status === 'settled';
+  return { entities, areAvailable };
 };
 
 export const useMatchedPage = () => useSelector(selectMatchedPage);

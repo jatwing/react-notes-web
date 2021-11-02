@@ -9,6 +9,7 @@ export const routeChanged = createAction('pages/routerChanged');
 /** state */
 const initialState = {
   entities: pageItemTree,
+  status: 'fulfilled',
 };
 
 const pagesSlice = createSlice({
@@ -17,6 +18,7 @@ const pagesSlice = createSlice({
   /** reducer */
   extraReducers: {
     [translationAccessible]: (state, action) => {
+      state.status = 'settled';
       const t = action.payload;
       traverse(state.entities, (node) => {
         if (node.url === '/') {
@@ -50,6 +52,8 @@ export const pagesReducer = pagesSlice.reducer;
 
 /** selectors */
 export const selectPages = (state) => state.pages.entities;
+
+export const selectStatus = (state) => state.pages.status;
 
 export const selectMatchedPage = (state) => {
   let matchedPage = null;

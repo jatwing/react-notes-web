@@ -15,12 +15,13 @@ import { theme } from 'src/lib/mui';
 import { pageItemUrls } from 'src/lib/pages';
 import { usePageViews } from 'src/redux/pages/hooks';
 import { store } from 'src/redux/store';
+import { Fallback } from 'src/containers/fallback';
 
 const PageSwitch = () => {
   usePageViews();
   return (
     <Page>
-      <Suspense fallback={'TODO use skeleton'}>
+      <Suspense fallback={<Fallback />}>
         <Switch>
           <Route
             exact={true}

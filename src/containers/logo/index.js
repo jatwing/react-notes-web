@@ -11,9 +11,9 @@ export const Logo = (props) => {
   return (
     <Box
       sx={{
-        ...sx,
         display: 'flex',
         alignItems: 'center',
+        ...sx,
       }}
     >
       <ReactNotes
@@ -27,7 +27,6 @@ export const Logo = (props) => {
       <Typography
         sx={{
           display: 'inline-block',
-          textTransform: 'capitalize',
           whiteSpace: 'nowrap',
           fontFamily: theme.typography.fontFamilies.monospace,
           fontSize: 'htmlFontSize',
@@ -36,7 +35,11 @@ export const Logo = (props) => {
           ml: '16px',
         }}
       >
-        {project?.entity?.name || <SkeletonText variant="word" />}
+        {!project.isAvailable ? (
+          <SkeletonText variant="word" />
+        ) : (
+          project.entity.name
+        )}
       </Typography>
     </Box>
   );
