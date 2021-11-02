@@ -11,8 +11,8 @@ export const translationAccessible = createAction('i18n/translationAccessible');
 
 /** state */
 const initialState = {
-  isLocalizationAccessible: false,
-  isTranslationAccessible: false,
+  t: null,
+  l: null,
 };
 
 const i18nSlice = createSlice({
@@ -20,16 +20,16 @@ const i18nSlice = createSlice({
   initialState,
   /** reducer */
   extraReducers: {
-    [localizationAccessible]: () => {
-      state.isLocalizationAccessible = true;
+    [translationAccessible]: (state, action) => {
+      state.t = action.payload;
     },
-    [translationAccessible]: () => {
-      state.isTranslationAccessible = true;
+    [localizationAccessible]: (state, action) => {
+      state.l = action.payload;
     },
   },
 });
 
-export const selectIsTranslationAccessible = (state) =>
-  state.isTranslationAccessible;
-export const selectIsLocalizationAccessible = (state) =>
-  state.isLocalizationAccessible;
+export const i18nReducer = i18nSlice.reducer;
+
+export const selectTranslation = (state) => state.i18n.t;
+export const selectLocalization = (state) => state.i18n.l;

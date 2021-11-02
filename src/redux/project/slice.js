@@ -18,17 +18,18 @@ const projectSlice = createSlice({
   /** reducer */
   extraReducers: {
     [projectRead.pending]: (state) => {
-      state.status = 'loading';
+      state.status = 'pending';
     },
     [projectRead.fulfilled]: (state, action) => {
-      state.status = 'succeeded';
+      state.status = 'fulfilled';
       state.entity = action.payload;
     },
     [projectRead.rejected]: (state, action) => {
-      state.status = 'failed';
+      state.status = 'rejected';
       state.error = action.error.message;
     },
     [projectLocalized]: (state, action) => {
+      state.status = 'settled';
       const l = action.payload;
       state.entity.name = l(state.entity._name);
       state.entity.copyright = l(state.entity._copyright);

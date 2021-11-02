@@ -13,9 +13,6 @@ export const Breadcrumbs = () => {
       </BreadcrumbsComponent>
     );
   }
-
-
-
   return (
     <BreadcrumbsComponent>
       {selectedPages.map((page) =>

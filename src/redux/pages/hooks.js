@@ -29,7 +29,9 @@ export const usePageViews = () => {
   useEffect(() => {
     store.dispatch(routeChanged(location.pathname));
   }, [location]);
-  useEffect(() => {
-    //   document.title = matchedPage?.name ?? '';
-  }, [matchedPage]);
+};
+
+export const useDocumentTitle = () => {
+  const matchedPage = useMatchedPage();
+  document.title = matchedPage?.name ?? '';
 };

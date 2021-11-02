@@ -6,7 +6,7 @@ import { Logo } from 'src/containers/logo';
 import { usePageContext } from 'src/containers/page';
 import { useMediaQueries } from 'src/lib/mui';
 import { useNotifications } from 'src/redux/notifications/hooks';
-import { SkeletonText } from 'src/components/feedback/skeleton'
+import { SkeletonText } from 'src/components/feedback/skeleton';
 
 const LeftSlot = () => {
   const { isLarge } = useMediaQueries();
@@ -34,7 +34,7 @@ const RightSlot = () => {
           </IconButton>
         }
         content={
-          notifications.isSucceed ? (
+          notifications.isAvailable ? (
             <List>
               {notifications.entities.map((entity) => (
                 <ListItem key={entity.content}>

@@ -7,15 +7,15 @@ export const useProject = () => {
   const entity = useSelector(selectEntity);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
-  const isIdle = status === 'idle';
-  const isLoading = status === 'loading';
-  const isSucceed = status === 'succeeded';
-  const isFailed = status === 'failed';
   const dispatch = useDispatch();
   useEffect(() => {
-    if (isIdle) {
+    if (status === 'idle') {
       dispatch(projectRead());
     }
   }, []);
-  return { entity, isIdle, isLoading, isSucceed, isFailed, error };
+  if (error) {
+    console.error(error);
+  }
+  const isAvailable = status === 'settled';
+  return { entity, isAvailable };
 };

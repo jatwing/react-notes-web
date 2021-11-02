@@ -32,17 +32,18 @@ const notificationsSlice = createSlice({
   /** reducer */
   extraReducers: {
     [notificationsRead.pending]: (state) => {
-      state.status = 'loading';
+      state.status = 'pending';
     },
     [notificationsRead.fulfilled]: (state, action) => {
-      state.status = 'succeeded';
+      state.status = 'fulfilled';
       notificationsAdapter.setMany(state, action.payload);
     },
-    [notificationsRead.failed]: (state, action) => {
-      state.status = 'failed';
+    [notificationsRead.rejected]: (state, action) => {
+      state.status = 'rejected';
       state.error = action.error.message;
     },
     [notificationsTranslated]: (state, action) => {
+      state.status = 'settled';
       if (process.env.NODE_ENV !== 'development') {
         return;
       }

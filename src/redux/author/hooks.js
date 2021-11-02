@@ -7,16 +7,16 @@ export const useAuthor = () => {
   const entity = useSelector(selectEntity);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
-  const isIdle = status === 'idle';
-  const isLoading = status === 'loading';
-  const isSucceed = status === 'succeeded';
-
-  const isFailed = status === 'failed';
   const dispatch = useDispatch();
   useEffect(() => {
-    if (isIdle) {
+    if (status === 'idle') {
       dispatch(authorRead());
     }
   }, []);
-  return { entity, isIdle, isLoading, isSucceed, isFailed, error };
+  if (error) {
+    console.error(error);
+    return;
+  }
+  const isAvailable = status === 'fulfilled';
+  return { entity, isAvailable };
 };

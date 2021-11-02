@@ -21,14 +21,14 @@ const rankingsSlice = createSlice({
   /** reducer */
   extraReducers: {
     [rankingsRead.pending]: (state) => {
-      state.status = 'loading';
+      state.status = 'pending';
     },
     [rankingsRead.fulfilled]: (state, action) => {
-      state.status = 'succeeded';
+      state.status = 'fulfilled';
       rankingsAdapter.setAll(state, action.payload);
     },
-    [rankingsRead.failed]: (state, action) => {
-      state.status = 'failed';
+    [rankingsRead.rejected]: (state, action) => {
+      state.status = 'rejected';
       state.error = action.error.message;
     },
   },

@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'src/redux/i18n/hooks';
+import { SkeletonText } from 'src/components/feedback/skeleton';
 import { SimplePagination } from 'src/components/navigation/pagination';
-import { useAdjacentPages } from 'src/redux/pages/hooks';
+import { usePages, useAdjacentPages } from 'src/redux/pages/hooks';
 
 const getDisciplineColor = (discipline) => {
   switch (discipline) {
@@ -16,9 +17,10 @@ const getDisciplineColor = (discipline) => {
 };
 
 export const Pagination = () => {
-  const { t } = useTranslation();
+  const t = useTranslation();
+  const pages = usePages();
   const [previousPage, nextPage] = useAdjacentPages();
-  return (
+  return t && pages.isAvailable ? (
     <SimplePagination
       previousLabel={t('previous')}
       nextLabel={t('next')}
@@ -39,5 +41,7 @@ export const Pagination = () => {
           : null
       }
     />
+  ) : (
+    <>{'need to handle the link'}</>
   );
 };

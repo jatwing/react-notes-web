@@ -17,14 +17,14 @@ const authorSlice = createSlice({
   /** reducer */
   extraReducers: {
     [authorRead.pending]: (state) => {
-      state.status = 'loading';
+      state.status = 'pending';
     },
     [authorRead.fulfilled]: (state, action) => {
-      state.status = 'succeeded';
+      state.status = 'fulfilled';
       state.entity = action.payload;
     },
-    [authorRead.failed]: (state, action) => {
-      state.status = 'failed';
+    [authorRead.rejected]: (state, action) => {
+      state.status = 'rejected';
       state.error = action.error.message;
     },
   },
