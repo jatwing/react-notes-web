@@ -14,18 +14,17 @@ const isValidHttpUrl = (urlString) => {
 /** link without style */
 export const LinkBase = (props) => {
   const {
-    href,
     children,
+    href,
     target = '_blank',
     rel = 'noreferrer noopener',
     onClick,
     sx,
   } = props;
   if (!href) {
-    return <Box children={children} sx={sx} />;
+    return <Box sx={sx}>{children}</Box>;
   }
   const newProps = {
-    children,
     ...(isValidHttpUrl(href)
       ? { href, target, rel }
       : { to: href, component: RouterLink }),
@@ -38,7 +37,7 @@ export const LinkBase = (props) => {
       ...sx,
     },
   };
-  return <MuiLink {...newProps} />;
+  return <MuiLink {...newProps}>{children}</MuiLink>;
 };
 
 /** link style for typography or component that contains typography */

@@ -17,7 +17,7 @@ export const useNotifications = () => {
     if (status === 'idle') {
       dispatch(notificationsRead());
     }
-  }, []);
+  });
   if (error) {
     console.error(error);
     return;

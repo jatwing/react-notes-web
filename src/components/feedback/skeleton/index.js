@@ -48,6 +48,7 @@ export const SkeletonRectangular = (props) => {
       sx={{
         width: '100%',
         height: '256px',
+        ...sx,
       }}
     />
   );

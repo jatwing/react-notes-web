@@ -17,7 +17,7 @@ export const useRankings = () => {
     if (status === 'idle') {
       dispatch(rankingsRead());
     }
-  }, []);
+  });
   if (error) {
     console.error(error);
   }

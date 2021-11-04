@@ -1,5 +1,4 @@
 import { Typography } from '@mui/material';
-import { createElement } from 'react';
 import { SkeletonText } from 'src/components/feedback/skeleton';
 import { Breadcrumbs as BreadcrumbsComponent } from 'src/components/navigation/breadcrumbs';
 import { Link } from 'src/components/navigation/link';
@@ -9,15 +8,21 @@ export const Breadcrumbs = () => {
   const pages = usePages();
   const selectedPages = useSelectedPages();
   if (!pages.areAvailable || selectedPages.length === 0) {
-    return <Typography children={<SkeletonText variant="primary" />} />;
+    return (
+      <Typography>
+        <SkeletonText variant="primary" />
+      </Typography>
+    );
   }
   return (
     <BreadcrumbsComponent>
       {selectedPages.map((page) =>
         page.url === '/' ? (
-          <Link children={page.name} href="/" key="/" />
+          <Link href="/" key="/">
+            {page.name}
+          </Link>
         ) : (
-          <Typography children={page.name} key={page.url} />
+          <Typography key={page.url}>{page.name}</Typography>
         )
       )}
     </BreadcrumbsComponent>

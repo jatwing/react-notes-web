@@ -43,25 +43,28 @@ const RightSlot = () => {
           !notifications.areAvailable || !t ? (
             <List>
               <ListItem>
-                <ListItemText children={<SkeletonText variant="primary" />} />
+                <ListItemText>
+                  <SkeletonText variant="primary" />
+                </ListItemText>
               </ListItem>
             </List>
           ) : notifications.entities.length === 0 ? (
             <List>
               <ListItem>
                 <ListItemText
-                  children={t('no_notifications_yet')}
                   sx={{
                     color: 'text.secondary',
                   }}
-                />
+                >
+                  {t('no_notifications_yet')}
+                </ListItemText>
               </ListItem>
             </List>
           ) : (
             <List>
               {notifications.entities.map((entity) => (
                 <ListItem key={entity.content}>
-                  <ListItemText children={entity.content} />
+                  <ListItemText>{entity.content}</ListItemText>
                 </ListItem>
               ))}
             </List>

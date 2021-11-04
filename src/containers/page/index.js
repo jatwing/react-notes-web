@@ -58,7 +58,7 @@ export const Page = (props) => {
             }}
           >
             <Breadcrumbs />
-            <Box children={children} component="article" />
+            <Box component="article">{children}</Box>
             <Codes />
             <Pagination />
           </Container>

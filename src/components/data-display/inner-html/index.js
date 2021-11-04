@@ -29,7 +29,7 @@ export const InnerHtml = (props) => {
           textDecorationColor: 'currentColor',
           color: 'inherit',
         },
-        '& a': {
+        '& a:active': {
           textDecoration: 'none',
           color: 'inherit',
         },

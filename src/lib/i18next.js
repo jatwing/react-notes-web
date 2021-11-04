@@ -13,16 +13,6 @@ import { store } from 'src/redux/store';
 const languages = ['en-US', 'zh-TW'];
 const namespaces = ['translation'];
 
-// TODO delete this section
-const resources = {
-  'en-US': {
-    translation: {
-      error: 'Error!',
-      loading: 'Loading...',
-    },
-  },
-};
-
 /** initialization */
 const options = {
   /** logging */
@@ -35,8 +25,6 @@ const options = {
   ns: namespaces,
   defaultNS: 'translation',
   fallbackNS: 'translation',
-  /** resources */
-  resources,
   /** translation defaults */
   interpolation: {
     escapeValue: false,

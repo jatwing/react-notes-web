@@ -12,7 +12,7 @@ export const useProject = () => {
     if (status === 'idle') {
       dispatch(projectRead());
     }
-  }, []);
+  });
   if (error) {
     console.error(error);
   }

@@ -12,7 +12,7 @@ export const useAuthor = () => {
     if (status === 'idle') {
       dispatch(authorRead());
     }
-  }, []);
+  });
   if (error) {
     console.error(error);
     return;

@@ -47,10 +47,11 @@ const PaginationCard = (props) => {
         <Typography
           component="p"
           role="doc-subtitle"
-          children={label}
           variant="subtitle2"
           sx={{ color: 'text.secondary', mb: '4px' }}
-        />
+        >
+          {label}
+        </Typography>
         <Typography
           variant="subtitle1"
           component="h2"
