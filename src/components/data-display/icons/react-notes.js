@@ -8,39 +8,31 @@ export const ReactNotesIcon = (props) => {
   return (
     <SvgIcon {...otherProps}>
       <path
-        d="M 4.396 16.396 L 9.465 7.604"
+        d="M9.316 0A3 3 0 009.316 6L21 6A3 3 0 0021 0"
         style={{
-          strokeWidth: '8.792px',
-          strokeLinecap: 'round',
-          /** react blue, rgb(97, 218, 251), grayscale(186) */
-          stroke: isColorful ? theme.palette.react.main : 'currentColor',
-          fill: 'none',
-          /** (255 - 186) / 255 = 0.271 */
-          opacity: isColorful ? '1' : '0.271',
+          stroke: 'none',
+          fill: isColorful ? theme.palette.react.dark : 'currentcolor',
         }}
       />
       <path
-        d="M 14.535 16.396 L 19.604 7.604"
+        d="M3 9A3 3 0 003 15L5.684 15A3 3 0 005.684 9"
         style={{
-          strokeWidth: '8.792px',
-          strokeLinecap: 'round',
-          /** saga green, rgb(137, 217, 109), grayscale(181) */
-          stroke: isColorful ? theme.palette.saga.main : 'currentColor',
-          fill: 'none',
-          /** (255 - 181) / 255 = 0.290 */
-          opacity: isColorful ? '1' : '0.290',
+          stroke: 'none',
+          fill: isColorful ? theme.palette.redux.dark : 'currentcolor',
         }}
       />
       <path
-        d="M 9.465 7.604 L 14.535 16.396"
+        d="M17.526 9A3 3 0 0017.526 15L21 15A3 3 0 0021 9"
         style={{
-          strokeWidth: '8.792px',
-          strokeLinecap: 'round',
-          /** redux purple, rgb(118, 74, 188), grayscale(100) */
-          stroke: isColorful ? theme.palette.redux.main : 'currentColor',
-          fill: 'none',
-          /** (255 - 100) / 255 = 0.608 */
-          opacity: isColorful ? '1' : '0.608',
+          stroke: 'none',
+          fill: isColorful ? theme.palette.redux.dark : 'currentcolor',
+        }}
+      />
+      <path
+        d="M3 18A3 3 0 003 24L14.684 24A3 3 0 0014.684 18"
+        style={{
+          stroke: 'none',
+          fill: isColorful ? theme.palette.saga.dark : 'currentcolor',
         }}
       />
     </SvgIcon>
