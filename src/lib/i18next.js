@@ -36,7 +36,7 @@ const options = {
   },
 };
 
-const callback = async (error, t) => {
+const callback = async (error) => {
   if (error) {
     console.error(error);
   }
@@ -51,27 +51,16 @@ const callback = async (error, t) => {
       i18n.addResources(language, namespace, resources[0]);
     }
   }
-  store.dispatch(resourcesAdded(i18n.t.bind(i18n)));
+  store.dispatch(resourcesAdded(i18n));
 };
 
-const localize = (i18n) => (texts) => {
-  if (!texts) {
-    return '';
-  }
-  return texts?.[i18n.language] || texts?.[i18n.options.fallbackLng] || '';
-};
 
 i18n.on('initialized', () => {
-  store.dispatch(instanceInitialized(localize(i18n)));
+  store.dispatch(instanceInitialized(i18n));
 });
 
 i18n.on('languageChanged', () => {
-  store.dispatch(
-    languageChanged({
-      t: i18n.t.bind(i18n),
-      l: localize(i18n),
-    })
-  );
+  store.dispatch(languageChanged(i18n));
 });
 
 i18n.use(LanguageDetector).use(initReactI18next).init(options, callback);

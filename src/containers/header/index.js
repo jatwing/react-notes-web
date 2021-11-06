@@ -8,6 +8,7 @@ import { usePageContext } from 'src/containers/page';
 import { useMediaQueries } from 'src/lib/mui';
 import { useTranslation } from 'src/redux/i18n/hooks';
 import { useNotifications } from 'src/redux/notifications/hooks';
+import { useLanguageSwitcher } from 'src/redux/i18n/hooks'
 
 const LeftSlot = () => {
   const { isLarge } = useMediaQueries();
@@ -31,6 +32,10 @@ const LeftSlot = () => {
 const RightSlot = () => {
   const notifications = useNotifications();
   const t = useTranslation();
+
+  const test = useLanguageSwitcher();
+  console.log(test);
+
   return (
     <Box sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
       <ClickableComponentWithPopover

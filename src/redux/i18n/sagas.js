@@ -11,23 +11,19 @@ import {
 /** watchers */
 export function* watchTranslationAccessible() {
   yield take(instanceInitialized);
-  const { payload: t } = yield take(resourcesAdded);
-  yield put(translationAccessible(t));
+  const { payload } = yield take(resourcesAdded);
+  yield put(translationAccessible(payload));
   while (true) {
-    const {
-      payload: { t },
-    } = yield take(languageChanged);
-    yield put(translationAccessible(t));
+    const { payload } = yield take(languageChanged);
+    yield put(translationAccessible(payload));
   }
 }
 
 export function* watchLocalizationAccessible() {
-  const { payload: l } = yield take(instanceInitialized);
-  yield put(localizationAccessible(l));
+  const { payload } = yield take(instanceInitialized);
+  yield put(localizationAccessible(payload));
   while (true) {
-    const {
-      payload: { l },
-    } = yield take(languageChanged);
-    yield put(localizationAccessible(l));
+    const { payload } = yield take(languageChanged);
+    yield put(localizationAccessible(payload));
   }
 }

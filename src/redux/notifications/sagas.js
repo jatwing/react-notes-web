@@ -1,8 +1,9 @@
-import { all, call, put, take } from 'redux-saga/effects';
+import { all, call, put, take, select } from 'redux-saga/effects';
 import { readDocuments } from 'src/lib/firebase';
 import { translationAccessible } from 'src/redux/i18n/slice';
 
 import { notificationsRead, notificationsTranslated } from './slice';
+import { selectTranslation } from 'src/redux/i18n/slice';
 
 /** workers */
 function* workNotificationsRead() {
@@ -17,14 +18,13 @@ function* workNotificationsRead() {
 
 /** watchers */
 export function* watchNotificationsRead() {
-  const [_, { payload: t }] = yield all([
-    take(notificationsRead),
-    take(translationAccessible),
-  ]);
+  yield all([take(notificationsRead), take(translationAccessible)]);
   yield call(workNotificationsRead);
+  const t = yield select(selectTranslation);
   yield put(notificationsTranslated(t));
   while (true) {
-    const { payload: t } = yield take(translationAccessible);
+    yield take(translationAccessible);
+    const t = yield select(selectTranslation);
     yield put(notificationsTranslated(t));
   }
 }

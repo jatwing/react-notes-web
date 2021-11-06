@@ -11,8 +11,7 @@ export const translationAccessible = createAction('i18n/translationAccessible');
 
 /** state */
 const initialState = {
-  t: null,
-  l: null,
+  instance: null,
 };
 
 const i18nSlice = createSlice({
@@ -21,15 +20,56 @@ const i18nSlice = createSlice({
   /** reducer */
   extraReducers: {
     [translationAccessible]: (state, action) => {
-      state.t = action.payload;
+      state.instance = action.payload;
     },
     [localizationAccessible]: (state, action) => {
-      state.l = action.payload;
+      state.instance = action.payload;
     },
   },
 });
 
 export const i18nReducer = i18nSlice.reducer;
 
-export const selectTranslation = (state) => state.i18n.t;
-export const selectLocalization = (state) => state.i18n.l;
+export const selectTranslation = (state) => {
+  const i18n = state.i18n.instance;
+  if (!i18n) {
+    return null;
+  }
+  return i18n.t.bind(i18n);
+};
+
+export const selectLocalization = (state) => (texts) => {
+  const i18n = state.i18n.instance;
+  if (!texts || !i18n) {
+    return '';
+  }
+  return texts[i18n.language] || texts[i18n.options.fallbackLng] || '';
+};
+
+export const selectLanguage = (state) => {
+  const i18n = state.i18n.instance;
+  if (!18n) {
+    return null;
+  }
+  return i18n.language;
+};
+
+export const selectLangauges = (state) => {
+  const i18n = state.i18n.instance;
+  if (!18n) {
+    return null;
+  }
+  const supportedLanguages = i18n.options.supportedLngs;
+  if (process.env.NODE_ENV === 'development') {
+    return supportedLanguages;
+  }
+  return supportedLanguages.filter((language) => language !== 'cimode');
+};
+
+export const selectLanguageChanged = (state) => {
+  const i18n = state.i18n.instance;
+  if (!18n) {
+    return null;
+  }
+  return i18n.changeLanguage.bind(i18n);
+};

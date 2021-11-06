@@ -1,10 +1,10 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import { pageItemTree, traverse } from 'src/lib/pages';
-import { translationAccessible } from 'src/redux/i18n/slice';
 import { rankingsRead } from 'src/redux/rankings/slice';
 
 /** actions */
 export const routeChanged = createAction('pages/routerChanged');
+export const pagesTranslated = createAction('pages/pagesTranslated');
 
 /** state */
 const initialState = {
@@ -17,7 +17,7 @@ const pagesSlice = createSlice({
   initialState,
   /** reducer */
   extraReducers: {
-    [translationAccessible]: (state, action) => {
+    [pagesTranslated]: (state, action) => {
       state.status = 'settled';
       const t = action.payload;
       traverse(state.entities, (node) => {
