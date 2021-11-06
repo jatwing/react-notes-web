@@ -38,6 +38,14 @@ export const selectTranslation = (state) => {
   return i18n.t.bind(i18n);
 };
 
+export const selectFixedTranslation = (state) => {
+  const i18n = state.i18n.instance;
+  if (!i18n) {
+    return null;
+  }
+  return i18n.getFixedT.bind(i18n);
+};
+
 export const selectLocalization = (state) => (texts) => {
   const i18n = state.i18n.instance;
   if (!texts || !i18n) {
@@ -48,15 +56,15 @@ export const selectLocalization = (state) => (texts) => {
 
 export const selectLanguage = (state) => {
   const i18n = state.i18n.instance;
-  if (!18n) {
+  if (!i18n) {
     return null;
   }
   return i18n.language;
 };
 
-export const selectLangauges = (state) => {
+export const selectSupportedLangauges = (state) => {
   const i18n = state.i18n.instance;
-  if (!18n) {
+  if (!i18n) {
     return null;
   }
   const supportedLanguages = i18n.options.supportedLngs;
@@ -68,7 +76,7 @@ export const selectLangauges = (state) => {
 
 export const selectLanguageChanged = (state) => {
   const i18n = state.i18n.instance;
-  if (!18n) {
+  if (!i18n) {
     return null;
   }
   return i18n.changeLanguage.bind(i18n);

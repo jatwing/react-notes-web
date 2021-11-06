@@ -1,9 +1,8 @@
-import { all, call, put, take, select } from 'redux-saga/effects';
+import { all, call, put, select, take } from 'redux-saga/effects';
 import { readDocuments } from 'src/lib/firebase';
-import { translationAccessible } from 'src/redux/i18n/slice';
+import { selectTranslation, translationAccessible } from 'src/redux/i18n/slice';
 
 import { notificationsRead, notificationsTranslated } from './slice';
-import { selectTranslation } from 'src/redux/i18n/slice';
 
 /** workers */
 function* workNotificationsRead() {

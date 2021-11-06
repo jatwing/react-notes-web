@@ -25,6 +25,8 @@ const options = {
   ns: namespaces,
   defaultNS: 'translation',
   fallbackNS: 'translation',
+  /** resources */
+  resources: {},
   /** translation defaults */
   interpolation: {
     escapeValue: false,
@@ -53,7 +55,6 @@ const callback = async (error) => {
   }
   store.dispatch(resourcesAdded(i18n));
 };
-
 
 i18n.on('initialized', () => {
   store.dispatch(instanceInitialized(i18n));

@@ -19,8 +19,8 @@ import {
   notificationsReducer,
   notificationsTranslated,
 } from 'src/redux/notifications/slice';
-import { pagesReducer, pagesTranslated } from 'src/redux/pages/slice';
 import { watchPagesTranslated } from 'src/redux/pages/sagas';
+import { pagesReducer, pagesTranslated } from 'src/redux/pages/slice';
 import { watchProjectRead } from 'src/redux/project/sagas';
 import { projectLocalized, projectReducer } from 'src/redux/project/slice';
 import { watchRankingsRead } from 'src/redux/rankings/sagas';

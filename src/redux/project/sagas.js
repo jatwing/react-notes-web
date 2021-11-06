@@ -1,9 +1,11 @@
-import { select, all, call, put, take } from 'redux-saga/effects';
+import { all, call, put, select, take } from 'redux-saga/effects';
 import { readDocuments } from 'src/lib/firebase';
-import { localizationAccessible } from 'src/redux/i18n/slice';
+import {
+  localizationAccessible,
+  selectLocalization,
+} from 'src/redux/i18n/slice';
 
 import { projectLocalized, projectRead } from './slice';
-import { selectLocalization } from 'src/redux/i18n/slice';
 
 /** workers */
 function* workProjectRead() {
