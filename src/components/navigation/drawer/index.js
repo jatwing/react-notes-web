@@ -1,4 +1,4 @@
-import { Close, ExpandLess, ExpandMore } from '@mui/icons-material';
+import { Close, ExpandMore } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -39,7 +39,10 @@ const NestedList = (props) => {
     <>
       <ListItemButton onClick={toggle}>
         <ListItemText primary={list.name} />
-        {isListOpen ? <ExpandLess /> : <ExpandMore />}
+        <ExpandMore  sx={{
+          rotate: isListOpen ? '90deg' : '0',
+          transition: (theme) => theme.transitions.create('rotate'),
+        }}/>
       </ListItemButton>
       <Collapse in={isListOpen} timeout="auto" unmountOnExit>
         {list?.children.map(
