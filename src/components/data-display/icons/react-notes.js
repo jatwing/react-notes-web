@@ -8,28 +8,21 @@ export const ReactNotesIcon = (props) => {
   return (
     <SvgIcon {...otherProps}>
       <path
-        d="M9.316 0A3 3 0 009.316 6L21 6A3 3 0 0021 0"
+        d="M0 .762A24 24 0 016 0L6 24 0 24"
         style={{
           stroke: 'none',
           fill: isColorful ? theme.palette.react.dark : 'currentcolor',
         }}
       />
       <path
-        d="M3 9A3 3 0 003 15L5.684 15A3 3 0 005.684 9"
+        d="M9 0A15 15 0 0114.211 1.252L14.211 18A3 3 0 009 18"
         style={{
           stroke: 'none',
           fill: isColorful ? theme.palette.redux.dark : 'currentcolor',
         }}
       />
       <path
-        d="M17.526 9A3 3 0 0017.526 15L21 15A3 3 0 0021 9"
-        style={{
-          stroke: 'none',
-          fill: isColorful ? theme.palette.redux.dark : 'currentcolor',
-        }}
-      />
-      <path
-        d="M3 18A3 3 0 003 24L14.684 24A3 3 0 0014.684 18"
+        d="M18 1.252A15 15 0 0124 6L24 21.708A9 9 0 0118 24"
         style={{
           stroke: 'none',
           fill: isColorful ? theme.palette.saga.dark : 'currentcolor',
