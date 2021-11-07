@@ -3,7 +3,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
-import { buildTime } from 'src/lib/preval';
+import { buildDate } from 'src/lib/preval';
 import { createLifecycleActions } from 'src/redux/utils';
 
 /** actions */
@@ -50,9 +50,15 @@ const notificationsSlice = createSlice({
       const t = action.payload;
       const entity = {
         name: 'build_date',
-        content: t('development_build_at_time_on_date', {
-          time: buildTime.toTimeString(),
-          date: buildTime.toDateString(),
+        content: t('development_build_on_datetime', {
+          // val: buildDate
+          val: new Date(Date.UTC(2012, 11, 20, 3, 0, 0)),
+          formatParams: {
+            val: {
+              dateStyle: 'short',
+              timeStyle: 'short'
+            },
+          },
         }),
       };
       notificationsAdapter.setOne(state, entity);
