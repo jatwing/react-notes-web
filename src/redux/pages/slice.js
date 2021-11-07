@@ -19,6 +19,9 @@ const pagesSlice = createSlice({
   extraReducers: {
     [pagesTranslated]: (state, action) => {
       state.status = 'settled';
+      
+      console.log('### translate')
+
       const t = action.payload;
       traverse(state.entities, (node) => {
         if (node.url === '/') {

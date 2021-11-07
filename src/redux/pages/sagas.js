@@ -5,7 +5,9 @@ import { pagesTranslated } from './slice';
 
 /** watchers */
 export function* watchPagesTranslated() {
-  yield take(translationAccessible);
-  const t = yield select(selectTranslation);
-  yield put(pagesTranslated(t));
+  while (true) {
+    yield take(translationAccessible);
+    const t = yield select(selectTranslation);
+    yield put(pagesTranslated(t));
+  }
 }
