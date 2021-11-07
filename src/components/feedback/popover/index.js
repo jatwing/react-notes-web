@@ -1,60 +1,86 @@
-import Popover from '@mui/material/Popover';
+import { Popover as MuiPopover } from '@mui/material';
 import { cloneElement, useState } from 'react';
 import { useToggle } from 'src/lib/react';
 
-export const ClickableComponentWithPopover = (props) => {
+export const PopoverAnchorPosition = (props) => {
   const {
     component,
     content,
-    anchorReference = 'anchorEl',
+    anchorReference,
+    anchorPosition = { left: 0, top: 0 },
+    sx,
+  } = props;
+  const { value: isPopoverOpen, setOff, toggle } = useToggle();
+  return (
+    <>
+      {cloneElement(component, {
+        onClick: toggle,
+      })}
+      <MuiPopover
+        anchorReference={anchorReference}
+        anchorPosition={anchorPosition}
+        open={isPopoverOpen}
+        onClose={setOff}
+        sx={{
+          '&.MuiPopover-root > *': {
+            minWidth: '256px',
+          },
+          ...sx,
+        }}
+      >
+        {cloneElement(content, {
+          handleClick: setOff,
+        })}
+        {content}
+      </MuiPopover>
+    </>
+  );
+};
+
+export const PopoverAnchorElement = (props) => {
+  const {
+    component,
+    content,
+    anchorReference,
     anchorOrigin = {
       vertical: 'bottom',
       horizontal: 'left',
     },
     transformOrigin = { vertical: 'top', horizontal: 'left' },
-    anchorPosition = { left: 0, top: 0 },
     sx,
   } = props;
   const [anchorEl, setAnchorEl] = useState(null);
-  const { value: isPopoverOpen, setOff, toggle } = useToggle();
-  const newProps = {
-    anchorReference,
-    ...(anchorReference === 'anchorEl' && {
-      open: !!anchorEl,
-      onClose: () => setAnchorEl(null),
-      anchorEl,
-      anchorOrigin,
-      transformOrigin,
-    }),
-    ...(anchorReference === 'anchorPosition' && {
-      open: isPopoverOpen,
-      onClose: setOff,
-      anchorPosition,
-    }),
-    sx,
-  };
-  const handleElementClicked = (event) => {
-    if (anchorReference === 'anchorEl') {
-      setAnchorEl(event.currentTarget);
-    } else if (anchorReference === 'anchorPosition') {
-      toggle();
-    }
-  };
   return (
     <>
       {cloneElement(component, {
-        onClick: handleElementClicked,
+        onClick: (event) => setAnchorEl(event.currentTarget),
       })}
-      <Popover
-        {...newProps}
+      <MuiPopover
+        anchorReference={anchorReference}
+        anchorEl={anchorEl}
+        anchorOrigin={anchorOrigin}
+        transformOrigin={transformOrigin}
+        open={!!anchorEl}
+        onClose={() => setAnchorEl(null)}
         sx={{
           '&.MuiPopover-root > *': {
             minWidth: '256px',
           },
+          ...sx,
         }}
       >
-        {content}
-      </Popover>
+        {cloneElement(content, {
+          handleClick: () => setAnchorEl(null),
+        })}
+      </MuiPopover>
     </>
   );
+};
+
+export const Popover = (props) => {
+  const { anchorReference = 'anchorEl' } = props;
+  if (anchorReference === 'anchorPosition') {
+    return <PopoverAnchorPosition {...props} />;
+  }
+  return <PopoverAnchorElement {...props} />;
 };

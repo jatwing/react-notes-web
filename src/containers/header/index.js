@@ -7,7 +7,7 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
-import { ClickableComponentWithPopover } from 'src/components/feedback/popover';
+import { Popover } from 'src/components/feedback/popover';
 import { SkeletonText } from 'src/components/feedback/skeleton';
 import { AppBar } from 'src/components/surfaces/app-bar';
 import { Logo } from 'src/containers/logo';
@@ -35,100 +35,101 @@ const LeftSlot = () => {
   );
 };
 
-const NotificationsButton = () => {
+const NotificationsContent = () => {
   const notifications = useNotifications();
   const t = useTranslation();
-  return (
-    <ClickableComponentWithPopover
-      component={
-        <IconButton>
-          <Notifications />
-        </IconButton>
-      }
-      content={
-        !notifications.areAvailable || !t ? (
-          <List>
-            <ListItem>
-              <ListItemText>
-                <SkeletonText variant="primary" />
-              </ListItemText>
-            </ListItem>
-          </List>
-        ) : notifications.entities.length === 0 ? (
-          <List>
-            <ListItem>
-              <ListItemText
-                sx={{
-                  color: 'text.secondary',
-                }}
-              >
-                {t('no_notifications_yet')}
-              </ListItemText>
-            </ListItem>
-          </List>
-        ) : (
-          <List>
-            {notifications.entities.map((entity) => (
-              <ListItem key={entity.content}>
-                <ListItemText>{entity.content}</ListItemText>
-              </ListItem>
-            ))}
-          </List>
-        )
-      }
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-    />
+  return !notifications.areAvailable || !t ? (
+    <List>
+      <ListItem>
+        <ListItemText>
+          <SkeletonText variant="primary" />
+        </ListItemText>
+      </ListItem>
+    </List>
+  ) : notifications.entities.length === 0 ? (
+    <List>
+      <ListItem>
+        <ListItemText
+          sx={{
+            color: 'text.secondary',
+          }}
+        >
+          {t('no_notifications_yet')}
+        </ListItemText>
+      </ListItem>
+    </List>
+  ) : (
+    <List>
+      {notifications.entities.map((entity) => (
+        <ListItem key={entity.content}>
+          <ListItemText>{entity.content}</ListItemText>
+        </ListItem>
+      ))}
+    </List>
   );
 };
 
-const LanguageButton = () => {
+const LanguageContent = (props) => {
+  const { handleClick } = props;
   const { language, supportedLanguages, changeLanguage, fixedT } =
     useLanguageSwitcher();
-  return (
-    <ClickableComponentWithPopover
-      component={
-        <IconButton>
-          <Language />
-        </IconButton>
-      }
-      content={
-        !language || !supportedLanguages || !changeLanguage || !fixedT ? (
-          <List>
-            <ListItem>
-              <ListItemText>
-                <SkeletonText variant="primary" />
-              </ListItemText>
-            </ListItem>
-          </List>
-        ) : (
-          <List>
-            {supportedLanguages.map((supportedLanguage) => (
-              <ListItem disablePadding={true} key={supportedLanguage}>
-                <ListItemButton
-                  selected={supportedLanguage === language}
-                  onClick={() => changeLanguage(supportedLanguage)}
-                >
-                  {fixedT(supportedLanguage)(
-                    supportedLanguage.replaceAll('-', '_')
-                  )}
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        )
-      }
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-    />
+  return !language || !supportedLanguages || !changeLanguage || !fixedT ? (
+    <List>
+      <ListItem>
+        <ListItemText>
+          <SkeletonText variant="primary" />
+        </ListItemText>
+      </ListItem>
+    </List>
+  ) : (
+    <List>
+      {supportedLanguages.map((supportedLanguage) => (
+        <ListItem disablePadding={true} key={supportedLanguage}>
+          <ListItemButton
+            selected={supportedLanguage === language}
+            onClick={() => {
+              changeLanguage(supportedLanguage);
+              if (handleClick) {
+                handleClick();
+              }
+            }}
+          >
+            {fixedT(supportedLanguage)(supportedLanguage.replaceAll('-', '_'))}
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List>
   );
 };
 
 const RightSlot = () => {
   return (
-    <Box sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-      <NotificationsButton />
-      <LanguageButton />
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <Popover
+        component={
+          <IconButton>
+            <Language />
+          </IconButton>
+        }
+        content={<LanguageContent />}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      />
+      <Popover
+        component={
+          <IconButton>
+            <Notifications />
+          </IconButton>
+        }
+        content={<NotificationsContent />}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      />
     </Box>
   );
 };
