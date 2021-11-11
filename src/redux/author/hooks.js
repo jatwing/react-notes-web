@@ -9,14 +9,17 @@ export const useAuthor = () => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (status === 'idle') {
+    if (status === 'idle' && !error) {
       dispatch(authorRead());
     }
   }, []);
-  if (error) {
-    console.error(error);
-    return;
-  }
-  const isAvailable = status === 'fulfilled';
-  return { entity, isAvailable };
+  useEffect(() => {
+    if (error) {
+      console.error(error);
+    }
+  }, [error]);
+  return {
+    entity,
+    isAvailable: status === 'fulfilled' && !error,
+  };
 };
