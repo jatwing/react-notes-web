@@ -14,13 +14,15 @@ export const useRankings = () => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (status === 'idle') {
+    if (status === 'idle' && !error) {
       dispatch(rankingsRead());
     }
   });
-  if (error) {
-    console.error(error);
-  }
-  const isAvailable = status === 'settled';
+  useEffect(() => {
+    if (error) {
+      console.error(error);
+    }
+  }, [error])
+  const isAvailable = status === 'settled' && !error;
   return { entities, isAvailable };
 };

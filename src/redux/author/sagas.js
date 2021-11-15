@@ -1,6 +1,5 @@
-import { call, put, take } from 'redux-saga/effects';
-import { readDocuments } from 'src/lib/firebase';
 import axios from 'axios';
+import { call, put, take } from 'redux-saga/effects';
 
 import { authorRead } from './slice';
 
@@ -8,17 +7,10 @@ import { authorRead } from './slice';
 function* workAuthorRead() {
   try {
     yield put(authorRead.pending());
-
-    console.log('start to call it ');
-
-    const result = yield call(() =>
+    const response = yield call(() =>
       axios.get(process.env.REACT_APP_API_URL + '/author')
     );
-    console.log(result);
-    console.log(result.json);
-
-    const entities = yield call(readDocuments('authors'));
-    yield put(authorRead.fulfilled(entities[0]));
+    yield put(authorRead.fulfilled(response.data));
   } catch (error) {
     yield put(authorRead.rejected(error.toString()));
   }

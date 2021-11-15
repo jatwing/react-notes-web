@@ -9,13 +9,15 @@ export const useProject = () => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (status === 'idle') {
+    if (status === 'idle' && !error) {
       dispatch(projectRead());
     }
   }, []);
-  if (error) {
-    console.error(error);
-  }
-  const isAvailable = status === 'settled';
+  useEffect(() => {
+    if (error) {
+      console.error(error);
+    }
+  }, [error]);
+  const isAvailable = status === 'settled' && !error;
   return { entity, isAvailable };
 };

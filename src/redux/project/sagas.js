@@ -1,5 +1,5 @@
+import axios from 'axios';
 import { all, call, put, select, take } from 'redux-saga/effects';
-import { readDocuments } from 'src/lib/firebase';
 import {
   localizationAccessible,
   selectLocalization,
@@ -11,8 +11,10 @@ import { projectLocalized, projectRead } from './slice';
 function* workProjectRead() {
   try {
     yield put(projectRead.pending());
-    let entities = yield call(readDocuments('projects'));
-    yield put(projectRead.fulfilled(entities[0]));
+    const response = yield call(() =>
+      axios.get(process.env.REACT_APP_API_URL + '/project')
+    );
+    yield put(projectRead.fulfilled(response.data));
   } catch (error) {
     yield put(projectRead.rejected(error));
   }

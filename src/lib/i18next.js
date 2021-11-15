@@ -1,3 +1,4 @@
+import axios from 'axios';
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
@@ -42,17 +43,16 @@ const callback = async (error) => {
   if (error) {
     console.error(error);
   }
-  for (const language of languages) {
-    for (const namespace of namespaces) {
-      const resources = await readDocuments(
-        `translations/${language}/${namespace}`
-      )();
-      if (!resources) {
-        continue;
-      }
-      i18n.addResources(language, namespace, resources[0]);
-    }
-  }
+  const response = await axios.get(
+    process.env.REACT_APP_API_URL + '/translations'
+  );
+  response.data.forEach((translation) => {
+    i18n.addResources(
+      translation.language,
+      translation.namespace,
+      translation.resources
+    );
+  });
   store.dispatch(resourcesAdded(i18n));
 };
 

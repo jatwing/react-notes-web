@@ -16,10 +16,7 @@ export const notificationsTranslated = createAction(
 );
 
 /** state */
-const notificationsAdapter = createEntityAdapter({
-  selectId: (entity) => entity.name,
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
-});
+const notificationsAdapter = createEntityAdapter();
 
 const initialState = notificationsAdapter.getInitialState({
   status: 'idle',
@@ -49,14 +46,14 @@ const notificationsSlice = createSlice({
       }
       const t = action.payload;
       const entity = {
-        name: 'build_date',
+        id: 'build_date',
         content: t('development_build_on_datetime', {
           // val: buildDate
           val: new Date(Date.UTC(2012, 11, 20, 3, 0, 0)),
           formatParams: {
             val: {
               dateStyle: 'short',
-              timeStyle: 'short'
+              timeStyle: 'short',
             },
           },
         }),

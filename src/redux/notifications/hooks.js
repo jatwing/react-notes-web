@@ -14,14 +14,15 @@ export const useNotifications = () => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (status === 'idle') {
+    if (status === 'idle' && !error) {
       dispatch(notificationsRead());
     }
   }, []);
-  if (error) {
-    console.error(error);
-    return;
-  }
-  const areAvailable = status === 'settled';
+  useEffect(() => {
+    if (error) {
+      console.error(error);
+    }
+  }, [error]);
+  const areAvailable = status === 'settled' && !error;
   return { entities, areAvailable };
 };

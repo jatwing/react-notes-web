@@ -1,21 +1,21 @@
+import axios from 'axios';
 import { call, put, select, take } from 'redux-saga/effects';
-import { readDocuments } from 'src/lib/firebase';
 
 import { rankingsRead, selectEntities } from './slice';
 
 export const getRankingSort = (entities) => {
-  const sort = (unrankedArray, rankingsId, criterialProperty = null) => {
-    if (!entities || !(rankingsId in entities)) {
+  const sort = (unrankedArray, rankingId, criterialProperty = null) => {
+    if (!entities || !(rankingId in entities)) {
       return unrankedArray;
     }
     const getRanking = (element) => {
       const criterion = criterialProperty
         ? element[criterialProperty]
         : element;
-      if (!criterion || !(criterion in entities[rankingsId])) {
+      if (!criterion || !(criterion in entities[rankingId]['ranking'])) {
         return Number.MAX_VALUE;
       }
-      const ranking = entities[rankingsId][criterion];
+      const ranking = entities[rankingId]['ranking'][criterion];
       if (isNaN(ranking)) {
         return Number.MAX_VALUE;
       }
@@ -30,19 +30,10 @@ export const getRankingSort = (entities) => {
 function* workRankingsRead() {
   try {
     yield put(rankingsRead.pending());
-    const rawEntities = yield call(readDocuments('rankings'));
-    const slashUnescape = (value) =>
-      typeof value === 'string' || value instanceof String
-        ? value.replaceAll('\\', '/')
-        : value;
-    const processedEntities = rawEntities.map((rawEntity) => {
-      const processedEntity = {};
-      Object.keys(rawEntity).forEach((key) => {
-        processedEntity[slashUnescape(key)] = slashUnescape(rawEntity[key]);
-      });
-      return processedEntity;
-    });
-    yield put(rankingsRead.fulfilled(processedEntities));
+    const response = yield call(() =>
+      axios.get(process.env.REACT_APP_API_URL + '/rankings')
+    );
+    yield put(rankingsRead.fulfilled(response.data));
     const statefulEntities = yield select(selectEntities);
     const sort = getRankingSort(statefulEntities);
     yield put(rankingsRead.settled(sort));

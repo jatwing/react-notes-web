@@ -5,10 +5,7 @@ import { createLifecycleActions } from 'src/redux/utils';
 export const rankingsRead = createLifecycleActions('rankings', 'rankingsRead');
 
 /** state */
-const rankingsAdapter = createEntityAdapter({
-  selectId: (entity) => entity._id,
-  sortComparer: (a, b) => a._id.localeCompare(b._id),
-});
+const rankingsAdapter = createEntityAdapter();
 
 const initialState = rankingsAdapter.getInitialState({
   status: 'idle',

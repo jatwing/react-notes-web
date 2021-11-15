@@ -19,9 +19,6 @@ const pagesSlice = createSlice({
   extraReducers: {
     [pagesTranslated]: (state, action) => {
       state.status = 'settled';
-      
-      console.log('### translate')
-
       const t = action.payload;
       traverse(state.entities, (node) => {
         if (node.url === '/') {
@@ -35,6 +32,9 @@ const pagesSlice = createSlice({
       const sort = action.payload;
       traverse(state.entities, (node) => {
         if (node.children) {
+          /**
+           * TODO do not this, so many useless calls.
+           */
           sort(node.children, node.url, 'url');
         }
       });

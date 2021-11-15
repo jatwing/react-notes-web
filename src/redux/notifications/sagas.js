@@ -1,5 +1,5 @@
+import axios from 'axios';
 import { all, call, put, select, take } from 'redux-saga/effects';
-import { readDocuments } from 'src/lib/firebase';
 import { selectTranslation, translationAccessible } from 'src/redux/i18n/slice';
 
 import { notificationsRead, notificationsTranslated } from './slice';
@@ -8,8 +8,10 @@ import { notificationsRead, notificationsTranslated } from './slice';
 function* workNotificationsRead() {
   try {
     yield put(notificationsRead.pending());
-    const entities = yield call(readDocuments('notifications'));
-    yield put(notificationsRead.fulfilled(entities));
+    const response = yield call(() =>
+      axios.get(process.env.REACT_APP_API_URL + '/notifications')
+    );
+    yield put(notificationsRead.fulfilled(response.data));
   } catch (error) {
     yield put(notificationsRead.rejected(error));
   }
