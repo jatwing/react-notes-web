@@ -15,7 +15,7 @@ export const ReactNotesIcon = (props) => {
         }}
       />
       <path
-        d="M9 0A15 15 0 0114.211 1.252L14.211 18A3 3 0 009 18"
+        d="M9 0A15 15 0 0115 1.252L15 18A3 3 0 009 18"
         style={{
           stroke: 'none',
           fill: isColorful ? theme.palette.redux.dark : 'currentcolor',
