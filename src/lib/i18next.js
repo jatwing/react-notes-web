@@ -2,7 +2,6 @@ import axios from 'axios';
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-import { readDocuments } from 'src/lib/firebase';
 import {
   instanceInitialized,
   languageChanged,
@@ -39,21 +38,27 @@ const options = {
   },
 };
 
+console.log('dasdasdas 1111');
+
 const callback = async (error) => {
   if (error) {
     console.error(error);
   }
-  const response = await axios.get(
-    process.env.REACT_APP_API_URL + '/translations'
-  );
-  response.data.forEach((translation) => {
-    i18n.addResources(
-      translation.language,
-      translation.namespace,
-      translation.resources
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_API_URL + '/translations'
     );
-  });
-  store.dispatch(resourcesAdded(i18n));
+    response?.data?.forEach((translation) => {
+      i18n.addResources(
+        translation.language,
+        translation.namespace,
+        translation.resources
+      );
+    });
+    store.dispatch(resourcesAdded(i18n));
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 i18n.on('initialized', () => {

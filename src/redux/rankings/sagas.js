@@ -38,7 +38,7 @@ function* workRankingsRead() {
     const sort = getRankingSort(statefulEntities);
     yield put(rankingsRead.settled(sort));
   } catch (error) {
-    yield put(rankingsRead.rejected(error));
+    yield put(rankingsRead.rejected(error.toString()));
   }
 }
 

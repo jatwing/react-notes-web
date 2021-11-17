@@ -13,7 +13,7 @@ function* workNotificationsRead() {
     );
     yield put(notificationsRead.fulfilled(response.data));
   } catch (error) {
-    yield put(notificationsRead.rejected(error));
+    yield put(notificationsRead.rejected(error.toString()));
   }
 }
 

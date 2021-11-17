@@ -37,9 +37,12 @@ const notificationsSlice = createSlice({
     },
     [notificationsRead.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.error = action.error.message;
+      state.error = action.error;
     },
     [notificationsTranslated]: (state, action) => {
+      if (state.status !== 'fulfilled') {
+        return;
+      }
       state.status = 'settled';
       if (process.env.NODE_ENV !== 'development') {
         return;

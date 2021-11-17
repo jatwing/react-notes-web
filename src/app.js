@@ -1,4 +1,3 @@
-import 'src/lib/i18next.js';
 
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';

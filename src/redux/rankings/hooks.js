@@ -23,6 +23,6 @@ export const useRankings = () => {
       console.error(error);
     }
   }, [error])
-  const isAvailable = status === 'settled' && !error;
-  return { entities, isAvailable };
+  const areAvailable = status === 'settled' && !error;
+  return { entities, areAvailable };
 };

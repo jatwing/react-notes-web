@@ -26,9 +26,12 @@ const projectSlice = createSlice({
     },
     [projectRead.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.error = action.error.message;
+      state.error = action.error;
     },
     [projectLocalized]: (state, action) => {
+      if (state.status !== 'fulfilled') {
+        return;
+      }
       state.status = 'settled';
       const l = action.payload;
       state.entity.name = l(state.entity._name);

@@ -16,7 +16,7 @@ function* workProjectRead() {
     );
     yield put(projectRead.fulfilled(response.data));
   } catch (error) {
-    yield put(projectRead.rejected(error));
+    yield put(projectRead.rejected(error.toString()));
   }
 }
 

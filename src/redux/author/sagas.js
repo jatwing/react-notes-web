@@ -10,13 +10,6 @@ function* workAuthorRead() {
     const response = yield call(() =>
       axios.get(process.env.REACT_APP_API_URL + '/author')
     );
-    /**
-     * to handle the network error,
-     *
-     * throw 500 error here, and in other sagas.
-     */
-
-
     yield put(authorRead.fulfilled(response.data));
   } catch (error) {
     yield put(authorRead.rejected(error.toString()));
