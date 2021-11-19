@@ -1,5 +1,7 @@
 # React Notes (Web)
 
+trying to write it using typescript.
+
 ## Content
 
 1. [Tic-Tac-Toe Game](https://reactjs.org/tutorial/tutorial.html)
@@ -34,6 +36,9 @@ REACT_APP_API_URL=react-notes-api.jatwing.com
 ```
 
 ## Attribution
+
+TLNR;
+The codes and documentations of this work come from the official React, Redux and Redux Saga documentations and examples.
 
 [Tutorial: Intro to React](https://reactjs.org/tutorial/tutorial.html) by [React Community](https://github.com/reactjs) is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
