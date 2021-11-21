@@ -1,5 +1,5 @@
 import axios from 'axios';
-import instance, { Callback, InitOptions } from 'i18next';
+import instance, { InitOptions } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import {
@@ -34,7 +34,7 @@ const options: InitOptions = {
   },
 };
 
-const callback: Callback = async (error) => {
+const callback = async (error: any): Promise<void> => {
   if (error) {
     console.error(error);
   }
