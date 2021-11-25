@@ -1,5 +1,6 @@
-import { put, take } from 'redux-saga/effects';
+import { i18n } from 'i18next';
 import { SagaIterator } from 'redux-saga';
+import { put, take } from 'redux-saga/effects';
 
 import {
   instanceInitialized,
@@ -8,7 +9,6 @@ import {
   resourcesAdded,
   translationAccessible,
 } from './slice';
-import { i18n } from 'i18next';
 
 /** watchers */
 export function* watchTranslationAccessible(): SagaIterator {

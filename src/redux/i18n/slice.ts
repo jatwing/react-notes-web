@@ -1,10 +1,10 @@
 import {
   ActionCreatorWithPayload,
+  AnyAction,
   createAction,
   createSlice,
-  Slice,
   Reducer,
-  AnyAction,
+  Slice,
 } from '@reduxjs/toolkit';
 import { i18n, TFunction } from 'i18next';
 import { RootState } from 'redux/store';
