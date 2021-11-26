@@ -1,13 +1,14 @@
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from 'redux/store';
 
-import React from 'react'
-import { store } from 'redux/store'
-
-function App() {
+export const App = (): JSX.Element => {
   return (
-    <div className="App">
-      <header className="App-header">{'test'}</header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <header className="App-header">{'test'}</header>
+      </div>
+    </Provider>
   );
-}
+};
 
-export default App;

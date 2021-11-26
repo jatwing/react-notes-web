@@ -1,14 +1,14 @@
+import { i18n,TFunction } from 'i18next';
 import { useSelector } from 'react-redux';
-import { TFunction, i18n } from 'i18next';
 
 import {
+  LFunction,
   selectFixedTranslation,
   selectLanguage,
   selectLanguageChanged,
   selectLocalization,
   selectSupportedLangauges,
   selectTranslation,
-  LFunction,
 } from './slice';
 
 export const useTranslation = (): null | TFunction =>

@@ -1,10 +1,10 @@
 import {
   ActionCreatorWithPayload,
+  AnyAction,
   createAction,
   createSlice,
-  Slice,
   Reducer,
-  AnyAction,
+  Slice,
 } from '@reduxjs/toolkit';
 import { i18n, TFunction } from 'i18next';
 import { RootState } from 'redux/store';
@@ -35,7 +35,7 @@ const initialState: I18nState = {
 };
 
 /** reducer */
-const i18nSlice: Slice<I18nState, {}, 'i18n'> = createSlice({
+const i18nSlice: Slice<I18nState, any, 'i18n'> = createSlice({
   name: 'i18n',
   initialState,
   reducers: {},

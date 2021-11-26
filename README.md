@@ -18,11 +18,21 @@ trying to write it using typescript.
 
 7. [Redux Essentials](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
 
+## linter config
+
+- https://eslint.org/
+- https://typescript-eslint.io/
+- https://github.com/import-js/eslint-plugin-import
+- https://github.com/alexgorbatchev/eslint-import-resolver-typescript
+- https://github.com/yannickcr/eslint-plugin-react
+- https://reactjs.org/
+
 ## Environment Variables
 
 **`.env.local`**
 
 ```
+BROWSER=none
 DISABLE_ESLINT_PLUGIN=true
 PORT=4488
 REACT_APP_API_URL=***

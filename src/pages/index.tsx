@@ -1,6 +1,6 @@
-import { FC, Fragment } from 'react';
+import React from 'react';
 
-const Page: FC = () => {
+const Page = (): JSX.Element => {
   const a = 'test'
   return <div>{a}</div>;
 };

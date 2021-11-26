@@ -69,6 +69,7 @@ instance.on('languageChanged', () => {
   store.dispatch(languageChanged(instance));
 });
 
+/* eslint-disable import/no-named-as-default-member */
 instance.use(LanguageDetector).use(initReactI18next).init(options, callback);
 
 export default instance;
