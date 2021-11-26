@@ -11,19 +11,19 @@ import { RootState } from 'redux/store';
 
 /** actions */
 export const instanceInitialized: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n>('i18n/instanceInitialized');
+  createAction<i18n, string>('i18n/instanceInitialized');
 
 export const resourcesAdded: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n>('i18n/resourcesAdded');
+  createAction<i18n, string>('i18n/resourcesAdded');
 
 export const languageChanged: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n>('i18n/languageChanged');
+  createAction<i18n, string>('i18n/languageChanged');
 
 export const localizationAccessible: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n>('i18n/localizationAccessible');
+  createAction<i18n, string>('i18n/localizationAccessible');
 
 export const translationAccessible: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n>('i18n/translationAccessible');
+  createAction<i18n, string>('i18n/translationAccessible');
 
 /** state */
 type I18nState = {
@@ -35,7 +35,7 @@ const initialState: I18nState = {
 };
 
 /** reducer */
-const i18nSlice: Slice<I18nState, any, 'i18n'> = createSlice({
+const i18nSlice: Slice<I18nState, any, string> = createSlice({
   name: 'i18n',
   initialState,
   reducers: {},
