@@ -1,9 +1,5 @@
 import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import {
-  watchLocalizationAccessible,
-  watchTranslationAccessible,
-} from 'redux/i18n/sagas';
-import {
   i18nReducer,
   instanceInitialized,
   languageChanged,
@@ -12,6 +8,10 @@ import {
   translationAccessible,
 } from 'redux/i18n/slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
+import {
+  watchLocalizationAccessible,
+  watchTranslationAccessible,
+} from 'redux/i18n/sagas';
 
 const sagaMiddleware: SagaMiddleware<object> = createSagaMiddleware();
 

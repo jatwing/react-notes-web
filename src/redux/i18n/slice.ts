@@ -1,10 +1,10 @@
 import {
   ActionCreatorWithPayload,
-  AnyAction,
   createAction,
   createSlice,
-  Reducer,
   Slice,
+  Reducer,
+  AnyAction,
 } from '@reduxjs/toolkit';
 import { i18n, TFunction } from 'i18next';
 import { RootState } from 'redux/store';
@@ -70,17 +70,12 @@ export const selectFixedTranslation = (state: RootState): null | TFunction => {
 
 export type LFunction = (texts: { [key: string]: string }) => string;
 
-// TODO
-// customized LFunction should be similar to TFunction
-// indeed, conside the null from the beginning.
-
-export const selectLocalization =
-  (state: RootState): LFunction =>
-  (texts) => {
-    const i18n = state.i18n.instance;
-    if (!i18n) {
-      return '';
-    }
+export const selectLocalization = (state: RootState): null | LFunction => {
+  const i18n = state.i18n.instance;
+  if (!i18n) {
+    return null;
+  }
+  return (texts) => {
     if (i18n.language in texts) {
       return texts[i18n.language];
     }
@@ -89,6 +84,7 @@ export const selectLocalization =
     }
     return '';
   };
+};
 
 export const selectLanguage = (state: RootState): null | string => {
   const i18n = state.i18n.instance;
