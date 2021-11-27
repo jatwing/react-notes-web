@@ -68,7 +68,7 @@ export const selectFixedTranslation = (state: RootState): null | TFunction => {
   return i18n.getFixedT.bind(i18n);
 };
 
-export type LFunction = (texts: { [key: string]: string }) => string;
+export type LFunction = (texts: Record<string, string>) => string;
 
 export const selectLocalization = (state: RootState): null | LFunction => {
   const i18n = state.i18n.instance;

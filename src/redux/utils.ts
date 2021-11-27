@@ -4,7 +4,7 @@ import {
   createAction,
 } from '@reduxjs/toolkit';
 
-type ActionWithPromiseStates = ActionCreatorWithoutPayload<string> & {
+export type ActionWithPromiseStates = ActionCreatorWithoutPayload<string> & {
   pending: ActionCreatorWithoutPayload<string>;
   fulfilled: ActionCreatorWithPayload<any, string>;
   rejected: ActionCreatorWithPayload<string, string>;

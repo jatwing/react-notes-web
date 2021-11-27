@@ -13,7 +13,9 @@ function* workAuthorRead(): SagaIterator {
     );
     yield put(authorRead.fulfilled(response.data));
   } catch (error) {
-    yield put(authorRead.rejected(error.toString()));
+    if (error instanceof Error) {
+      yield put(authorRead.rejected(error.toString()));
+    }
   }
 }
 

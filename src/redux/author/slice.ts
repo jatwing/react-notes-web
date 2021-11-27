@@ -1,12 +1,13 @@
 import { AnyAction, createSlice, Reducer, Slice } from '@reduxjs/toolkit';
 import { RootState } from 'redux/store';
-import { ActionWithPromiseStates } from 'redux/utils';
+import {
+  ActionWithPromiseStates,
+  createActionWithPromiseStates,
+} from 'redux/utils';
 
 /** actions */
-export const authorRead: ActionWithPromiseStates = createLifecycleActions(
-  'author',
-  'authorRead',
-);
+export const authorRead: ActionWithPromiseStates =
+  createActionWithPromiseStates('author', 'authorRead');
 
 /** state */
 export type Author = Record<string, string | Record<string, string>>;
@@ -27,15 +28,16 @@ const initialState: AuthorState = {
 const authorSlice: Slice<AuthorState, any, string> = createSlice({
   name: 'author',
   initialState,
+  reducers: {},
   extraReducers: {
-    [authorRead.pending]: (state) => {
+    [authorRead.pending.toString()]: (state) => {
       state.status = 'pending';
     },
-    [authorRead.fulfilled]: (state, action) => {
+    [authorRead.fulfilled.toString()]: (state, action) => {
       state.status = 'fulfilled';
       state.entity = action.payload;
     },
-    [authorRead.rejected]: (state, action) => {
+    [authorRead.rejected.toString()]: (state, action) => {
       state.status = 'rejected';
       state.error = action.error;
     },

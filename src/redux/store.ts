@@ -1,4 +1,5 @@
 import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
+import { watchAuthorRead } from 'redux/author/sagas';
 import {
   watchLocalizationAccessible,
   watchTranslationAccessible,
@@ -12,11 +13,13 @@ import {
   translationAccessible,
 } from 'redux/i18n/slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
+import {authorReducer} from 'redux/author/slice';
 
 const sagaMiddleware: SagaMiddleware<any> = createSagaMiddleware();
 
 export const store: EnhancedStore<any> = configureStore({
   reducer: {
+    author: authorReducer,
     i18n: i18nReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -35,6 +38,7 @@ export const store: EnhancedStore<any> = configureStore({
     }).concat(sagaMiddleware),
 });
 
+sagaMiddleware.run(watchAuthorRead);
 sagaMiddleware.run(watchLocalizationAccessible);
 sagaMiddleware.run(watchTranslationAccessible);
 
