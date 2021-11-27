@@ -1,4 +1,4 @@
-import 'lib/i18next'
+import 'lib/i18next';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

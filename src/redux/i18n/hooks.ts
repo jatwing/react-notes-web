@@ -1,4 +1,4 @@
-import { i18n,TFunction } from 'i18next';
+import { i18n, TFunction } from 'i18next';
 import { useSelector } from 'react-redux';
 
 import {

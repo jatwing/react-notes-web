@@ -8,7 +8,7 @@ export type ActionWithPromiseStates = ActionCreatorWithoutPayload<string> & {
   pending: ActionCreatorWithoutPayload<string>;
   fulfilled: ActionCreatorWithPayload<any, string>;
   rejected: ActionCreatorWithPayload<string, string>;
-  settled: ActionCreatorWithoutPayload<string>;
+  settled: ActionCreatorWithPayload<any, string>;
 };
 
 export const createActionWithPromiseStates = (
@@ -19,5 +19,5 @@ export const createActionWithPromiseStates = (
     pending: createAction<void, string>(`${domain}/${event}/pending`),
     fulfilled: createAction<any, string>(`${domain}/${event}/fulfilled`),
     rejected: createAction<string, string>(`${domain}/${event}/rejected`),
-    settled: createAction<void, string>(`${domain}/${event}/settled`),
+    settled: createAction<any, string>(`${domain}/${event}/settled`),
   });

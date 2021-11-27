@@ -1,28 +1,28 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { useAuthor } from 'redux/author/hooks';
+import { useNotifications } from 'redux/notifications/hooks';
+import { useProject } from 'redux/project/hooks';
 import { store } from 'redux/store';
-import { useAuthor } from 'redux/author/hooks'
+import { useRankings } from 'redux/rankings/hooks'
 
 const Test = (): JSX.Element => {
-
   const author = useAuthor();
+  const notifications = useNotifications();
+  const project = useProject();
 
-  return <>
-      {'test the hooks here'}
-    </>
+  const rankings = useRankings();
 
-}
-
-
+  return <>{'test the hooks here'}</>;
+};
 
 export const App = (): JSX.Element => {
   return (
     <Provider store={store}>
       <div className="App">
         <header className="App-header">{'test'}</header>
-        <Test/>
+        <Test />
       </div>
     </Provider>
   );
 };
-
