@@ -14,9 +14,12 @@ import {
   translationAccessible,
 } from 'redux/i18n/slice';
 import { watchNotificationsRead } from 'redux/notifications/sagas';
-import { notificationsReducer } from 'redux/notifications/slice';
+import {
+  notificationsReducer,
+  notificationsTranslated,
+} from 'redux/notifications/slice';
 import { watchProjectRead } from 'redux/project/sagas';
-import { projectReducer } from 'redux/project/slice';
+import { projectLocalized,projectReducer  } from 'redux/project/slice';
 import { watchRankingsRead } from 'redux/rankings/sagas';
 import { rankingsRead, rankingsReducer } from 'redux/rankings/slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
@@ -41,6 +44,8 @@ export const store: EnhancedStore<any> = configureStore({
           languageChanged.toString(),
           localizationAccessible.toString(),
           translationAccessible.toString(),
+          notificationsTranslated.toString(),
+          projectLocalized.toString(),
           rankingsRead.settled.toString(),
         ],
         ignoredPaths: ['i18n.instance'],

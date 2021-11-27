@@ -52,12 +52,14 @@
     ]
   },
   "devDependencies": {
+    "@types/preval.macro": "^3.0.0",
     "@typescript-eslint/parser": "^5.4.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-react": "^7.27.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "preval.macro": "^5.0.0"
   }
 }
