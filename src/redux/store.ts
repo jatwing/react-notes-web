@@ -18,13 +18,13 @@ import {
   notificationsReducer,
   notificationsTranslated,
 } from 'redux/notifications/slice';
+import { watchPagesTranslated } from 'redux/pages/sagas';
+import { pagesReducer, pagesTranslated } from 'redux/pages/slice';
 import { watchProjectRead } from 'redux/project/sagas';
 import { projectLocalized, projectReducer } from 'redux/project/slice';
 import { watchRankingsRead } from 'redux/rankings/sagas';
 import { rankingsRead, rankingsReducer } from 'redux/rankings/slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { pagesReducer, pagesTranslated } from 'redux/pages/slice';
-import { watchPagesTranslated } from 'redux/pages/sagas';
 
 const sagaMiddleware: SagaMiddleware<any> = createSagaMiddleware();
 

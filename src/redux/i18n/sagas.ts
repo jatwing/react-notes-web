@@ -10,6 +10,11 @@ import {
 } from './slice';
 
 /** watchers */
+
+/**
+ * watch t, l change together ...
+ */
+
 export function* watchTranslationAccessible(): SagaIterator {
   yield take(instanceInitialized);
   const { payload } = yield take(resourcesAdded);

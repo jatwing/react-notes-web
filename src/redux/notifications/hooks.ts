@@ -9,7 +9,7 @@ import {
   selectStatus,
 } from './slice';
 
-export const useNotifications = (): null | Array<Notification> => {
+export const useNotifications = (): null | ReadonlyArray<Notification> => {
   const entities = useSelector(selectEntities);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);

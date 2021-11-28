@@ -1,14 +1,14 @@
 import {
+  ActionCreatorWithPayload,
+  AnyAction,
   createAction,
   createSlice,
-  ActionCreatorWithPayload,
+  Reducer,
   Slice,
-  AnyAction,
-  Reducer
 } from '@reduxjs/toolkit';
-import { pageItemTree, traverse, PageItemNode } from 'lib/pages';
-import { rankingsRead } from 'redux/rankings/slice';
 import { TFunction } from 'i18next';
+import { PageItemNode, pageItemTree, traverse } from 'lib/pages';
+import { rankingsRead } from 'redux/rankings/slice';
 import { RootState } from 'redux/store';
 
 /** actions */
@@ -57,7 +57,6 @@ const pagesSlice: Slice<PagesState, any, string> = createSlice({
          *
          */
 
-
         if (node.children) {
           /**
            * TODO do not this, so many useless calls.
@@ -101,7 +100,9 @@ export const selectMatchedPage = (state: RootState): null | PageItemNode => {
   return matchedPage;
 };
 
-export const selectSelectedPages = (state: RootState): Array<PageItemNode> => {
+export const selectSelectedPages = (
+  state: RootState,
+): ReadonlyArray<PageItemNode> => {
   const selectedPages: Array<PageItemNode> = [];
   traverse(state.pages.entities, (node) => {
     if (node.isSelected) {
@@ -115,7 +116,7 @@ export const selectSelectedPages = (state: RootState): Array<PageItemNode> => {
 
 export const selectAdjacentPages = (
   state: RootState,
-): Array<null | PageItemNode> => {
+): ReadonlyArray<null | PageItemNode> => {
   let previousPage = null;
   let matchedPage: null | PageItemNode = null;
   let nextPage = null;

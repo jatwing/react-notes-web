@@ -31,7 +31,7 @@ export const traverse = (
 export type PageItemNodeDraft = PageFileNode & {
   url?: string;
   type?: null | string;
-  codes?: null | Array<string>;
+  codes?: null | ReadonlyArray<string>;
 };
 
 export type PageItemNode = Required<PageItemNodeDraft>;
@@ -92,7 +92,7 @@ const getPageItemTree = (pageFileTree: null | PageFileNode): PageItemNode => {
 
 export const pageItemTree: PageItemNode = getPageItemTree(pageFileTree);
 
-const getPageItemUrls = (pageItemTree: PageItemNode): Array<string> => {
+const getPageItemUrls = (pageItemTree: PageItemNode): ReadonlyArray<string> => {
   const urls: Array<string> = [];
   traverse(pageItemTree, (node: PageItemNode) => {
     if (node.type === 'item') {
@@ -102,4 +102,5 @@ const getPageItemUrls = (pageItemTree: PageItemNode): Array<string> => {
   return urls;
 };
 
-export const pageItemUrls: Array<string> = getPageItemUrls(pageItemTree);
+export const pageItemUrls: ReadonlyArray<string> =
+  getPageItemUrls(pageItemTree);

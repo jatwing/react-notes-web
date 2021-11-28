@@ -1,9 +1,9 @@
+import { PageItemNode } from 'lib/pages';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useRankings } from 'redux/rankings/hooks';
 import { store } from 'redux/store';
-import { PageItemNode } from 'lib/pages';
 
 import {
   routeChanged,
@@ -30,10 +30,10 @@ export const usePages = (): null | PageItemNode => {
 export const useMatchedPage = (): null | PageItemNode =>
   useSelector(selectMatchedPage);
 
-export const useSelectedPages = (): Array<PageItemNode> =>
+export const useSelectedPages = (): ReadonlyArray<PageItemNode> =>
   useSelector(selectSelectedPages);
 
-export const useAdjacentPages = (): Array<null | PageItemNode> =>
+export const useAdjacentPages = (): ReadonlyArray<null | PageItemNode> =>
   useSelector(selectAdjacentPages);
 
 export const usePageViews = (): void => {
@@ -49,6 +49,5 @@ export const useDocumentTitle = (): void => {
    * FIXME the type in slice is wrong.
    */
 
-
- // document.title = matchedPage?.name ?? '';
+  // document.title = matchedPage?.name ?? '';
 };

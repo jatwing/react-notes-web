@@ -10,8 +10,12 @@ export const authorRead: ActionWithPromiseStates =
   createActionWithPromiseStates('author', 'authorRead');
 
 /** state */
-// TODO when we write in container, we can define more specific type of author.
-export type Author = Record<string, string | Record<string, string>>;
+export type Author = {
+  email: string;
+  id: string;
+  slack: string;
+  stack_overflow: string;
+};
 
 type AuthorState = {
   entity: null | Author;

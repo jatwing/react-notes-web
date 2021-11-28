@@ -56,8 +56,9 @@ export const rankingsReducer: Reducer<RankingsState, AnyAction> =
   rankingsSlice.reducer;
 
 /** selectors */
-export const selectEntities = (state: RootState): null | Array<Ranking> =>
-  state.rankings.entities;
+export const selectEntities = (
+  state: RootState,
+): null | ReadonlyArray<Ranking> => state.rankings.entities;
 
 export const selectStatus = (state: RootState): string => state.rankings.status;
 

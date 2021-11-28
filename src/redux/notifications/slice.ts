@@ -11,7 +11,7 @@ import {
 } from '@reduxjs/toolkit';
 import { i18n } from 'i18next';
 import { RootState } from 'redux/store';
-// import { buildDate } from 'src/lib/preval';
+import { buildDate } from 'lib/preval';
 import {
   ActionWithPromiseStates,
   createActionWithPromiseStates,
@@ -24,7 +24,10 @@ export const notificationsTranslated: ActionCreatorWithPayload<i18n, string> =
   createAction<i18n, string>('notifications/notificationsTranslated');
 
 /** state */
-export type Notification = Record<string, string>;
+export type Notification = {
+  id: string,
+  content: string
+}
 
 const notificationsAdapter: EntityAdapter<Notification> = createEntityAdapter();
 
@@ -95,7 +98,7 @@ const notificationsSelectors: EntitySelectors<Notification, any> =
     (state: RootState): EntityState<Notification> => state.notifications,
   );
 
-export const selectEntities: (state: RootState) => Array<Notification> =
+export const selectEntities: (state: RootState) => ReadonlyArray<Notification> =
   notificationsSelectors.selectAll;
 
 export const selectStatus = (state: RootState): string =>

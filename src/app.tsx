@@ -3,6 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { useAuthor } from 'redux/author/hooks';
 import { useNotifications } from 'redux/notifications/hooks';
+import { usePages } from 'redux/pages/hooks';
 import { useProject } from 'redux/project/hooks';
 import { useRankings } from 'redux/rankings/hooks';
 import { store } from 'redux/store';
@@ -17,6 +18,7 @@ const Test = (): JSX.Element => {
   const project = useProject();
 
   const rankings = useRankings();
+  const pages = usePages();
 
   return <>{'test the hooks here'}</>;
 };

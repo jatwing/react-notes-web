@@ -46,7 +46,7 @@ const callback = async (error: any): Promise<void> => {
       (translation: {
         language: string;
         namespace: string;
-        resources: Array<string>;
+        resources: ReadonlyArray<string>;
       }) => {
         instance.addResources(
           translation.language,
