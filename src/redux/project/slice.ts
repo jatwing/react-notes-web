@@ -33,12 +33,12 @@ const initialState: ProjectState = {
   status: 'idle',
   error: null,
 };
-
+  
+/** reducer */
 const projectSlice: Slice<ProjectState, any, string> = createSlice({
   name: 'project',
   initialState,
   reducers: {},
-  /** reducer */
   extraReducers: {
     [projectRead.pending.toString()]: (state) => {
       state.status = 'pending';

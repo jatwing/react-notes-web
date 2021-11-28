@@ -38,11 +38,11 @@ const initialState: NotificationsState = notificationsAdapter.getInitialState({
   error: null,
 });
 
+/** reducer */
 const notificationsSlice = createSlice({
   name: 'notifications',
   initialState,
   reducers: {},
-  /** reducer */
   extraReducers: {
     [notificationsRead.pending.toString()]: (state) => {
       state.status = 'pending';

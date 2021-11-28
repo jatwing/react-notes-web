@@ -32,10 +32,10 @@ const initialState: RankingsState = rankingsAdapter.getInitialState({
   error: null,
 });
 
+/** reducer */
 const rankingsSlice: Slice<RankingsState, any, string> = createSlice({
   name: 'rankings',
   initialState,
-  /** reducer */
   reducers: {},
   extraReducers: {
     [rankingsRead.pending.toString()]: (state) => {
