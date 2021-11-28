@@ -19,7 +19,7 @@ import {
   notificationsTranslated,
 } from 'redux/notifications/slice';
 import { watchProjectRead } from 'redux/project/sagas';
-import { projectLocalized,projectReducer  } from 'redux/project/slice';
+import { projectLocalized, projectReducer } from 'redux/project/slice';
 import { watchRankingsRead } from 'redux/rankings/sagas';
 import { rankingsRead, rankingsReducer } from 'redux/rankings/slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';

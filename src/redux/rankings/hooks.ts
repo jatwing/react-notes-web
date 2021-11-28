@@ -15,7 +15,6 @@ import {
  * for redux state, note thta immutability.
  */
 
-
 export const useRankings = (): null | Ranking => {
   const entities = useSelector(selectEntities);
   const status = useSelector(selectStatus);
@@ -31,7 +30,7 @@ export const useRankings = (): null | Ranking => {
     if (error) {
       console.error(error);
     }
-  }, [error])
+  }, [error]);
   if (status !== 'settled' || error) {
     return null;
   }

@@ -1,4 +1,4 @@
-import { buildDate, pageFileTree,readmeMarkdown } from 'lib/preval';
+import { buildDate, pageFileTree, readmeMarkdown } from 'lib/preval';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { useAuthor } from 'redux/author/hooks';

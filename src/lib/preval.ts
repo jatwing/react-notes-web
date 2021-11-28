@@ -14,11 +14,8 @@ module.exports = getFileContent('README.md');
 export type PageFileNode = {
   filename: string;
   path: string;
-  pathType: string;
-  isIndexFile: boolean;
-  isSliceFile: boolean;
-  content?: string;
-  children?: Array<PageFileNode>;
+  content: null | string;
+  children: null | Array<PageFileNode>;
   discipline: string;
 };
 
@@ -38,6 +35,17 @@ const disciplines = {
 const getPageFileTree = (path, discipline = '') => {
   const filename = basename(path);
   const subDiscipline = disciplines[path] || discipline;
+  if (statSync(path).isFile()) {
+    if (filename === 'index.tsx' || filename === 'slice.ts') {
+      return {
+        filename,
+        path,
+        content: readFileSync(path, 'utf8'),
+        children: null,
+        discipline: disciplines[path] || discipline,
+      };
+    }
+  }
   if (statSync(path).isDirectory()) {
     const children = readdirSync(path)
       .map((childFilename) =>
@@ -50,24 +58,10 @@ const getPageFileTree = (path, discipline = '') => {
     return {
       filename,
       path,
-      pathType: 'directory',
+      content: null,
       children,
       discipline: subDiscipline,
     };
-  } else if (statSync(path).isFile()) {
-    const isIndexFile = /^index.(js|jsx|ts|tsx)$/.test(filename);
-    const isSliceFile = /^slice.(js|jsx|ts|tsx)$/.test(filename);
-    if (isIndexFile || isSliceFile) {
-      return {
-        filename,
-        path,
-        pathType: 'file',
-        isIndexFile,
-        isSliceFile,
-        content: readFileSync(path, 'utf8'),
-        discipline: disciplines[path] || discipline,
-      };
-    }
   }
   return null;
 };
