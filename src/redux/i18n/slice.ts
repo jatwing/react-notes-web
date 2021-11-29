@@ -10,28 +10,29 @@ import { i18n, TFunction } from 'i18next';
 import { RootState } from 'redux/store';
 
 /** actions */
-export const instanceInitialized: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n, string>('i18n/instanceInitialized');
+export type I18n = i18n;
 
-export const resourcesAdded: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n, string>('i18n/resourcesAdded');
+export const instanceInitialized: ActionCreatorWithPayload<I18n, string> =
+  createAction<I18n, string>('i18n/instanceInitialized');
 
-export const languageChanged: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n, string>('i18n/languageChanged');
+export const resourcesAdded: ActionCreatorWithPayload<I18n, string> =
+  createAction<I18n, string>('i18n/resourcesAdded');
 
-export const localizationAccessible: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n, string>('i18n/localizationAccessible');
+export const languageChanged: ActionCreatorWithPayload<I18n, string> =
+  createAction<I18n, string>('i18n/languageChanged');
 
-export const translationAccessible: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n, string>('i18n/translationAccessible');
+export const i18nAccessible: ActionCreatorWithPayload<I18n, string> =
+  createAction<I18n, string>('i18n/i18nAccessible');
 
 /** state */
 type I18nState = {
-  instance: null | i18n;
+  entity: null | I18n;
+  status: string;
 };
 
 const initialState: I18nState = {
-  instance: null,
+  entity: null,
+  status: 'idle',
 };
 
 /** reducer */
@@ -40,11 +41,8 @@ const i18nSlice: Slice<I18nState, any, string> = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [translationAccessible.toString()]: (state, action) => {
-      state.instance = action.payload;
-    },
-    [localizationAccessible.toString()]: (state, action) => {
-      state.instance = action.payload;
+    [i18nAccessible.toString()]: (state, action) => {
+      state.entity = action.payload;
     },
   },
 });
@@ -52,26 +50,28 @@ const i18nSlice: Slice<I18nState, any, string> = createSlice({
 export const i18nReducer: Reducer<I18nState, AnyAction> = i18nSlice.reducer;
 
 /** selectors */
-export const selectTranslation = (state: RootState): null | TFunction => {
-  const i18n = state.i18n.instance;
+export type Translate = TFunction;
+
+export const selectTranslation = (state: RootState): null | Translate => {
+  const i18n = state.i18n.entity;
   if (!i18n) {
     return null;
   }
   return i18n.t.bind(i18n);
 };
 
-export const selectFixedTranslation = (state: RootState): null | TFunction => {
-  const i18n = state.i18n.instance;
+export const selectFixedTranslation = (state: RootState): null | Translate => {
+  const i18n = state.i18n.entity;
   if (!i18n) {
     return null;
   }
-  return i18n.getFixedT.bind(i18n);
+  return i18n.t.bind(i18n);
 };
 
-export type LFunction = (texts: Record<string, string>) => string;
+export type Localize = (texts: Record<string, string>) => string;
 
-export const selectLocalization = (state: RootState): null | LFunction => {
-  const i18n = state.i18n.instance;
+export const selectLocalization = (state: RootState): null | Localize => {
+  const i18n = state.i18n.entity;
   if (!i18n) {
     return null;
   }
@@ -87,7 +87,7 @@ export const selectLocalization = (state: RootState): null | LFunction => {
 };
 
 export const selectLanguage = (state: RootState): null | string => {
-  const i18n = state.i18n.instance;
+  const i18n = state.i18n.entity;
   if (!i18n) {
     return null;
   }
@@ -97,7 +97,7 @@ export const selectLanguage = (state: RootState): null | string => {
 export const selectSupportedLangauges = (
   state: RootState,
 ): null | ReadonlyArray<string> => {
-  const i18n = state.i18n.instance;
+  const i18n = state.i18n.entity;
   if (!i18n) {
     return null;
   }
@@ -111,10 +111,12 @@ export const selectSupportedLangauges = (
   return supportedLanguages.filter((language: string) => language !== 'cimode');
 };
 
+export type ChangeLanguage = i18n['changeLanguage'];
+
 export const selectLanguageChanged = (
   state: RootState,
-): null | i18n['changeLanguage'] => {
-  const i18n = state.i18n.instance;
+): null | ChangeLanguage => {
+  const i18n = state.i18n.entity;
   if (!i18n) {
     return null;
   }

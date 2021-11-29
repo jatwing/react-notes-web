@@ -1,27 +1,28 @@
-import { i18n, TFunction } from 'i18next';
 import { useSelector } from 'react-redux';
 
 import {
-  LFunction,
+  ChangeLanguage,
+  Localize,
   selectFixedTranslation,
   selectLanguage,
   selectLanguageChanged,
   selectLocalization,
   selectSupportedLangauges,
   selectTranslation,
+  Translate,
 } from './slice';
 
-export const useTranslation = (): null | TFunction =>
+export const useTranslation = (): null | Translate =>
   useSelector(selectTranslation);
 
-export const useLocalization = (): null | LFunction =>
+export const useLocalization = (): null | Localize =>
   useSelector(selectLocalization);
 
 export const useLanguageSwitcher = (): {
   language: null | string;
   supportedLanguages: null | ReadonlyArray<string>;
-  changeLanguage: null | i18n['changeLanguage'];
-  fixedT: null | TFunction;
+  changeLanguage: null | ChangeLanguage;
+  fixedT: null | Translate;
 } => {
   const language = useSelector(selectLanguage);
   const supportedLanguages = useSelector(selectSupportedLangauges);

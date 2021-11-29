@@ -7,6 +7,7 @@ import {
   Slice,
 } from '@reduxjs/toolkit';
 import { i18n } from 'i18next';
+import { Localize } from 'redux/i18n/slice';
 import { RootState } from 'redux/store';
 import {
   ActionWithPromiseStates,
@@ -16,8 +17,10 @@ import {
 /** actions */
 export const projectRead: ActionWithPromiseStates =
   createActionWithPromiseStates('project', 'projectRead');
-export const projectLocalized: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n, string>('project/projectLocalized');
+export const projectInternationalized: ActionCreatorWithPayload<
+  Localize,
+  string
+> = createAction<Localize, string>('project/projectLocalized');
 
 /** state */
 export type Project = Record<string, string | Record<string, string>>;
@@ -51,7 +54,7 @@ const projectSlice: Slice<ProjectState, any, string> = createSlice({
       state.status = 'rejected';
       state.error = action.error;
     },
-    [projectLocalized.toString()]: (state, action) => {
+    [projectInternationalized.toString()]: (state, action) => {
       if (state.status !== 'fulfilled') {
         return;
       }

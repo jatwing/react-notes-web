@@ -1,9 +1,13 @@
 import axios from 'axios';
-import { selectTranslation, translationAccessible } from 'redux/i18n/slice';
+import {
+  i18nAccessible,
+  selectLocalization,
+  selectTranslation,
+} from 'redux/i18n/slice';
 import { SagaIterator } from 'redux-saga';
 import { all, call, put, select, take } from 'redux-saga/effects';
 
-import { notificationsRead, notificationsTranslated } from './slice';
+import { notificationsInternationalized, notificationsRead } from './slice';
 
 /** workers */
 function* workNotificationsRead(): SagaIterator {
@@ -22,13 +26,15 @@ function* workNotificationsRead(): SagaIterator {
 
 /** watchers */
 export function* watchNotificationsRead(): SagaIterator {
-  yield all([take(notificationsRead), take(translationAccessible)]);
+  yield all([take(notificationsRead), take(i18nAccessible)]);
   yield call(workNotificationsRead);
+  const l = yield select(selectLocalization);
   const t = yield select(selectTranslation);
-  yield put(notificationsTranslated(t));
+  yield put(notificationsInternationalized({ l, t }));
   while (true) {
-    yield take(translationAccessible);
+    yield take(i18nAccessible);
+    const l = yield select(selectLocalization);
     const t = yield select(selectTranslation);
-    yield put(notificationsTranslated(t));
+    yield put(notificationsInternationalized({ l, t }));
   }
 }

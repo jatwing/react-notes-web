@@ -9,9 +9,9 @@ import {
   EntityState,
   Reducer,
 } from '@reduxjs/toolkit';
-import { i18n } from 'i18next';
-import { RootState } from 'redux/store';
 import { buildDate } from 'lib/preval';
+import { Localize, Translate } from 'redux/i18n/slice';
+import { RootState } from 'redux/store';
 import {
   ActionWithPromiseStates,
   createActionWithPromiseStates,
@@ -20,14 +20,18 @@ import {
 /** actions */
 export const notificationsRead: ActionWithPromiseStates =
   createActionWithPromiseStates('notifications', 'notificationsRead');
-export const notificationsTranslated: ActionCreatorWithPayload<i18n, string> =
-  createAction<i18n, string>('notifications/notificationsTranslated');
+export const notificationsInternationalized: ActionCreatorWithPayload<
+  { t: Translate; l: Localize },
+  string
+> = createAction<{ t: Translate; l: Localize }, string>(
+  'notifications/notificationsInternationalized',
+);
 
 /** state */
 export type Notification = {
-  id: string,
-  content: string
-}
+  id: string;
+  content: string;
+};
 
 const notificationsAdapter: EntityAdapter<Notification> = createEntityAdapter();
 
@@ -58,15 +62,17 @@ const notificationsSlice = createSlice({
       state.status = 'rejected';
       state.error = action.error;
     },
-    [notificationsTranslated.toString()]: (state, action) => {
+    [notificationsInternationalized.toString()]: (state, action) => {
       if (state.status !== 'fulfilled') {
         return;
       }
       state.status = 'settled';
+      // FIXME
       if (process.env.NODE_ENV !== 'development') {
         return;
       }
-      const t = action.payload;
+      const { t, l } = action.payload;
+
       const entity = {
         id: 'build_date',
         // FIXME, it requires t and l functions.

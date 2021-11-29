@@ -16,9 +16,8 @@ const Test = (): JSX.Element => {
   const author = useAuthor();
   const notifications = useNotifications();
   const project = useProject();
-
-  const rankings = useRankings();
   const pages = usePages();
+  const rankings = useRankings();
 
   return <>{'test the hooks here'}</>;
 };

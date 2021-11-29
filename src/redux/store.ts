@@ -1,27 +1,23 @@
 import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import { watchAuthorRead } from 'redux/author/sagas';
 import { authorReducer } from 'redux/author/slice';
+import { watchI18nAccessible } from 'redux/i18n/sagas';
 import {
-  watchLocalizationAccessible,
-  watchTranslationAccessible,
-} from 'redux/i18n/sagas';
-import {
+  i18nAccessible,
   i18nReducer,
   instanceInitialized,
   languageChanged,
-  localizationAccessible,
   resourcesAdded,
-  translationAccessible,
 } from 'redux/i18n/slice';
 import { watchNotificationsRead } from 'redux/notifications/sagas';
 import {
+  notificationsInternationalized,
   notificationsReducer,
-  notificationsTranslated,
 } from 'redux/notifications/slice';
-import { watchPagesTranslated } from 'redux/pages/sagas';
-import { pagesReducer, pagesTranslated } from 'redux/pages/slice';
+import { watchPagesInternationalized } from 'redux/pages/sagas';
+import { pagesInternationalized, pagesReducer } from 'redux/pages/slice';
 import { watchProjectRead } from 'redux/project/sagas';
-import { projectLocalized, projectReducer } from 'redux/project/slice';
+import { projectInternationalized, projectReducer } from 'redux/project/slice';
 import { watchRankingsRead } from 'redux/rankings/sagas';
 import { rankingsRead, rankingsReducer } from 'redux/rankings/slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
@@ -30,8 +26,8 @@ const sagaMiddleware: SagaMiddleware<any> = createSagaMiddleware();
 
 export const store: EnhancedStore<any> = configureStore({
   reducer: {
-    author: authorReducer,
     i18n: i18nReducer,
+    author: authorReducer,
     notifications: notificationsReducer,
     pages: pagesReducer,
     project: projectReducer,
@@ -45,24 +41,22 @@ export const store: EnhancedStore<any> = configureStore({
           instanceInitialized.toString(),
           resourcesAdded.toString(),
           languageChanged.toString(),
-          localizationAccessible.toString(),
-          translationAccessible.toString(),
-          notificationsTranslated.toString(),
-          pagesTranslated.toString(),
-          projectLocalized.toString(),
+          i18nAccessible.toString(),
+          notificationsInternationalized.toString(),
+          pagesInternationalized.toString(),
+          projectInternationalized.toString(),
           rankingsRead.settled.toString(),
         ],
-        ignoredPaths: ['i18n.instance'],
+        ignoredPaths: ['i18n.entity'],
       },
     }).concat(sagaMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 
+sagaMiddleware.run(watchI18nAccessible);
 sagaMiddleware.run(watchAuthorRead);
-sagaMiddleware.run(watchLocalizationAccessible);
-sagaMiddleware.run(watchTranslationAccessible);
 sagaMiddleware.run(watchNotificationsRead);
-sagaMiddleware.run(watchPagesTranslated);
+sagaMiddleware.run(watchPagesInternationalized);
 sagaMiddleware.run(watchProjectRead);
 sagaMiddleware.run(watchRankingsRead);

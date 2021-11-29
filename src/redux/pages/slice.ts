@@ -6,16 +6,18 @@ import {
   Reducer,
   Slice,
 } from '@reduxjs/toolkit';
-import { TFunction } from 'i18next';
 import { PageItemNode, pageItemTree, traverse } from 'lib/pages';
+import { Translate } from 'redux/i18n/slice';
 import { rankingsRead } from 'redux/rankings/slice';
 import { RootState } from 'redux/store';
 
 /** actions */
 export const routeChanged: ActionCreatorWithPayload<string, string> =
   createAction<string, string>('pages/routerChanged');
-export const pagesTranslated: ActionCreatorWithPayload<TFunction, string> =
-  createAction<TFunction, string>('pages/pagesTranslated');
+export const pagesInternationalized: ActionCreatorWithPayload<
+  Translate,
+  string
+> = createAction<Translate, string>('pages/pagesInternationalized');
 
 /** state */
 type PagesState = {
@@ -34,7 +36,7 @@ const pagesSlice: Slice<PagesState, any, string> = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [pagesTranslated.toString()]: (state, action) => {
+    [pagesInternationalized.toString()]: (state, action) => {
       state.status = 'settled';
       const t = action.payload;
       traverse(state.entities, (node) => {

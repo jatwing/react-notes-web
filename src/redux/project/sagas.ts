@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { localizationAccessible, selectLocalization } from 'redux/i18n/slice';
+import { i18nAccessible, selectLocalization } from 'redux/i18n/slice';
 import { SagaIterator } from 'redux-saga';
 import { all, call, put, select, take } from 'redux-saga/effects';
 
-import { projectLocalized, projectRead } from './slice';
+import { projectInternationalized, projectRead } from './slice';
 
 /** workers */
 function* workProjectRead(): SagaIterator {
@@ -22,13 +22,13 @@ function* workProjectRead(): SagaIterator {
 
 /** watchers */
 export function* watchProjectRead(): SagaIterator {
-  yield all([take(projectRead), take(localizationAccessible)]);
+  yield all([take(projectRead), take(i18nAccessible)]);
   yield call(workProjectRead);
   const l = yield select(selectLocalization);
-  yield put(projectLocalized(l));
+  yield put(projectInternationalized(l));
   while (true) {
-    yield take(localizationAccessible);
+    yield take(i18nAccessible);
     const l = yield select(selectLocalization);
-    yield put(projectLocalized(l));
+    yield put(projectInternationalized(l));
   }
 }

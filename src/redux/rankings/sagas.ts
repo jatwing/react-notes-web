@@ -6,6 +6,8 @@ import { rankingsRead, selectEntities } from './slice';
 
 /**
  * FIXME sort function should be more specific
+ *
+ * to use in redux, it should return an array
  */
 export const getRankingSort = (entities: any) => {
   const sort = (
