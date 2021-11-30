@@ -79,6 +79,39 @@ const pagesSlice: Slice<PagesState, any, string> = createSlice({
   },
 });
 
+// TODO new action after we define the sagas.
+/*
+ * we provide the ranking of your selected type
+ * you get the rankings object
+ * then sort base on it.
+export const getRanking2Sort = (entities: any) => {
+  const sort = (
+    unrankedArray: any,
+    rankingId: string,
+    criterialProperty: null | string,
+  ) => {
+    if (!entities || !(rankingId in entities)) {
+      return unrankedArray;
+    }
+    const getRanking = (element: any) => {
+      const criterion = criterialProperty
+        ? element[criterialProperty]
+        : element;
+      if (!criterion || !(criterion in entities[rankingId]['ranking'])) {
+        return Number.MAX_VALUE;
+      }
+      const ranking = entities[rankingId]['ranking'][criterion];
+      if (isNaN(ranking)) {
+        return Number.MAX_VALUE;
+      }
+      return ranking;
+    };
+    unrankedArray.sort((a: any, b: any) => getRanking(a) - getRanking(b));
+  };
+  return sort;
+};
+*/
+
 export const pagesReducer: Reducer<PagesState, AnyAction> = pagesSlice.reducer;
 
 /** selectors */

@@ -9,32 +9,29 @@ import { rankingsRead, selectEntities } from './slice';
  *
  * to use in redux, it should return an array
  */
-export const getRankingSort = (entities: any) => {
-  const sort = (
-    unrankedArray: any,
-    rankingId: string,
-    criterialProperty: null | string,
-  ) => {
-    if (!entities || !(rankingId in entities)) {
-      return unrankedArray;
-    }
-    const getRanking = (element: any) => {
-      const criterion = criterialProperty
-        ? element[criterialProperty]
-        : element;
-      if (!criterion || !(criterion in entities[rankingId]['ranking'])) {
-        return Number.MAX_VALUE;
-      }
-      const ranking = entities[rankingId]['ranking'][criterion];
-      if (isNaN(ranking)) {
-        return Number.MAX_VALUE;
-      }
-      return ranking;
-    };
-    unrankedArray.sort((a: any, b: any) => getRanking(a) - getRanking(b));
-  };
-  return sort;
-};
+
+// page hook: use ranking of pages, even page saga
+//
+// dispatch action ranking read (type = pages)
+//
+// this saga take the action
+//
+// base on the type string call different rankings api
+//
+// 1. base on the type, dispatch different actions with different payload (rankings)
+//
+// 2. diapatch only one ????
+
+
+// another usage is that
+//
+// i simply want to sort the footer column title
+//
+// use ranking of footer
+//
+// need to provide some hooks to do that in hooks.ts
+
+
 
 /** workers */
 function* workRankingsRead(): SagaIterator {
@@ -45,7 +42,8 @@ function* workRankingsRead(): SagaIterator {
     );
     yield put(rankingsRead.fulfilled(response.data));
     const statefulEntities = yield select(selectEntities);
-    const sort = getRankingSort(statefulEntities);
+   // const sort = getRankingSort(statefulEntities);
+    const sort = null;
     yield put(rankingsRead.settled(sort));
   } catch (error) {
     if (error instanceof Error) {
