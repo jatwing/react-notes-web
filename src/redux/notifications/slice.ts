@@ -4,15 +4,16 @@ import {
   createAction,
   createEntityAdapter,
   createSlice,
+  current,
   EntityAdapter,
+  EntityId,
   EntitySelectors,
   EntityState,
   Reducer,
-  current
 } from '@reduxjs/toolkit';
 import { buildDate } from 'lib/preval';
 import { Localize, Translate } from 'redux/i18n/slice';
-import { store, RootState } from 'redux/store';
+import { RootState } from 'redux/store';
 import {
   ActionWithPromiseStates,
   createActionWithPromiseStates,
@@ -29,9 +30,12 @@ export const notificationsInternationalized: ActionCreatorWithPayload<
 );
 
 /** state */
-export type Notification = {
+type NotificationDraft = {
   id: string;
-  _content: Record<string, string>;
+  _content: string | Record<string, string>;
+};
+
+export type Notification = NotificationDraft & {
   content: null | string;
 };
 
@@ -48,6 +52,68 @@ const initialState: NotificationsState = notificationsAdapter.getInitialState({
   error: null,
 });
 
+/** reducer */
+const notificationsSlice = createSlice({
+  name: 'notifications',
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [notificationsRead.pending.toString()]: (state) => {
+      state.status = 'pending';
+    },
+    [notificationsRead.fulfilled.toString()]: (state, action) => {
+      state.status = 'fulfilled';
+      const entities = action.payload
+        .filter(
+          (entity: NotificationDraft) =>
+            process.env.NODE_ENV === 'development' ||
+            entity.id !== 'build_date',
+        )
+        .map((entity: NotificationDraft) => ({
+          ...entity,
+          content: null,
+        }));
+      notificationsAdapter.setMany(state, entities);
+    },
+    [notificationsRead.rejected.toString()]: (state, action) => {
+      state.status = 'rejected';
+      state.error = action.error;
+    },
+    [notificationsInternationalized.toString()]: (state, action) => {
+      if (state.status !== 'fulfilled') {
+        return;
+      }
+      state.status = 'settled';
+      const { t, l } = action.payload;
+      const entities = current(state).ids.map((id: EntityId) => {
+        const entity = current(state).entities[id];
+        if (!entity) {
+          throw new Error('inexhaustive');
+        }
+        if (typeof entity._content === 'object') {
+          return {
+            ...entity,
+            content: l(entity._content),
+          };
+        }
+        if (entity.id === 'build_date') {
+          return {
+            ...entity,
+            content: t('development_build_on_datetime', {
+              value: buildDate,
+            }),
+          };
+        }
+        throw new Error('inexhaustive');
+      });
+      notificationsAdapter.setMany(state, entities);
+    },
+  },
+});
+
+export const notificationsReducer: Reducer<NotificationsState, AnyAction> =
+  notificationsSlice.reducer;
+
 /** selectors */
 const notificationsSelectors: EntitySelectors<Notification, any> =
   notificationsAdapter.getSelectors(
@@ -62,74 +128,3 @@ export const selectStatus = (state: RootState): string =>
 
 export const selectError = (state: RootState): null | string =>
   state.notifications.error;
-
-/** reducer */
-const notificationsSlice = createSlice({
-  name: 'notifications',
-  initialState,
-  reducers: {},
-  extraReducers: {
-    [notificationsRead.pending.toString()]: (state) => {
-      state.status = 'pending';
-    },
-    [notificationsRead.fulfilled.toString()]: (state, action) => {
-      state.status = 'fulfilled';
-
-      /**
-       * maybe save to state.source
-       *
-       *
-       * use the adpter after the translation.
-       * 
-       *
-       * drawback: can not change to cimode for testing
-       *
-       */
-
-
-      notificationsAdapter.setMany(state, action.payload);
-    },
-    [notificationsRead.rejected.toString()]: (state, action) => {
-      state.status = 'rejected';
-      state.error = action.error;
-    },
-    [notificationsInternationalized.toString()]: (state, action) => {
-      if (state.status !== 'fulfilled') {
-        return;
-      }
-      state.status = 'settled';
-      const { t, l } = action.payload;
-
-      console.log(current(state))
-
-
-      // FIXME
-      if (process.env.NODE_ENV !== 'development') {
-        return;
-      }
-
-      const entity = {
-        id: 'build_date',
-        // FIXME, it requires t and l functions.
-        content: 'TODO fix the i18next config settings error',
-        test: '31123',
-        /*
-        content: t('development_build_on_datetime', {
-          // val: buildDate
-          val: new Date(Date.UTC(2012, 11, 20, 3, 0, 0)),
-          formatParams: {
-            val: {
-              dateStyle: 'short',
-              timeStyle: 'short',
-            },
-          },
-        }),
-        */
-      };
-      //    notificationsAdapter.setOne(state, entity);
-    },
-  },
-});
-
-export const notificationsReducer: Reducer<NotificationsState, AnyAction> =
-  notificationsSlice.reducer;
