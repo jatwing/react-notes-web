@@ -41,7 +41,11 @@ const i18nSlice: Slice<I18nState, any, string> = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [instanceInitialized.toString()]: (state, action) => {
+      state.status = 'pending';
+    },
     [i18nAccessible.toString()]: (state, action) => {
+      state.status = 'fulfilled';
       state.entity = action.payload;
     },
   },
