@@ -6,7 +6,6 @@ import {
   Reducer,
   Slice,
 } from '@reduxjs/toolkit';
-import { i18n } from 'i18next';
 import { Localize } from 'redux/i18n/slice';
 import { RootState } from 'redux/store';
 import {
@@ -23,7 +22,16 @@ export const projectInternationalized: ActionCreatorWithPayload<
 > = createAction<Localize, string>('project/projectLocalized');
 
 /** state */
-export type Project = Record<string, string | Record<string, string>>;
+export type Project = {
+  id: string;
+  _copyright: Record<string, string>;
+  _name: Record<string, string>;
+  attribution: string;
+  copyright: string;
+  github: string;
+  license: string;
+  name: string;
+};
 
 type ProjectState = {
   entity: null | Project;
@@ -48,7 +56,11 @@ const projectSlice: Slice<ProjectState, any, string> = createSlice({
     },
     [projectRead.fulfilled.toString()]: (state, action) => {
       state.status = 'fulfilled';
-      state.entity = action.payload;
+      state.entity = {
+        ...action.payload,
+        copyright: '',
+        name: '',
+      };
     },
     [projectRead.rejected.toString()]: (state, action) => {
       state.status = 'rejected';
@@ -60,11 +72,11 @@ const projectSlice: Slice<ProjectState, any, string> = createSlice({
       }
       state.status = 'settled';
       const l = action.payload;
-      if (!state.entity || !l) {
-        return;
+      if (!state.entity) {
+        throw new Error('inexhaustive');
       }
-      state.entity.name = l(state.entity._name);
       state.entity.copyright = l(state.entity._copyright);
+      state.entity.name = l(state.entity._name);
     },
   },
 });

@@ -36,7 +36,7 @@ type NotificationDraft = {
 };
 
 export type Notification = NotificationDraft & {
-  content: null | string;
+  content: string;
 };
 
 const notificationsAdapter: EntityAdapter<Notification> =
@@ -63,7 +63,7 @@ const notificationsSlice = createSlice({
     },
     [notificationsRead.fulfilled.toString()]: (state, action) => {
       state.status = 'fulfilled';
-      const entities = action.payload
+      const entities: Array<Notification> = action.payload
         .filter(
           (entity: NotificationDraft) =>
             process.env.NODE_ENV === 'development' ||
@@ -71,7 +71,7 @@ const notificationsSlice = createSlice({
         )
         .map((entity: NotificationDraft) => ({
           ...entity,
-          content: null,
+          content: '',
         }));
       notificationsAdapter.setMany(state, entities);
     },

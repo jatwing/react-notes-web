@@ -11,8 +11,8 @@ export const authorRead: ActionWithPromiseStates =
 
 /** state */
 export type Author = {
-  email: string;
   id: string;
+  email: string;
   slack: string;
   stack_overflow: string;
 };
