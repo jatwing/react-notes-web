@@ -1,9 +1,6 @@
 import {
   AnyAction,
-  createEntityAdapter,
   createSlice,
-  EntityAdapter,
-  EntityState,
   Reducer,
   Slice,
 } from '@reduxjs/toolkit';

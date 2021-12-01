@@ -1,14 +1,30 @@
 import { PageItemNode } from 'lib/pages';
 import { Ranking } from './slice';
 
+const getRank = (key: string, ranking: Ranking['data']): number => {
+  if (!(key in ranking)) {
+    return Number.MAX_VALUE;
+  }
+  return ranking[key];
+};
+
+// can not use a common function, url is here.
 export const sortPages = (
   pages: Array<PageItemNode>,
   ranking: Ranking['data'],
 ): Array<PageItemNode> => {
+  console.log('## sortPages ##');
+  console.log(pages);
+  console.log(ranking);
+  pages.forEach((page) => {
+    console.log(page);
+  });
+
   return pages
     .slice()
     .sort(
-      (a: PageItemNode, b: PageItemNode) => ranking[a.url] - ranking[b.url],
+      (a: PageItemNode, b: PageItemNode) =>
+        getRank(a.url, ranking) - getRank(b.url, ranking),
     );
 };
 

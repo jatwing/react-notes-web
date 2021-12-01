@@ -47,7 +47,7 @@ export const store: EnhancedStore<any> = configureStore({
           projectInternationalized.toString(),
           pagesRankingsRead.settled.toString(),
         ],
-        ignoredPaths: ['i18n.entity'],
+        ignoredPaths: ['i18n.entity', 'rankings.pages.sort'],
       },
     }).concat(sagaMiddleware),
 });

@@ -25,7 +25,8 @@ const options: InitOptions = {
   resources: {},
   /** translation defaults */
   interpolation: {
-    escapeValue: false,
+    escape: (str) => str.replaceAll('-', '_'),
+    escapeValue: true,
   },
   /** react i18next */
   react: {

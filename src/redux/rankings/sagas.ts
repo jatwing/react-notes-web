@@ -25,11 +25,11 @@ export function* workPagesRankingsRead(): SagaIterator {
     );
     yield put(pagesRankingsRead.fulfilled(response.data));
 
-    const rankings = yield select(selectColumnsEntities);
+    const rankings = yield select(selectPagesEntities);
     
-    const sort = getSortation(rankings, 'pages');
-    
-    console.log(sort);
+ //   const sort = getSortation(rankings, 'pages');
+
+    yield put(pagesRankingsRead.settled(getSortation(rankings, 'pages')))
 
   } catch (error) {
     if (error instanceof Error) {

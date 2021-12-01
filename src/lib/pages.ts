@@ -42,18 +42,18 @@ const getPageItemTree = (pageFileTree: null | PageFileNode): PageItemNode => {
   }
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
   traverse(pageItemTree, (node: PageItemNodeDraft): undefined | false => {
-    /** callback for node with children and valid path */
-    if (!node.children) {
-      throw new Error('inexhaustive');
-    }
+    /** callback for node with valid path and children */
     const result = /^src\/pages(.*)$/.exec(node.path);
     if (!result) {
       throw new Error('inexhaustive');
     }
-    node.url = result[1];
+    node.url = result[1] || '/';
+    if (!node.children) {
+      return;
+    }
     /** four types of node */
     const indexChild = node.children.find(
-      (child) => child.filename === 'index.ts',
+      (child) => child.filename === 'index.tsx',
     );
     if (!indexChild) {
       if (!node.children.some((child) => !!child.children)) {

@@ -5,10 +5,11 @@ import {
   createSlice,
   Reducer,
   Slice,
+  current,
 } from '@reduxjs/toolkit';
 import { PageItemNode, pageItemTree, traverse } from 'lib/pages';
 import { Translate } from 'redux/i18n/slice';
- //import { rankingsRead } from 'redux/rankings/slice';
+import { pagesRankingsRead } from 'redux/rankings/slice';
 import { RootState } from 'redux/store';
 
 /** actions */
@@ -43,25 +44,18 @@ const pagesSlice: Slice<PagesState, any, string> = createSlice({
         if (node.url === '/') {
           node.name = t('home');
         } else {
-          /**
-           * FIXME use the escape function inside i81next.
-           */
           node.name = t(node.filename.replaceAll('-', '_'));
         }
       });
     },
-
-    /*
-    [rankingsRead.settled.toString()]: (state, action) => {
+    [pagesRankingsRead.settled.toString()]: (state, action) => {
       const sort = action.payload;
       traverse(state.entities, (node) => {
-
         if (node.children) {
-          sort(node.children, node.url, 'url');
+          node.children = sort(node.children, node.url);
         }
       });
     },
-  */
     [routeChanged.toString()]: (state, action) => {
       traverse(state.entities, (node) => {
         const route = action.payload;

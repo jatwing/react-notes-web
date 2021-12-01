@@ -8,9 +8,9 @@ import { useProject } from 'redux/project/hooks';
 import { usePagesRankings  } from 'redux/rankings/hooks';
 import { store } from 'redux/store';
 
-console.log(buildDate);
+//console.log(buildDate);
 //console.log(readmeMarkdown)
-console.log(pageFileTree);
+//console.log(pageFileTree);
 
 const Test = (): JSX.Element => {
   const author = useAuthor();
@@ -18,6 +18,9 @@ const Test = (): JSX.Element => {
   const project = useProject();
   const pages = usePages();
   const rankings = usePagesRankings();
+
+  // console.log(' 2. pages')
+  //  console.log(pages)
 
   return <>{'test the hooks here'}</>;
 };
