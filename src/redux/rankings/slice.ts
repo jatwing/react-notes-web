@@ -24,8 +24,8 @@ export const columnsRankingsRead: ActionWithPromiseStates =
 /** state */
 export type Ranking = {
   id: string;
-  ranking: Record<string, number>;
   category: string;
+  data: Record<string, number>;
 };
 
 type RankingsState = {

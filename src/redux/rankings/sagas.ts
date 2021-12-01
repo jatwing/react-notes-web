@@ -9,9 +9,13 @@ import {
   selectColumnsEntities,
 } from './slice';
 
+import { Sort, getSortation } from './utils';
+
 /** workers */
 
 // finally we need to combine them;
+//
+// need the actionCreator and the category
 
 export function* workPagesRankingsRead(): SagaIterator {
   try {
@@ -20,7 +24,13 @@ export function* workPagesRankingsRead(): SagaIterator {
       axios.get(process.env.REACT_APP_API_URL + '/rankings/pages'),
     );
     yield put(pagesRankingsRead.fulfilled(response.data));
-    // prepare sort function here or not ?
+
+    const rankings = yield select(selectColumnsEntities);
+    
+    const sort = getSortation(rankings, 'pages');
+    
+    console.log(sort);
+
   } catch (error) {
     if (error instanceof Error) {
       yield put(pagesRankingsRead.rejected(error.toString()));
@@ -47,8 +57,8 @@ export function* workColumnsRankingsRead(): SagaIterator {
 export function* watchPagesRankingsRead(): SagaIterator {
   yield take(pagesRankingsRead);
 
-  // use common worker, need to provide , 
-  //    - category name: pages 
+  // use common worker, need to provide ,
+  //    - category name: pages
   //    - action name : pagesRankingsRead
 
   yield call(workPagesRankingsRead);
