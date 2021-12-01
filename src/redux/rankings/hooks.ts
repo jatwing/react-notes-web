@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Ranking,
-  rankingsRead,
-  selectEntities,
-  selectError,
-  selectStatus,
+  pagesRankingsRead,
+  selectPagesEntities,
+  selectPagesError,
+  selectPagesStatus,
 } from './slice';
 
 /**
@@ -15,15 +15,18 @@ import {
  * for redux state, note thta immutability.
  */
 
-export const useRankings = (): null | Ranking => {
-  const entities = useSelector(selectEntities);
-  const status = useSelector(selectStatus);
-  const error = useSelector(selectError);
+export const usePagesRankings = (): null | ReadonlyArray<Ranking> => {
+  const entities = useSelector(selectPagesEntities);
+
+  // directly get sort here
+
+  const status = useSelector(selectPagesStatus);
+  const error = useSelector(selectPagesError);
   const dispatch = useDispatch();
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (status === 'idle' && !error) {
-      dispatch(rankingsRead());
+      dispatch(pagesRankingsRead());
     }
   });
   useEffect(() => {

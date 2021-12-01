@@ -2,58 +2,59 @@ import axios from 'axios';
 import { SagaIterator } from 'redux-saga';
 import { call, put, select, take } from 'redux-saga/effects';
 
-import { rankingsRead, selectEntities } from './slice';
-
-/**
- * FIXME sort function should be more specific
- *
- * to use in redux, it should return an array
- */
-
-// page hook: use ranking of pages, even page saga
-//
-// dispatch action ranking read (type = pages)
-//
-// this saga take the action
-//
-// base on the type string call different rankings api
-//
-// 1. base on the type, dispatch different actions with different payload (rankings)
-//
-// 2. diapatch only one ????
-
-
-// another usage is that
-//
-// i simply want to sort the footer column title
-//
-// use ranking of footer
-//
-// need to provide some hooks to do that in hooks.ts
-
-
+import {
+  pagesRankingsRead,
+  selectPagesEntities,
+  columnsRankingsRead,
+  selectColumnsEntities,
+} from './slice';
 
 /** workers */
-function* workRankingsRead(): SagaIterator {
+
+// finally we need to combine them;
+
+export function* workPagesRankingsRead(): SagaIterator {
   try {
-    yield put(rankingsRead.pending());
+    yield put(pagesRankingsRead.pending());
     const response = yield call(() =>
-      axios.get(process.env.REACT_APP_API_URL + '/rankings'),
+      axios.get(process.env.REACT_APP_API_URL + '/rankings/pages'),
     );
-    yield put(rankingsRead.fulfilled(response.data));
-    const statefulEntities = yield select(selectEntities);
-   // const sort = getRankingSort(statefulEntities);
-    const sort = null;
-    yield put(rankingsRead.settled(sort));
+    yield put(pagesRankingsRead.fulfilled(response.data));
+    // prepare sort function here or not ?
   } catch (error) {
     if (error instanceof Error) {
-      yield put(rankingsRead.rejected(error.toString()));
+      yield put(pagesRankingsRead.rejected(error.toString()));
+    }
+  }
+}
+
+export function* workColumnsRankingsRead(): SagaIterator {
+  try {
+    yield put(columnsRankingsRead.pending());
+    const response = yield call(() =>
+      axios.get(process.env.REACT_APP_API_URL + '/rankings/columns'),
+    );
+    yield put(columnsRankingsRead.fulfilled(response.data));
+    // prepare sort function here or not ?
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(columnsRankingsRead.rejected(error.toString()));
     }
   }
 }
 
 /** watchers */
-export function* watchRankingsRead() {
-  yield take(rankingsRead);
-  yield call(workRankingsRead);
+export function* watchPagesRankingsRead(): SagaIterator {
+  yield take(pagesRankingsRead);
+
+  // use common worker, need to provide , 
+  //    - category name: pages 
+  //    - action name : pagesRankingsRead
+
+  yield call(workPagesRankingsRead);
+}
+
+export function* watchColumnsRankingsRead(): SagaIterator {
+  yield take(columnsRankingsRead);
+  yield call(workColumnsRankingsRead);
 }

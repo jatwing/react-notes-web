@@ -2,7 +2,7 @@ import { PageItemNode } from 'lib/pages';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { useRankings } from 'redux/rankings/hooks';
+// import { useRankings } from 'redux/rankings/hooks';
 import { store } from 'redux/store';
 
 import {

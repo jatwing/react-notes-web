@@ -18,8 +18,8 @@ import { watchPagesInternationalized } from 'redux/pages/sagas';
 import { pagesInternationalized, pagesReducer } from 'redux/pages/slice';
 import { watchProjectRead } from 'redux/project/sagas';
 import { projectInternationalized, projectReducer } from 'redux/project/slice';
-import { watchRankingsRead } from 'redux/rankings/sagas';
-import { rankingsRead, rankingsReducer } from 'redux/rankings/slice';
+import { watchPagesRankingsRead } from 'redux/rankings/sagas';
+import { pagesRankingsRead, rankingsReducer } from 'redux/rankings/slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 
 const sagaMiddleware: SagaMiddleware<any> = createSagaMiddleware();
@@ -45,7 +45,7 @@ export const store: EnhancedStore<any> = configureStore({
           notificationsInternationalized.toString(),
           pagesInternationalized.toString(),
           projectInternationalized.toString(),
-          rankingsRead.settled.toString(),
+          pagesRankingsRead.settled.toString(),
         ],
         ignoredPaths: ['i18n.entity'],
       },
@@ -59,4 +59,4 @@ sagaMiddleware.run(watchAuthorRead);
 sagaMiddleware.run(watchNotificationsRead);
 sagaMiddleware.run(watchPagesInternationalized);
 sagaMiddleware.run(watchProjectRead);
-sagaMiddleware.run(watchRankingsRead);
+sagaMiddleware.run(watchPagesRankingsRead);
