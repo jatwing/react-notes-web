@@ -1,15 +1,10 @@
-import {
-  AnyAction,
-  createSlice,
-  Reducer,
-  Slice,
-} from '@reduxjs/toolkit';
+import { AnyAction, createSlice, Reducer, Slice } from '@reduxjs/toolkit';
 import { RootState } from 'redux/store';
 import {
   ActionWithPromiseStates,
   createActionWithPromiseStates,
 } from 'redux/utils';
-import { Sort } from './utils'
+import { Sort } from './utils';
 
 /** actions */
 export const pagesRankingsRead: ActionWithPromiseStates =
@@ -98,28 +93,51 @@ export const rankingsReducer: Reducer<RankingsState, AnyAction> =
   rankingsSlice.reducer;
 
 /** selectors */
-export const selectPagesEntities = (
-  state: RootState,
-): null | ReadonlyArray<Ranking> => state.rankings.pages.entities;
+export const selectEntities =
+  (category: string) =>
+  (state: RootState): null | ReadonlyArray<Ranking>  => {
+    switch (category) {
+      case 'pages':
+      case 'columns':
+        return state.rankings[category].entities;
+      default:
+        throw new Error('unreachable');
+    }
+  };
 
-export const selectPagesSortation = (state: RootState): null | Sort =>
-  state.rankings.pages.sort;
+export const selectSortation =
+  (category: string) =>
+  (state: RootState): null | Sort  => {
+    switch (category) {
+      case 'pages':
+      case 'columns':
+        return state.rankings[category].sort;
+      default:
+        throw new Error('unreachable');
+    }
+  };
 
-export const selectPagesStatus = (state: RootState): string =>
-  state.rankings.pages.status;
+export const selectStatus =
+  (category: string) =>
+  (state: RootState): string  => {
+    switch (category) {
+      case 'pages':
+      case 'columns':
+        return state.rankings[category].status;
+      default:
+        throw new Error('unreachable');
+    }
+  };
 
-export const selectPagesError = (state: RootState): null | string =>
-  state.rankings.pages.error;
+export const selectError =
+  (category: string) =>
+  (state: RootState): null | string  => {
+    switch (category) {
+      case 'pages':
+      case 'columns':
+        return state.rankings[category].error;
+      default:
+        throw new Error('unreachable');
+    }
+  };
 
-export const selectColumnsEntities = (
-  state: RootState,
-): null | ReadonlyArray<Ranking> => state.rankings.columns.entities;
-
-export const selectColumnsSortation = (state: RootState): null | Sort =>
-  state.rankings.columns.sort;
-
-export const selectColumnsStatus = (state: RootState): string =>
-  state.rankings.columns.status;
-
-export const selectColumnsError = (state: RootState): null | string =>
-  state.rankings.columns.error;

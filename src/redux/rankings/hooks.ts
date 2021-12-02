@@ -4,29 +4,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Ranking,
   pagesRankingsRead,
-  selectPagesEntities,
-  selectPagesError,
-  selectPagesStatus,
+  columnsRankingsRead,
+  selectSortation,
+  selectError,
+  selectStatus,
 } from './slice';
+import { Sort } from './utils';
 
-/**
- * TODO define a helper function to use the Ranking to sort
- *
- * for redux state, note thta immutability.
- */
-
-export const usePagesRankings = (): null | ReadonlyArray<Ranking> => {
-  const entities = useSelector(selectPagesEntities);
-
-  // directly get sort here
-
-  const status = useSelector(selectPagesStatus);
-  const error = useSelector(selectPagesError);
+export const useRankings = (category: string): null | Sort => {
+  const sort = useSelector(selectSortation(category));
+  const status = useSelector(selectStatus(category));
+  const error = useSelector(selectError(category));
   const dispatch = useDispatch();
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (status === 'idle' && !error) {
-      dispatch(pagesRankingsRead());
+      if (category === 'pages') {
+        dispatch(pagesRankingsRead());
+      }
+      if (category === 'columns') {
+        dispatch(columnsRankingsRead());
+      }
     }
   });
   useEffect(() => {
@@ -37,5 +35,5 @@ export const usePagesRankings = (): null | ReadonlyArray<Ranking> => {
   if (status !== 'settled' || error) {
     return null;
   }
-  return entities;
+  return sort;
 };

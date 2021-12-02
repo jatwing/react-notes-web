@@ -1,46 +1,38 @@
 import { PageItemNode } from 'lib/pages';
 import { Ranking } from './slice';
 
-const getRank = (key: string, ranking: Ranking['data']): number => {
-  if (!(key in ranking)) {
+const getRank = (name: string, ranking: Ranking['data']): number => {
+  if (!(name in ranking)) {
     return Number.MAX_VALUE;
   }
-  return ranking[key];
+  return ranking[name];
 };
 
-// can not use a common function, url is here.
-export const sortPages = (
-  pages: Array<PageItemNode>,
-  ranking: Ranking['data'],
-): Array<PageItemNode> => {
-  console.log('## sortPages ##');
-  console.log(pages);
-  console.log(ranking);
-  pages.forEach((page) => {
-    console.log(page);
-  });
-
-  return pages
-    .slice()
-    .sort(
-      (a: PageItemNode, b: PageItemNode) =>
-        getRank(a.url, ranking) - getRank(b.url, ranking),
-    );
+const getName = (entity: any, category: string): string => {
+  switch (category) {
+    case 'pages':
+      return (entity as PageItemNode).url;
+    default:
+      throw new Error('unreachable');
+  }
 };
 
-export type Sort = (entities: Array<any>, id: string) => Array<any>;
+export type Sort = <T>(entities: Array<T>, id: string) => Array<T>;
 
 export const getSortation =
   (rankings: Array<Ranking>, category: string): Sort =>
-  (entities: Array<any>, id: string): Array<any> => {
+  <T>(entities: Array<T>, id: string): Array<T> => {
     const ranking = rankings.find(
       (ranking: Ranking) => ranking.id === id && ranking.category === category,
     );
     if (!ranking) {
       throw new Error('unreachable');
     }
-    if (category === 'pages') {
-      return sortPages(entities, ranking.data);
-    }
-    throw new Error('unreachable');
+    return entities
+      .slice()
+      .sort(
+        (a: T, b: T) =>
+          getRank(getName(a, category), ranking.data) -
+          getRank(getName(b, category), ranking.data),
+      );
   };

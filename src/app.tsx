@@ -5,7 +5,7 @@ import { useAuthor } from 'redux/author/hooks';
 import { useNotifications } from 'redux/notifications/hooks';
 import { usePages } from 'redux/pages/hooks';
 import { useProject } from 'redux/project/hooks';
-import { usePagesRankings  } from 'redux/rankings/hooks';
+import { useRankings  } from 'redux/rankings/hooks';
 import { store } from 'redux/store';
 
 //console.log(buildDate);
@@ -17,7 +17,7 @@ const Test = (): JSX.Element => {
   const notifications = useNotifications();
   const project = useProject();
   const pages = usePages();
-  const rankings = usePagesRankings();
+  const rankings = useRankings('pages');
 
   // console.log(' 2. pages')
   //  console.log(pages)

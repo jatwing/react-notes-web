@@ -42,16 +42,24 @@ const getPageItemTree = (pageFileTree: null | PageFileNode): PageItemNode => {
   }
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
   traverse(pageItemTree, (node: PageItemNodeDraft): undefined | false => {
-    /** callback for node with valid path and children */
+    /** url from valid path */
     const result = /^src\/pages(.*)$/.exec(node.path);
     if (!result) {
       throw new Error('inexhaustive');
     }
     node.url = result[1] || '/';
+    /** two types of file nodes */
     if (!node.children) {
+      if (node.filename === 'index.tsx') {
+        node.type = 'item';
+        node.codes = [node.content as string];
+        return;
+      }
+      node.type = null;
+      node.codes = null;
       return;
     }
-    /** four types of node */
+    /** four types of directory nodes */
     const indexChild = node.children.find(
       (child) => child.filename === 'index.tsx',
     );
@@ -72,19 +80,18 @@ const getPageItemTree = (pageFileTree: null | PageFileNode): PageItemNode => {
     }
     node.type = 'item';
     const codes = [];
-    /** add content of slice.ts files recursively if possible */
+    /** codes of existed slice.ts files in directory */
     traverse(node, (childNode: PageItemNodeDraft): void => {
       if (childNode.filename === 'slice.ts') {
         codes.push(childNode.content as string);
       }
     });
-    /** add content of index.tsx file otherwise */
+    /** code of index.tsx file as fallback */
     if (codes.length === 0) {
       codes.push(indexChild.content as string);
     }
     node.codes = codes;
-    /** prune node's children */
-    node.children = null;
+    node.children = /** pruning */ null;
     return false;
   });
   return pageItemTree;
