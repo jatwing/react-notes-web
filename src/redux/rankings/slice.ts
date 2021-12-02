@@ -7,7 +7,7 @@ import {
 import { Sort } from './utils';
 
 /** actions */
-type Category = 'columns' | 'pages';
+export type Category = 'columns' | 'pages';
 
 export const columnsRankingsRead: ActionWithPromiseStates =
   createActionWithPromiseStates('rankings', 'columnsRankingsRead');
