@@ -7,42 +7,55 @@ import {
 import { Sort } from './utils';
 
 /** actions */
-export const pagesRankingsRead: ActionWithPromiseStates =
-  createActionWithPromiseStates('rankings', 'pagesRankingsRead');
+type Category = 'columns' | 'pages';
 
 export const columnsRankingsRead: ActionWithPromiseStates =
   createActionWithPromiseStates('rankings', 'columnsRankingsRead');
 
+export const pagesRankingsRead: ActionWithPromiseStates =
+  createActionWithPromiseStates('rankings', 'pagesRankingsRead');
+
+export const getCategoryRankingsRead = (
+  category: Category,
+): ActionWithPromiseStates => {
+  switch (category) {
+    case 'columns': {
+      return columnsRankingsRead;
+    }
+    case 'pages': {
+      return pagesRankingsRead;
+    }
+    default: {
+      throw new Error('unreachable');
+    }
+  }
+};
+
 /** state */
 export type Ranking = {
   id: string;
-  category: string;
+  category: Category;
   data: Record<string, number>;
 };
 
-type RankingsState = {
-  pages: {
+type RankingsState = Record<
+  Category,
+  {
     entities: null | Array<Ranking>;
     sort: null | Sort;
     status: string;
     error: null | string;
-  };
-  columns: {
-    entities: null | Array<Ranking>;
-    sort: null | Sort;
-    status: string;
-    error: null | string;
-  };
-};
+  }
+>;
 
 const initialState: RankingsState = {
-  pages: {
+  columns: {
     entities: null,
     sort: null,
     status: 'idle',
     error: null,
   },
-  columns: {
+  pages: {
     entities: null,
     sort: null,
     status: 'idle',
@@ -56,21 +69,6 @@ const rankingsSlice: Slice<RankingsState, any, string> = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [pagesRankingsRead.pending.toString()]: (state) => {
-      state.pages.status = 'pending';
-    },
-    [pagesRankingsRead.fulfilled.toString()]: (state, action) => {
-      state.pages.status = 'fulfilled';
-      state.pages.entities = action.payload;
-    },
-    [pagesRankingsRead.rejected.toString()]: (state, action) => {
-      state.pages.status = 'rejected';
-      state.pages.error = action.payload;
-    },
-    [pagesRankingsRead.settled.toString()]: (state, action) => {
-      state.pages.status = 'settled';
-      state.pages.sort = action.payload;
-    },
     [columnsRankingsRead.pending.toString()]: (state) => {
       state.columns.status = 'pending';
     },
@@ -86,6 +84,21 @@ const rankingsSlice: Slice<RankingsState, any, string> = createSlice({
       state.columns.status = 'settled';
       state.columns.sort = action.payload;
     },
+    [pagesRankingsRead.pending.toString()]: (state) => {
+      state.pages.status = 'pending';
+    },
+    [pagesRankingsRead.fulfilled.toString()]: (state, action) => {
+      state.pages.status = 'fulfilled';
+      state.pages.entities = action.payload;
+    },
+    [pagesRankingsRead.rejected.toString()]: (state, action) => {
+      state.pages.status = 'rejected';
+      state.pages.error = action.payload;
+    },
+    [pagesRankingsRead.settled.toString()]: (state, action) => {
+      state.pages.status = 'settled';
+      state.pages.sort = action.payload;
+    },
   },
 });
 
@@ -94,50 +107,21 @@ export const rankingsReducer: Reducer<RankingsState, AnyAction> =
 
 /** selectors */
 export const selectEntities =
-  (category: string) =>
-  (state: RootState): null | ReadonlyArray<Ranking>  => {
-    switch (category) {
-      case 'pages':
-      case 'columns':
-        return state.rankings[category].entities;
-      default:
-        throw new Error('unreachable');
-    }
-  };
+  (category: Category) =>
+  (state: RootState): null | ReadonlyArray<Ranking> =>
+    state.rankings[category].entities;
 
 export const selectSortation =
-  (category: string) =>
-  (state: RootState): null | Sort  => {
-    switch (category) {
-      case 'pages':
-      case 'columns':
-        return state.rankings[category].sort;
-      default:
-        throw new Error('unreachable');
-    }
-  };
+  (category: Category) =>
+  (state: RootState): null | Sort =>
+    state.rankings[category].sort;
 
 export const selectStatus =
-  (category: string) =>
-  (state: RootState): string  => {
-    switch (category) {
-      case 'pages':
-      case 'columns':
-        return state.rankings[category].status;
-      default:
-        throw new Error('unreachable');
-    }
-  };
+  (category: Category) =>
+  (state: RootState): string =>
+    state.rankings[category].status;
 
 export const selectError =
   (category: string) =>
-  (state: RootState): null | string  => {
-    switch (category) {
-      case 'pages':
-      case 'columns':
-        return state.rankings[category].error;
-      default:
-        throw new Error('unreachable');
-    }
-  };
-
+  (state: RootState): null | string =>
+    state.rankings[category].error;

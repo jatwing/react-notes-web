@@ -1,15 +1,21 @@
 import { PageItemNode } from 'lib/pages';
-import { Ranking } from './slice';
+import { Ranking, Category } from './slice';
 
-const getRank = (name: string, ranking: Ranking['data']): number => {
-  if (!(name in ranking)) {
+const getRank = (
+  criterion: string,
+  ranking: Record<string, number>,
+): number => {
+  if (!(criterion in ranking)) {
     return Number.MAX_VALUE;
   }
-  return ranking[name];
+  return ranking[criterion];
 };
 
-const getName = (entity: any, category: string): string => {
+const getCriterion = (entity: any, category: Category): string => {
   switch (category) {
+    case 'columns': {
+      return entity;
+    }
     case 'pages':
       return (entity as PageItemNode).url;
     default:
@@ -20,19 +26,19 @@ const getName = (entity: any, category: string): string => {
 export type Sort = <T>(entities: Array<T>, id: string) => Array<T>;
 
 export const getSortation =
-  (rankings: Array<Ranking>, category: string): Sort =>
+  (rankings: Array<Ranking>, category: Category): Sort =>
   <T>(entities: Array<T>, id: string): Array<T> => {
     const ranking = rankings.find(
       (ranking: Ranking) => ranking.id === id && ranking.category === category,
     );
     if (!ranking) {
-      throw new Error('unreachable');
+      return entities;
     }
     return entities
       .slice()
       .sort(
         (a: T, b: T) =>
-          getRank(getName(a, category), ranking.data) -
-          getRank(getName(b, category), ranking.data),
+          getRank(getCriterion(a, category), ranking.data) -
+          getRank(getCriterion(b, category), ranking.data),
       );
   };

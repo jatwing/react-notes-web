@@ -1,20 +1,19 @@
 import axios from 'axios';
 import { SagaIterator } from 'redux-saga';
 import { call, put, select, take } from 'redux-saga/effects';
-
 import {
   pagesRankingsRead,
   columnsRankingsRead,
   selectEntities,
+  Category
 } from './slice';
 import { ActionWithPromiseStates } from 'redux/utils';
-
 import { Sort, getSortation } from './utils';
 
 /** workers */
 export function* workRankingsRead(
   rankingsRead: ActionWithPromiseStates,
-  category: string,
+  category: Category,
 ): SagaIterator {
   try {
     yield put(rankingsRead.pending());
