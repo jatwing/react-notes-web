@@ -5,7 +5,6 @@ import {
   createSlice,
   Reducer,
   Slice,
-  current,
 } from '@reduxjs/toolkit';
 import { PageItemNode, pageItemTree, traverse } from 'lib/pages';
 import { Translate } from 'redux/i18n/slice';

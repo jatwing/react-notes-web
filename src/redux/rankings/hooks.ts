@@ -2,14 +2,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  Ranking,
-  pagesRankingsRead,
-  columnsRankingsRead,
-  selectSortation,
-  selectError,
-  selectStatus,
-  rankingsReadActions,
   Category,
+  rankingsReadActions,
+  selectError,
+  selectSortation,
+  selectStatus,
 } from './slice';
 import { Sort } from './utils';
 

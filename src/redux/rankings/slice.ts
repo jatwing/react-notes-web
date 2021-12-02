@@ -4,6 +4,7 @@ import {
   ActionWithPromiseStates,
   createActionWithPromiseStates,
 } from 'redux/utils';
+
 import { Sort } from './utils';
 
 /** actions */

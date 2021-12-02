@@ -1,5 +1,6 @@
 import { PageItemNode } from 'lib/pages';
-import { Ranking, Category } from './slice';
+
+import { Category, Ranking } from './slice';
 
 const getRank = (
   criterion: string,

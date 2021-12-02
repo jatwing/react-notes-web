@@ -5,12 +5,12 @@ import { useLocation } from 'react-router-dom';
 import { store } from 'redux/store';
 
 import {
-  urlChanged,
   selectAdjacentPages,
   selectMatchedPage,
   selectPages,
   selectSelectedPages,
   selectStatus,
+  urlChanged,
 } from './slice';
 
 export const usePages = (): null | PageItemNode => {
