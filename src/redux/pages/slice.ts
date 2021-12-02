@@ -13,22 +13,25 @@ import { pagesRankingsRead } from 'redux/rankings/slice';
 import { RootState } from 'redux/store';
 
 /** actions */
-export const routeChanged: ActionCreatorWithPayload<string, string> =
-  createAction<string, string>('pages/routerChanged');
 export const pagesInternationalized: ActionCreatorWithPayload<
   Translate,
   string
 > = createAction<Translate, string>('pages/pagesInternationalized');
 
+export const urlChanged: ActionCreatorWithPayload<string, string> =
+  createAction<string, string>('pages/urlChanged');
+
 /** state */
 type PagesState = {
   entities: PageItemNode;
   status: string;
+  currentUrl: string;
 };
 
 const initialState: PagesState = {
   entities: pageItemTree,
   status: 'fulfilled',
+  currentUrl: '/',
 };
 
 /** reducer */
@@ -56,14 +59,8 @@ const pagesSlice: Slice<PagesState, any, string> = createSlice({
         }
       });
     },
-    [routeChanged.toString()]: (state, action) => {
-      traverse(state.entities, (node) => {
-        const route = action.payload;
-        node.isMatched = node.url === route;
-        node.isSelected =
-          node.url === '/' ||
-          new RegExp(`^${node.url}(/([^/])+)*$`).test(route);
-      });
+    [urlChanged.toString()]: (state, action) => {
+      state.currentUrl = action.payload;
     },
   },
 });
@@ -81,7 +78,7 @@ export const selectMatchedPage = (state: RootState): null | PageItemNode => {
   traverse(
     state.pages.entities,
     (node) => {
-      if (node.isMatched) {
+      if (node.url === state.pages.currentUrl) {
         matchedPage = node;
         return false;
       }
@@ -96,7 +93,10 @@ export const selectSelectedPages = (
 ): ReadonlyArray<PageItemNode> => {
   const selectedPages: Array<PageItemNode> = [];
   traverse(state.pages.entities, (node) => {
-    if (node.isSelected) {
+    if (
+      node.url === '/' ||
+      new RegExp(`^${node.url}(/([^/])+)*$`).test(state.pages.currentUrl)
+    ) {
       selectedPages.push(node);
     } else {
       return false;
@@ -121,7 +121,7 @@ export const selectAdjacentPages = (
         nextPage = node;
         return false;
       }
-      if (node.isMatched) {
+      if (node.url === state.pages.currentUrl) {
         matchedPage = node;
       } else {
         previousPage = node;

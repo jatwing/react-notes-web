@@ -29,6 +29,7 @@ export const traverse = (
 };
 
 export type PageItemNodeDraft = PageFileNode & {
+  name?: string;
   url?: string;
   type?: null | string;
   codes?: null | ReadonlyArray<string>;
@@ -42,6 +43,7 @@ const getPageItemTree = (pageFileTree: null | PageFileNode): PageItemNode => {
   }
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
   traverse(pageItemTree, (node: PageItemNodeDraft): undefined | false => {
+    node.name = node.filename;
     /** url from valid path */
     const result = /^src\/pages(.*)$/.exec(node.path);
     if (!result) {

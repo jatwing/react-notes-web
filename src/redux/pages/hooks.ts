@@ -2,11 +2,10 @@ import { PageItemNode } from 'lib/pages';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-// import { useRankings } from 'redux/rankings/hooks';
 import { store } from 'redux/store';
 
 import {
-  routeChanged,
+  urlChanged,
   selectAdjacentPages,
   selectMatchedPage,
   selectPages,
@@ -17,10 +16,6 @@ import {
 export const usePages = (): null | PageItemNode => {
   const entities = useSelector(selectPages);
   const status = useSelector(selectStatus);
-  /**
-   * try to do that in sagas.
-   */
-  //useRankings();
   if (status !== 'settled') {
     return null;
   }
@@ -39,15 +34,16 @@ export const useAdjacentPages = (): ReadonlyArray<null | PageItemNode> =>
 export const usePageViews = (): void => {
   const location = useLocation();
   useEffect(() => {
-    store.dispatch(routeChanged(location.pathname));
+    store.dispatch(urlChanged(location.pathname));
   }, [location]);
 };
 
 export const useDocumentTitle = (): void => {
   const matchedPage = useMatchedPage();
-  /**
-   * FIXME the type in slice is wrong.
-   */
-
-  // document.title = matchedPage?.name ?? '';
+  useEffect(() => {
+    if (!matchedPage) {
+      return;
+    }
+    document.title = matchedPage.name;
+  }, [matchedPage]);
 };
