@@ -8,7 +8,7 @@ import {
   selectSortation,
   selectError,
   selectStatus,
-  getCategoryRankingsRead,
+  rankingsReadActions,
   Category,
 } from './slice';
 import { Sort } from './utils';
@@ -21,7 +21,7 @@ export const useRankings = (category: Category): null | Sort => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (status === 'idle' && !error) {
-      dispatch(getCategoryRankingsRead(category)());
+      dispatch(rankingsReadActions[category]());
     }
   });
   useEffect(() => {

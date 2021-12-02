@@ -15,20 +15,9 @@ export const columnsRankingsRead: ActionWithPromiseStates =
 export const pagesRankingsRead: ActionWithPromiseStates =
   createActionWithPromiseStates('rankings', 'pagesRankingsRead');
 
-export const getCategoryRankingsRead = (
-  category: Category,
-): ActionWithPromiseStates => {
-  switch (category) {
-    case 'columns': {
-      return columnsRankingsRead;
-    }
-    case 'pages': {
-      return pagesRankingsRead;
-    }
-    default: {
-      throw new Error('unreachable');
-    }
-  }
+export const rankingsReadActions: Record<Category, ActionWithPromiseStates> = {
+  columns: columnsRankingsRead,
+  pages: pagesRankingsRead,
 };
 
 /** state */
@@ -122,6 +111,6 @@ export const selectStatus =
     state.rankings[category].status;
 
 export const selectError =
-  (category: string) =>
+  (category: Category) =>
   (state: RootState): null | string =>
     state.rankings[category].error;

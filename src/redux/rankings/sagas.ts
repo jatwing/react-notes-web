@@ -5,16 +5,15 @@ import {
   pagesRankingsRead,
   columnsRankingsRead,
   selectEntities,
-  Category
+  Category,
+  rankingsReadActions,
 } from './slice';
 import { ActionWithPromiseStates } from 'redux/utils';
 import { Sort, getSortation } from './utils';
 
 /** workers */
-export function* workRankingsRead(
-  rankingsRead: ActionWithPromiseStates,
-  category: Category,
-): SagaIterator {
+export function* workRankingsRead(category: Category): SagaIterator {
+  const rankingsRead = rankingsReadActions[category];
   try {
     yield put(rankingsRead.pending());
     const response = yield call(() =>
@@ -31,12 +30,12 @@ export function* workRankingsRead(
 }
 
 /** watchers */
-export function* watchPagesRankingsRead(): SagaIterator {
-  yield take(pagesRankingsRead);
-  yield call(workRankingsRead, pagesRankingsRead, 'pages');
-}
-
 export function* watchColumnsRankingsRead(): SagaIterator {
   yield take(columnsRankingsRead);
-  yield call(workRankingsRead, columnsRankingsRead, 'columns');
+  yield call(workRankingsRead, 'columns');
+}
+
+export function* watchPagesRankingsRead(): SagaIterator {
+  yield take(pagesRankingsRead);
+  yield call(workRankingsRead, 'pages');
 }
