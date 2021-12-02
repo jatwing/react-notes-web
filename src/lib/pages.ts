@@ -50,18 +50,13 @@ const getPageItemTree = (pageFileTree: null | PageFileNode): PageItemNode => {
       throw new Error('inexhaustive');
     }
     node.url = result[1] || '/';
-    /** two types of file nodes */
+    /** file node */
     if (!node.children) {
-      if (node.filename === 'index.tsx') {
-        node.type = 'item';
-        node.codes = [node.content as string];
-        return;
-      }
       node.type = null;
       node.codes = null;
       return;
     }
-    /** four types of directory nodes */
+    /** four types of directory node */
     const indexChild = node.children.find(
       (child) => child.filename === 'index.tsx',
     );

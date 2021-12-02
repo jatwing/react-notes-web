@@ -1,5 +1,5 @@
-import React from 'react';
+import React, {FC} from 'react';
 const Page = (): JSX.Element => {
-  return <>{'test'}</>;
+  return <>{'test main concepts'}</>;
 };
-export default Page;
+export default Page as FC;
