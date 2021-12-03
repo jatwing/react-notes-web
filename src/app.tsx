@@ -1,3 +1,6 @@
+import { Fallback } from 'containers/fallback';
+import { Page } from 'containers/page';
+import { pageItemUrls } from 'lib/pages';
 import * as React from 'react';
 import { createElement } from 'react';
 import { Provider } from 'react-redux';
@@ -7,36 +10,15 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { Fallback } from 'containers/fallback';
-import { Page } from 'containers/page';
-import { pageItemUrls } from 'lib/pages';
 import { useDocumentTitle, usePageViews } from 'redux/pages/hooks';
 import { store } from 'redux/store';
-import Index from 'pages';
-
-
-// huh, slice 1 for the lazy load, know the basic location
-//
-// another question is that what should a relative url lool like
-//
-// we have  /  and /apple/banana now,
-//
-// @see https://webmasters.stackexchange.com/questions/56840/what-is-the-purpose-of-leading-slash-in-html-urls/56844
-
 
 export const PageRoutes = (): JSX.Element => {
+  usePageViews();
+  useDocumentTitle();
   return (
     <Page>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <React.Suspense fallback={<Fallback />}>
-              {createElement(React.lazy(() => import('pages')))}
-            </React.Suspense>
-          }
-          key="/"
-        />
         {pageItemUrls.map((url) => (
           <Route
             path={url}
@@ -50,6 +32,7 @@ export const PageRoutes = (): JSX.Element => {
             key={url}
           />
         ))}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Page>
   );

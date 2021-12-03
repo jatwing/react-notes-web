@@ -57,7 +57,7 @@ const getPageFileTree = (path, discipline = '') => {
     }
     return {
       filename,
-      path,
+      path: path + '/',
       content: null,
       children,
       discipline: subDiscipline,

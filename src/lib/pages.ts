@@ -44,12 +44,12 @@ const getPageItemTree = (pageFileTree: null | PageFileNode): PageItemNode => {
   const pageItemTree = JSON.parse(JSON.stringify(pageFileTree));
   traverse(pageItemTree, (node: PageItemNodeDraft): undefined | false => {
     node.name = node.filename;
-    /** url from valid path */
+    /** absolute url from valid path */
     const result = /^src\/pages(.*)$/.exec(node.path);
     if (!result) {
       throw new Error('inexhaustive');
     }
-    node.url = result[1] || '/';
+    node.url = result[1];
     /** file node */
     if (!node.children) {
       node.type = null;
@@ -98,8 +98,8 @@ export const pageItemTree: PageItemNode = getPageItemTree(pageFileTree);
 
 const getPageItemUrls = (pageItemTree: PageItemNode): ReadonlyArray<string> => {
   const urls: Array<string> = [];
-  traverse(pageItemTree, (node: PageItemNode) => {
-    if (node.type === 'item') {
+  traverse(pageItemTree, (node: PageItemNode): void => {
+    if (node.url === '/' || node.type === 'item') {
       urls.push(node.url);
     }
   });

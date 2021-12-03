@@ -1,5 +1,3 @@
 import React from 'react';
 
-export const Fallback = (): JSX.Element => (
-  <>Fallback</>
-)
+export const Fallback = (): JSX.Element => <>Fallback</>;

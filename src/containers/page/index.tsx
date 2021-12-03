@@ -4,7 +4,7 @@ type FallbackProps = {
   children: JSX.Element;
 };
 
-export const Page  = (props: FallbackProps): JSX.Element => (
+export const Page = (props: FallbackProps): JSX.Element => (
   <div>
     <p>{' this is a page '}</p>
 
