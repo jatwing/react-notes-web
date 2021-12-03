@@ -1,3 +1,4 @@
+import 'index.css'
 import 'lib/i18next';
 
 import React from 'react';
