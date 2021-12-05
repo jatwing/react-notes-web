@@ -1,82 +1,68 @@
 /** https://material.io/components/buttons/web */
-import React, { useRef, useEffect, createElement } from 'react';
 import './index.scss';
-import { MDCRipple } from '@material/ripple';
-import clsx from 'clsx';
 
-// test using svg icon
-import { TestIcon } from 'components/svg-icons';
+import clsx from 'clsx';
+import { useRipple } from 'components/hooks';
+import React, { createElement, FC } from 'react';
+
+type ButtonIconProps = {
+  icon: string | FC<any>;
+};
+
+const ButtonIcon = ({ icon }: ButtonIconProps): JSX.Element => {
+  const iconProps = {
+    className: clsx({
+      'material-icons': true,
+      'mdc-button__icon': true,
+    }),
+    'aria-hidden': true,
+  };
+  if (typeof icon === 'string') {
+    return <span {...iconProps}>{icon}</span>;
+  }
+  return createElement(icon, iconProps);
+};
 
 type ButtonProps = {
   label: string;
-  icon?: string | JSX.Element;
+  icon?: string | FC<any>;
+  isDisabled?: boolean;
+  isFullwidth?: boolean;
   isIconLeading?: boolean;
+  isRaised?: boolean;
   type?: 'text' | 'outlined' | 'contained';
 };
 
 export const Button = ({
   label,
   icon,
+  isDisabled = false,
+  isFullwidth = false,
   isIconLeading = true,
+  isRaised = true,
   type = 'text',
 }: ButtonProps): JSX.Element => {
-  // maybe create a useRipple hook;
-  const ref = useRef(null);
-  useEffect(() => {
-    if (ref.current) {
-      MDCRipple.attachTo(ref.current);
-    }
-  }, [ref]);
-  let iconElement;
-  if (!icon) {
-    iconElement = null;
-  } else if (typeof icon === 'string') {
-    iconElement = (
-      <span
-        className={clsx({
-          'material-icons': true,
-          'mdc-button__icon': true,
-        })}
-        aria-hidden="true"
-      />
-    );
-  } else {
-    iconElement = createElement(TestIcon, {
-      className: clsx({
-        'material-icons': true,
-        'mdc-button__icon': true,
-      }),
-      'aria-hidden': 'true',
-    });
-  }
-
+  const ref = useRipple();
   return (
     <button
       ref={ref}
+      disabled={isDisabled}
       className={clsx({
+        'custom-button--fullwidth': type !== 'text' && isFullwidth,
         'mdc-button': true,
+        'mdc-button--icon-leading': icon && isIconLeading,
+        'mdc-button--icon-trailing': icon && !isIconLeading,
+        'mdc-button--outlined': type === 'outlined',
+        'mdc-button--raised': type === 'contained' && isRaised,
         'mdc-button--touch': true,
+        'mdc-button--unelevated': type === 'contained' && !isRaised,
       })}
     >
       <span className="mdc-button__ripple" />
       <span className="mdc-button__touch" />
-
-      {icon && isIconLeading && 
-      // still wrong, need to add extra className for leading
-      iconElement}
-
-      {false && (
-        <span
-          className={clsx({
-            'material-icons': true,
-            'mdc-button__icon': true,
-          })}
-          aria-hidden="true"
-        >
-          bookmark
-        </span>
-      )}
+      {icon && isIconLeading && <ButtonIcon icon={icon} />}
       <span className="mdc-button__label">{label}</span>
+      {icon && !isIconLeading && <ButtonIcon icon={icon} />}
     </button>
   );
 };

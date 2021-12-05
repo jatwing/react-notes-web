@@ -1,8 +1,5 @@
-@use "@material/button/styles";
+@use '@material/button/styles';
 
-
-.test {
-  font-size: 40px;
+.custom-button--fullwidth {
+  width: 100%;
 }
-
-
