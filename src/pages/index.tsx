@@ -1,5 +1,5 @@
 import { Button } from 'components/buttons';
-import { TestIcon } from 'components/svg-icons';
+import { TestIcon, SvgIcon } from 'components/svg-icons';
 import React from 'react';
 
 const Page = (): JSX.Element => {
@@ -10,7 +10,7 @@ const Page = (): JSX.Element => {
         <Button
           label="text"
           type="text"
-          icon={TestIcon}
+          icon={SvgIcon}
           isIconLeading={false}
         />
       </div>
