@@ -6,26 +6,24 @@ import { useRipple } from 'components/hooks';
 import React, { createElement, FC } from 'react';
 
 type ButtonIconProps = {
-  icon: string | FC<any>;
+  icon: string;
 };
 
-const ButtonIcon = ({ icon }: ButtonIconProps): JSX.Element => {
-  const iconProps = {
-    className: clsx({
+const ButtonIcon = ({ icon }: ButtonIconProps): JSX.Element => (
+  <span
+    className={clsx({
       'material-icons': true,
       'mdc-button__icon': true,
-    }),
-    'aria-hidden': true,
-  };
-  if (typeof icon === 'string') {
-    return <span {...iconProps}>{icon}</span>;
-  }
-  return createElement(icon, iconProps);
-};
+    })}
+    aria-hidden={true}
+  >
+    {icon}
+  </span>
+);
 
 type ButtonProps = {
   label: string;
-  icon?: string | FC<any>;
+  icon?: string;
   isDisabled?: boolean;
   isFullwidth?: boolean;
   isIconLeading?: boolean;

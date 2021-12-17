@@ -10,7 +10,7 @@ const Page = (): JSX.Element => {
         <Button
           label="text"
           type="text"
-          icon={SvgIcon}
+          icon={"bookmark"}
           isIconLeading={false}
         />
       </div>
